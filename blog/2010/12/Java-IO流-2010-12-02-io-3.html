@@ -1,0 +1,899 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="IO流," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott-小白" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 字节流抽象基类：InputStream，OutputStream。字节流可以操作任何数据。注意：字符流使用的数组是字符数组。char [] ch">
+<meta name="keywords" content="IO流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java IO流 字节流">
+<meta property="og:url" content="http://www.sguotao.com/blog/2010/12/Java-IO流-2010-12-02-io-3.html">
+<meta property="og:site_name" content="Scott-小白">
+<meta property="og:description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 字节流抽象基类：InputStream，OutputStream。字节流可以操作任何数据。注意：字符流使用的数组是字符数组。char [] ch">
+<meta property="og:updated_time" content="2016-05-30T11:11:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java IO流 字节流">
+<meta name="twitter:description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 字节流抽象基类：InputStream，OutputStream。字节流可以操作任何数据。注意：字符流使用的数组是字符数组。char [] ch">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/blog/2010/12/Java-IO流-2010-12-02-io-3.html"/>
+
+
+
+
+
+  <title>Java IO流 字节流 | Scott-小白</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-小白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2010/12/Java-IO流-2010-12-02-io-3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-小白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java IO流 字节流
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-12-02T00:00:00+08:00">
+                2010-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2010/12/Java-IO流-2010-12-02-io-3.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/blog/2010/12/Java-IO流-2010-12-02-io-3.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容：</p>
+<p><a href="http://sguotao.com/2010/11/30/io-1/" target="_blank" rel="external">Java IO流 1 IO流的介绍</a> <br><br><a href="http://sguotao.com/2010/12/01/io-2/" target="_blank" rel="external">Java IO流 2 字符流 </a><br><br><a href="http://sguotao.com/2010/12/02/io-3/" target="_blank" rel="external">Java IO流 3 字节流 </a><br><br><a href="http://sguotao.com/2010/12/03/io-4/" target="_blank" rel="external">Java IO流 4 File类 </a><br><br><a href="http://sguotao.com/2012/11/21/io-5/" target="_blank" rel="external">Java IO流 5 序列流</a></p>
+<h2 id="1-字节流"><a href="#1-字节流" class="headerlink" title="1. 字节流"></a>1. 字节流</h2><p>抽象基类：InputStream，OutputStream。字节流可以操作任何数据。<br><strong>注意：字符流使用的数组是字符数组</strong>。char [] chs<br><strong>字节流使用的数组是字节数组</strong>。byte [] bt </p>
+<p>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+FileOutputStream fos = new FileOutputStream("a.txt"); 
+fos.write("abcde");//直接将数据写入到了目的地。 
+fos.close();//只关闭资源。 
+FileInputStream fis = new FileInputStream("a.txt"); 
+//fis.available();//获取关联的文件的字节数。 
+</pre>
+
+<p>如果文件体积不是很大，可以这样操作。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+byte[] buf = new byte[fis.available()];//创建一个刚刚好的缓冲区。
+</pre>
+
+<p>但是这有一个弊端，就是文件过大，大小超出jvm 的内容空间时，会内存溢出。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+fis.read(buf); 
+System.out.println(new String(buf)); 
+</pre>
+
+<p>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+/**
+  *copy一个图片
+  */
+BufferedInputStream bufis = new BufferedInputStream(new FileInputStream("1.jpg")); 
+BufferedOutputStream bufos =  new BufferedOutputStream(new FileOutptStream("2.jpg")); 
+int by = 0; 
+while((by=bufis.read())!=-1){ 
+      bufos.write(by); 
+} 
+bufos.close(); 
+bufis.close(); 
+</pre>
+
+<h2 id="2-字节流-amp-字符流小结"><a href="#2-字节流-amp-字符流小结" class="headerlink" title="2. 字节流&amp;字符流小结"></a>2. 字节流&amp;字符流小结</h2><p><strong>字符流</strong><br>  FileReader. FileWriter.<br>  BufferedReader BufferedWriter. </p>
+<p><strong>字节流</strong><br>  FileInputStream FileOutputStream<br>  BufferedInputStream BufferedOutputStream </p>
+<p><strong>字节流的read()方法读取一个字节。为什么返回的不是byte类型，而是int 类型呢</strong>？<br>因为read方法读到末尾时返回的是-1。而在所操作的数据中的很容易出现连续多个1的情况，而连续读到8个1，就是-1。导致读取会提前停止。所以将读到的一个字节给提升为一个int 类型的数值，但是只保留原字节，并在剩余二进制位补0。</p>
+<p>具体操作是：byte&amp;255    or    byte&amp;0xff 。对于write方法，可以一次写入一个字节，但接收的是一个int 类型数值。只写入该int 类型的数值的最低一个字节（8位）。简单说:read方法对读到的数据进行提升。write对操作的数据进行转换。 </p>
+<h2 id="2-转换流"><a href="#2-转换流" class="headerlink" title="2. 转换流"></a>2. 转换流</h2><p><strong>1.转换流特点</strong></p>
+<ul>
+<li>是字节流和字符流之间的桥梁。 </li>
+<li>该流对象中可以对读取到的字节数据进行指定编码表的编码转换。 </li>
+</ul>
+<p><strong>2.什么时候使用呢?</strong></p>
+<ul>
+<li>当字节和字符之间有转换动作时。 </li>
+<li>流操作的数据需要进行编码表的指定时。 </li>
+</ul>
+<p><strong>3 具体的对象体现</strong></p>
+<ul>
+<li>InputStreamReader：字节到字符的桥梁。 </li>
+<li>OutputStreamWriter：字符到字节的桥梁。 </li>
+</ul>
+<p>这两个流对象是字符流体系中的成员。那么它们有转换作用，而本身又是字符流。所以在构造的时候，需要传入字节流对象进来。构造函数：<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+InputStreamReader(InputStream)://通过该构造函数初始化，使用的是本系统默认的编码表GBK。 
+InputStreamReader(InputStream,String charSet)://通过该构造函数初始化，可以指定编码表。   OutputStreamWriter(OutputStream)://通过该构造函数初始化，使用的是本系统默认的编码表GBK。 
+OutputStreamWriter(OutputStream,String charSet)://通过该构造函数初始化，可以指定编码表。
+</pre>
+
+<p><strong>4.操作文件的字符流对象是转换流的子类</strong><br><strong>Reader</strong><br>&nbsp;&nbsp;|–InputStreamReader<br>&nbsp;&nbsp;&nbsp;&nbsp;|–FileReader </p>
+<p><strong>Writer</strong><br>&nbsp;&nbsp;|–OutputStreamWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;|–FileWriter </p>
+<p>转换流中的read方法。已经融入了编码表，在底层调用字节流的read方法时将获取的一个或者多个字节数据进行临时存储，并去查指定的编码表，如果编码表没有指定，查的是默认码表。那么转流的read方法就可以返回一个字符比如中文。转换流已经完成了编码转换的动作，对于直接操作的文本文件的FileReaer而言，就不用在重新定义了，只要继承该转换流，获取其方法，就可以直接操作文本文件中的字符数据了。 </p>
+<p>注意： 在使用FileReader操作文本数据时，该对象使用的是默认的编码表。如果要使用指定编码表时，必须使用转换流。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+FileReader fr = new FileReader("a.txt");//操作a.txt的中的数据使用的本系统默认的GBK。
+</pre>
+
+<p>操作a.txt中的数据使用的也是本系统默认的GBK。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+InputStreamReader isr = new InputStreamReader(new FileInputStream("a.txt")); 
+</pre>
+
+<p>这两句的代码的意义相同。如果a.txt中的文件中的字符数据是通过utf-8的形式编码。那么在读取时，就必须指定编码表。那么转换流必须使用。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+InputStreamReader isr = new InputStreamReader(new FileInputStream("a.txt"),"utf-8"); 
+</pre>
+
+<p><strong>5.流操作的基本规律</strong></p>
+<ul>
+<li>明确数据源和数据汇（数据目的）。其实是为了明确输入流还是输出流。 </li>
+<li>明确操作的数据是否是纯文本数据。其实是为了明确字符流还是字节流。 </li>
+</ul>
+<p><strong>6.数据源与数据汇</strong></p>
+<ul>
+<li>数据源：键盘System.in,硬盘File开头的流对象，内存(数组)。 </li>
+<li>数据汇：控制台System.out,硬盘File开头的流对象，内存(数组)。 </li>
+</ul>
+<p><strong>7.需求：将键盘录入的数据存储到一个文件中</strong>。<br>数据源：System.in 既然是源，使用的就是输入流，可用的体系有InputStream，Reader。</p>
+<p>因为键盘录入进来的一定是纯文本数据，所以可以使用专门操作字符数据的Reader。发现System.in对应的流是字节读取流。所以要将其进行转换，将字节转成字符即可。所以要使用Reader体系中：InputStreamReader<br>接下来，是否需要提高效率呢？如果需要，那么就加入字符流的缓冲区：<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+BufferedReader bur = new BufferedReader(new InputStreamReader(System.in)); 
+</pre>
+
+<p>数据汇：一个文件，硬盘。既然是数据汇，那么一定是输出流，可以用的OutputStream,Writer。往文件中存储的都是文本数据，那么可以使用字符流较为方便:Writer。因为操作的是一个文件。所以使用Writer中的FileWriter。是否要提高效率呢？是，那就使用BufferedWriter。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+BufferedWriter bufr = new BufferedWriter(new FileWriter("a.txt")); 
+</pre>
+
+<p><strong>8.附加需求：希望将这些文本数据按照指定的编码表存入文件中</strong>。<br>既然是文本数据，而是还是写入到文件中，那么使用的体系还是Writer。因为要指定编码表，所以要使用Writer中的转换流，OutputStreamWriter。是否要提高效率，是，选择BufferedWriter。注意：虽然是最终是文件，但是不可以选择FileWriter。因为该对象是使用默认编码表。 </p>
+<p>输出转换流要接收一个字节输出流进来，所以要是用OutputStram体系，而最终输出到一个文件中，那么就要使用OutputStream体系中可以操作的文件的字节流对象FileOutputStream。：<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+//String charSet = System.getProperty("file.encoding"); 
+String charSet = "utf-8"; 
+BufferedWriter  bufw  =  new  BufferedWriter(new  OutputStreamWriter(new 
+FileOutputStream("a.txt"),charSet); 
+</pre>
+
+<h2 id="3-可以和流相关联的集合对象Properties"><a href="#3-可以和流相关联的集合对象Properties" class="headerlink" title="3. 可以和流相关联的集合对象Properties"></a>3. 可以和流相关联的集合对象Properties</h2><p><strong>Map</strong><br>&nbsp;&nbsp;|–Hashtable<br>&nbsp;&nbsp;&nbsp;&nbsp;|–Properties </p>
+<p>Properties:该集合不需要泛型，因为该集合中的键值对都是String类型。 </p>
+<ul>
+<li>存入键值对：setProperty(key,value); </li>
+<li>获取指定键对应的值：value getProperty(key); </li>
+<li><p>获取集合中所有键元素：Enumeration    propertyNames(); 在jdk1.6 版本给该类提供一个新的方法：Set<string> stringPropertyNames(); </string></p>
+</li>
+<li><p>列出该集合中的所有键值对，可以通过参数打印流指定列出到的目的地。<br>list(PrintStream);   list(PrintWriter);<br>例：list(System.out):将集合中的键值对打印到控制台。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+list(new PrintStream("prop.txt"));//将集合中的键值对存储到prop.txt文件中。 
+</pre>
+</li>
+<li><p>可以将流中的规则数据加载进行集合，并称为键值对。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+load(InputStream): //jdk1.6 版本。提供了新的方法。  load(Reader): 
+</pre>
+
+</li>
+</ul>
+<p><strong>注意：流中的数据要是  “键=值” 的规则数据</strong>。 </p>
+<ul>
+<li>可以将集合中的数据进行指定目的的存储。<br>&lt;?prettify?&gt;<pre class="prettyprint">
+store(OutputStram,String comment)方法。 
+//jdk1.6 版本。提供了新的方法。 store(Writer ,String comment): 使用该方法存储时，会带着当时存储的时间。
+</pre>
+
+
+
+
+
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IO流/" rel="tag"># IO流</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2010/12/Java-IO流-2010-12-03-io-4.html" rel="next" title="Java IO流 File类">
+                <i class="fa fa-chevron-left"></i> Java IO流 File类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2010/12/Java-IO流-2010-12-01-io-2.html" rel="prev" title="Java IO流 字符流">
+                Java IO流 字符流 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-字节流"><span class="nav-number">1.</span> <span class="nav-text">1. 字节流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-字节流-amp-字符流小结"><span class="nav-number">2.</span> <span class="nav-text">2. 字节流&字符流小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-转换流"><span class="nav-number">3.</span> <span class="nav-text">2. 转换流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-可以和流相关联的集合对象Properties"><span class="nav-number">4.</span> <span class="nav-text">3. 可以和流相关联的集合对象Properties</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Scott.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.sguotao.com/blog/2010/12/Java-IO流-2010-12-02-io-3.html';
+          this.page.identifier = '/blog/2010/12/Java-IO流-2010-12-02-io-3.html';
+          this.page.title = 'Java IO流 字节流';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Scott.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

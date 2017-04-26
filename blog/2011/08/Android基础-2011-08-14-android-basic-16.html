@@ -1,0 +1,837 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android基础," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott-小白" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 传感器传感器类型：方向、加速度(重力)、光线、磁场、距离(临近性)、温度等。     方向传感器 Sensor.TYPE_ORIENTATION         加速度(重力)传感器 | Sensor.TYPE_ACCELEROMETER光线传感器 | Sensor.TYPE_LIGHT磁场传感器 | Sensor.TYPE_MAGNETIC_FIELD距离(临近性)传感器 | Sensor">
+<meta name="keywords" content="Android基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android基础16 传感器">
+<meta property="og:url" content="http://www.sguotao.com/blog/2011/08/Android基础-2011-08-14-android-basic-16.html">
+<meta property="og:site_name" content="Scott-小白">
+<meta property="og:description" content="1. 传感器传感器类型：方向、加速度(重力)、光线、磁场、距离(临近性)、温度等。     方向传感器 Sensor.TYPE_ORIENTATION         加速度(重力)传感器 | Sensor.TYPE_ACCELEROMETER光线传感器 | Sensor.TYPE_LIGHT磁场传感器 | Sensor.TYPE_MAGNETIC_FIELD距离(临近性)传感器 | Sensor">
+<meta property="og:image" content="http://obovytgzz.bkt.clouddn.com/9patch1.png">
+<meta property="og:image" content="http://obovytgzz.bkt.clouddn.com/9patch2.png">
+<meta property="og:updated_time" content="2016-11-22T01:59:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android基础16 传感器">
+<meta name="twitter:description" content="1. 传感器传感器类型：方向、加速度(重力)、光线、磁场、距离(临近性)、温度等。     方向传感器 Sensor.TYPE_ORIENTATION         加速度(重力)传感器 | Sensor.TYPE_ACCELEROMETER光线传感器 | Sensor.TYPE_LIGHT磁场传感器 | Sensor.TYPE_MAGNETIC_FIELD距离(临近性)传感器 | Sensor">
+<meta name="twitter:image" content="http://obovytgzz.bkt.clouddn.com/9patch1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/blog/2011/08/Android基础-2011-08-14-android-basic-16.html"/>
+
+
+
+
+
+  <title>Android基础16 传感器 | Scott-小白</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-小白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2011/08/Android基础-2011-08-14-android-basic-16.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-小白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android基础16 传感器
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2011-08-16T00:00:00+08:00">
+                2011-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2011/08/Android基础-2011-08-14-android-basic-16.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/blog/2011/08/Android基础-2011-08-14-android-basic-16.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-传感器"><a href="#1-传感器" class="headerlink" title="1. 传感器"></a>1. 传感器</h2><p>传感器类型：方向、加速度(重力)、光线、磁场、距离(临近性)、温度等。 </p>
+<table>
+<thead>
+<tr>
+<th>方向传感器</th>
+<th style="text-align:center">Sensor.TYPE_ORIENTATION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>加速度(重力)传感器 | Sensor.TYPE_ACCELEROMETER<br>光线传感器 | Sensor.TYPE_LIGHT<br>磁场传感器 | Sensor.TYPE_MAGNETIC_FIELD<br>距离(临近性)传感器 | Sensor.TYPE_PROXIMITY<br>温度传感器 | Sensor.TYPE_TEMPERATURE</p>
+<p>代码实现：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取某种类型的感应器</span></div><div class="line">Sensor <span class="section">sensor</span> = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line"><span class="comment">//注册监听，获取传感器变化值</span></div><div class="line">sensorManager.registerListener(listener, <span class="section">sensor</span>, SensorManager.SENSOR_DELAY_GAME);</div></pre></td></tr></table></figure>
+<p>上面第三个参数为采样率：最快、游戏、普通、用户界面。当应用程序请求特定的采样率时，其实只是对传感器子系统的一个建议，不保证特定的采样率可用。</p>
+<table>
+<thead>
+<tr>
+<th>最快</th>
+<th style="text-align:center">SensorManager.SENSOR_DELAY_FASTEST</th>
+<th style="text-align:center">最低延迟，一般不是特别敏感的处理不推荐使用，该种模式可能造成手机电力大量消耗，由于传递的为原始数据，算法不处理好将会影响游戏逻辑和UI的性能。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p> 游戏 | SensorManager.SENSOR_DELAY_GAME | 游戏延迟，一般绝大多数的实时性较高的游戏都使用该级别。<br>普通 | SensorManager.SENSOR_DELAY_NORMAL | 标准延迟，对于一般的益智类或EASY级别的游戏可以使用，但过低的采样率可能对一些赛车类游戏有跳帧现象。<br>用户界面 | SensorManager.SENSOR_DELAY_UI | 一般对于屏幕方向自动旋转使用，相对节省电能和逻辑处理，一般游戏开发中我们不使用。</p>
+<p>下面介绍如何获取加速度(重力)传感器和方向传感器的测量值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> TextView accelerometer;</div><div class="line">	<span class="keyword">private</span> TextView orientation;</div><div class="line">	<span class="keyword">private</span> SensorManager sensorManager;</div><div class="line">	</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.main);</div><div class="line">        <span class="comment">//①获取感应器管理器</span></div><div class="line">        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);</div><div class="line">        accelerometer = (TextView) findViewById(R.id.accelerometer);  </div><div class="line">        orientation = (TextView) findViewById(R.id.orientation);  </div><div class="line">    &#125;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//②获取重力加速度传感器</span></div><div class="line">		Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line">		<span class="comment">//③注册监听器</span></div><div class="line">	 	sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_GAME);	</div><div class="line">		Sensor sensor1 = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);<span class="comment">//获取方向传感器</span></div><div class="line">		sensorManager.registerListener(listener, sensor1, SensorManager.SENSOR_DELAY_GAME);	</div><div class="line">		<span class="keyword">super</span>.onResume();</div><div class="line">	&#125; </div><div class="line">    <span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//④注消所有传感器监听</span></div><div class="line">    	sensorManager.unregisterListener(listener); </div><div class="line">		<span class="keyword">super</span>.onPause();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">private</span> SensorEventListener listener = <span class="keyword">new</span> SensorEventListener() &#123;		</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSensorChanged</span><span class="params">(SensorEvent event)</span> </span>&#123;<span class="comment">//当传感器的值发生变化			</span></div><div class="line">			<span class="keyword">float</span> x = event.values[SensorManager.DATA_X];      </div><div class="line">        	<span class="keyword">float</span> y = event.values[SensorManager.DATA_Y];      </div><div class="line">		    <span class="keyword">float</span> z = event.values[SensorManager.DATA_Z];  </div><div class="line">		<span class="keyword">switch</span> (event.sensor.getType()) &#123;</div><div class="line">			<span class="keyword">case</span> Sensor.TYPE_ACCELEROMETER:</div><div class="line">				accelerometer.setText(<span class="string">"Accelerometer Sensor: "</span> + x + <span class="string">", "</span> + y + <span class="string">", "</span> + z); </div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> Sensor.TYPE_ORIENTATION:</div><div class="line">				orientation.setText(<span class="string">"Orientation Sensor: "</span> + x + <span class="string">", "</span> + y + <span class="string">", "</span> + z); </div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;		</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAccuracyChanged</span><span class="params">(Sensor sensor, <span class="keyword">int</span> accuracy)</span> </span>&#123;<span class="comment">//当传感器的精度变化时	</span></div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>方法orientation.setText(x，y，z);参数的含义</strong></p>
+<ol>
+<li>x该值表示方位，0代表北（North）；90代表东（East）；180代表南（South）；270代表西（West）如果x值正好是这4个值之一，并且手机是水平放置，手机的顶部对准的方向就是该值代表的方向。</li>
+<li>y值表示倾斜度，或手机翘起的程度。当手机绕着X轴倾斜时该值发生变化。y值的取值范围是-180≤y值 ≤180。</li>
+<li>z值来测量桌子等物体的倾斜度。<br>z值表示手机沿着Y轴的滚动角度。表示手机沿着Y轴的滚动角度。取值范围是-90≤z值≤90。假设将手机屏幕朝上水平放在桌面上，这时如果桌面是平的，z值应为0。将手机左侧逐渐抬起时，z值逐渐变小，直到手机垂直于桌面放置，这时z值是-90。将手机右侧逐渐抬起时，z值逐渐增大，    直到手机垂直于桌面放置，这时z值是90。在垂直位置时继续向右或向左滚动，z值会继续在-90至90之间变化。</li>
+</ol>
+<p>假设将手机屏幕朝上水平放在桌子上，这时如果桌子是完全水平的，y值应该是0（由于很少有桌子是绝对水平的，因此，该值很可能不为0，但一般都是-5和5之间的某个值）。这时从手机顶部开始抬起，直到将手机沿X轴旋转180度（屏幕向下水平放在桌面上）。在这个旋转过程中，y值会在0到-180之间变化，也就是说，从手机顶部抬起时，y的值会逐渐变小，直到等于-180。如果从手机底部开始抬起，直到将手机沿X轴旋转180度，这时y值会在0到180之间变化。也就是y值会逐渐增大，直到等于180。可以利用y值和使用方向传感器（案例：指南针）</p>
+<h2 id="2-NinePatch图片"><a href="#2-NinePatch图片" class="headerlink" title="2. NinePatch图片"></a>2. NinePatch图片</h2><p><img src="http://obovytgzz.bkt.clouddn.com/9patch1.png" alt="图片1"><br>NinePatch是一种很有用的PNG图片格式，它可以在特定区域随文字大小进行缩放。如下：</p>
+<p>从上图可以看到，背景图片的中间区域会随着文字的大小进行缩放。背景图片是一张NinePatch图片。 NinePatch图片可以使用android自带的draw9patch工具来制作，该工具在SDK安装路径的tools目录下。执行该工具，然后点击“File”-&gt;“open 9-path”打开一张用于制作NinePatch图片的原来图片。在画布的上方和左方的边上画线指定缩放区域，勾选“Show patches”可显示画定的区域，绿色为固定大小区域，红色为缩放区域，文字会摆放在红色区域。制作完后，点击“File” “save 9-path”保存图片，draw9patch工具会自动为图片加上*.9.png后缀。</p>
+<p>把制作好的图片拷贝进项目的res/drawable目录，然后编写代码。如下：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;TextView android:layout_width=<span class="string">"wrap_content"</span> </div><div class="line">    android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">    android:<span class="built_in">text</span>=<span class="string">"退出"</span> android:textColor=<span class="string">"#330000"</span></div><div class="line">    android:<span class="built_in">background</span>=<span class="string">"@drawable/button"</span>/&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://obovytgzz.bkt.clouddn.com/9patch2.png" alt="图片2"></p>
+<h2 id="3-触摸事件"><a href="#3-触摸事件" class="headerlink" title="3. 触摸事件"></a>3. 触摸事件</h2><h3 id="3-1-拖拽"><a href="#3-1-拖拽" class="headerlink" title="3.1 拖拽"></a>3.1 拖拽</h3><p>XML配置：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;ImageView  </div><div class="line">		android:<span class="built_in">id</span>=<span class="string">"@+id/img"</span></div><div class="line">	    android:layout_width=<span class="string">"wrap_content"</span> </div><div class="line">	    android:layout_height=<span class="string">"wrap_content"</span> </div><div class="line">	    android:scaleType=<span class="string">"matrix"</span></div><div class="line">	    android:src=<span class="string">"@drawable/bb2"</span>   /&gt;</div></pre></td></tr></table></figure>
+<p>Java代码实现：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">ImageView imageView = (ImageView) findViewById(R.id.img);</div><div class="line">imageView.setOnTouchListener(<span class="keyword">new</span> MyListener());</div><div class="line"><span class="keyword">private</span> final <span class="keyword">class</span> <span class="title">MyListener</span> <span class="title">implements</span> <span class="title">OnTouchListener</span> &#123;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">float</span> x;	</div><div class="line">		<span class="keyword">private</span> <span class="keyword">float</span> y;</div><div class="line">		<span class="keyword">private</span> Matrix startMatrix = <span class="keyword">new</span> Matrix();</div><div class="line">		<span class="keyword">private</span> Matrix matrix = <span class="keyword">new</span> Matrix();</div><div class="line">		<span class="function"><span class="keyword">public</span> boolean <span class="title">onTouch</span>(<span class="params">View v, MotionEvent <span class="keyword">event</span></span>) </span>&#123;</div><div class="line">			<span class="keyword">switch</span> (<span class="keyword">event</span>.getAction()) &#123;</div><div class="line">				<span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">					x = <span class="keyword">event</span>.getX();</div><div class="line">					y = <span class="keyword">event</span>.getY();</div><div class="line">					startMatrix.<span class="keyword">set</span>(imageView.getImageMatrix());</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line">					matrix.<span class="keyword">set</span>(startMatrix);</div><div class="line">					matrix.postTranslate(<span class="keyword">event</span>.getX() - x, <span class="keyword">event</span>.getY() - y);</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			imageView.setImageMatrix(matrix);</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-2-多点触控"><a href="#3-2-多点触控" class="headerlink" title="3.2 多点触控"></a>3.2 多点触控</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> final <span class="keyword">class</span> <span class="title">MyListener</span> <span class="title">implements</span> <span class="title">OnTouchListener</span> &#123;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">float</span> x;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">float</span> y;</div><div class="line">		<span class="keyword">private</span> Matrix matrix = <span class="keyword">new</span> Matrix();</div><div class="line">		<span class="keyword">private</span> Matrix startMatrix = <span class="keyword">new</span> Matrix();</div><div class="line">		<span class="keyword">private</span> <span class="keyword">int</span> type;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">float</span> startDis;</div><div class="line">		<span class="keyword">private</span> PointF point;</div><div class="line">		<span class="function"><span class="keyword">public</span> boolean <span class="title">onTouch</span>(<span class="params">View v, MotionEvent <span class="keyword">event</span></span>) </span>&#123;</div><div class="line">			System.<span class="keyword">out</span>.println(<span class="keyword">event</span>.getAction());</div><div class="line">			<span class="keyword">switch</span> (<span class="keyword">event</span>.getAction()) &#123;</div><div class="line">				<span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">					type = <span class="number">1</span>;</div><div class="line">					x = <span class="keyword">event</span>.getX();</div><div class="line">					y = <span class="keyword">event</span>.getY();</div><div class="line">					startMatrix.<span class="keyword">set</span>(imageView.getImageMatrix());</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line">					matrix.<span class="keyword">set</span>(startMatrix);</div><div class="line">					<span class="keyword">if</span> (type == <span class="number">1</span>)</div><div class="line">						matrix.postTranslate(<span class="keyword">event</span>.getX() - x, <span class="keyword">event</span>.getY() - y);</div><div class="line">					<span class="keyword">else</span> &#123;</div><div class="line">						<span class="keyword">float</span> scale = getDis(<span class="keyword">event</span>) / startDis;</div><div class="line">						matrix.postScale(scale, scale, point.x, point.y);</div><div class="line">					&#125;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> MotionEvent.ACTION_POINTER_DOWN:</div><div class="line">					type = <span class="number">2</span>;</div><div class="line">					startMatrix.<span class="keyword">set</span>(imageView.getImageMatrix());</div><div class="line">					startDis = getDis(<span class="keyword">event</span>);</div><div class="line">					point = getPoint(<span class="keyword">event</span>);</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			imageView.setImageMatrix(matrix);</div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">float</span> <span class="title">getDis</span>(<span class="params">MotionEvent <span class="keyword">event</span></span>) </span>&#123;</div><div class="line">		<span class="keyword">float</span> a = <span class="keyword">event</span>.getX(<span class="number">1</span>) - <span class="keyword">event</span>.getX(<span class="number">0</span>);</div><div class="line">		<span class="keyword">float</span> b = <span class="keyword">event</span>.getY(<span class="number">1</span>) - <span class="keyword">event</span>.getY(<span class="number">0</span>);</div><div class="line">		<span class="keyword">return</span> (<span class="keyword">float</span>) Math.sqrt(a * a + b * b);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">private</span> PointF <span class="title">getPoint</span>(<span class="params">MotionEvent <span class="keyword">event</span></span>) </span>&#123;</div><div class="line">		<span class="keyword">float</span> x = (<span class="keyword">event</span>.getX(<span class="number">0</span>) + <span class="keyword">event</span>.getX(<span class="number">1</span>)) / <span class="number">2</span>;</div><div class="line">		<span class="keyword">float</span> y = (<span class="keyword">event</span>.getY(<span class="number">0</span>) + <span class="keyword">event</span>.getY(<span class="number">1</span>)) / <span class="number">2</span>;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> PointF(x, y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-读取SIM卡"><a href="#4-读取SIM卡" class="headerlink" title="4. 读取SIM卡"></a>4. 读取SIM卡</h2><p>文档位置：<br>android-sdk-windows\platforms\android-8\sources\ContactsProvider\src\com\android\providers\contacts\ CallLogProvider.java</p>
+<h3 id="4-1-判断SIM卡属于那个运营商"><a href="#4-1-判断SIM卡属于那个运营商" class="headerlink" title="4.1 判断SIM卡属于那个运营商"></a>4.1 判断SIM卡属于那个运营商</h3><p>SIM卡的IMSI码是SIM卡唯一标识：IMSI 国际移动用户识别码（IMSI：International Mobile Subscriber Identification Number）是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。IMSI由MCC、MNC、MSIN组成，其中MCC为移动国家号码，由3位数字组成，唯一地识别移动客户所属的国家，我国为460；MNC为网络id，由2位数字组成，用于识别移动客户所归属的移动网络，中国移动为00，中国联通为01,中国电信为03；MSIN为移动客户识别码，采用等长11位数字构成。唯一地识别国内GSM.移动通信网中移动客户。所以要区分是移动还是联通，只需取得SIM卡中的MNC字段即可。<br>需要权限</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.READ_PHONE_STATE"</span> /&gt;</div><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>Java代码实现：<br>第一种方法:获取手机的IMSI码,并判断是中国移动\中国联通\中国电信</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);</div><div class="line">        String imsi = telManager.getSubscriberId();</div><div class="line"> <span class="keyword">if</span>(imsi!=null)&#123;</div><div class="line"><span class="comment">//因为移动网络编号46000下的IMSI已经用完,所以虚拟了一个46002编号，134/159号段使用了此编号</span></div><div class="line">        <span class="keyword">if</span>(imsi.<span class="keyword">startsWith</span>(<span class="string">"46000"</span>) || imsi.<span class="keyword">startsWith</span>(<span class="string">"46002"</span>))&#123;  <span class="comment">//中国移动</span></div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(imsi.<span class="keyword">startsWith</span>(<span class="string">"46001"</span>))&#123; <span class="comment">//中国联通        </span></div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(imsi.<span class="keyword">startsWith</span>(<span class="string">"46003"</span>))&#123; <span class="comment">//中国电信</span></div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>第二种方法</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);</div><div class="line">        String <span class="keyword">operator</span> = telManager.getSimOperator();</div><div class="line"> <span class="keyword">if</span>(<span class="keyword">operator</span>!=<span class="literal">null</span>)&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">operator</span>.<span class="keyword">equals</span>(<span class="string">"46000"</span>) || <span class="keyword">operator</span>.<span class="keyword">equals</span>(<span class="string">"46002"</span>))&#123;  <span class="comment">//中国移动</span></div><div class="line">        &#125;<span class="function"><span class="keyword">else</span> <span class="title">if</span>(<span class="params"><span class="keyword">operator</span>.<span class="keyword">equals</span>(<span class="string">"46001"</span></span>))</span>&#123;<span class="comment">//中国联通</span></div><div class="line">        &#125;<span class="function"><span class="keyword">else</span> <span class="title">if</span>(<span class="params"><span class="keyword">operator</span>.<span class="keyword">equals</span>(<span class="string">"46003"</span></span>))</span>&#123;<span class="comment">//中国电信</span></div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-2-从SIM卡中获取联系人信息"><a href="#4-2-从SIM卡中获取联系人信息" class="headerlink" title="4.2 从SIM卡中获取联系人信息"></a>4.2 从SIM卡中获取联系人信息</h3><p>Android系统内部通过Contentprovider对外共享Sim卡存放的联系人等信息，你可以通过操作Contentprovider来实现Sim卡信息的添删改查操作。 需要权限：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.READ_PHONE_STATE"</span>/&gt;</div></pre></td></tr></table></figure>
+<p>Java代码实现：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(<span class="string">"content://icc/adn"</span>)<span class="comment">;</span></div><div class="line">		Cursor <span class="keyword">c</span> = getContentResolver().query(uri, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>)<span class="comment">;</span></div><div class="line">		while (<span class="keyword">c</span>.moveToNext())</div><div class="line">			System.out.println(<span class="keyword">c</span>.getString(<span class="keyword">c</span>.getColumnIndex(<span class="string">"name"</span>)) + <span class="string">": "</span> </div><div class="line">        + <span class="keyword">c</span>.getString(<span class="keyword">c</span>.getColumnIndex(<span class="string">"number"</span>)))<span class="comment">;</span></div></pre></td></tr></table></figure>
+<h3 id="4-3-删除呼叫记录"><a href="#4-3-删除呼叫记录" class="headerlink" title="4.3 删除呼叫记录"></a>4.3 删除呼叫记录</h3><p>需要权限</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.READ_CONTACTS"</span> /&gt;</div><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.WRITE_CONTACTS"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>负责存放呼叫记录的内容提供者源码在ContactsProvider项目下：</p>
+<ol>
+<li>源码路径：com\android\providers\contacts\CallLogProvider.java</li>
+<li>使用到的数据库在：/data/data/com.android.providers.contacts/databases/contacts2.db</li>
+<li>表名:calls</li>
+</ol>
+<p><strong>呼叫记录有三种类型</strong></p>
+<ol>
+<li>来电：CallLog.Calls.INCOMING_TYPE （常量值：1）</li>
+<li>外拔：CallLog.Calls.OUTGOING_TYPE（常量值：2）</li>
+<li>未接：CallLog.Calls.MISSED_TYPE（常量值：3）</li>
+</ol>
+<p>删除指定号码的来电或未接呼叫记录：Java代码实现：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">IncomingCallLogContentObserver observer = <span class="keyword">new</span> IncomingCallLogContentObserver(<span class="keyword">new</span> Handler());</div><div class="line">observer.setNumber(<span class="string">"5554"</span>);</div><div class="line">getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, <span class="literal">true</span>, observer);</div><div class="line"><span class="keyword">private</span> <span class="keyword">class</span> IncomingCallLogContentObserver <span class="keyword">extends</span> ContentObserver &#123;</div><div class="line">        <span class="keyword">private</span> <span class="built_in">String</span> <span class="built_in">number</span>;</div><div class="line">        <span class="keyword">public</span> IncomingCallLogContentObserver(Handler handler)&#123;    	 </div><div class="line">      	  <span class="keyword">super</span>(handler);      	 </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">public</span> <span class="built_in">void</span> setNumber(<span class="built_in">String</span> <span class="built_in">number</span>)&#123;</div><div class="line">        	 <span class="keyword">this</span>.number = <span class="built_in">number</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">public</span> <span class="built_in">void</span> onChange(<span class="built_in">boolean</span> paramBoolean)&#123;</div><div class="line">        	ContentResolver contentResolver = getContentResolver();</div><div class="line">        	<span class="keyword">if</span>(<span class="built_in">number</span>!=<span class="literal">null</span>)&#123;              </div><div class="line">              Uri localUri = CallLog.Calls.CONTENT_URI;</div><div class="line"> Cursor cursor = contentResolver.query(localUri, <span class="keyword">new</span> <span class="built_in">String</span>[]&#123;<span class="string">"_id"</span>&#125;, <span class="string">"number=? AND (type=1 OR type=3)"</span>, </div><div class="line">              		<span class="keyword">new</span> <span class="built_in">String</span>[]&#123;<span class="built_in">number</span>&#125;, <span class="string">"_id desc limit 1"</span>);</div><div class="line">              <span class="keyword">if</span>(cursor.moveToFirst())&#123;</div><div class="line">  	            contentResolver.delete(localUri, <span class="string">"_id=?"</span>, <span class="keyword">new</span> <span class="built_in">String</span>[]&#123;cursor.getString(<span class="number">0</span>)&#125;);</div><div class="line">              &#125;</div><div class="line">              cursor.close();</div><div class="line">        	&#125;</div><div class="line">            contentResolver.unregisterContentObserver(<span class="keyword">this</span>);</div><div class="line">        &#125;｝</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android基础/" rel="tag"># Android基础</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2012/11/Java-IO流-2010-12-04-io-5.html" rel="next" title="Java IO流 序列流">
+                <i class="fa fa-chevron-left"></i> Java IO流 序列流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2011/08/Android基础-2011-08-13-android-basic-15.html" rel="prev" title="Android基础15 动画特效">
+                Android基础15 动画特效 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-传感器"><span class="nav-number">1.</span> <span class="nav-text">1. 传感器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-NinePatch图片"><span class="nav-number">2.</span> <span class="nav-text">2. NinePatch图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-触摸事件"><span class="nav-number">3.</span> <span class="nav-text">3. 触摸事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-拖拽"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 拖拽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-多点触控"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 多点触控</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-读取SIM卡"><span class="nav-number">4.</span> <span class="nav-text">4. 读取SIM卡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-判断SIM卡属于那个运营商"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 判断SIM卡属于那个运营商</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-从SIM卡中获取联系人信息"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 从SIM卡中获取联系人信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-删除呼叫记录"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 删除呼叫记录</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Scott.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.sguotao.com/blog/2011/08/Android基础-2011-08-14-android-basic-16.html';
+          this.page.identifier = '/blog/2011/08/Android基础-2011-08-14-android-basic-16.html';
+          this.page.title = 'Android基础16 传感器';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Scott.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

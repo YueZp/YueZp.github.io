@@ -1,0 +1,876 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="IO流," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott-小白" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 序列流SequenceInputStream特点：可以将多个读取流合并成一个流。这样操作起来很方便。  原理：其实就是将每一个读取流对象存储到一">
+<meta name="keywords" content="IO流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java IO流 序列流">
+<meta property="og:url" content="http://www.sguotao.com/blog/2012/11/Java-IO流-2010-12-04-io-5.html">
+<meta property="og:site_name" content="Scott-小白">
+<meta property="og:description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 序列流SequenceInputStream特点：可以将多个读取流合并成一个流。这样操作起来很方便。  原理：其实就是将每一个读取流对象存储到一">
+<meta property="og:updated_time" content="2016-05-30T11:10:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java IO流 序列流">
+<meta name="twitter:description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 序列流SequenceInputStream特点：可以将多个读取流合并成一个流。这样操作起来很方便。  原理：其实就是将每一个读取流对象存储到一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/blog/2012/11/Java-IO流-2010-12-04-io-5.html"/>
+
+
+
+
+
+  <title>Java IO流 序列流 | Scott-小白</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-小白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2012/11/Java-IO流-2010-12-04-io-5.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-小白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java IO流 序列流
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2012-11-21T00:00:00+08:00">
+                2012-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2012/11/Java-IO流-2010-12-04-io-5.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/blog/2012/11/Java-IO流-2010-12-04-io-5.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容：</p>
+<p><a href="http://sguotao.com/2010/11/30/io-1/" target="_blank" rel="external">Java IO流 1 IO流的介绍</a> <br><br><a href="http://sguotao.com/2010/12/01/io-2/" target="_blank" rel="external">Java IO流 2 字符流 </a><br><br><a href="http://sguotao.com/2010/12/02/io-3/" target="_blank" rel="external">Java IO流 3 字节流 </a><br><br><a href="http://sguotao.com/2010/12/03/io-4/" target="_blank" rel="external">Java IO流 4 File类 </a><br><br><a href="http://sguotao.com/2012/11/21/io-5/" target="_blank" rel="external">Java IO流 5 序列流</a></p>
+<h2 id="1-序列流"><a href="#1-序列流" class="headerlink" title="1. 序列流"></a>1. 序列流</h2><p><strong>SequenceInputStream</strong><br>特点：可以将多个读取流合并成一个流。这样操作起来很方便。 </p>
+<p>原理：其实就是将每一个读取流对象存储到一个集合中。最后一个流对象结尾作为这个流的结尾。<br>两个构造函数：<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+SequenceInputStream(InputStream in1,InputStream in2)    //可以将两个读取流合并成一个流
+SequenceInputStream(Enumeration  &lt;? extends InputStream &gt; en) //可以将枚举中的多个流合并成一个流。 
+</pre>
+
+<p>作用：可以用于多个数据的合并.</p>
+<p>注意：<strong>因为Enumeration是Vector中特有的取出方式。而Vector被ArrayList取代。 所以要使用ArrayList集合效率更高一些。那么如何获取Enumeration呢</strong>?<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+  ArrayList &lt;FileInputStream &gt;al = new ArrayList&lt;FileInputStream&gt;(); 
+  for(int x=1; x<4; x++)="" al.add(new="" fileinputstream(x+".txt"));="" iterator&lt;fileinputstream&gt;="" it="al.iterator();" enumeration&lt;fileinputstream&gt;="" en="new" enumeration&lt;fileinputstream&gt;(){="" public="" boolean="" hasmoreelements()="" {="" return="" it.hasnext();="" }="" fileinputstream="" nextelement()="" it.next();="" };="" 多个流就变成了一个流，这就是数据源。="" sequenceinputstream="" sis="new" sequenceinputstream(en);="" 创建数据目的。="" fileoutputstream="" fos="new" fileoutputstream("4.txt");="" byte[]="" buf="new" byte[1024*4];="" int="" len="0;" while((len="sis.read(buf))!=-1)" fos.write(buf,0,len);="" fos.close();="" sis.close();="" <="" pre="">
+
+<p>如果要一个对文件数据切割。一个读取对应多了输出。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+  FileInputStream fis = new FileInputStream("1.mp3"); 
+  FileOutputStream fos    = null; 
+  byte[] buf = new byte[1024*1024];//是一个1MB的缓冲区。 
+  int len = 0; 
+  int count = 1; 
+  while((len=fis.read(buf))!=-1) { 
+    fos = new FileOutputStream((count++)+".part); 
+    fos.write(buf,0,len); 
+    fos.close(); 
+  } 
+  fis.close();
+</pre>
+
+<p>这样就是将1.mp3文件切割成多个碎片文件。想要合并使用SequenceInputStream即可。对于切割后，合并是需要的一些源文件的信息。可以通过配置文件进行存储。该配置可以通过键=值的形式存在。然后通过Properties对象进行数据的加载和获取。 </p>
+<h2 id="2-对象的序列化"><a href="#2-对象的序列化" class="headerlink" title="2. 对象的序列化"></a>2. 对象的序列化</h2><h3 id="2-1-ObjectInputStream-和ObjectOutputStream"><a href="#2-1-ObjectInputStream-和ObjectOutputStream" class="headerlink" title="2.1 ObjectInputStream 和ObjectOutputStream"></a>2.1 ObjectInputStream 和ObjectOutputStream</h3><p>可以通过这两个流对象直接操作已有对象并将对象进行本地持久化存储。存储后的对象可以进行网络传输。 </p>
+<p>两个对象的特有方法：<br><strong>ObjectInputStream</strong><br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+Object readObject()//该方法抛出异常：ClassNotFountException。 
+</pre>
+**ObjectOutputStream**
+<?prettify?>
+<pre class="prettyprint">
+void writeObject(Object)//被写入的对象必须实现一个接口:Serializable 否则会抛出：NotSerializableException  
+</pre>
+
+<p>Serializable：该接口其实就是一个没有方法的标记接口。 用于给类指定一个UID。该UID是通过类中的可序列化成员的数字签名运算出来的一个long 型的值。 只要是这些成员没有变化，那么该值每次运算都一样。 该值用于判断被序列化的对象和类文件是否兼容。如果被序列化的对象需要被不同的类版本所兼容。可以在类中自定义UID。定义方式：static final long serialVersionUID = 42L; </p>
+<p>注意：对应静态的成员变量，不会被序列化。对应非静态也不想被序列化的成员而言，可以通过transient关键字修饰。 通常，这两个对象成对使用。 </p>
+<h3 id="2-2-操作基本数据类型的流对象"><a href="#2-2-操作基本数据类型的流对象" class="headerlink" title="2.2 操作基本数据类型的流对象"></a>2.2 操作基本数据类型的流对象</h3><p><strong>DataInputStream</strong><br>DataInputStream(InputStream);<br>操作基本数据类型的方法：<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+int readInt():一次读取四个字节，并将其转成int 值。 
+boolean readBoolean():一次读取一个字节。 
+short readShort(); 
+long readLong(); 
+剩下的数据类型一样。 
+String readUTF():按照utf-8修改版读取字符。注意，它只能读writeUTF()写入的字符数据
+</pre>
+
+<p><strong>DataOutputStream</strong><br>DataOutputStream(OutputStream):<br>操作基本数据类型的方法:<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+writeInt(int)：一次写入四个字节。 
+注意：和write(int)不同。write(int)只将该整数的最低一个8位写入。剩余三个8位丢弃。 
+writeBoolean(boolean); 
+writeShort(short); 
+writeLong(long); 
+剩下是数据类型也也一样。 
+writeUTF(String):按照utf-8修改版将字符数据进行存储。只能通过readUTF 读取。 
+通常只要操作基本数据类型的数据。就需要通过DataStram进行包装。通常成对使用。 
+</pre>
+
+<h3 id="2-3-操作数组的流对象"><a href="#2-3-操作数组的流对象" class="headerlink" title="2.3 操作数组的流对象"></a>2.3 操作数组的流对象</h3><p><strong>操作字节数组</strong><br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+    ByteArrayInputStream 
+    ByteArrayOutputStream 
+      toByteArray(); 
+      toString(); 
+      writeTo(OutputStream); 
+</pre>
+
+<p><strong>操作字符数组</strong><br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+    CharArrayReader 
+    CharArrayWriter 
+</pre>
+
+<p>对于这些流，源是内存。目的也是内存。而且这些流并未调用系统资源。使用的就是内存中的数组。所以这些在使用的时候不需要close。操作数组的读取流在构造时，必须要明确一个数据源。所以要传入相对应的数组。 </p>
+<p>对于操作数组的写入流，在构造函数可以使用空参数。因为它内置了一个可变长度数组作为缓冲区。<br>这几个流的出现其实就是通过流的读写思想在操作数组。<br>类似的对象同理： StringReader，StringWriter。</p>
+<h2 id="3-编码转换"><a href="#3-编码转换" class="headerlink" title="3. 编码转换"></a>3. 编码转换</h2><p>在io 中涉及到编码转换的流是转换流和打印流。但是打印流只有输出。在转换流中是可以指定编码表的。默认情况下，都是本机默认的码表。GBK. 这个编码表怎么来的？<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+  System.getProperty("file.encoding"); 
+</pre>
+
+<p>常见码表：<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+  ASCII:美国标准信息交换码。使用的是1个字节的7位来表示该表中的字符。 
+  ISO8859-1:拉丁码表。使用1个字节来表示。 
+  GB2312:简体中文码表。 
+  GBK：简体中文码表，比GB2312融入更多的中文文件和符号。 
+  unicode:国际标准码表。都用两个字节表示一个字符。 
+  UTF-8：对unicode进行优化，每一个字节都加入了标识头。 
+</pre>
+
+<p>编码转换：<br>  字符串  –&gt;字节数组  ：编码。通过getBytes(charset);<br>  字节数组–&gt;字符串  ：  解码。通过String类的构造函数完成。String(byte[],charset); </p>
+<p>如果编错了，没救！ 如果编对了，解错了，有可能还有救！<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+  String s = "你好"; 
+  //编码 
+  byte[] b = s.getBytes("GBK"); 
+  //解码
+  String s1 = new String(b,"iso8859-1"); 
+  System.out.println(s1);//???? 
+</pre>
+
+<p>想要还原。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+  /* 对s1先进行一次解码码表的编码。获取原字节数据。 
+  然后在对原字节数据进行指定编码表的解码。 */ 
+  byte[] b1 = s1.getBytes("iso8859-1"); 
+  String s2 = new String(b1,"gbk"); 
+  System.out.println(s2);//你好
+</pre>
+
+<p>这种情况在tomcat服务器会出现。</p>
+<p>因为tomcat服务器默认是iso8859-1的编码表。所以客户端通过浏览器向服务端通过get提交方式提交中文数据时，服务端获取到会使用ISO8859-1进行中文数据的解码。会出现乱码。</p>
+<p>这时就必须要对获取的数据进行iso8859-1编码。然后在按照页面指定的编码表进行解码即可，而对于post提交，这种方法也通用。但是post有更好的解决方式。 request.setCharacterEncoding(“utf-8”);即可。所以建立客户端提交使用post提交方式。 </p>
+</4;></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IO流/" rel="tag"># IO流</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2012/11/Java-集合框架-2012-11-22-java-collection-1.html" rel="next" title="集合框架篇1 容器简介">
+                <i class="fa fa-chevron-left"></i> 集合框架篇1 容器简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2011/08/Android基础-2011-08-14-android-basic-16.html" rel="prev" title="Android基础16 传感器">
+                Android基础16 传感器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-序列流"><span class="nav-number">1.</span> <span class="nav-text">1. 序列流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-对象的序列化"><span class="nav-number">2.</span> <span class="nav-text">2. 对象的序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-ObjectInputStream-和ObjectOutputStream"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 ObjectInputStream 和ObjectOutputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-操作基本数据类型的流对象"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 操作基本数据类型的流对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-操作数组的流对象"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 操作数组的流对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编码转换"><span class="nav-number">3.</span> <span class="nav-text">3. 编码转换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Scott.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.sguotao.com/blog/2012/11/Java-IO流-2010-12-04-io-5.html';
+          this.page.identifier = '/blog/2012/11/Java-IO流-2010-12-04-io-5.html';
+          this.page.title = 'Java IO流 序列流';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Scott.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,881 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="多线程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott-小白" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 如何创建和运行线程的两种方法。线程运行的代码就是实现了Runnable接口的类的run()方法或者是Thread">
+<meta name="keywords" content="多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程 2 线程的创建">
+<meta property="og:url" content="http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html">
+<meta property="og:site_name" content="Scott-小白">
+<meta property="og:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 如何创建和运行线程的两种方法。线程运行的代码就是实现了Runnable接口的类的run()方法或者是Thread">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.10.58.png">
+<meta property="og:updated_time" content="2016-05-31T02:25:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多线程 2 线程的创建">
+<meta name="twitter:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 如何创建和运行线程的两种方法。线程运行的代码就是实现了Runnable接口的类的run()方法或者是Thread">
+<meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.10.58.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html"/>
+
+
+
+
+
+  <title>多线程 2 线程的创建 | Scott-小白</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-小白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-小白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                多线程 2 线程的创建
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-10-02T00:00:00+08:00">
+                2010-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。</p>
+<p><a href="http://sguotao.com/2010/10/01/multi-thread-1/" target="_blank" rel="external">多线程 1 线程与线程类</a><br><br><a href="http://sguotao.com/2010/10/02/multi-thread-2/" target="_blank" rel="external">多线程 2 线程的创建</a><br><br><a href="http://sguotao.com/2010/10/03/multi-thread-3/" target="_blank" rel="external">多线程 3 线程的状态与调度</a><br><br><a href="http://sguotao.com/2010/10/04/multi-thread-4/" target="_blank" rel="external">多线程 4 线程状态的改变</a><br><br><a href="http://sguotao.com/2010/10/05/multi-thread-5/" target="_blank" rel="external">多线程 5 线程的同步与共享</a><br><br><a href="http://sguotao.com/2010/10/06/multi-thread-6/" target="_blank" rel="external">多线程 6 线程组</a></p>
+<p>如何创建和运行线程的两种方法。线程运行的代码就是实现了Runnable接口的类的run()方法或者是Thread类的子类的run()方法，因此构造线程体就有两种方法：</p>
+<ul>
+<li>继承Thread类并覆盖它的run()方法；</li>
+<li>实现Runnable接口并实现它的run()方法。</li>
+</ul>
+<h2 id="1-继承Thread类创建线程"><a href="#1-继承Thread类创建线程" class="headerlink" title="1. 继承Thread类创建线程"></a>1. 继承Thread类创建线程</h2><p>通过继承Thread类，并覆盖run()方法，这时就可以用该类的实例作为线程的目标对象。下面的程序定义了SimpleThread类，它继承了Thread类并覆盖了run()方法。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+public class SimpleThread extends Thread{
+  public SimpleThread(String str){
+    super(str);
+}
+public void run(){
+    for(int i=0; i<100; i++){="" system.out.println(getname()+"="+ i);
+      try{
+         sleep((int)(Math.random()*100));
+      }catch(InterruptedException e){}
+    } 
+System.out.println(getName()+ " done");="" }="" <="" pre="">
+
+<p> SimpleThread类继承了Thread类，并覆盖了run()方法，该方法就是线程体。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+public class ThreadTest{
+  public static void main(String args[]){
+    Thread t1 = new SimpleThread("Runner A");
+    Thread t2 = new SimpleThread("Runner B");
+    t1.start();
+t2.start(); 
+    }
+}
+</pre>
+
+<p>在ThreadTest类的main()方法中创建了两个SimpleThread类的线程对象并调用线程类的start()方法启动线程。构造线程时没有指定目标对象，所以线程启动后执行本类的run()方法。</p>
+<p>注意，实际上ThreadTest程序中有三个线程同时运行。请试着将下段代码加到main()方法中，分析程序运行结果。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+for(int i=0; i<100; i++){="" system.out.println(thread.currentthread().getname()+"="+ i);
+   try{
+     Thread.sleep((int)(Math.random()*500));
+   }catch(InterruptedException e){}
+System.out.println(Thread.currentThread().getName()+ " done");="" }="" <="" pre="">
+
+<p>从上述代码执行结果可以看到，在应用程序的main()方法启动时，JVM就创建一个主线程，在主线程中可以创建其他线程。再看下面的程序：<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+public class MainThreadDemo{
+  public static void main(String args[]){
+    Thread t = Thread.currentThread();
+    t.setName("MyThread");
+    System.out.println(t);
+    System.out.println(t.getName());
+    System.out.println(t.getThreadGroup().getName());
+  }
+}
+</pre>
+
+<p>该程序输出结果为：<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+Thread[MyThread, 5, main]
+MyThread
+main
+</pre>
+
+<p>上述程序在main()方法中声明了一个Thread对象t，然后调用Thread类的静态方法currentThread()获得当前线程对象。然后重新设置该线程对象的名称，最后输出线程对象、线程组对象名和线程对象名。</p>
+<h2 id="2-实现Runnable接口创建线程"><a href="#2-实现Runnable接口创建线程" class="headerlink" title="2. 实现Runnable接口创建线程"></a>2. 实现Runnable接口创建线程</h2><p>可以定义一个类实现Runnable接口，然后将该类对象作为线程的目标对象。实现Runnable接口就是实现run()方法。下面程序通过实现Runnable接口构造线程体。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+class T1 implements Runnable{
+  public void run(){
+    for(int i=0;i<15;i++) system.out.println("runner="" a="+i);
+  }
+}
+class T2 implements Runnable{
+  public void run(){
+    for(int j=0;j<15;j++)
+      System.out.println(" runner="" b="+j);
+  }
+}
+public class ThreadTest{
+  public static void main(String args[]){
+    Thread t1=new Thread(new T1()," thread="" a");="" t2="new" thread(new="" t2(),"thread="" b");="" t1.start();="" t2.start();="" }="" <="" pre="">
+
+<p>下面是一个小应用程序，利用线程对象在其中显示当前时间。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+import java.awt.*;
+import java.util.*;
+import javax.swing.*;
+import java.text.DateFormat;
+public class ClockDemo extends JApplet{
+  private Thread clockThread = null;
+  private ClockPanel cp=new ClockPanel();
+  public void init(){
+      getContentPane().add(cp);
+  } 
+  public void start() {
+ if (clockThread == null) {
+        clockThread = new Thread(cp, "Clock");
+    clockThread.start();
+     }
+}
+  public void stop() {
+     clockThread = null;
+  }
+}
+class ClockPanel extends JPanel implements Runnable{
+    public void paintComponent(Graphics g) {
+super.paintComponent(g);
+      Calendar cal = Calendar.getInstance();
+    Date date = cal.getTime();
+    DateFormat dateFormatter = DateFormat.getTimeInstance();
+    g.setColor(Color.BLUE);
+    g.setFont(new Font("TimesNewRoman",Font.BOLD,36));
+    g.drawString(dateFormatter.format(date), 50, 50);
+  }
+    public void run() {
+     while (true) {
+       repaint();
+       try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e){ }
+    }
+}
+}
+</pre>
+
+<p>该小应用程序的运行结果如图3所示：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.10.58.png" alt=""></p>
+</15;i++)></pre></100;></pre></100;></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2010/10/Java-多线程-2010-10-3-multi-thread-3.html" rel="next" title="多线程 3 线程的状态与调度">
+                <i class="fa fa-chevron-left"></i> 多线程 3 线程的状态与调度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2010/10/Java-多线程-2010-10-1-multi-thread-1.html" rel="prev" title="多线程 1 线程与线程类">
+                多线程 1 线程与线程类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-继承Thread类创建线程"><span class="nav-number">1.</span> <span class="nav-text">1. 继承Thread类创建线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-实现Runnable接口创建线程"><span class="nav-number">2.</span> <span class="nav-text">2. 实现Runnable接口创建线程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Scott.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html';
+          this.page.identifier = '/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html';
+          this.page.title = '多线程 2 线程的创建';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Scott.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

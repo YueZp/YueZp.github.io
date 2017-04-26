@@ -1,0 +1,1240 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ReactNative," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott-小白" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
+<meta name="keywords" content="ReactNative">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactNative样式整理">
+<meta property="og:url" content="http://www.sguotao.com/blog/2017/03/ReactNative-2017-04-25-rn-css.html">
+<meta property="og:site_name" content="Scott-小白">
+<meta property="og:description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
+<meta property="og:updated_time" content="2017-04-25T14:00:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactNative样式整理">
+<meta name="twitter:description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/blog/2017/03/ReactNative-2017-04-25-rn-css.html"/>
+
+
+
+
+
+  <title>ReactNative样式整理 | Scott-小白</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-小白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2017/03/ReactNative-2017-04-25-rn-css.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-小白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                ReactNative样式整理
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T00:00:00+08:00">
+                2017-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2017/03/ReactNative-2017-04-25-rn-css.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/blog/2017/03/ReactNative-2017-04-25-rn-css.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。</p>
+<h2 id="引入样式的几种方法"><a href="#引入样式的几种方法" class="headerlink" title="引入样式的几种方法"></a>引入样式的几种方法</h2><p>常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。</p>
+<h3 id="1-内嵌方式"><a href="#1-内嵌方式" class="headerlink" title="1. 内嵌方式"></a>1. 内嵌方式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">appProject</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;<span class="type">View</span> style=&#123;</div><div class="line">                &#123;</div><div class="line">                marginTop:<span class="number">200</span>,</div><div class="line">                marginLeft:<span class="number">5</span>,</div><div class="line">                marginRight:<span class="number">5</span>,</div><div class="line">                height:<span class="number">84</span>,</div><div class="line">                flexDirection:<span class="symbol">'ro</span>w',</div><div class="line">                backgroundColor:'#<span class="type">FF0067</span>',</div><div class="line">                &#125;</div><div class="line">                &#125;&gt;</div><div class="line">            &lt;/<span class="type">View</span>&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-外联方式"><a href="#2-外联方式" class="headerlink" title="2. 外联方式"></a>2. 外联方式</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="string">const</span> <span class="string">Styles</span> <span class="string">=</span> <span class="string">StyleSheet.create(&#123;</span></div><div class="line"><span class="attr">    container:</span> <span class="string">&#123;</span></div><div class="line"><span class="attr">        marginTop:</span><span class="number">200</span><span class="string">,</span></div><div class="line"><span class="attr">        marginLeft:</span><span class="number">5</span><span class="string">,</span></div><div class="line"><span class="attr">        marginRight:</span><span class="number">5</span><span class="string">,</span></div><div class="line"><span class="attr">        height:</span><span class="number">84</span><span class="string">,</span></div><div class="line"><span class="attr">        flexDirection:</span><span class="string">'row'</span><span class="string">,</span></div><div class="line"><span class="attr">        backgroundColor:</span><span class="string">'#FF0067'</span><span class="string">,</span></div><div class="line">    <span class="string">&#125;</span></div><div class="line"><span class="string">&#125;);</span></div></pre></td></tr></table></figure>
+<h3 id="3-混合方式"><a href="#3-混合方式" class="headerlink" title="3. 混合方式"></a>3. 混合方式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">appProject</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="comment">//外层容器</span></div><div class="line">            &lt;<span class="type">View</span> style=&#123;[<span class="type">Styles</span>.container,<span class="type">Styles</span>.bg,&#123;color:<span class="symbol">'re</span>d'&#125;]&#125;&gt;</div><div class="line">            &lt;/<span class="type">View</span>&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-import引用"><a href="#4-import引用" class="headerlink" title="4.import引用"></a>4.import引用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    StyleSheet,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"><span class="keyword">const</span> styles = StyleSheet.create(&#123;</div><div class="line">    <span class="attr">container</span>: &#123;</div><div class="line">        <span class="attr">marginTop</span>:<span class="number">200</span>,</div><div class="line">        <span class="attr">marginLeft</span>:<span class="number">5</span>,</div><div class="line">        <span class="attr">marginRight</span>:<span class="number">5</span>,</div><div class="line">        <span class="attr">height</span>:<span class="number">84</span>,</div><div class="line">        <span class="attr">flexDirection</span>:<span class="string">'row'</span>,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">bg</span>:&#123;</div><div class="line">        <span class="attr">backgroundColor</span>:<span class="string">'#FF0067'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"><span class="built_in">module</span>.exports = styles;</div></pre></td></tr></table></figure>
+<p>通过import进行引入</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./styles/style'</span>;</div></pre></td></tr></table></figure>
+<h2 id="常见的属性及说明"><a href="#常见的属性及说明" class="headerlink" title="常见的属性及说明"></a>常见的属性及说明</h2><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">backgroundColor</td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 background-color 属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-宽高尺寸"><a href="#2-宽高尺寸" class="headerlink" title="2.宽高尺寸"></a>2.宽高尺寸</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">width</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 width 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">height</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 height 属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-外边距相关-margin"><a href="#3-外边距相关-margin" class="headerlink" title="3.外边距相关(margin)"></a>3.外边距相关(margin)</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">margin</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 margin 属性，不同的是，只能定义一个参数，用以表示上、右、下、左4个方位的外补白</td>
+</tr>
+<tr>
+<td style="text-align:center">marginHorizontal</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">CSS中没有对应的属性，相当于同时设置marginRight和marginLeft</td>
+</tr>
+<tr>
+<td style="text-align:center">marginVertical</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">CSS中没有对应的属性，相当于同时设置marginTop和marginBottom</td>
+</tr>
+<tr>
+<td style="text-align:center">marginTop</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 margin-top 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">marginRight</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 margin-right 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">marginBottom</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 margin-bottom 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">marginLeft</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 margin-left 属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-内边距相关-padding"><a href="#4-内边距相关-padding" class="headerlink" title="4.内边距相关(padding)"></a>4.内边距相关(padding)</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">padding</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 padding 属性，不同的是，只能定义一个参数，用以表示上、右、下、左4个方位的内补白</td>
+</tr>
+<tr>
+<td style="text-align:center">paddingHorizontal</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">CSS中没有对应的属性，相当于同时设置paddingRight和paddingLeft</td>
+</tr>
+<tr>
+<td style="text-align:center">paddingVertical</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">CSS中没有对应的属性，相当于同时设置paddingTop和paddingBottom</td>
+</tr>
+<tr>
+<td style="text-align:center">paddingTop</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 padding-top 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">paddingRight</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 padding-right 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">paddingBottom</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 padding-bottom 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">paddingLeft</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 padding-left 属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-边框相关-border"><a href="#5-边框相关-border" class="headerlink" title="5.边框相关(border)"></a>5.边框相关(border)</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">borderStyle</td>
+<td style="text-align:center">solid, dotted, dashed</td>
+<td style="text-align:center">对应 CSS 中的 border-style 属性，但阉割了 none, hidden, double, groove, ridge, inset, outset 取值，且无方向分拆属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderWidth</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-width 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderTopWidth</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-top-width 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderRightWidth</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-right-width 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderBottomWidth</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-bottom-width 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderLeftWidth</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-left-width 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderColor</td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 border-color 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderTopColor</td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 border-top-color 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderRightColor</td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 border-right-color 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderBottomColor</td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 border-bottom-color 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderLeftColor</td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 border-left-color 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderRadius</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-radius 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderTopLeftRadius</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-top-left-radius 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderTopRightRadius</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-top-right-radius 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderBottomLeftRadius</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-bottom-left-radius 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">borderBottomRightRadius</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 border-bottom-right-radius 属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-位置相关-position"><a href="#6-位置相关-position" class="headerlink" title="6.位置相关(position)"></a>6.位置相关(position)</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">position</td>
+<td style="text-align:center">absolute, relative</td>
+<td style="text-align:center">对应 CSS 中的 position 属性，但阉割了 static, fixed 取值</td>
+</tr>
+<tr>
+<td style="text-align:center">top</td>
+<td style="text-align:center">number&gt;</td>
+<td style="text-align:center">对应 CSS 中的 top 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">right</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 right 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">bottom</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 bottom 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">left</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 left 属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-文本相关-Text"><a href="#7-文本相关-Text" class="headerlink" title="7.文本相关(Text)"></a>7.文本相关(Text)</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">color</td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 color 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">fontFamily</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">对应 CSS 中的 font-family 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">fontSize</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 font-size 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">fontStyle</td>
+<td style="text-align:center">normal, italic</td>
+<td style="text-align:center">对应 CSS 中的 font-style 属性，但阉割了 oblique 取值</td>
+</tr>
+<tr>
+<td style="text-align:center">fontWeight</td>
+<td style="text-align:center">normal, bold 100~900</td>
+<td style="text-align:center">对应 CSS 中的 font-weight 属性，但阉割了 bolder, lighter 取值</td>
+</tr>
+<tr>
+<td style="text-align:center">lineHeight</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 line-height 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">textAlign</td>
+<td style="text-align:center">auto, left, right, center, justifyiOS</td>
+<td style="text-align:center">对应 CSS 中的 text-align 属性，增加了 auto 取值</td>
+</tr>
+<tr>
+<td style="text-align:center">textAlignVertical<sup>Android</sup></td>
+<td style="text-align:center">auto, top, bottom, center</td>
+<td style="text-align:center">对应 CSS 中的 vertical-align 属性，增加了 auto 取值，center 取代了 middle，并阉割了 baseline, sub 等值</td>
+</tr>
+<tr>
+<td style="text-align:center">textShadowColor</td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 text-shadow 属性中的颜色定义</td>
+</tr>
+<tr>
+<td style="text-align:center">textShadowOffset</td>
+<td style="text-align:center">{width: number, height: number}</td>
+<td style="text-align:center">对应 CSS 中的 text-shadow 属性中的阴影偏移定义</td>
+</tr>
+<tr>
+<td style="text-align:center">textShadowRadius</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">在 CSS 中，阴影的圆角大小取决于元素的圆角定义，不需要额外定义</td>
+</tr>
+<tr>
+<td style="text-align:center">letterSpacing<sup>iOS</sup></td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 letter-spacing 属性，但取值不同</td>
+</tr>
+<tr>
+<td style="text-align:center">textDecorationColor<sup>iOS</sup></td>
+<td style="text-align:center">color</td>
+<td style="text-align:center">对应 CSS 中的 text-decoration-color 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">textDecorationLine<sup>iOS</sup></td>
+<td style="text-align:center">none, underline, line-through, underline line-through</td>
+<td style="text-align:center">对应 CSS 中的 text-decoration-line 属性，但阉割了 overline, blink 取值</td>
+</tr>
+<tr>
+<td style="text-align:center">textDecorationStyle<sup>iOS</sup></td>
+<td style="text-align:center">solid, double, dotted, dashed</td>
+<td style="text-align:center">对应 CSS 中的 text-decoration-style 属性，但阉割了 wavy 取值</td>
+</tr>
+<tr>
+<td style="text-align:center">writingDirection<sup>iOS</sup></td>
+<td style="text-align:center">auto, ltr, rtl</td>
+<td style="text-align:center">对应 CSS 中的 direction 属性，增加了 auto 取值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-弹性布局相关-Flex"><a href="#8-弹性布局相关-Flex" class="headerlink" title="8.弹性布局相关(Flex)"></a>8.弹性布局相关(Flex)</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">flex</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">对应 CSS 中的 flex 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">flexDirection</td>
+<td style="text-align:center">row, column</td>
+<td style="text-align:center">对应 CSS 中的 flex-direction 属性，但阉割了 row-reverse, column-reverse 取值</td>
+</tr>
+<tr>
+<td style="text-align:center">flexWrap</td>
+<td style="text-align:center">wrap, nowrap</td>
+<td style="text-align:center">对应 CSS 中的 flex-wrap 属性，但阉割了 wrap-reverse 取值</td>
+</tr>
+<tr>
+<td style="text-align:center">justifyContent</td>
+<td style="text-align:center">flex-start, flex-end, center, space-between, space-around</td>
+<td style="text-align:center">对应 CSS 中的 justify-content 属性，但阉割了 stretch 取值。</td>
+</tr>
+<tr>
+<td style="text-align:center">alignItems</td>
+<td style="text-align:center">flex-start, flex-end, center, stretch</td>
+<td style="text-align:center">对应 CSS 中的 align-items 属性，但阉割了 baseline 取值。</td>
+</tr>
+<tr>
+<td style="text-align:center">alignSelf</td>
+<td style="text-align:center">auto, flex-start, flex-end, center, stretch</td>
+<td style="text-align:center">对应 CSS 中的 align-self 属性，但阉割了 baseline 取值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="9-转换相关-transform"><a href="#9-转换相关-transform" class="headerlink" title="9.转换相关(transform)"></a>9.转换相关(transform)</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">transform</td>
+<td style="text-align:center">[{perspective: number}, {rotate: string}, {rotateX: string}, {rotateY: string}, {rotateZ: string}, {scale: number}, {scaleX: number}, {scaleY: number}, {translateX: number}, {translateY: number}, {skewX: string}, {skewY: string}]</td>
+<td style="text-align:center">对应 CSS 中的 transform 属性</td>
+</tr>
+<tr>
+<td style="text-align:center">transformMatrix</td>
+<td style="text-align:center">TransformMatrixPropType</td>
+<td style="text-align:center">类似于 CSS 中 transform 属性的 matrix() 和 matrix3d() 函数</td>
+</tr>
+<tr>
+<td style="text-align:center">backfaceVisibility</td>
+<td style="text-align:center">visible, hidden</td>
+<td style="text-align:center">对应 CSS 中的 backface-visibility 属性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-图片相关"><a href="#10-图片相关" class="headerlink" title="10.图片相关"></a>10.图片相关</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">resizeMode</td>
+<td style="text-align:center">cover, contain, stretch</td>
+<td style="text-align:center">contain是指无论如何图片都包含在指定区域内，假设设置的宽度高度比图片大，则图片居中显示，否则，图片等比缩小显示</td>
+</tr>
+<tr>
+<td style="text-align:center">overflow</td>
+<td style="text-align:center">visible, hidden</td>
+<td style="text-align:center">超出部分是否显示，hidden为隐藏</td>
+</tr>
+<tr>
+<td style="text-align:center">tintColor</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">着色，rgb字符串类型</td>
+</tr>
+<tr>
+<td style="text-align:center">opacity</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">透明度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="11-图像变换"><a href="#11-图像变换" class="headerlink" title="11.图像变换"></a>11.图像变换</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">属性名称</th>
+<th style="text-align:center">取值</th>
+<th style="text-align:center">对应css属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">rotation</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">旋转</td>
+</tr>
+<tr>
+<td style="text-align:center">scaleX</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">水平方向缩放</td>
+</tr>
+<tr>
+<td style="text-align:center">scaleY</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">垂直方向缩放</td>
+</tr>
+<tr>
+<td style="text-align:center">translateX</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">水平方向平移</td>
+</tr>
+<tr>
+<td style="text-align:center">translateY</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">水平方向平移</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ReactNative/" rel="tag"># ReactNative</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html" rel="prev" title="Android内存泄露">
+                Android内存泄露 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入样式的几种方法"><span class="nav-number">1.</span> <span class="nav-text">引入样式的几种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-内嵌方式"><span class="nav-number">1.1.</span> <span class="nav-text">1. 内嵌方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-外联方式"><span class="nav-number">1.2.</span> <span class="nav-text">2. 外联方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-混合方式"><span class="nav-number">1.3.</span> <span class="nav-text">3. 混合方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-import引用"><span class="nav-number">1.4.</span> <span class="nav-text">4.import引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的属性及说明"><span class="nav-number">2.</span> <span class="nav-text">常见的属性及说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-背景"><span class="nav-number">2.1.</span> <span class="nav-text">1.背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-宽高尺寸"><span class="nav-number">2.2.</span> <span class="nav-text">2.宽高尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-外边距相关-margin"><span class="nav-number">2.3.</span> <span class="nav-text">3.外边距相关(margin)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-内边距相关-padding"><span class="nav-number">2.4.</span> <span class="nav-text">4.内边距相关(padding)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-边框相关-border"><span class="nav-number">2.5.</span> <span class="nav-text">5.边框相关(border)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-位置相关-position"><span class="nav-number">2.6.</span> <span class="nav-text">6.位置相关(position)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-文本相关-Text"><span class="nav-number">2.7.</span> <span class="nav-text">7.文本相关(Text)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-弹性布局相关-Flex"><span class="nav-number">2.8.</span> <span class="nav-text">8.弹性布局相关(Flex)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-转换相关-transform"><span class="nav-number">2.9.</span> <span class="nav-text">9.转换相关(transform)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-图片相关"><span class="nav-number">2.10.</span> <span class="nav-text">10.图片相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-图像变换"><span class="nav-number">2.11.</span> <span class="nav-text">11.图像变换</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Scott.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.sguotao.com/blog/2017/03/ReactNative-2017-04-25-rn-css.html';
+          this.page.identifier = '/blog/2017/03/ReactNative-2017-04-25-rn-css.html';
+          this.page.title = 'ReactNative样式整理';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Scott.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

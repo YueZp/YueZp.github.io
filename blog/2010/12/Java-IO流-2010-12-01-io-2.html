@@ -1,0 +1,1029 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="IO流," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott-小白" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 字符流介绍 Reader&amp;nbsp;&amp;nbsp;|–InputStreamReader&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|–Fil">
+<meta name="keywords" content="IO流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java IO流 字符流">
+<meta property="og:url" content="http://www.sguotao.com/blog/2010/12/Java-IO流-2010-12-01-io-2.html">
+<meta property="og:site_name" content="Scott-小白">
+<meta property="og:description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 字符流介绍 Reader&amp;nbsp;&amp;nbsp;|–InputStreamReader&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|–Fil">
+<meta property="og:updated_time" content="2016-05-30T11:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java IO流 字符流">
+<meta name="twitter:description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容： Java IO流 1 IO流的介绍 Java IO流 2 字符流 Java IO流 3 字节流 Java IO流 4 File类 Java IO流 5 序列流 1. 字符流介绍 Reader&amp;nbsp;&amp;nbsp;|–InputStreamReader&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|–Fil">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/blog/2010/12/Java-IO流-2010-12-01-io-2.html"/>
+
+
+
+
+
+  <title>Java IO流 字符流 | Scott-小白</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-小白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2010/12/Java-IO流-2010-12-01-io-2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-小白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java IO流 字符流
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-12-01T00:00:00+08:00">
+                2010-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2010/12/Java-IO流-2010-12-01-io-2.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/blog/2010/12/Java-IO流-2010-12-01-io-2.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容：</p>
+<p><a href="http://sguotao.com/2010/11/30/io-1/" target="_blank" rel="external">Java IO流 1 IO流的介绍</a> <br><br><a href="http://sguotao.com/2010/12/01/io-2/" target="_blank" rel="external">Java IO流 2 字符流 </a><br><br><a href="http://sguotao.com/2010/12/02/io-3/" target="_blank" rel="external">Java IO流 3 字节流 </a><br><br><a href="http://sguotao.com/2010/12/03/io-4/" target="_blank" rel="external">Java IO流 4 File类 </a><br><br><a href="http://sguotao.com/2012/11/21/io-5/" target="_blank" rel="external">Java IO流 5 序列流</a></p>
+<h2 id="1-字符流介绍"><a href="#1-字符流介绍" class="headerlink" title="1. 字符流介绍"></a>1. 字符流介绍</h2><p> <strong>Reader</strong><br>&nbsp;&nbsp;|–InputStreamReader<br>&nbsp;&nbsp;&nbsp;&nbsp;|–FileReader:专门用于处理文件的字符读取流对象。 </p>
+<p><strong>Writer</strong><br>&nbsp;&nbsp;|–OutputStreamWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;|–FileWriter:专门用于处理文件的字符写入流对象。 </p>
+<h2 id="2-Writer-和-Reader"><a href="#2-Writer-和-Reader" class="headerlink" title="2. Writer 和 Reader"></a>2. Writer 和 Reader</h2><p><strong>Reader中的常见的方法</strong></p>
+<ol>
+<li>int read()： 读取一个字符。返回的是读到的那个字符。如果读到流的末尾，返回-1。</li>
+<li>int read(char[])： 将读到的字符存入指定的数组中，返回的是读到的字符个数，也就是往数组里装的元素的个数。如果读到流的末尾，返回-1。</li>
+<li>close(): 读取字符其实用的是window系统的功能，就希望使用完毕后，进行资源的释放。 </li>
+</ol>
+<p><strong>Writer中的常见的方法</strong></p>
+<ol>
+<li>write(ch): 将一个字符写入到流中。 </li>
+<li>write(char[]): 将一个字符数组写入到流中。 </li>
+<li>write(String): 将一个字符串写入到流中。 </li>
+<li>flush():刷新流，将流中的数据刷新到目的地中，流还存在。 </li>
+<li>close():关闭资源：在关闭前会先调用flush()，刷新流中的数据去目的地。然后流关闭。 </li>
+</ol>
+<h2 id="3-FileWriter和FileReader"><a href="#3-FileWriter和FileReader" class="headerlink" title="3. FileWriter和FileReader"></a>3. FileWriter和FileReader</h2><h3 id="3-1-FileWriter"><a href="#3-1-FileWriter" class="headerlink" title="3.1 FileWriter"></a>3.1 FileWriter</h3><p>该类没有特有的方法。只有自己的构造函数。该类特点在于， </p>
+<ol>
+<li>用于处理文本文件。 </li>
+<li>该类中有默认的编码表， </li>
+<li>该类中有临时缓冲。 </li>
+</ol>
+<p>构造函数：在写入流对象初始化时，必须要有一个存储数据的目的地。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+FileWriter(String filename)
+</pre>
+
+<p>该构造函数做了什么事情呢？ </p>
+<ol>
+<li>调用系统资源。 </li>
+<li>在指定位置，创建一个文件。 </li>
+</ol>
+<p><strong>注意：如果该文件已存在，将会被覆盖.</strong></p>
+<p>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+FileWriter(String filename,boolean append)
+</pre>
+
+<p>该构造函数：当传入的boolean类型值为true时，会在指定文件末尾处进行数据的续写。 </p>
+<h3 id="3-2-FileReader"><a href="#3-2-FileReader" class="headerlink" title="3.2 FileReader"></a>3.2 FileReader</h3><ol>
+<li>用于读取文本文件的流对象。 </li>
+<li>用于关联文本文件。</li>
+</ol>
+<p>构造函数：在读取流对象初始化的时候，必须要指定一个被读取的文件。 如果该文件不存在会发生FileNotFoundException.<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+FileReader(String filename); 
+</pre>
+
+<p>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+/**
+  *将文本数据存储到一个文件中
+  */
+ class Demo  { 
+    public static void main(String[] args) throws IOException { 
+      FileWriter fw = new FileWrier("demo.txt"); 
+      fw.write("abcdec"); 
+      fw.flush(); 
+      fw.write("kkkk"); 
+      fw.close(); 
+    } 
+  } 
+</pre>
+
+<p>对于读取或者写入流对象的构造函数，以及读写方法，还有刷新关闭功能都会抛出IOException 或其子类。 所以都要进行处理。或者throws抛出，或者try ……catch处理。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+/**
+  *完整的异常处理方式 
+  */
+ class Demo  { 
+    public static void main(String[] args)  { 
+      FileWriter fw = null; 
+      try { 
+        fw = new FileWrier("z:\\demo.txt"); 
+        fw.write("abcdec"); 
+         fw.flush(); 
+        fw.write("kkkk"); 
+      } catch(IOException e) { 
+        System.out.println(e.toString()); 
+      } finally{ 
+        if(fw!=null) 
+          try  { 
+            fw.close();   
+          } catch(IOException e) { 
+            System.out.println("close:"+e.toString()); 
+          } 
+        } 
+    } 
+  } 
+</pre>
+
+<p>另一个小细节，当指定绝对路径时，定义目录分隔符有两种方式： </p>
+<ol>
+<li>反斜线  但是一定要写两个。\  new FileWriter(“c:\demo.txt”); </li>
+<li>斜线  /   写一个即可。 new FileWriter(“c:/demo.txt”); </li>
+</ol>
+<p>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+/**
+  *读取一个已有的文本文件，将文本数据打印出来 
+  *一次读一个字符就打印出来，效率不高。 
+  */
+class Demo  { 
+    public static void main(String[] args) throws IOException  { 
+      FileReader fr = new FileReader("demo.txt"); 
+      int ch = 0; 
+      //一次读一个字符
+      while((ch=fr.read())!=-1) { 
+        System.out.print((char)ch); 
+      } 
+      fr.close(); 
+    } 
+  } 
+</pre>
+
+<p>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+/**
+  *读一个字符就存入字符数组里，读完1Kb再打印
+  */
+ class Demo { 
+    public static void main(String[] args) { 
+      FileReader fr = null; 
+      try { 
+        fr = new FileReader("demo.txt"); 
+        char[] buf = new char[1024];//该长度通常都是1024的整数倍
+        int len = 0; 
+        while((len=fr.read(buf))!=-1) { 
+          System.out.println(new String(buf,0,len)); 
+        } 
+      } 
+      catch(IOException e) { 
+        System.out.println(e.toString()); 
+      } finally { 
+        if(fr!=null) 
+          try{ 
+            fr.close(); 
+          } catch(IOException e){ 
+            System.out.println("close:"+e.toString()); 
+          } 
+      } 
+    } 
+  } 
+</pre>
+
+<h2 id="4-BufferedWriter和BufferedReader"><a href="#4-BufferedWriter和BufferedReader" class="headerlink" title="4. BufferedWriter和BufferedReader"></a>4. BufferedWriter和BufferedReader</h2><p>缓冲区的出现提高了对流的操作效率。原理：其实就是将数组进行封装。 </p>
+<ol>
+<li>对应的对象： BufferedWriter<br><strong>特有方法： newLine()：跨平台的换行符</strong></li>
+<li>对应的对象：BufferedReader：<br><strong>特有方法： readLine():一次读一行，</strong>到行标记时，将行标记之前的字符数据作为字符串返回。当读到末尾时，返回null。 </li>
+</ol>
+<p>在使用缓冲区对象时，要明确，缓冲的存在是为了增强流的功能而存在，所以在建立缓冲区对象时，要先有流对象存在。其实缓冲内部就是在使用流对象的方法，只不过加入了数组对数据进行了临时存储。为了提高操作数据的效率。代码上的体现： </p>
+<p>写入缓冲区对象。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint">
+ //建立缓冲区对象必须把流对象作为参数传递给缓冲区的构造函数
+BufferedWriter bufw = new BufferedWriter(new FileWriter("buf.txt")); 
+bufw.write("abce");//将数据写入到了缓冲区
+bufw.flush();//对缓冲区的数据进行刷新。将数据刷到目的地中
+bufw.close();//关闭缓冲区，其实关闭的是被包装在内部的流对象
+</pre>
+
+<p>读取缓冲区对象。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint"> 
+BufferedReader bufr = new BufferedReader(new FileReader("buf.txt"));   
+String line = null; 
+//按照行的形式取出数据。取出的每一个行数据不包含回车符
+while((line=bufr.readLine())!=null) { 
+System.out.println(line); } 
+bufr.close(); 
+</pre>
+
+<p>通过缓冲区的形式，对文本文件进行拷贝。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint"> 
+ public static void main(String[] args) { 
+      BufferedReader bufr = new BufferedReader(new FileReader("a.txt")); 
+      BufferedWriter bufw = new BufferedWriter(new FileWriter("b.txt")); 
+      String line = null; 
+      while((line=bufr.readLine())!=null) { 
+        bufw.write(line); 
+        bufw.newLine(); 
+        bufw.flush(); 
+      } 
+      bufw.close(); 
+      bufr.close(); 
+    } 
+</pre>
+
+<h2 id="5-readLine-方法的原理"><a href="#5-readLine-方法的原理" class="headerlink" title="5. readLine()方法的原理"></a>5. readLine()方法的原理</h2><p>其实缓冲区中的该方法，用的还是与缓冲区关联的流对象的read方法。只不过，每一次读到一个字符，先不进行具体操作，先进行临时存储。当读取到回车标记时，将临时容器中存储的数据一次性返回。既然明确了原理，我们也可以实现一个类似功能的方法。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint"> 
+ class MyBufferedReader { 
+    private Reader r; 
+    MyBufferedReader(Reader r) { 
+      this.r = r; 
+    } 
+    public String myReadLine()throws IOException { 
+      //1,创建临时容器
+      StringBuilder sb = new StringBuilder(); 
+      //2,循环的使用read方法不断读取字符
+      int ch = 0; 
+      while((ch=r.read())!=-1) { 
+        if(ch=='\r') 
+          continue; 
+        if(ch=='\n') 
+          return sb.toString(); 
+        else 
+          sb.append((char)ch); 
+      } 
+        if(sb.length()!=0) 
+        return sb.toString(); 
+      return null; 
+    } 
+    public void myClose()throws IOException { 
+      r.close(); 
+    } 
+  } 
+  main() { 
+    MyBufferedReader myBufr = new MyBufferedReader(new FileReader("a.txt")); 
+    String line = null; 
+    while((line=myBufr.myReadLine())!=null) { 
+      System.out.println(line); 
+    } 
+  } 
+</pre>
+
+<h2 id="6-装饰设计模式"><a href="#6-装饰设计模式" class="headerlink" title="6. 装饰设计模式"></a>6. 装饰设计模式</h2><p>字符流缓冲区的出现基于流并增强了流的功能。这也是一种设计模式的体现：装饰设计模式。 实现了对一组对象进行功能的增强。该模式和继承有什么区别呢？它比继承有更好的灵活性。通常装饰类和被装饰类都同属与一个父类或者接口。 </p>
+<p><strong>Writer</strong><br>&nbsp;&nbsp;|–MediaWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;|–TextWriter </p>
+<p><strong>注：MediaWriter与TextWtiter两个类在JDK 中并不存在，为了更形象的举例说明而“创建”的，不要误解</strong></p>
+<p>需求：想要对数据的操作提高效率，就用到了缓冲技术通过所学习的继承特性。可以建立子类复写父类中的write方法即可。</p>
+<p>Writer：<strong>注：不要误解，以下两个对象不存在，只为举例.</strong><br>&nbsp;&nbsp;|–MediaWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;|–BufferedMediaWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|–TextWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|–BufferedTextWriter </p>
+<p>当Writer中子类对象过多，那么为了提高每一个对象效率，每一个对象都有一个自己的子类Buffered。<br>虽然可以实现，但是继承体系变的很臃肿。那么是否可以对其进行一下优化呢？其实子类都是在使用缓冲技术。可不可以对缓冲技术进行描述，将需要增强的对象传递给缓冲区即可。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint"> 
+  class BufferdWriter { 
+    BufferedWriter(MediaWriter mw) { } 
+    BufferedWriter(TextWriter mw) { } 
+  } 
+</pre>
+
+<p>该类虽然完成了对已有两个对象的增强。但是当有新的对象出现时，还要继续在该类中添加构造函数。这样不利于扩展和维护。将对这些对象父类型进行操作即可。这就是多态，提高了程序的扩展性。同时BufferedWriter中一样具体write方法，只不过是增强后的write。所以BuferedWriter也应该是Writer中的一个子类。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint"> 
+class BufferedWriter extends Writer { 
+    private Writer w; 
+    BufferedWriter(Writer w){ 
+      this.w = w; 
+    } 
+  } 
+</pre>
+
+<p><strong>Writer</strong><br>&nbsp;&nbsp;|–MediaWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;|–TextWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|–BufferedWriter </p>
+<p>这样就会发现装饰设计模式，优化增强功能的部分。比继承要灵活很多。可以在读一行的基础上添加一个行号。<br>&lt;?prettify?&gt;</p>
+<pre class="prettyprint"> 
+class MyLineNumberReader extends MyBufferedReader { 
+    private int number; 
+    MyLineNumberReader(Reader r) { 
+      super(r); 
+    } 
+    public String myReadLine(){ 
+      number++; 
+      return super.myReadLine(); 
+    } 
+    public void setNumber(int number){ 
+      this.number = number; 
+    } 
+    public int getNumber(){ 
+      return number; 
+    } 
+  } 
+</pre>
+
+
+
+
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IO流/" rel="tag"># IO流</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2010/12/Java-IO流-2010-12-02-io-3.html" rel="next" title="Java IO流 字节流">
+                <i class="fa fa-chevron-left"></i> Java IO流 字节流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2010/11/Java-IO流-2010-11-30-io-1.html" rel="prev" title="Java IO流 IO流的介绍">
+                Java IO流 IO流的介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-字符流介绍"><span class="nav-number">1.</span> <span class="nav-text">1. 字符流介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Writer-和-Reader"><span class="nav-number">2.</span> <span class="nav-text">2. Writer 和 Reader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-FileWriter和FileReader"><span class="nav-number">3.</span> <span class="nav-text">3. FileWriter和FileReader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-FileWriter"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 FileWriter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-FileReader"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 FileReader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-BufferedWriter和BufferedReader"><span class="nav-number">4.</span> <span class="nav-text">4. BufferedWriter和BufferedReader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-readLine-方法的原理"><span class="nav-number">5.</span> <span class="nav-text">5. readLine()方法的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-装饰设计模式"><span class="nav-number">6.</span> <span class="nav-text">6. 装饰设计模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Scott.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.sguotao.com/blog/2010/12/Java-IO流-2010-12-01-io-2.html';
+          this.page.identifier = '/blog/2010/12/Java-IO流-2010-12-01-io-2.html';
+          this.page.title = 'Java IO流 字符流';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Scott.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

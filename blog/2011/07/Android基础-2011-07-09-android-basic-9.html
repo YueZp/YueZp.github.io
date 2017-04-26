@@ -1,0 +1,799 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android基础," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott-小白" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.  录音机使用手机进行现场录音，实现步骤如下：a)    在功能清单文件AndroidManifest.xml中添加音频刻录权限： 1&amp;lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&amp;gt; b)    编写音频刻录代码: 1234567891011MediaRecorder recorder = new M">
+<meta name="keywords" content="Android基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android基础9 多媒体">
+<meta property="og:url" content="http://www.sguotao.com/blog/2011/07/Android基础-2011-07-09-android-basic-9.html">
+<meta property="og:site_name" content="Scott-小白">
+<meta property="og:description" content="1.  录音机使用手机进行现场录音，实现步骤如下：a)    在功能清单文件AndroidManifest.xml中添加音频刻录权限： 1&amp;lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&amp;gt; b)    编写音频刻录代码: 1234567891011MediaRecorder recorder = new M">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-10%20%E4%B8%8B%E5%8D%886.18.40.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-10%20%E4%B8%8B%E5%8D%886.18.54.png">
+<meta property="og:updated_time" content="2016-11-22T01:59:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android基础9 多媒体">
+<meta name="twitter:description" content="1.  录音机使用手机进行现场录音，实现步骤如下：a)    在功能清单文件AndroidManifest.xml中添加音频刻录权限： 1&amp;lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot;/&amp;gt; b)    编写音频刻录代码: 1234567891011MediaRecorder recorder = new M">
+<meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-10%20%E4%B8%8B%E5%8D%886.18.40.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/blog/2011/07/Android基础-2011-07-09-android-basic-9.html"/>
+
+
+
+
+
+  <title>Android基础9 多媒体 | Scott-小白</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-小白</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2011/07/Android基础-2011-07-09-android-basic-9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-小白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android基础9 多媒体
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2011-07-09T00:00:00+08:00">
+                2011-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2011/07/Android基础-2011-07-09-android-basic-9.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/blog/2011/07/Android基础-2011-07-09-android-basic-9.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-录音机"><a href="#1-录音机" class="headerlink" title="1.  录音机"></a>1.  录音机</h2><p>使用手机进行现场录音，实现步骤如下：<br>a)    在功能清单文件AndroidManifest.xml中添加音频刻录权限：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.RECORD_AUDIO"</span>/&gt;</div></pre></td></tr></table></figure>
+<p>b)    编写音频刻录代码:</p>
+<figure class="highlight pony"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="type">MediaRecorder</span> recorder = <span class="function"><span class="keyword">new</span> <span class="title">MediaRecorder</span>();</span></div><div class="line"> <span class="title">recorder</span>.<span class="title">setAudioSource</span>(<span class="type">MediaRecorder</span>.<span class="type">AudioSource</span>.<span class="type">MIC</span>);<span class="comment">//从麦克风采集声音</span></div><div class="line"> <span class="title">recorder</span>.<span class="title">setOutputFormat</span>(<span class="type">MediaRecorder</span>.<span class="type">OutputFormat</span>.<span class="type">THREE_GPP</span>);<span class="comment">//内容输出格式</span></div><div class="line"> <span class="title">recorder</span>.<span class="title">setAudioEncoder</span>(<span class="type">MediaRecorder</span>.<span class="type">AudioEncoder</span>.<span class="type">AMR_NB</span>);<span class="comment">//音频编码方式</span></div><div class="line"> <span class="title">recorder</span>.<span class="title">setOutputFile</span>("/mnt/sdcard/ncist.amr");</div><div class="line"> <span class="title">recorder</span>.<span class="title">prepare</span>();<span class="comment">//预期准备</span></div><div class="line"> <span class="title">recorder</span>.<span class="title">start</span>();   <span class="comment">//开始刻录</span></div><div class="line"> ...</div><div class="line"> <span class="title">recorder</span>.<span class="title">stop</span>();<span class="comment">//停止刻录</span></div><div class="line"> <span class="title">recorder</span>.<span class="title">reset</span>();   <span class="comment">//重设</span></div><div class="line"> <span class="title">recorder</span>.<span class="title">release</span>(); <span class="comment">//刻录完成一定要释放资源</span></div></pre></td></tr></table></figure>
+<h2 id="2-音频播放器"><a href="#2-音频播放器" class="headerlink" title="2. 音频播放器"></a>2. 音频播放器</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-10%20%E4%B8%8B%E5%8D%886.18.40.png" alt="图片1"></p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">MediaPlayer mediaPlayer = <span class="keyword">new</span> MediaPlayer();</div><div class="line"><span class="built_in">if</span> (mediaPlayer.isPlaying()) &#123;</div><div class="line">   mediaPlayer.reset();<span class="comment">//重置为初始状态</span></div><div class="line">&#125;</div><div class="line">mediaPlayer.setDataSource(<span class="string">"/mnt/sdcard/god.mp3"</span>);</div><div class="line">mediaPlayer.<span class="built_in">prepare</span>();				</div><div class="line">mediaPlayer.start();<span class="comment">//开始或恢复播放</span></div><div class="line">mediaPlayer.pause();<span class="comment">//暂停播放</span></div><div class="line">mediaPlayer.start();<span class="comment">//恢复播放</span></div><div class="line">mediaPlayer.<span class="built_in">stop</span>();<span class="comment">//停止播放</span></div><div class="line">mediaPlayer.<span class="built_in">release</span>();<span class="comment">//释放资源</span></div><div class="line">mediaPlayer.setOnCompletionListener(<span class="keyword">new</span> MediaPlayer.OnCompletionListener() &#123;<span class="comment">//播出完毕事件</span></div><div class="line">       @Override </div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> onCompletion(MediaPlayer arg0) &#123;</div><div class="line">	    mediaPlayer.<span class="built_in">release</span>();</div><div class="line">        &#125;</div><div class="line">&#125;);</div><div class="line">mediaPlayer.setOnErrorListener(<span class="keyword">new</span> MediaPlayer.OnErrorListener() &#123;<span class="comment">// 错误处理事件</span></div><div class="line">         @Override </div><div class="line">	<span class="keyword">public</span> <span class="keyword">boolean</span> onError(MediaPlayer player, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2) &#123;</div><div class="line">		mediaPlayer.<span class="built_in">release</span>();</div><div class="line">		<span class="built_in">return</span> false;</div><div class="line">         &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="3-使用soundpool播放音效"><a href="#3-使用soundpool播放音效" class="headerlink" title="3. 使用soundpool播放音效"></a>3. 使用soundpool播放音效</h2><p>在Android开发中我们经常使用MediaPlayer来播放音频文件，但是MediaPlayer存在一些不足，例如：资源占用量较高、延迟时间较长、不支持多个音频同时播放等。这些缺点决定了MediaPlayer在某些场合的使用情况不会很理想，例如在对时间精准度要求相对较高的游戏开发中。在游戏开发中我们经常需要播放一些游戏音效（比如：子弹爆炸，物体撞击等），这些音效的共同特点是短促、密集、延迟程度小。在这样的场景下，我们可以使用SoundPool代替MediaPlayer来播放这些音效。 </p>
+<p>SoundPool（android.media.SoundPool），顾名思义是声音池的意思，主要用于播放一些较短的声音片段，支持从程序的资源或文件系统加载。与MediaPlayer相比，SoundPool的优势在于CPU资源占用量低和反应延迟小。另外，SoundPool还支持自行设置声音的品质、音量、播放比率等参数，支持通过ID对多个音频流进行管理。就现在已知的资料来说，SoundPool有一些设计上的BUG，从固件版本1.0开始有些还没有修复，我们在使用中应该小心再小心。相信将来Google会修复这些问题，但我们最好还是列出来：</p>
+<ol>
+<li>SoundPool最大只能申请1M的内存空间，这就意味着我们只能用一些很短的声音片段，而不是用它来播放歌曲或者做游戏背景音乐。</li>
+<li>SoundPool提供了pause和stop方法，但这些方法建议最好不要轻易使用，因为有些时候它们可能会使你的程序莫名其妙的终止.建议使用这两个方法的时候尽可能多做测试工作，还有些朋友反映它们不会立即中止播放声音,而是把缓冲区里的数据播放完才会停下来,也许会多播放一秒钟。</li>
+<li>SoundPool的效率问题。其实SoundPool的效率在这些播放类中算是很好的了，但是有的朋友在G1中测试它还是有100ms左右的延迟，这可能会影响用户体验。也许这不能管SoundPool本身，因为到了性能比较好的Droid中这个延迟就可以让人接受了。</li>
+</ol>
+<p>在现阶段SoundPool有这些缺陷，但也有着它不可替代的优点，基于这些建议大家<br><strong>在如下情况中多使用SoundPool</strong><br>a)    应用程序中的声效(按键提示音，消息等)<br>b)    游戏中密集而短暂的声音(如多个飞船同时爆炸)</p>
+<p><strong>开发步骤</strong><br>a)    往项目的res/raw目录中放入音效文件。<br>b)    新建SoundPool对象，然后调用SoundPool.load()加载音效，调用SoundPool.play()播放指定音效文件。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">AudioActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"><span class="keyword">private</span> <span class="type">SoundPool</span> pool;</div><div class="line"><span class="meta">@Override</span></div><div class="line">public void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</div><div class="line">	<span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">	setContentView(<span class="type">R</span>.layout.main);</div><div class="line">	<span class="comment">//指定声音池的最大音频流数目为10，声音品质为5</span></div><div class="line">	pool = <span class="keyword">new</span> <span class="type">SoundPool</span>(<span class="number">10</span>, <span class="type">AudioManager</span>.<span class="type">STREAM_SYSTEM</span>, <span class="number">5</span>);</div><div class="line">	<span class="keyword">final</span> int sourceid = pool.load(<span class="keyword">this</span>, <span class="type">R</span>.raw.pj, <span class="number">0</span>);<span class="comment">//载入音频流，返回在池中的id</span></div><div class="line">	<span class="type">Button</span> button = (<span class="type">Button</span>)<span class="keyword">this</span>.findViewById(<span class="type">R</span>.id.button);</div><div class="line">	button.setOnClickListener(<span class="keyword">new</span> <span class="type">View</span>.<span class="type">OnClickListener</span>() &#123;</div><div class="line">		public void onClick(<span class="type">View</span> v) &#123;</div><div class="line">		<span class="comment">//播放音频，第二个参数为左声道音量;</span></div><div class="line">				第三个参数为右声道音量;</div><div class="line">				第四个参数为优先级；</div><div class="line">第五个参数为循环次数，<span class="number">0</span>不循环，<span class="number">-1</span>循环;第六个参数为速率，速率最低<span class="number">0.5</span>最高为<span class="number">2</span>，<span class="number">1</span>代表正常速度</div><div class="line">			pool.play(sourceid, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-视频播放器"><a href="#4-视频播放器" class="headerlink" title="4. 视频播放器"></a>4. 视频播放器</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-10%20%E4%B8%8B%E5%8D%886.18.54.png" alt="图片2"></p>
+<p>a)    在main.xml布局文件添加用于视频画面绘制的SurfaceView 控件</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;SurfaceView <span class="string">android:</span>layout_width=<span class="string">"fill_parent"</span> <span class="string">android:</span>layout_height=<span class="string">"240dip"</span> <span class="string">android:</span>id=<span class="string">"@+id/surfaceView"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>b)    在Activity中</p>
+<figure class="highlight pony"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="type">SurfaceView</span> surfaceView = (<span class="type">SurfaceView</span>)<span class="literal">this</span>.findViewById(<span class="type">R</span>.id.surfaceView);</div><div class="line">surfaceView.getHolder().setFixedSize(<span class="number">176</span>, <span class="number">144</span>);	<span class="comment">//设置分辨率</span></div><div class="line"><span class="comment">/*下面设置Surface不维护自己的缓冲区，而是等待屏幕的渲染引擎将内容推送到用户面前*/</span></div><div class="line">surfaceView.getHolder().setType(<span class="type">SurfaceHolder</span>.<span class="type">SURFACE_TYPE_PUSH_BUFFERS</span>);</div><div class="line"><span class="type">MediaPlayer</span> mediaPlayer = <span class="function"><span class="keyword">new</span> <span class="title">MediaPlayer</span>();</span></div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">reset</span>();<span class="comment">//重置为初始状态</span></div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">setAudioStreamType</span>(<span class="type">AudioManager</span>.<span class="type">STREAM_MUSIC</span>);</div><div class="line">/* 设置<span class="title">Video</span>影片以<span class="title">SurfaceHolder</span>播放 */</div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">setDisplay</span>(surfaceView.getHolder());</div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">setDataSource</span>("/mnt/sdcard/oppo.mp4");</div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">prepare</span>();				</div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">start</span>();<span class="comment">//播放</span></div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">pause</span>();<span class="comment">//暂停播放</span></div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">start</span>();<span class="comment">//恢复播放</span></div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">stop</span>();<span class="comment">//停止播放</span></div><div class="line"><span class="title">mediaPlayer</span>.<span class="title">release</span>();<span class="comment">//释放资源</span></div></pre></td></tr></table></figure>
+<h2 id="5-拍照"><a href="#5-拍照" class="headerlink" title="5. 拍照"></a>5. 拍照</h2><p>a)    在main.xml布局文件添加用于显示取景画面的SurfaceView 控件：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;SurfaceView <span class="string">android:</span>layout_width=<span class="string">"fill_parent"</span> <span class="string">android:</span>layout_height=<span class="string">"240dip"</span> <span class="string">android:</span>id=<span class="string">"@+id/surfaceView"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>b)    在Activity中</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">SurfaceView surfaceView = (SurfaceView)this.findViewById(R.id.surfaceView);</div><div class="line">surfaceView.getHolder().setFixedSize(<span class="number">176</span>, <span class="number">144</span>);	<span class="comment">//设置分辨率</span></div><div class="line"><span class="comment">/*下面设置Surface不维护自己的缓冲区，而是等待屏幕的渲染引擎将内容推送到用户面前*/</span></div><div class="line">surfaceView.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);</div><div class="line"><span class="comment">//打开摄像头SDK2.3之后支持前置摄像头，open方法可以接收一个int参数，用来指定哪个摄像头</span></div><div class="line">Camera camera = Camera.open();</div><div class="line">WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);</div><div class="line"><span class="keyword">Display</span> <span class="keyword">display</span> = wm.getDefaultDisplay();</div><div class="line">Camera.Parameters <span class="keyword">parameters</span> = camera.getParameters();</div><div class="line"><span class="keyword">parameters</span>.setPreviewSize(display.getWidth(), display.getHeight());<span class="comment">//设置预览照片的大小</span></div><div class="line"><span class="keyword">parameters</span>.setPreviewFrameRate(3);<span class="comment">//每秒3帧</span></div><div class="line"><span class="keyword">parameters</span>.setPictureFormat(PixelFormat.JPEG);<span class="comment">//设置照片的输出格式</span></div><div class="line"><span class="keyword">parameters</span>.<span class="keyword">set</span>(<span class="string">"jpeg-quality"</span>, 85);<span class="comment">//照片质量</span></div><div class="line"><span class="keyword">parameters</span>.setPictureSize(display.getWidth(), display.getHeight());<span class="comment">//设置照片的大小</span></div><div class="line">camera.setParameters(<span class="keyword">parameters</span>);</div><div class="line">camera.setPreviewDisplay(surfaceView.getHolder());<span class="comment">//通过SurfaceView显示取景画面</span></div><div class="line">camera.startPreview();<span class="comment">//开始预览</span></div><div class="line">camera.autoFocus(null);<span class="comment">//自动对焦</span></div><div class="line">camera.takePicture(null, null, null, jpegCallback);<span class="comment">//拍照片</span></div><div class="line">camera.stopPreview();<span class="comment">//停止预览</span></div><div class="line">camera.release();<span class="comment">//释放摄像头</span></div></pre></td></tr></table></figure>
+<p>c)    需要权限</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.CAMERA"</span> /&gt;</div></pre></td></tr></table></figure>
+<p><strong>小结</strong><br>a)    设置预览显示位置</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">setPreviewDisplay</span><span class="params">(SurfaceHolder holder)</span></span></div></pre></td></tr></table></figure>
+<p><strong>注意：SurfaceView不在前端显示的时候会被销毁，恢复之后会重绘</strong><br>b)    将摄像头拍摄画面显示在SurfaceView中，在此之前可对摄像头进行参数配置，getParameters() 方法可以获取摄像头的相关参数Parameters，调用其内部方法即可进行配置</p>
+<p>c)    自动对焦</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">autoFocus</span><span class="params">(AutoFocusCallback cb)</span></span></div></pre></td></tr></table></figure>
+<p>自动对焦是一个异步操作，如果我们向等待自动对焦结束之后才开始拍照，需要传入一个回调对象，在其回调函数中调用拍照方法</p>
+<p>d)    拍照 </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">takePicture</span><span class="params">(ShutterCallback shutter, PictureCallback raw, PictureCallback jpeg)</span></span></div></pre></td></tr></table></figure>
+<p>拍照也是异步操作，需要通过回调函数来得到拍照之后的数据，注意拍照之后摄像头不回自动回到预览状态，需要重写调用startPreview()方法</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.CAMERA"</span>/&gt;</div></pre></td></tr></table></figure>
+<h2 id="6-录像"><a href="#6-录像" class="headerlink" title="6. 录像"></a>6. 录像</h2><p>a)    在功能清单文件AndroidManifest.xml中添加音频刻录和照相机权限：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.RECORD_AUDIO"</span>/&gt;</div><div class="line"> &lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.CAMERA"</span>/&gt;</div><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.MOUNT_UNMOUNT_FILESYSTEMS"</span>/&gt;</div><div class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</div></pre></td></tr></table></figure>
+<p>b)    编写音频刻录代码:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.reset</span>();</div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setVideoSource</span>(MediaRecorder.VideoSource.CAMERA); <span class="comment">//设置视频输入源，从照相机采集视频</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setAudioSource</span>(MediaRecorder.AudioSource.MIC); <span class="comment">//设置音频输入源</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setOutputFormat</span>(MediaRecorder.OutputFormat.THREE_GPP);<span class="comment">//设置输出格式</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setVideoSize</span>(<span class="number">320</span>, <span class="number">240</span>);</div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setVideoFrameRate</span>(<span class="number">3</span>); <span class="comment">//每秒3帧</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setVideoEncoder</span>(MediaRecorder.VideoEncoder.H263); <span class="comment">//设置视频编码方式</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setAudioEncoder</span>(MediaRecorder.AudioEncoder.AMR_NB);<span class="comment">//设置音频编码器</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setOutputFile</span>(<span class="string">"/mnt/sdcard/ncist.3gp"</span>);<span class="comment">//设置输出文件</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.setPreviewDisplay</span>(surfaceView.getHolder().getSurface());<span class="comment">//设置预览显示位置</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.prepare</span>();<span class="comment">//预期准备</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.start</span>();<span class="comment">//开始刻录</span></div><div class="line">...</div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.stop</span>();<span class="comment">//停止刻录</span></div><div class="line"><span class="selector-tag">recorder</span><span class="selector-class">.release</span>(); <span class="comment">//刻录完成一定要释放资源</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android基础/" rel="tag"># Android基础</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2011/07/Android基础-2011-07-15-android-basic-10.html" rel="next" title="Android基础10 通知">
+                <i class="fa fa-chevron-left"></i> Android基础10 通知
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2011/07/Android基础-2011-07-03-android-basic-8.html" rel="prev" title="Android基础8 服务(Service)">
+                Android基础8 服务(Service) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-录音机"><span class="nav-number">1.</span> <span class="nav-text">1.  录音机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-音频播放器"><span class="nav-number">2.</span> <span class="nav-text">2. 音频播放器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用soundpool播放音效"><span class="nav-number">3.</span> <span class="nav-text">3. 使用soundpool播放音效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-视频播放器"><span class="nav-number">4.</span> <span class="nav-text">4. 视频播放器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-拍照"><span class="nav-number">5.</span> <span class="nav-text">5. 拍照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-录像"><span class="nav-number">6.</span> <span class="nav-text">6. 录像</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Scott.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.sguotao.com/blog/2011/07/Android基础-2011-07-09-android-basic-9.html';
+          this.page.identifier = '/blog/2011/07/Android基础-2011-07-09-android-basic-9.html';
+          this.page.title = 'Android基础9 多媒体';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Scott.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
