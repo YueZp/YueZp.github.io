@@ -21,6 +21,8 @@
 
 
 
+  <meta name="google-site-verification" content="googlea8ba7e863392b1ab" />
+
 
 
 
@@ -258,9 +260,43 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -275,268 +311,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Scott">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Scott-小白">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html" itemprop="url">
-                  Android内存泄露
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T00:00:00+08:00">
-                2017-03-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html" class="leancloud_visitors" data-flag-title="Android内存泄露">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="内存泄露与内存溢出"><a href="#内存泄露与内存溢出" class="headerlink" title="内存泄露与内存溢出"></a>内存泄露与内存溢出</h2><h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>内存泄露(Memory Leak)是指无用对象（不再使用的对象）持续占有内存，或者无用对象的内存得不到及时释放，从而造成内存空间得不到有效的利用。在Java中，内存泄露的原因，通常是长生命周期的对象，持有短生命周期对象的引用。在《深入理解Java虚拟机》中的解释是，当无用对象一直被有用对象引用，导致无用对象可达，JVM无法对无用对象完成回收。从而造成内存泄露。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170327149058275225194.png" alt="内存泄露"></p>
-<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>内存溢出(Out of Memory)是指程序在运行过程中，无法申请到足够的的内存导致的一种错误。内存泄露是会导致内存溢出，但不是导致内存溢出的唯一原因。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170327149058290012605.png" alt="20170327149058290012605.png"></p>
-<h2 id="Java中的内存泄露"><a href="#Java中的内存泄露" class="headerlink" title="Java中的内存泄露"></a>Java中的内存泄露</h2><h3 id="Java-内存分配"><a href="#Java-内存分配" class="headerlink" title="Java 内存分配"></a>Java 内存分配</h3><p>Java中的内存分配主要分三块，静态存储区，栈区和堆区。</p>
-<ul>
-<li>静态存储区，编译时分配，存在于程序的整个运行期间，主要用于存放静态数据和常量。</li>
-<li>栈区，在方法执行时，用于存放方法内部的局部变量，方法结束后，内存释放。</li>
-<li>堆区，通常用来存放new出来的对象，由JVM进行回收处理。</li>
-</ul>
-<h3 id="四种引用类型"><a href="#四种引用类型" class="headerlink" title="四种引用类型"></a>四种引用类型</h3><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170329149077275371348.png" alt="20170329149077275371348.png"><br>从JDK1.2开始，Java将对象的引用分为了强引用、软引用、弱引用和虚引用。</p>
-<ul>
-<li>强引用(Strong Reference),平时使用最多的一种引用，<strong>如果一个对象的引用方式是强引用，垃圾回收器不会对该对象进行回收，即使出现了内存空间不足的情况，JVM会抛出Out of Memory,也不会对强引用的对象进行回收。</strong></li>
-<li>软引用(Soft Reference),在对象的引用强度上若于强引用，对于弱引用的对象，<strong>当内存不足时，JVM会回收软引用对象，释放内存空间</strong>。通常情况下，缓存的创建，适合使用软引用的方式。</li>
-<li>弱引用(Weak Reference),在对象的引用强度上，弱于软引用，相对于强引用对象的不可回收，弱引用的对象，不存在这种情况，<strong>在垃圾回收器工作时，不论内存空间是否充足，都会对弱引用的对象进行回收。</strong>弱引用的作用，主要在于解决强引用对象之前的耦合关系，如在集合类中，任何Java对象都可以作为键来使用，当一个键值对被放入到集合中，集合对象本身就对这些键和值产生引用，如果是强引用，只要集合对象本身存在，其中包含的键和值就不会被回收，当集合包含的键和值越来越多时，最后会消耗掉JVM中的全部内存。</li>
-<li>虚引用(Phantom Reference)，使用的情况并不多见，主要用来实现比较清晰的内存控制，这对于内存有限的移动设备是很有意义的。<strong>虚引用用来跟踪对象被垃圾回收器回收的活动</strong>，虚引用和软引用，弱引用的一个明显的区别是，虚引用必须和引用队列联合使用，通过检查引用队列中的内容，可以判断一个对象是否即将被回收。</li>
-</ul>
-<p>一个对象的引用类型有多个，怎么判断？<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170329149077630884381.png" alt="20170329149077630884381.png"><br>判定规则如下：</p>
-<ul>
-<li>单条引用链上的可达性，以最弱的一个引用类型来决定；</li>
-<li>多条引用链上的可达性，以最强的一个引用类型来决定；</li>
-</ul>
-<p>我们假设上图中，1和3为强引用，5为软引用，7为弱引用。对于对象5的引用类型，在路径1–5中，5为软引用类型，依据规则1，对象5为软引用类型。在路径3–7中，7为弱引用类型，所以对象5为弱引用类型。依据规则2，多条引用链上的可达性，以最强的一个引用类型决定，因此，对象5的引用类型为软引用类型。</p>
-<h2 id="内存泄露检测工具"><a href="#内存泄露检测工具" class="headerlink" title="内存泄露检测工具"></a>内存泄露检测工具</h2><h3 id="Monitors"><a href="#Monitors" class="headerlink" title="Monitors"></a>Monitors</h3><p>Memory Monitors是AndroidStudio自带的一个性能检测工具，主要包含以下几个功能：</p>
-<ul>
-<li>实时查看app的内存使用情况；</li>
-<li>能够比较直观的了解到app的运行卡顿是否跟GC的频繁操作有关；</li>
-<li>能够了解到app的crash是否跟内存溢出有关；</li>
-<li>能够发现内存抖动(在短时间内分配大量内存，频繁的引起GC操作)</li>
-</ul>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170401149101636441749.png" alt="20170401149101636441749.png"></p>
-<h3 id="DDMS-Dump"><a href="#DDMS-Dump" class="headerlink" title="DDMS Dump"></a>DDMS Dump</h3><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017040114910150822979.png" alt="2017040114910150822979.png"><br><strong>什么是Java Heap Dump？</strong>首先需要搞明白什么是Java Heap，Java Heap是分配给实例类和数组对象运行数据区，所有Java线程在运行期间共享heap中的数据，Java Heap Dump相当于在应用运行时，某个时间点进行一次快照，在AndroidStudio中，快照会被保存为.hprof类型的文件，保存在captures目录中。</p>
-<p>分析.hprof文件，我们可以将.hprof视图分成A、B、C三个部分，在A部分中，可以看到app的整个堆内存信息，显示了在堆内存中的所有的java类。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Total Count</td>
-<td style="text-align:center">内存中，当前Java类的实例数量</td>
-</tr>
-<tr>
-<td style="text-align:center">Heap Count</td>
-<td style="text-align:center">堆内存中，当前Java类的实例数量</td>
-</tr>
-<tr>
-<td style="text-align:center">Size of</td>
-<td style="text-align:center">当前Java类每个实例对象需要占用内存的物理大小</td>
-</tr>
-<tr>
-<td style="text-align:center">Shallow Size</td>
-<td style="text-align:center">当前Java实例对象占有的内存大小</td>
-</tr>
-<tr>
-<td style="text-align:center">Retained Size</td>
-<td style="text-align:center">释放当前Java实例对象后，节省的内存大小</td>
-</tr>
-</tbody>
-</table>
-<p>当选中A区域中的某个Java类，可以在B区域中看到选中Java类的所有实例对象。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Depth</td>
-<td style="text-align:center">当前对象的深度</td>
-</tr>
-<tr>
-<td style="text-align:center">Shallow Size</td>
-<td style="text-align:center">当前对象占有的内存大小</td>
-</tr>
-<tr>
-<td style="text-align:center">Dominating Size</td>
-<td style="text-align:center">当前对象可支配的内存大小</td>
-</tr>
-</tbody>
-</table>
-<p>在B中看到选中Java类的所有实例对象的同时，在C区域能够看到哪些对象引用了该对象。</p>
-<p><strong>什么是Allocation Tracker？</strong>Allocation Tracker主要用来追踪内存分配信息，Start Allocation Tracking 相当于在程序运行时，某个时间节点，对内存分配信息进行一次快照，生成的快照文件被保存为.alloc类型，保存在captures目录中。Allocation Tracker 也可以在Devices Monitor中启动，在Devices Monitor中使用时，需要设备有Root权限。</p>
-<h3 id="MAT"><a href="#MAT" class="headerlink" title="MAT"></a>MAT</h3><p>MAT(Eclipse Memory Analyzer)是一个堆转储文件分析工具，在Monitor的快照文件(.hprof)，需要转换成MAT可以打开的标准.hprof文件，使用Mat工具打开转换后的.hprof文件，会生成一个内存消耗整体状况的报告，从饼状图中，可以比较直观地看到哪些对象占用了多少的内存空间。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170419149258510813625.png" alt="20170419149258510813625.png"><br>这里介绍一下，MAT给我们提供的几个分析的维度。</p>
-<ul>
-<li>Histogram，在该视图中可以清晰的看出内存中对象的数量，及所占用内存空间的大小。</li>
-<li>Dominator Tree:在该视图中，可以在线程的角度观察到哪些对象占用内存空间。</li>
-<li>Top Consumers:从包，对象等角度，显示内存的占用情况，能够比较直观的找出占用内存比较多的对象。</li>
-<li>Leak Suspects:分析内存泄露的情况，生成一份报表，给出一些problem的建议。</li>
-</ul>
-<p>下面介绍一些常用的操作，视图中支持正则表达式筛选，可以过滤出我们比较关心的对象，可以以列表或者树形的结构显示出来，其中：</p>
-<ul>
-<li>with incoming references:过滤出那些类引用了当前选中的类；</li>
-<li>with outcoming references:过滤出当前选中类引用了哪些类；</li>
-</ul>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017042014926559112895.png" alt="2017042014926559112895.png"></p>
-<p>垃圾回收器会对虚拟机的内存空间，即堆空间中已经存在的对象进行识别，如果对象正在被引用，那么称其为存活对象，如果对象不在被引用，则为垃圾回收器回收的对象，这部分对象占用的内存空间可以被回收。</p>
-<p>在垃圾回收机制中有一组元素被称为根元素集合，它们是一组被虚拟机直接引用的对象。堆空间中的每个对象都是由一个根元素为起点被层层调用的。所以，一个对象如果被一个存活的根元素所引用，就会被认为是存活对象，不能被回收。这时，可以通过分析一个对象到根元素的引用路径来分析该对象为什么不能够被顺利回收。</p>
-<p>当选中某个对象，通过Merge Shortest Paths to GC Root的操作，可以显示对象之间的排除了软引用，弱引用和虚引用的引用关系，这样我们看到的就是被选中对象是否还存在强引用，通过分析 ，能够直接找到内存没有释放的原因。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170420149269042589662.png" alt="20170420149269042589662.png"></p>
-<h2 id="开发中常见内存泄露的场景"><a href="#开发中常见内存泄露的场景" class="headerlink" title="开发中常见内存泄露的场景"></a>开发中常见内存泄露的场景</h2><h3 id="1-Context对象使用不当；"><a href="#1-Context对象使用不当；" class="headerlink" title="1.Context对象使用不当；"></a>1.Context对象使用不当；</h3><p>在Android中经常使用的单例模式，如果使用不当，会出现内存泄露，泄露的主要原因是因为，单例模式中的静态成员变量的生命周期与应用的生命周期一样长。比较常见的场景是，经常在一些工具类中使用单例模式，如xxManager,xxHelper，xxUtils,这些工具类中需要使用Context,由于Activity是间接继承Context，当Activity退出时，单例对象中持有了它的引用，导致Activity回收失败，从而出现内存泄露。处理方式是使用Application,由于Application的生命周期贯穿整个应用，所以当这些工具类需要使用到Context时，使用getApplication()或者getApplicationContext()。</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Util</span> &#123;</div><div class="line">        <span class="keyword">private</span> Context mContext;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> Util sInstance;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Util</span>(<span class="params">Context context</span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.mContext = context;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Util <span class="title">getInstance</span>(<span class="params">Context context</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (sInstance == <span class="literal">null</span>) &#123;</div><div class="line"><span class="comment">//                sInstance = new Util(context);</span></div><div class="line">                sInstance = <span class="keyword">new</span> Util(context.getApplicationContext());</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> sInstance;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h3 id="2-内部类使用不当"><a href="#2-内部类使用不当" class="headerlink" title="2.内部类使用不当"></a>2.内部类使用不当</h3><p>当使用非静态的内部类时，如果出现内部类持有外部类的引用，就会出现内存泄露，优化方法，可以使用静态的内部类，这样内部类就不在持有外部类的引用，不会影响GC对于外部类的回收。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">MyActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 静态成员变量</div><div class="line">     */</div><div class="line">    public static <span class="type">InnerClass</span> innerClass = <span class="literal">null</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(<span class="type">R</span>.layout.activity_my);</div><div class="line"></div><div class="line">        innerClass = <span class="keyword">new</span> <span class="type">InnerClass</span>();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</div><div class="line"></div><div class="line">        public void doSomeThing() &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="3-Handler的异步消息通信"><a href="#3-Handler的异步消息通信" class="headerlink" title="3.Handler的异步消息通信"></a>3.Handler的异步消息通信</h3><p>在使用Handler时出现内存泄露的主要原因是Handler的生命周期与Activity的生命周期不一致，当应用启动时，创建UI主线程Looper对象，Looper实现了简单的消息队列，主线程Looper对象存在整个应用的生命周期中。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">HandlerActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Handler</span> mHandler = <span class="keyword">new</span> <span class="type">Handler</span>() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        public void handleMessage(<span class="type">Message</span> msg) &#123;</div><div class="line">            <span class="comment">// ...</span></div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    public void onCreate(<span class="type">Bundle</span> savedInstanceState) &#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(<span class="type">R</span>.layout.activity_main);</div><div class="line">        mHandler.sendMessageDelayed(<span class="type">Message</span>.obtain(), <span class="number">10</span>*<span class="number">000</span>);</div><div class="line">        finish();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当在Actiivity中使用Handler时，就可能会产生内存泄露，究其根本原因，是我们使用的非静态内部类(或者匿名内部类)默认隐性持有外部类的引用，静态内部类不会持有外部类的引用。在Activity结束时，由于Message是延迟消息，会在主线程的消息队列中，该消息持有Activity中的Handler的引用，Handler默认持有Activity的引用，直至该消息被处理完。此时导致Activity对象无法被回收，就会出现内存泄露。优化方法，可以使用静态内部类继承Handler对象，或者在Activity的onDestory()方法中，调用mHandler.removeCallbacksAndMessages(null);</p>
-<h3 id="4-Bitmap使用不当"><a href="#4-Bitmap使用不当" class="headerlink" title="4.Bitmap使用不当"></a>4.Bitmap使用不当</h3><p>使用Bitmap如果回收不及时，也会出现内存泄露。原因在于Bitmap类没有对外创建对象的构造方法，获得Bitmap对象只能通过BitmapFactory中的各种静态方法，生成Bitmap对象是通过JNI调用底层c来实现的。所以，当我们获取一个Bitmap对象时，其对应的内存中包含两部分内容，一部分是Java，一部分是c,Java部分的内存可以通过GC进行回收，但是c部分的内存GC是不会进行自动回收的，所以，我们在使用Bitmap对象时，需要调用recycle()来主动释放c部分的内存。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 判断是否已经回收</span></div><div class="line"><span class="keyword">if</span>(bitmap != <span class="literal">null</span> &amp;&amp; !bitmap.isRecycled())&#123; </div><div class="line">        <span class="comment">// 回收并且置为null</span></div><div class="line">        bitmap.recycle(); </div><div class="line">        bitmap = <span class="literal">null</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="5-资源性对象没有及时关闭"><a href="#5-资源性对象没有及时关闭" class="headerlink" title="5.资源性对象没有及时关闭"></a>5.资源性对象没有及时关闭</h3><p>当我们使用一些资源性对象时，如果没有做关闭操作，也会出现内存泄露，常见的资源性对象包括(Cursor、ContentProvider、File、Stream)等。还有一类如EventBus、BroadCastReceiver在注册后，为了避免重复注册，需要在退出时及时的销毁。</p>
-<h3 id="6-集合列表相关"><a href="#6-集合列表相关" class="headerlink" title="6.集合列表相关"></a>6.集合列表相关</h3><p>集合类如果仅仅有添加元素的方法，而没有相应的删除机制，导致内存被占用。如果这个集合类是全局性的变量 (比如类中的静态属性，全局性的 map 等即有静态引用或 final 一直指向它)，那么没有相应的删除机制，很可能导致集合所占用的内存只增不减。</p>
-<h3 id="7-Native中存在内存泄露"><a href="#7-Native中存在内存泄露" class="headerlink" title="7.Native中存在内存泄露"></a>7.Native中存在内存泄露</h3><p>由于Native层的代码多用c或c++来实现，GC无法对这部分内存进行会后处理，这时可能会出现内存泄露，这时候就需要c工程师帮助分析，如Malloc的内存是否做了free处理，指针使用完成后，是否进行了置空处理等等。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ol>
-<li><a href="http://www.jianshu.com/p/e97ed5d8a403" target="_blank" rel="external">科普：内存泄漏与内存溢出</a></li>
-<li><a href="https://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/" target="_blank" rel="external">Java的内存泄漏</a></li>
-<li><a href="https://segmentfault.com/a/1190000006852540" target="_blank" rel="external">Android 内存泄露总结</a></li>
-<li><a href="https://segmentfault.com/a/1190000003910496" target="_blank" rel="external">Java四种引用类型</a></li>
-<li><a href="http://blog.csdn.net/itomge/article/details/48719527" target="_blank" rel="external">MAT使用教程</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
       
 
@@ -586,7 +360,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T00:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T10:27:04+08:00">
                 2017-03-24
               </time>
             
@@ -596,6 +370,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ReactNative/" itemprop="url" rel="index">
+                    <span itemprop="name">ReactNative</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -645,497 +441,187 @@
       
         
           
-            <p>ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。</p>
-<h2 id="引入样式的几种方法"><a href="#引入样式的几种方法" class="headerlink" title="引入样式的几种方法"></a>引入样式的几种方法</h2><p>常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。</p>
-<h3 id="1-内嵌方式"><a href="#1-内嵌方式" class="headerlink" title="1. 内嵌方式"></a>1. 内嵌方式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">appProject</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;<span class="type">View</span> style=&#123;</div><div class="line">                &#123;</div><div class="line">                marginTop:<span class="number">200</span>,</div><div class="line">                marginLeft:<span class="number">5</span>,</div><div class="line">                marginRight:<span class="number">5</span>,</div><div class="line">                height:<span class="number">84</span>,</div><div class="line">                flexDirection:<span class="symbol">'ro</span>w',</div><div class="line">                backgroundColor:'#<span class="type">FF0067</span>',</div><div class="line">                &#125;</div><div class="line">                &#125;&gt;</div><div class="line">            &lt;/<span class="type">View</span>&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="2-外联方式"><a href="#2-外联方式" class="headerlink" title="2. 外联方式"></a>2. 外联方式</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="string">const</span> <span class="string">Styles</span> <span class="string">=</span> <span class="string">StyleSheet.create(&#123;</span></div><div class="line"><span class="attr">    container:</span> <span class="string">&#123;</span></div><div class="line"><span class="attr">        marginTop:</span><span class="number">200</span><span class="string">,</span></div><div class="line"><span class="attr">        marginLeft:</span><span class="number">5</span><span class="string">,</span></div><div class="line"><span class="attr">        marginRight:</span><span class="number">5</span><span class="string">,</span></div><div class="line"><span class="attr">        height:</span><span class="number">84</span><span class="string">,</span></div><div class="line"><span class="attr">        flexDirection:</span><span class="string">'row'</span><span class="string">,</span></div><div class="line"><span class="attr">        backgroundColor:</span><span class="string">'#FF0067'</span><span class="string">,</span></div><div class="line">    <span class="string">&#125;</span></div><div class="line"><span class="string">&#125;);</span></div></pre></td></tr></table></figure>
-<h3 id="3-混合方式"><a href="#3-混合方式" class="headerlink" title="3. 混合方式"></a>3. 混合方式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">appProject</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="comment">//外层容器</span></div><div class="line">            &lt;<span class="type">View</span> style=&#123;[<span class="type">Styles</span>.container,<span class="type">Styles</span>.bg,&#123;color:<span class="symbol">'re</span>d'&#125;]&#125;&gt;</div><div class="line">            &lt;/<span class="type">View</span>&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="4-import引用"><a href="#4-import引用" class="headerlink" title="4.import引用"></a>4.import引用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    StyleSheet,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"><span class="keyword">const</span> styles = StyleSheet.create(&#123;</div><div class="line">    <span class="attr">container</span>: &#123;</div><div class="line">        <span class="attr">marginTop</span>:<span class="number">200</span>,</div><div class="line">        <span class="attr">marginLeft</span>:<span class="number">5</span>,</div><div class="line">        <span class="attr">marginRight</span>:<span class="number">5</span>,</div><div class="line">        <span class="attr">height</span>:<span class="number">84</span>,</div><div class="line">        <span class="attr">flexDirection</span>:<span class="string">'row'</span>,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">bg</span>:&#123;</div><div class="line">        <span class="attr">backgroundColor</span>:<span class="string">'#FF0067'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"><span class="built_in">module</span>.exports = styles;</div></pre></td></tr></table></figure>
-<p>通过import进行引入</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./styles/style'</span>;</div></pre></td></tr></table></figure>
-<h2 id="常见的属性及说明"><a href="#常见的属性及说明" class="headerlink" title="常见的属性及说明"></a>常见的属性及说明</h2><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">backgroundColor</td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 background-color 属性</td>
-</tr>
-</tbody>
-</table>
-<h3 id="2-宽高尺寸"><a href="#2-宽高尺寸" class="headerlink" title="2.宽高尺寸"></a>2.宽高尺寸</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">width</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 width 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">height</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 height 属性</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-外边距相关-margin"><a href="#3-外边距相关-margin" class="headerlink" title="3.外边距相关(margin)"></a>3.外边距相关(margin)</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">margin</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 margin 属性，不同的是，只能定义一个参数，用以表示上、右、下、左4个方位的外补白</td>
-</tr>
-<tr>
-<td style="text-align:center">marginHorizontal</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">CSS中没有对应的属性，相当于同时设置marginRight和marginLeft</td>
-</tr>
-<tr>
-<td style="text-align:center">marginVertical</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">CSS中没有对应的属性，相当于同时设置marginTop和marginBottom</td>
-</tr>
-<tr>
-<td style="text-align:center">marginTop</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 margin-top 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">marginRight</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 margin-right 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">marginBottom</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 margin-bottom 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">marginLeft</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 margin-left 属性</td>
-</tr>
-</tbody>
-</table>
-<h3 id="4-内边距相关-padding"><a href="#4-内边距相关-padding" class="headerlink" title="4.内边距相关(padding)"></a>4.内边距相关(padding)</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">padding</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 padding 属性，不同的是，只能定义一个参数，用以表示上、右、下、左4个方位的内补白</td>
-</tr>
-<tr>
-<td style="text-align:center">paddingHorizontal</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">CSS中没有对应的属性，相当于同时设置paddingRight和paddingLeft</td>
-</tr>
-<tr>
-<td style="text-align:center">paddingVertical</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">CSS中没有对应的属性，相当于同时设置paddingTop和paddingBottom</td>
-</tr>
-<tr>
-<td style="text-align:center">paddingTop</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 padding-top 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">paddingRight</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 padding-right 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">paddingBottom</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 padding-bottom 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">paddingLeft</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 padding-left 属性</td>
-</tr>
-</tbody>
-</table>
-<h3 id="5-边框相关-border"><a href="#5-边框相关-border" class="headerlink" title="5.边框相关(border)"></a>5.边框相关(border)</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">borderStyle</td>
-<td style="text-align:center">solid, dotted, dashed</td>
-<td style="text-align:center">对应 CSS 中的 border-style 属性，但阉割了 none, hidden, double, groove, ridge, inset, outset 取值，且无方向分拆属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderWidth</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-width 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderTopWidth</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-top-width 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderRightWidth</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-right-width 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderBottomWidth</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-bottom-width 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderLeftWidth</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-left-width 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderColor</td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 border-color 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderTopColor</td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 border-top-color 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderRightColor</td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 border-right-color 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderBottomColor</td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 border-bottom-color 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderLeftColor</td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 border-left-color 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderRadius</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-radius 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderTopLeftRadius</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-top-left-radius 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderTopRightRadius</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-top-right-radius 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderBottomLeftRadius</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-bottom-left-radius 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">borderBottomRightRadius</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 border-bottom-right-radius 属性</td>
-</tr>
-</tbody>
-</table>
-<h3 id="6-位置相关-position"><a href="#6-位置相关-position" class="headerlink" title="6.位置相关(position)"></a>6.位置相关(position)</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">position</td>
-<td style="text-align:center">absolute, relative</td>
-<td style="text-align:center">对应 CSS 中的 position 属性，但阉割了 static, fixed 取值</td>
-</tr>
-<tr>
-<td style="text-align:center">top</td>
-<td style="text-align:center">number&gt;</td>
-<td style="text-align:center">对应 CSS 中的 top 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">right</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 right 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">bottom</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 bottom 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">left</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 left 属性</td>
-</tr>
-</tbody>
-</table>
-<h3 id="7-文本相关-Text"><a href="#7-文本相关-Text" class="headerlink" title="7.文本相关(Text)"></a>7.文本相关(Text)</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">color</td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 color 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">fontFamily</td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">对应 CSS 中的 font-family 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">fontSize</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 font-size 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">fontStyle</td>
-<td style="text-align:center">normal, italic</td>
-<td style="text-align:center">对应 CSS 中的 font-style 属性，但阉割了 oblique 取值</td>
-</tr>
-<tr>
-<td style="text-align:center">fontWeight</td>
-<td style="text-align:center">normal, bold 100~900</td>
-<td style="text-align:center">对应 CSS 中的 font-weight 属性，但阉割了 bolder, lighter 取值</td>
-</tr>
-<tr>
-<td style="text-align:center">lineHeight</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 line-height 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">textAlign</td>
-<td style="text-align:center">auto, left, right, center, justifyiOS</td>
-<td style="text-align:center">对应 CSS 中的 text-align 属性，增加了 auto 取值</td>
-</tr>
-<tr>
-<td style="text-align:center">textAlignVertical<sup>Android</sup></td>
-<td style="text-align:center">auto, top, bottom, center</td>
-<td style="text-align:center">对应 CSS 中的 vertical-align 属性，增加了 auto 取值，center 取代了 middle，并阉割了 baseline, sub 等值</td>
-</tr>
-<tr>
-<td style="text-align:center">textShadowColor</td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 text-shadow 属性中的颜色定义</td>
-</tr>
-<tr>
-<td style="text-align:center">textShadowOffset</td>
-<td style="text-align:center">{width: number, height: number}</td>
-<td style="text-align:center">对应 CSS 中的 text-shadow 属性中的阴影偏移定义</td>
-</tr>
-<tr>
-<td style="text-align:center">textShadowRadius</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">在 CSS 中，阴影的圆角大小取决于元素的圆角定义，不需要额外定义</td>
-</tr>
-<tr>
-<td style="text-align:center">letterSpacing<sup>iOS</sup></td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 letter-spacing 属性，但取值不同</td>
-</tr>
-<tr>
-<td style="text-align:center">textDecorationColor<sup>iOS</sup></td>
-<td style="text-align:center">color</td>
-<td style="text-align:center">对应 CSS 中的 text-decoration-color 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">textDecorationLine<sup>iOS</sup></td>
-<td style="text-align:center">none, underline, line-through, underline line-through</td>
-<td style="text-align:center">对应 CSS 中的 text-decoration-line 属性，但阉割了 overline, blink 取值</td>
-</tr>
-<tr>
-<td style="text-align:center">textDecorationStyle<sup>iOS</sup></td>
-<td style="text-align:center">solid, double, dotted, dashed</td>
-<td style="text-align:center">对应 CSS 中的 text-decoration-style 属性，但阉割了 wavy 取值</td>
-</tr>
-<tr>
-<td style="text-align:center">writingDirection<sup>iOS</sup></td>
-<td style="text-align:center">auto, ltr, rtl</td>
-<td style="text-align:center">对应 CSS 中的 direction 属性，增加了 auto 取值</td>
-</tr>
-</tbody>
-</table>
-<h3 id="8-弹性布局相关-Flex"><a href="#8-弹性布局相关-Flex" class="headerlink" title="8.弹性布局相关(Flex)"></a>8.弹性布局相关(Flex)</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">flex</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">对应 CSS 中的 flex 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">flexDirection</td>
-<td style="text-align:center">row, column</td>
-<td style="text-align:center">对应 CSS 中的 flex-direction 属性，但阉割了 row-reverse, column-reverse 取值</td>
-</tr>
-<tr>
-<td style="text-align:center">flexWrap</td>
-<td style="text-align:center">wrap, nowrap</td>
-<td style="text-align:center">对应 CSS 中的 flex-wrap 属性，但阉割了 wrap-reverse 取值</td>
-</tr>
-<tr>
-<td style="text-align:center">justifyContent</td>
-<td style="text-align:center">flex-start, flex-end, center, space-between, space-around</td>
-<td style="text-align:center">对应 CSS 中的 justify-content 属性，但阉割了 stretch 取值。</td>
-</tr>
-<tr>
-<td style="text-align:center">alignItems</td>
-<td style="text-align:center">flex-start, flex-end, center, stretch</td>
-<td style="text-align:center">对应 CSS 中的 align-items 属性，但阉割了 baseline 取值。</td>
-</tr>
-<tr>
-<td style="text-align:center">alignSelf</td>
-<td style="text-align:center">auto, flex-start, flex-end, center, stretch</td>
-<td style="text-align:center">对应 CSS 中的 align-self 属性，但阉割了 baseline 取值</td>
-</tr>
-</tbody>
-</table>
-<h3 id="9-转换相关-transform"><a href="#9-转换相关-transform" class="headerlink" title="9.转换相关(transform)"></a>9.转换相关(transform)</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">transform</td>
-<td style="text-align:center">[{perspective: number}, {rotate: string}, {rotateX: string}, {rotateY: string}, {rotateZ: string}, {scale: number}, {scaleX: number}, {scaleY: number}, {translateX: number}, {translateY: number}, {skewX: string}, {skewY: string}]</td>
-<td style="text-align:center">对应 CSS 中的 transform 属性</td>
-</tr>
-<tr>
-<td style="text-align:center">transformMatrix</td>
-<td style="text-align:center">TransformMatrixPropType</td>
-<td style="text-align:center">类似于 CSS 中 transform 属性的 matrix() 和 matrix3d() 函数</td>
-</tr>
-<tr>
-<td style="text-align:center">backfaceVisibility</td>
-<td style="text-align:center">visible, hidden</td>
-<td style="text-align:center">对应 CSS 中的 backface-visibility 属性</td>
-</tr>
-</tbody>
-</table>
-<h3 id="10-图片相关"><a href="#10-图片相关" class="headerlink" title="10.图片相关"></a>10.图片相关</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">resizeMode</td>
-<td style="text-align:center">cover, contain, stretch</td>
-<td style="text-align:center">contain是指无论如何图片都包含在指定区域内，假设设置的宽度高度比图片大，则图片居中显示，否则，图片等比缩小显示</td>
-</tr>
-<tr>
-<td style="text-align:center">overflow</td>
-<td style="text-align:center">visible, hidden</td>
-<td style="text-align:center">超出部分是否显示，hidden为隐藏</td>
-</tr>
-<tr>
-<td style="text-align:center">tintColor</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">着色，rgb字符串类型</td>
-</tr>
-<tr>
-<td style="text-align:center">opacity</td>
-<td style="text-align:center">number</td>
-<td style="text-align:center">透明度</td>
-</tr>
-</tbody>
-</table>
-<h3 id="11-图像变换"><a href="#11-图像变换" class="headerlink" title="11.图像变换"></a>11.图像变换</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">属性名称</th>
-<th style="text-align:center">取值</th>
-<th style="text-align:center">对应css属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">rotation</td>
-<td style="text-align:center">–</td>
-<td style="text-align:center">旋转</td>
-</tr>
-<tr>
-<td style="text-align:center">scaleX</td>
-<td style="text-align:center">–</td>
-<td style="text-align:center">水平方向缩放</td>
-</tr>
-<tr>
-<td style="text-align:center">scaleY</td>
-<td style="text-align:center">–</td>
-<td style="text-align:center">垂直方向缩放</td>
-</tr>
-<tr>
-<td style="text-align:center">translateX</td>
-<td style="text-align:center">–</td>
-<td style="text-align:center">水平方向平移</td>
-</tr>
-<tr>
-<td style="text-align:center">translateY</td>
-<td style="text-align:center">–</td>
-<td style="text-align:center">水平方向平移</td>
-</tr>
-</tbody>
-</table>
+          ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。
+引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。
+1. 内嵌方式1234567891011121314151617exp
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2017/03/ReactNative-2017-04-25-rn-css.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-小白">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html" itemprop="url">
+                  Android内存泄露
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T10:27:04+08:00">
+                2017-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html" class="leancloud_visitors" data-flag-title="Android内存泄露">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          内存泄露与内存溢出内存泄露内存泄露(Memory Leak)是指无用对象（不再使用的对象）持续占有内存，或者无用对象的内存得不到及时释放，从而造成内存空间得不到有效的利用。在Java中，内存泄露的原因，通常是长生命周期的对象，持有短生命周期对象的引用。在《深入理解Java虚拟机》中的解释是，当无用对
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2017/03/Android进阶-2017-03-24-android-memory-leak.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1216,7 +702,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-17T00:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-17T10:27:04+08:00">
                 2017-03-17
               </time>
             
@@ -1226,6 +712,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/插件框架/" itemprop="url" rel="index">
+                    <span itemprop="name">插件框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1275,53 +783,15 @@
       
         
           
-            <h2 id="Java的类加载机制ClassLoader"><a href="#Java的类加载机制ClassLoader" class="headerlink" title="Java的类加载机制ClassLoader"></a>Java的类加载机制ClassLoader</h2><p>我们编写的java代码，最终会编译成.class字节码的形式，一个完整的Java程序，通常会由若干个.class文件组成，在程序运行时，通过该程序的入口函数来调用系统的各个功能，但是程序启动时，并不会一次性将.class文件加载到内存中，根据程序的需要，通过Java的类加载机制来动态加载.class文件，ClassLoader就是来实现.class文件的动态加载的。</p>
-<h2 id="Java中各类加载器的关系"><a href="#Java中各类加载器的关系" class="headerlink" title="Java中各类加载器的关系"></a>Java中各类加载器的关系</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974200061820.png" alt="20170317148974200061820.png"><br>Java默认会提供三个类加载器，分别为BootStrapClassLoader,ExtClassLoader和AppClassLoader;</p>
-<ul>
-<li>BootStrapLoader，启动类加载器，是Java类加载层次中最顶层的类加载器，由c代码编写，负责加载JDK中的核心类库（包括JRE classes目录下的.class文件，libs目录下的jar文件）。可以使用System.getProperty(“sun.boot.class.path”)来显示BootStrapLoader加载的jar和.class文件；</li>
-<li>ExtClassLoader,扩展类加载器，负责加载Java的扩展类库，默认加载/jre/lib/ext目录下的所有jar和.class文件。可以通过可以使用System.getProperty(“java.ext.dirs”)来显示ExtClassLoader加载的jar和.class文件；</li>
-<li>AppClassLoader,系统类加载器，负责加载classpath目录下所有的jar和class文件。</li>
-</ul>
-<h2 id="Java类加载的实现过程"><a href="#Java类加载的实现过程" class="headerlink" title="Java类加载的实现过程"></a>Java类加载的实现过程</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974217438657.jpg" alt="20170317148974217438657.jpg"></p>
-<ul>
-<li>执行程序代码，找到JRE所在目录；</li>
-<li>找到jvm.dll(Windows)或者libjvm.so(Linux);</li>
-<li>启动JVM，并进行初始化工作</li>
-<li>创建BootStrapClassLoader;</li>
-<li>BootStrapClassLoader会加载ExtClassLoader，并设定ExtClassLoader的parent为BootStrapClassLoader;</li>
-<li>BootStrapClassLoader会加载AppClassLoader,并设定AppClassLoader的parent为ExtClassLoader;</li>
-</ul>
-<p>当AppClassLoader开始加载xxx.class时，类加载器会现将加载的任务交给其parent来完成，如果parent找不到，则自己负责加载。所以在加载xxx.class时的顺序是，BootstrapClassLoader –&gt; ExtClassLoader –&gt; AppClassLoader，如果都找不到，则抛出ClassNotFoundException。这就是非常有名的双亲委托模型。</p>
-<p>使用双亲委托模型，有效地解决了.class字节码重复加载的问题，当parent已经加载类某各类的.class字节码时，子类就没有必要再重新进行加载。举个例子，来说明一下双亲委托模型。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974220124844.png" alt="20170317148974220124844.png"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 取得SomeClass的Class实例</span></div><div class="line">   Class c = Class.forName(<span class="string">"SomeClass"</span>);</div><div class="line">   <span class="comment">// 取得ClassLoader</span></div><div class="line">   ClassLoader loader = c.getClassLoader();</div><div class="line">   System.out.println(loader);</div><div class="line">   <span class="comment">// 取得父ClassLoader</span></div><div class="line">   System.out.println(loader.getParent());</div><div class="line">   <span class="comment">// 再取得父ClassLoader</span></div><div class="line">   System.out.println(loader.getParent().getParent());</div></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sun.misc.Launcher\$AppClassLoader@<span class="number">19821f</span></div><div class="line">sun.misc.Launcher\$ExtClassLoader<span class="meta">@addbf</span>1</div><div class="line"><span class="keyword">null</span></div></pre></td></tr></table></figure>
-<p>由于SomeClass是自定义的一个Java类，通常会java.class.path中产生字节码，首先AppClassLoader会将加载的任务交给其parent,ExtClassLaoder,ExtClassLoader将加载任务交给其parent，BootStrapClassLoader,由于BootStrapLoader在其目录(sun.boot.class.path)下没有找到该类的字节码，所以由ExtClassLoader来加载，ExtClassLoader在其目录(java.ext.dirs)也没有发现SomeClass的字节码，交给AppClassLoader进行加载，AppClassLoader在(java.class.path)中找到，并进行加载。</p>
-<p>加载SomeClass的ClassLoader是AppClassLoader,其parent是ExtClassLoader,<br>而ExtClassLoader的parent是null，这是因为BootStrapClassLoader是由c代码编写的，在JVM中并没有对应的实例对象，所以显示为null。</p>
-<h2 id="Dalvik与JVM"><a href="#Dalvik与JVM" class="headerlink" title="Dalvik与JVM"></a>Dalvik与JVM</h2><p>在Java中，把一些Java类编译成.class文件，通过ClassLoader进行加载，但是在Android上边，情况有所不同，主要的原因在于Android中使用的虚拟机是Dalvik。Android中的Dalvik和Java中的JVM都是将对应的Java类加载到内存中运行。不同的是JVM加载的是.class字节码文件，或是通过defineClass方式产生class，进行加载。Dalvik加载的是.dex文件，.dex文件是Android对.class文件进行了优化，更加适合内存和处理器有限的系统。</p>
-<ul>
-<li>Dalvik是基于寄存器的，而JVM是基于栈的。</li>
-<li>Dalvik运行dex文件，而JVM运行java字节码</li>
-<li>自Android 2.2开始，Dalvik支持JIT（just-in-time，即时编译技术）。</li>
-</ul>
-<p>很长时间以来，Dalvik虚拟机一直被用户指责为拖慢安卓系统运行速度不如IOS的根源。2014年6月25日,Android L 正式亮相于召开的谷歌I/O大会，Android L 改动幅度较大，谷歌将直接删除Dalvik，代替它的是传闻已久的ART。ART,即Android Runtime。ART 的机制与 Dalvik 不同。在Dalvik下，应用每次运行的时候，字节码都需要通过即时编译器（just in time,JIT）转换为机器码，这会拖慢应用的运行效率，而在ART 环境中，应用在第一次安装的时候，字节码就会预先编译成机器码，使其成为真正的本地应用。这个过程叫做预编译（AOT,Ahead-Of-Time)。这样的话，应用的启动(首次)和执行都会变得更加快速。</p>
-<h2 id="DexClassLoader与PathClassLoader"><a href="#DexClassLoader与PathClassLoader" class="headerlink" title="DexClassLoader与PathClassLoader"></a>DexClassLoader与PathClassLoader</h2><p>在使用Java虚拟机时，我们经常自定义继承自ClassLoader的类加载器。然后通过defineClass方法来从一个二进制流中加载Class。而在Android中我们无法这么使用，Android中ClassLoader的defineClass方法具体是调用VMClassLoader的defineClass本地静态方法。而这个本地方法什么都没做，只是抛出了一个“UnsupportedOperationException”异常。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> Class&lt;?&gt; defineClass(String name, <span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</div><div class="line">        <span class="keyword">throws</span> ClassFormatError</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"can't load this type of class file"</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>既然在Dalvik虚拟机里，ClassLoader不好用，那么Android官方为了解决这个问题，帮我们从ClassLoader中派生出了两个类：DexClassLoader和PathClassLoader。先来看一下DexClassLoader和PahtClassLoader的继承关系。</p>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170322149015010153287.png" alt="20170322149015010153287.png"></p>
-<h3 id="DexClassLoader"><a href="#DexClassLoader" class="headerlink" title="DexClassLoader"></a>DexClassLoader</h3><p>DexClassLoader可以加载jar,apk,dex,可以从SD卡进行加载，可以实现dex的动态加载与更新，DexClassLoader要有一个app私有且可写的目录来存储经过优化的.odex文件。构造函数如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DexClassLoader</span> <span class="keyword">extends</span> <span class="title">BaseDexClassLoader</span> </span>&#123;</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 *</div><div class="line">		 * <span class="doctag">@param</span> dexPath .dex文件路径,多个文件路径使用':'分隔</div><div class="line">		 * <span class="doctag">@param</span> optimizedDirectory .dex文件优化后生成的.odex文件的路径</div><div class="line">		 * <span class="doctag">@param</span> librarySearchPath 动态库路径</div><div class="line">		 * <span class="doctag">@param</span> parent 双亲委派模式,指定父类加载器</div><div class="line">		 */</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">DexClassLoader</span><span class="params">(String dexPath, String optimizedDirectory, String librarySearchPath, ClassLoader parent)</span> </span>&#123;</div><div class="line">			<span class="keyword">super</span>((String)<span class="keyword">null</span>, (File)<span class="keyword">null</span>, (String)<span class="keyword">null</span>, (ClassLoader)<span class="keyword">null</span>);</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stub!"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h3 id="PathClassLoader"><a href="#PathClassLoader" class="headerlink" title="PathClassLoader"></a>PathClassLoader</h3><p>PathClassLoader只能加载已经安装的apk文件。Android系统默认使用的类加载器。构造函数如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PathClassLoader</span> <span class="keyword">extends</span> <span class="title">BaseDexClassLoader</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">PathClassLoader</span><span class="params">(String dexPath, ClassLoader parent)</span> </span>&#123;</div><div class="line">			<span class="keyword">super</span>((String)<span class="keyword">null</span>, (File)<span class="keyword">null</span>, (String)<span class="keyword">null</span>, (ClassLoader)<span class="keyword">null</span>);</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stub!"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">/**</span></div><div class="line">		 *</div><div class="line">		 * <span class="doctag">@param</span> dexPath .dex文件路径</div><div class="line">		 * <span class="doctag">@param</span> librarySearchPath 本地库路径</div><div class="line">		 * <span class="doctag">@param</span> parent 双亲委派模式,指定父类加载器</div><div class="line">		 */</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">PathClassLoader</span><span class="params">(String dexPath, String librarySearchPath, ClassLoader parent)</span> </span>&#123;</div><div class="line">			<span class="keyword">super</span>((String)<span class="keyword">null</span>, (File)<span class="keyword">null</span>, (String)<span class="keyword">null</span>, (ClassLoader)<span class="keyword">null</span>);</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stub!"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h3 id="DexClassLoader与PathClassLoader的比较"><a href="#DexClassLoader与PathClassLoader的比较" class="headerlink" title="DexClassLoader与PathClassLoader的比较"></a>DexClassLoader与PathClassLoader的比较</h3><p>通过两个类加载构造函数的对比发现，区别在于DexClassLoader构造函数中的参数optimizedDirectory。Google官方文档中给出optimizedDirectory的说明是，用来存储经过优化后的.odex文件的路径。optimizedDirectory必须是一个内部存储路径，DexClassLoader可以通过构造函数指定optimizedDirectory，所以DexClassLoader可以实现动态加载，外部的.jar/.dex文件，优化后会存在在optimizedDirectory目录中。PathClassLoader由于没有指定该路径，所以只能加载内部的，已经安装的apk中的.odex文件。</p>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170322149015373793574.png" alt="20170322149015373793574.png"></p>
-<p>整个类加载过程可以简单描述为上面的时序图。ClassLoader在加载过程中，通过loadClass方法，调用BaseDexClassLoader中重载的findClass方法，该方法会遍历DexPathList列表。DexPathList的创建过程如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">BaseDexClassLoader</span><span class="params">(String dexPath, File optimizedDirectory,</span></span></div><div class="line">                              String libraryPath, ClassLoader parent) &#123;</div><div class="line">        <span class="keyword">super</span>(parent);</div><div class="line">        <span class="keyword">this</span>.originalPath = dexPath;</div><div class="line">        <span class="keyword">this</span>.pathList = <span class="keyword">new</span> DexPathList(<span class="keyword">this</span>, dexPath, libraryPath, optimizedDirectory);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>optimizedDirectory用来缓存优化过的.odex文件，在DexClassLoader中可以通过构造函数进行制定，在PathClassLoader中，optimizedDirectory为null，会直接使用系统中已经安装的apk文件的.odex目录。DexPathList完整的创建过程。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">DexPathList</span><span class="params">(ClassLoader definingContext, String dexPath,</span></span></div><div class="line">                       String libraryPath, File optimizedDirectory) &#123;</div><div class="line">        ……</div><div class="line">        <span class="keyword">this</span>.dexElements = makeDexElements(splitDexPath(dexPath), optimizedDirectory);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Element[] makeDexElements(ArrayList&lt;File&gt; files,</div><div class="line">                                             File optimizedDirectory) &#123;</div><div class="line">        ArrayList&lt;Element&gt; elements = <span class="keyword">new</span> ArrayList&lt;Element&gt;();</div><div class="line">        <span class="keyword">for</span> (File file : files) &#123;</div><div class="line">            ZipFile zip = <span class="keyword">null</span>;</div><div class="line">            DexFile dex = <span class="keyword">null</span>;</div><div class="line">            String name = file.getName();</div><div class="line">            <span class="keyword">if</span> (name.endsWith(DEX_SUFFIX)) &#123;</div><div class="line">                dex = loadDexFile(file, optimizedDirectory);</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (name.endsWith(APK_SUFFIX) || name.endsWith(JAR_SUFFIX)</div><div class="line">                || name.endsWith(ZIP_SUFFIX)) &#123;</div><div class="line">                zip = <span class="keyword">new</span> ZipFile(file);</div><div class="line">            &#125;</div><div class="line">            ……</div><div class="line">            <span class="keyword">if</span> ((zip != <span class="keyword">null</span>) || (dex != <span class="keyword">null</span>)) &#123;</div><div class="line">                elements.add(<span class="keyword">new</span> Element(file, zip, dex));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> elements.toArray(<span class="keyword">new</span> Element[elements.size()]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> DexFile <span class="title">loadDexFile</span><span class="params">(File file, File optimizedDirectory)</span></span></div><div class="line">        <span class="keyword">throws</span> IOException &#123;</div><div class="line">        <span class="keyword">if</span> (optimizedDirectory == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> DexFile(file);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            String optimizedPath = optimizedPathFor(file, optimizedDirectory);</div><div class="line">            <span class="keyword">return</span> DexFile.loadDex(file.getPath(), optimizedPath, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Converts a dex/jar file path and an output directory to an</div><div class="line">     * output file path for an associated optimized dex file.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">optimizedPathFor</span><span class="params">(File path,</span></span></div><div class="line">                                           File optimizedDirectory) &#123;</div><div class="line">        String fileName = path.getName();</div><div class="line">        <span class="keyword">if</span> (!fileName.endsWith(DEX_SUFFIX)) &#123;</div><div class="line">            <span class="keyword">int</span> lastDot = fileName.lastIndexOf(<span class="string">"."</span>);</div><div class="line">            <span class="keyword">if</span> (lastDot &lt; <span class="number">0</span>) &#123;</div><div class="line">                fileName += DEX_SUFFIX;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                StringBuilder sb = <span class="keyword">new</span> StringBuilder(lastDot + <span class="number">4</span>);</div><div class="line">                sb.append(fileName, <span class="number">0</span>, lastDot);</div><div class="line">                sb.append(DEX_SUFFIX);</div><div class="line">                fileName = sb.toString();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        File result = <span class="keyword">new</span> File(optimizedDirectory, fileName);</div><div class="line">        <span class="keyword">return</span> result.getPath();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>1.<a href="http://blog.csdn.net/xyang81/article/details/7292380" target="_blank" rel="external">深入分析Java ClassLoader原理</a><br>2.<a href="http://blog.csdn.net/irelandken/article/details/7048817" target="_blank" rel="external">分析BootstrapClassLoader/ExtClassLoader/AppClassLoader的加载路径 及”父委托机制”</a><br>3.<a href="https://openhome.cc/Gossip/JavaEssence/ClassLoader.html" target="_blank" rel="external">簡介類別載入器</a><br>4.<a href="http://www.infoq.com/cn/articles/android-in-depth-dalvik" target="_blank" rel="external">Java虚拟机Dalvik</a><br>5<a href="http://www.jianshu.com/p/669fc4858194" target="_blank" rel="external">Android动态加载——DexClassloader分析</a></p>
-
-          
+          Java的类加载机制ClassLoader我们编写的java代码，最终会编译成.class字节码的形式，一个完整的Java程序，通常会由若干个.class文件组成，在程序运行时，通过该程序的入口函数来调用系统的各个功能，但是程序启动时，并不会一次性将.class文件加载到内存中，根据程序的需要，通过
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2017/03/插件框架-2017-03-17-classloader.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1402,7 +872,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-04T00:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-04T12:00:00+08:00">
                 2017-01-04
               </time>
             
@@ -1412,6 +882,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1461,23 +953,16 @@
       
         
           
-            <p>为你，千千万万遍</p>
-<p>阿米尔问哈桑为什么知道被切断绳线的风筝的掉落地点，<br>哈桑肯定会对阿米尔说，我就是知道，然后反问，我什么时候骗过你。<br>阿米尔轻声说，我怎么知道有没有骗过我。<br>哈桑发誓，为了你，我宁可啃烂泥。阿米尔进一步确定，你真的会为我啃烂泥？<br>哈桑坚定的说，我肯定，然后又说，但是你又怎么能忍心让我啃烂泥。</p>
-<p>同哈桑洋溢着笑脸对阿米尔说：为你，千千万万遍。</p>
-<p>一个是主人，一个是仆人；<br>一个是普什图，一个是哈扎拉；<br>一个是逊尼派，一个是什叶派；</p>
-<p>从他们出生的那一刻起，他们的命运就被这些他们所不能理解的标签所分隔开来，尽管他们是亲密无间的朋友，尽管他们事实上拥有同一位父亲。无论是平凡的阿米尔和哈桑，还是高高在上的查希尔国王或者卡尔扎伊，都不得不接受社会为他们预定的座位——阿米尔不再是阿米尔，哈桑也不再是哈桑，他们必须戴上社会分给他们的面具。</p>
-<p>哈桑总是说“为你，千千万万遍”，而生性懦弱的阿米尔却选择沉默冷酷的逃避，这样的悲剧性结果并不单单是个性差异所造成的，在这些年少无知的孩子的潜意识里早已被灌输了相应于自身社会地位的“应该”与“不应该”，一个哈扎拉仆人理应为主人尽忠，而高贵的普什图少爷不值得为一个卑贱的哈扎拉仆人冒任何风险。</p>
-<p>“阿米尔和哈桑，喀布尔的统治者”，这样的誓言只能是石榴树下的童话，“王子与贫儿”不可能成为兄弟，因为他们命中注定不平等。包括二十年后，阿米尔重返阿富汗的自我救赎行为，也只不过是在获知自己与哈桑的同父异母兄弟关系之后对身世的无奈认可，也就是说，他仍然没有证明自己已经找到了“重新成为好人的路”。</p>
-<p>我们少年的时候，总是意气风发，三五结伴，促膝长谈。那是在我们其乐融融的环境中构建的虚拟场景，属于物理学讲究的理想状态，然而在残酷的现实面前，在微弱的友谊遇到挑战的时刻，只要有一方露出破绽，友谊的桥梁必然坍塌。</p>
-<p>于是当阿米尔在看到哈桑被大一些的孩子欺负甚至猥亵的时候，他选择沉默和逃避；与此同时，哈桑却为了阿米尔的风筝坚定不动摇的和对手较量，对手残忍的揭示阿米尔和哈桑之间的主仆关系，哈桑大声反驳说两个人是朋友。躲在角落里不敢出现的阿米尔听到这句话不但没有一点激励也没有丝毫感动，他心底里的怯懦终于将他的灵魂吞噬，于是悲剧发生。</p>
-<p>这就是我们对友谊最大的误解，认为它是万能的。</p>
-<p>即使是存在这样的问题，《追风筝的人》也还是一本出色的小说。主和仆、贵族和贱民、朋友和兄弟，历史和现实，种种转变都被刻画得生动而细腻。放在历史的宏大背景下，更洞见人生和人性的复杂。</p>
-<p>友谊和爱。</p>
-<p>是在困难之中由弱变强的柔韧派还是在权衡利弊之中土崩瓦解的懦弱派。</p>
-<p>谁敢真的站出来举起右手发誓，我从来没有辜负过任何一段纯粹的友谊，谁敢真的抬头挺胸说自己对朋友忠心不二。</p>
-<p>我们总是太自信，对友谊误解，对自己的爱误解，对不可能的事信以为真。</p>
-
-          
+          为你，千千万万遍
+阿米尔问哈桑为什么知道被切断绳线的风筝的掉落地点，哈桑肯定会对阿米尔说，我就是知道，然后反问，我什么时候骗过你。阿米尔轻声说，我怎么知道有没有骗过我。哈桑发誓，为了你，我宁可啃烂泥。阿米尔进一步确定，你真的会为我啃烂泥？哈桑坚定的说，我肯定，然后又说，但是你又怎么能忍心让我啃烂泥。
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2017/01/读书笔记-2017-01-04-追风筝的人.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1558,7 +1043,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-17T00:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-17T17:00:00+08:00">
                 2016-08-17
               </time>
             
@@ -1568,6 +1053,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">生活感悟</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1617,41 +1124,20 @@
       
         
           
-            <blockquote>
-<p>文章作者：咪喵<br>文章来源： TalentGuide </p>
-</blockquote>
-<p>为什么有的人，明明事情做得不少，却永远没人说他好？有的人，不管做什么都得到周围人众口一词的称赞？</p>
-<p>真的是因为两个人做的事差很多吗？也许是。<br>也许，只是一些小习惯改变了他们的口碑。</p>
-<h2 id="1-收到请回答"><a href="#1-收到请回答" class="headerlink" title="1. 收到请回答"></a>1. 收到请回答</h2><p>一些人，交给他的事情永远没下文。你不知道他收到了没有，是不是正在做，已经做到了什么进展，啥时候能交付。即使这件事他已经做完了，不去问，他也永远不会告诉你。</p>
-<ol>
-<li>收到任务，请告诉对方“我收到了。”</li>
-<li>需要时间消化，请告诉对方“我看一下，晚点（给出具体时间段更佳）给你答复。”</li>
-<li>事情有进展时，及时周知相关人等最新进度。</li>
-<li>事情完成时，通知相关方，并感谢在其中给过帮助的人。</li>
-</ol>
-<p>做到这些，不需要很多时间，却会让与你合作的人感到轻松愉快。</p>
-<h2 id="2-要做就别抱怨"><a href="#2-要做就别抱怨" class="headerlink" title="2. 要做就别抱怨"></a>2. 要做就别抱怨</h2><p>有的人，接受任务时永远不情不愿，嘴里没完没了地抱怨，最后虽仍然接下了任务，却留下了难以合作的印象。</p>
-<p>如果别人的行为确实给自己带来了麻烦或是有为难之处，可以清晰告知对方自己难做的原因，说清楚希望对方如何改进，并告知这样的改进会给双方带来什么好处。</p>
-<p>比如对方总给你扔急活，你为了这个急活不得不加班加点，到处求人。正确的做法是<strong>告诉对方这件事有哪些环节，分别需要多长时间，以后请提早多少天告知，以便更好的完成。这次帮忙加急，下不为例</strong>。这样对方能理解你这次加急赶完是帮了他忙，而不会抱怨每次给你事情都推三阻四还完成得不好。</p>
-<h2 id="3-推进事情要推到有进展才算数"><a href="#3-推进事情要推到有进展才算数" class="headerlink" title="3. 推进事情要推到有进展才算数"></a>3. 推进事情要推到有进展才算数</h2><p>有些人，推进一件事的方法是：每隔一段时间，发封不痛不痒的邮件，抄送所有人，摆个样子跟进一下，也不在乎对方是否给了结果。仿佛在说“你看，我推过了，是对方不给做，推不动不关我事哦。出了问题责任是他是他还是他。”</p>
-<p>如果是自家孩子病了，有哪位家长会说“我给医生发邮件了，他没回我，所以病治不了了。”显然，孩子生病时家长都是心急火燎的，医生不在会找护士，找主管，找院长，找媒体。用尽一切可用的渠道，一切可用的方法，直到医生给孩子看病为止。</p>
-<p>当说一件事情推不动时，扪心自问自己真的做到了像家长为生病的孩子找医生那样努力吗？真的已经用尽了一切可用的力量，找尽了一切可找的人去推动这件事吗？</p>
-<p>装模作样推一推是没有意义的，一定要推到这件事有实质进展为止。<strong>实质进展是对方给排期、给解决方案、给具体处理这件事的人</strong>。如果什么都没拿到，那根本不算推进过一件事。</p>
-<h2 id="4-做不到早说"><a href="#4-做不到早说" class="headerlink" title="4. 做不到早说"></a>4. 做不到早说</h2><p>有的人，交给他的事情，不问永远没问题，一问全是问题。拖过了截止期做不到，罗列出一堆原因，都是ABCDE的问题，与他无关。</p>
-<p>OK，就算ABCDE的问题确实与他无关，为什么不能在发现有这些问题时及时反馈呢？自己解决不了的问题，及时反馈并暴露，让有能力解决的人去解决，是靠谱最重要的表现之一。</p>
-<p>又有人说，我要是暴露了这些问题得罪了别人怎么办？请问不暴露这些问题，任由时间资源浪费，事情最终没做到，就谁都不得罪了吗？<strong>作为一个团队，成事是最重要的。暴露问题是为了解决问题，而不是为了挑事，关键是把握分寸</strong>。</p>
-<p>还有人说，跟别人没关系，就是堆给我的活太多了，我做不完怎么办？如果是这种情况，更要尽早反馈了。或许你花了大量时间在一件优先级比较低的事情上，导致最重要的事情没有做完。结果把自己累得半死，还谁都不满意。<strong>发现自己做不完，就要第一时间跟相关方确认优先级，力保最重要的事情能够及时完成。如果被插入了其他优先级更高的事，也要尽快知会事情被推迟的相关方</strong>。</p>
-<h2 id="5-功劳是大家的"><a href="#5-功劳是大家的" class="headerlink" title="5. 功劳是大家的"></a>5. 功劳是大家的</h2><p>有些人，干活的时候一天八回地狂催别人。活干完了，人没影了，汇报工作成果时只字不提其他人，仿佛活全是他自己一人干的。这样的人，执行力再好，下次再找人干活时，也难得到别人心甘情愿的帮忙。</p>
-<p><strong>无论别人是帮了多小的忙，在事情结束后也要表示感谢</strong>。道谢要不嫌隆重，能当面谢的尽量当面去谢，能单独打电话谢的就不要讲其他事情时顺便谢，发邮件表示感谢的话尽量抄送对方老板详细说明感谢的事由。这些事情并不费劲，却会让别人更愿意帮助你。</p>
-<h2 id="6-别吐槽，给解决方案"><a href="#6-别吐槽，给解决方案" class="headerlink" title="6. 别吐槽，给解决方案"></a>6. 别吐槽，给解决方案</h2><p>有的人，你一找他解决问题，就开启吐槽模式，内容全是“我有多辛苦多不容易，能做的我都做了，这些问题全是因为balabala……”</p>
-<p>每当这时我都好想告诉对方“亲，没有人关心你的心路历程。”我不关心你有多辛苦多不容易你做了多少事情，为什么别人就是没按照你设定的剧本做。我只知道现在有一个问题，我找你只想知道“怎样解决这个问题”。</p>
-<p><strong>当有一个问题时，请直奔主题，给解决方案</strong>。</p>
-<h2 id="7-敢作敢当"><a href="#7-敢作敢当" class="headerlink" title="7. 敢作敢当"></a>7. 敢作敢当</h2><p>当事情搞砸时，最次的做法是想尽办法推卸责任，最好的做法是<strong>诚恳道歉，评估影响范围，想尽办法用最快速度修正错误，弥补损失</strong>。</p>
-<p>不要耍滑头，得意于自己把责任都推出去了，推卸得越成功，实际越失败。不要怕承担，勇于承担责任的人，别人才敢赋予你更大的责任。</p>
-<h2 id="8-结语"><a href="#8-结语" class="headerlink" title="8. 结语"></a>8. 结语</h2><p>做到上面这些条，说难不难，说易也不易。说白了，就是要多操些心，多费些力。</p>
-<p>有的人说一份工作而已，干嘛把自己搞这么累。我就做好自己这部分，别人的事我不管，跟我没关系，只要出事了别怪我头上就行。当然，若真这么想，没什么不行的，您高兴就好。只是请不要再抱怨为什么自己怀才不遇，升职加薪总是比别人慢。多劳多得，很公平，不是么？</p>
-
           
+文章作者：咪喵文章来源： TalentGuide 
+
+为什么有的人，明明事情做得不少，却永远没人说他好？有的人，不管做什么都得到周围人众口一词的称赞？
+真的是因为两个人做的事差很多吗？也许是。也许，只是一些小习惯改变了他们的口碑。
+1. 收到请回答一些人，交给他的事情永远没下文。你不知道他收到了没
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2016/08/生活感悟-2016-08-17-pleasure-working-with-you.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1743,6 +1229,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">生活感悟</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1791,27 +1299,16 @@
       
         
           
-            <p>北京时间，2016年5月1日，完成了自己人生中一件非常重要的事情，我结婚了，当自己去看婚礼视频的时候，那因紧张而僵硬的表情，在大方自如的媳妇面前，感觉是那么的不协调，我对自己说，我是多么的幸运，能遇到这样的女孩，同时，我也感到一份支撑，一种依靠。2016，我不再单打独斗了。</p>
-<p>总想快速从结婚的喜悦中调整到繁忙的工作中来，2016年，对于公司也是非常重要的一年，能成为其中的一员，见证公司和自己的成长，我想着本身也是一种缘分，希望自己能在2016年剩下的日子里，看到自己持续的成长。</p>
-<p>今天看到一篇博客，其中的一些文字，让自己感触很深：</p>
-<ol>
-<li>好奇心比雄心走得更远：很多人对未来空有满腔的雄心壮志，往往不如对技术要有一份好奇心，一份探索欲，再加上一份执着的人。</li>
-<li>要有open的心态：曾经的我也只是把自己的所思所得都放入自己的云笔记，很少整理，这其实不利于技术发展，有空应该多整理自己零散的知识点，觉得不错的点可以拿出来写成博客，那是对能力的又一层提升。另外，在低头做技术的同时，还应该有空抬头看世界，不能闭门造车。</li>
-<li>天道酬勤：学历只能代表过去，能力代表现在，潜力代表未来！ 你不把自己逼一把，你压根不知道自己有多优秀，只要努力去学习，去挖掘潜力，进而提升自我技术修为，未来不再是梦！共勉之！</li>
-</ol>
-<p>解决问题的方式：遇到问题，一定要先尝试自己解决，解决不了再请教他人。这是对自己的一个锻炼，也是对他人的一个尊重，可以有多种途径自行搜索：</p>
-<ol>
-<li>百度一下，很多时候还是能有所帮助的，不要过分强调google，完全抛弃百度，毕竟中文看起来比较快；</li>
-<li>先中文关键词google一下；再英文关键词google一下；</li>
-<li>stackoverflow.com、知乎等技术问答网站内直接搜索；</li>
-<li>查看官方文档；</li>
-<li>如果有源码，尝试直接看源码，看能否解决；</li>
-<li>有空可以多逛逛github，多看看Google官方文档，多关注社区，定会收获不少；</li>
-</ol>
-<p>当然，最最重要的是<strong>能静得下心，持之以恒地专研技术</strong>。</p>
-<p>以前，自己总是用“和光同尘，静水流深”来勉励自己，现在更加觉着这句话的重要。浮躁是在自己这个年纪，甚至是现在这个社会，比较普遍的现象。希望自己不要眼高手低，脚踏实地的走好现在的路，低调做人，高调做事。</p>
-
-          
+          北京时间，2016年5月1日，完成了自己人生中一件非常重要的事情，我结婚了，当自己去看婚礼视频的时候，那因紧张而僵硬的表情，在大方自如的媳妇面前，感觉是那么的不协调，我对自己说，我是多么的幸运，能遇到这样的女孩，同时，我也感到一份支撑，一种依靠。2016，我不再单打独斗了。
+总想快速从结婚的喜悦中调
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2016/05/生活感悟-2016-05-09-getdown-to-my-work.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1892,7 +1389,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-25T00:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-25T10:27:04+08:00">
                 2016-01-25
               </time>
             
@@ -1902,6 +1399,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/RxJava/" itemprop="url" rel="index">
+                    <span itemprop="name">RxJava</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1951,37 +1470,17 @@
       
         
           
-            <blockquote>
-<p>版权声明：本文为博主原创文章，未经允许，不得转载。</p>
-</blockquote>
-<p>本文字数99，预计读完需要5’34’’</p>
-<h2 id="1-RxJava是什么？"><a href="#1-RxJava是什么？" class="headerlink" title="1.RxJava是什么？"></a>1.RxJava是什么？</h2><p>GitHub官方给出的解释：</p>
-<blockquote>
-<p>RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.</p>
-</blockquote>
-<p>即一个运行在JVM上的库，通过一个<strong>可观测的序列</strong>，组成的<strong>异步的</strong>、<strong>基于事件的</strong>程序。</p>
-<h2 id="2-为什么要使用RxJava"><a href="#2-为什么要使用RxJava" class="headerlink" title="2.为什么要使用RxJava?"></a>2.为什么要使用RxJava?</h2><p>在平时的开发中，当遇到如进行访问网络请求，数据库的查询操作，文件读写操作等耗时操作时，都会放在子线程中来进行。<br>让复杂的业务逻辑，回归简单和清晰。</p>
-<h2 id="3-怎样使用RxJava"><a href="#3-怎样使用RxJava" class="headerlink" title="3.怎样使用RxJava?"></a>3.怎样使用RxJava?</h2><h3 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h3><p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">https://github.com/ReactiveX/RxJava</a></p>
-<p>RxAndroid响应式开发</p>
-<p>1，Rx是响应式编程的意思，本质是观察者模式，是以观察者（Observer）和订阅者（Subscriber)为基础的异步响应方式。<br>2，在Android编程时，经常会使用后台线程，那么就可以使用这种方式，目前的异步编程方式都会导致一些问题，如：</p>
-<p>Asynctasks can easily lead to memory leaks.<br>CursorLoaders with a ContentProvider require a large amount of configuration and boilerplate code to setup.<br>Services are intentded for longer running background tasks and not fast-finishing operations,such as making<br>a network call or loading content from a database.<br>访问网络接口调用返回数据，尤其在使用接口回调时，处理数据比较麻烦。</p>
-<p>Rx模式以及优点<br>1，使用观察者模式；<br>    创建：Rx可以方便的创建事件流和数据流；<br>    组合：Rx使用查询式的操作符组合和变换数据流；<br>    监听：Rx可以订阅任何可观察数据流并执行操作；<br>2，简化代码<br>    函数式风格:对可观察数据流使用无副作用的输入输出函数，避免了程序里错综复杂的状态；<br>    简化代码:Rx的操作符通常可以将复杂的难题简化成为很少的几行代码；<br>    异步错误处理:传统的try/catch没办法处理异步计算，Rx提供了合适的错误处理机制；<br>    轻松使用并发:Rx的Observerables和Schedulers让开发者可以摆脱底层的线程同步和各种并发问题。</p>
-<p>响应式编程<br>    Rx提供了一系列的操作符，你可以使用它们来过滤（filter）、选择（select）、变换（transform)、<br>    结合（combine)和组合（compose)多个Observable，这些操作符让执行和复合变得非常高效。</p>
-<pre><code>你可以把Observable当做Iterable的推送方式的等价物，使用Iterable,消费者从生产者哪里获取数据，
-线程阻塞直至数据准备好。使用Observable，在数据准备好时，生产者将数据推送给消费者。数据可以同步
-或异步的到达，这种方式更灵活。
-</code></pre><p>RxJava的观察者模式<br>    观察者模式面向的需求是：A对象（观察者）对B对象（被观察者）的某种变化高度敏感，<br>    需要在B变化的一瞬间做出反应。</p>
-<pre><code>RxJava有四个基本概念：
-    Observable（可观察者,即被观察者）
-    Observer（观察者）
-    subscribe（订阅）
-    事件
+          1.RxJava是什么？GitHub官方给出的解释：
 
-Observable和Observer通过subscribe()方法实现订阅关系，从而Observerable可以在需要的时候发出事件来通知Observer。
-</code></pre><p>RxJava基本实现<br>    1.创建Observer<br>        Observer即观察者，它决定事件触发的时候将有怎样的行为。RxJava中的Observer接口实现方式：<br>    2.创建Observable<br>        Observable即被观察者，它决定什么时候触发事件以及触发怎样的事件。RxJava使用create()方法<br>        来创建一个Observable，并为它定义事件触发规则；<br>    3.Subscribe(订阅)<br>        创建了Observable和Observer之后，再用subscribe()方法将它们联结起来，整条链子就可以工作了。</p>
-<p>创建观察者<br>    在异步模型中创建观察者；<br>    定义一个方法，它完成某些任务，然后从异步调用中返回一个值，这个方法时观察者的一部分。<br>    将这个异步调用本身定义为一个Observable<br>    观察者通过订阅（Subscribe)操作关联到那个Observable；<br>    继续业务逻辑，等方法返回时，Observable会发射结果，观察者的方法会开始处理结果或结果集；</p>
-
-          
+RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2016/01/RxJava-2016-01-25.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2073,6 +1572,28 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">生活感悟</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -2121,54 +1642,19 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
       
         
           
-            <blockquote>
-<p>文章来源：微信公众号</p>
-</blockquote>
-<p>海尔的企业文化内刊上，刊着一张员工砸冰箱的黑白照片。这件事发生在1985年，海尔公司涣散不堪，只能长期靠借钱维持工厂运营。砸冰箱事件源于一封举报信，用户反映海尔的电冰箱有质量问题。经检查，这类不合格的冰箱还有76台，张瑞敏当即决定把冰箱全部砸掉，并由生产者自己动手。</p>
-<p>至此，“具备责任心、做好每一个细节”的理念深深刻在每一个员工心里。海尔的管理精髓之一是：日事日毕，日清日高。强调高效的执行力，把每天的工作做完、做好。在此理念下，海尔从一个濒临倒闭的小厂，蜕变为享誉国内外的大集团。执行力的力量功不可没。</p>
-<p>我的老大Ella在创业前，曾在腾讯干过几年，当时工作中他们提得最多的一个词，就是<strong>“执行力”</strong>。这个习惯让她在以后的创业中受益匪浅。<br>Ella曾问过阿里高管：论人才储备，阿里18罗汉，占据各部高层，为什么他们有那么多人可用？</p>
-<p>对方回答：平凡人做非凡事。企业偏爱执行力强的平凡人，愿意帮助这样的员工成长。执行力对职业发展的重要性可见一斑。再有想法不去执行，也是空谈。那么，执行力具体指的是什么？从概念上讲，它包含三个方面：完成任务的意愿、完成任务的能力、完成任务的程度。我用三个小故事来分别解释这三个方面：</p>
-<ol>
-<li><p>我有个朋友，一直口口声声说暗恋一名女孩儿，却从来没有展开追求。他并不是不知道怎么追女孩，在给别人建议时，他头头是道。<br>“你每天给她买早餐，悄悄放在桌上，坚持三个月，肯定成！”<br>“你为什么不这样做？”<br>“不行不行，现在还不是时候，我再等等吧。”<br>等着等着，然后就没有然后了。女孩跟别人好了。心中思绪涌动，但不愿付诸行动。<br><strong>此乃缺乏执行的意愿。</strong></p>
-</li>
-<li><p>一群老鼠开会，研究怎样才能躲避猫的袭击。有老鼠提议说：不如在猫脖子上挂一个铃铛，猫一靠近，我们就能听到然后逃跑了。大家纷纷赞同这是个好点子，鼠老大决定就这么办！那么问题来了，谁去挂这个铃铛呢？所有老鼠都低着头，谁也不愿意接这个任务，做就等于死。直到鼠老大去世，这个决定依然没有被实施。<br><strong>究其原因，是老鼠们根本不具备执行它的能力。</strong></p>
-</li>
-<li><p>闺蜜梅梅一个月前定下减肥计划——每天坚持跑步半小时。一个月来，她一天也没落下，但减肥大业毫无成效，这让我很困惑。在陪她跑了一次之后，我彻底明白其中原因：半小时时间里，有10分钟她在做准备工作，10分钟在停下来喝水休息，剩下10分钟才是真正运动的时间。<br><strong>执行程度低，看似完成了目标，实则收效甚微。</strong></p>
-</li>
-</ol>
-<p>以上三个故事，都是缺乏执行力的表现。在职场中，因为多次没有完成工作任务而被解雇的例子比比皆是，相信你也碰到或耳闻过。而执行力强的那些人，总是晋升最快的一类。你可能要问了：道理我都懂，可为什么执行起来这么困难呢？</p>
-<p>Lagou将执行力不足的原因总结为三点：</p>
-<ul>
-<li>目标定得太离谱；</li>
-<li>想得多却做得少；</li>
-<li>拖延后潦草收场；</li>
-</ul>
-<p>为了摆脱“听了很多道理，却依然做不好工作”的困扰，Lagou 针对原因对症下药，精心准备了10条既有用、又易操作的小技巧，来助你提高执行力，使职场之路更加顺畅。</p>
-<h2 id="1-明确目标"><a href="#1-明确目标" class="headerlink" title="1.明确目标"></a>1.明确目标</h2><p>很多时候你会发现，决定好了的事情，执行起来却非常困难，这通常是目标设定不清晰导致的。目标超过个人能力、目标过大、周期过长、不能分解、指向不明、不掌握资源等等，都会导致目标难以执行。在设定目标的时候，首先要去判定目标的明确性，这时候，我们可以用到著名的“SMART原则”，来衡量已定目标的明确与否。“SMART原则”是：</p>
-<ul>
-<li>目标必须是具体的(Specific);</li>
-<li>目标必须是可以衡量的(Measurable);</li>
-<li>目标必须是可以达到的(Attainable);</li>
-<li>目标必须和其他目标具有相关性(Relevant);</li>
-<li>目标必须具有明确的截止期限(Time-based)。</li>
-</ul>
-<p>例如：你接到一项任务，做一款H5，旨在通过H5实现用户的转化，促使他们去注册你公司的APP。你把这项任务的目标设定为——尽最大可能做出一款能够刷爆朋友圈的H5，实现用户的高效转化——这会让你在实施这项任务时感到茫然。</p>
-<p>运用SMART原则，此项目标的设定应为：在两周的时间内（明确期限），做一款H5，实现1万的用户转化（具体目标、可衡量）。在设定这个量的时候，应当考虑渠道数和粉丝数，并参考以往的推广案例里，它们的转化率是多少。如果推广渠道的粉丝总数才5万，你设定1万的转化量，那几乎是不切实际的。</p>
-<h2 id="2-将目标分解成多个小目标"><a href="#2-将目标分解成多个小目标" class="headerlink" title="2.将目标分解成多个小目标"></a>2.将目标分解成多个小目标</h2><p>目标过大、周期过长的任务，会让人不知从何下手。在处理一项庞杂的事务时，很容易出现本末倒置、战线延长的现象。成功hold住大目标的秘诀在于，将之分解为一个个小目标，安排好时间，逐一攻破。目标分解的经典案例是一个关于马拉松的故事：1984年东京国际马拉松邀请赛中，一个名不见经传的山本田一出人意料地夺得冠军，他的技巧在于把路程分解成几个小目标：银行、大树、红房子。他说：“比赛开始后，我就以百米冲刺的速度奋力向第一个目标冲去，到达第一个目标后，我同样的速度冲向第二个目标— —40多公里的路程就被我分解成这么几个小目标轻松地跑完了。”</p>
-<h2 id="3-设定奖励机制"><a href="#3-设定奖励机制" class="headerlink" title="3.设定奖励机制"></a>3.设定奖励机制</h2><p>为自己完成目标设定一个奖励，会让你更有动力去做这件事。比如在你面临一项棘手的任务时，告诉自己如果完成了，就可以去买一个你心仪已久的东西，这会让你更有动力去朝目标努力。同样，可以将奖励机制细分在每个小目标里。每完成一个部分，给自己一个小小的奖励，既能减轻困难感，又能让你更有动力去完成下一个目标。</p>
-<h2 id="4-寻找执行后果的吸引力"><a href="#4-寻找执行后果的吸引力" class="headerlink" title="4.寻找执行后果的吸引力"></a>4.寻找执行后果的吸引力</h2><p>在执行任务之前，先去考量完成目标能给你带来的好处。这里的好处可能是：得到领导的肯定、同事的赞许、职位晋升的可能、金钱收入、经验值增长……这样，你的行动就有了一个具有吸引力的目的地，吸引你主动向前，提高执行力。</p>
-<h2 id="5-寻找同伴"><a href="#5-寻找同伴" class="headerlink" title="5.寻找同伴"></a>5.寻找同伴</h2><p>行为是具有传染性的。试想，如果你与他人共同完成一项任务，当你看到别人已经行动了，你好意思待着不动么？同伴的参与会督促你尽快执行任务，在“自己不能做得比别人差”的心理作用下，让你的执行效果更加地好。</p>
-<h2 id="6-在公共场合公开进度-寻求监督"><a href="#6-在公共场合公开进度-寻求监督" class="headerlink" title="6.在公共场合公开进度,寻求监督"></a>6.在公共场合公开进度,寻求监督</h2><p>很多时候，面子是促进一个人完成目标的重要因素。把你要做的事写在公开场合，让朋友监督，说出去的话，泼出去的水，在众目睽睽之下，为了不丢脸，硬着头皮熬夜也要把这件事做完。</p>
-<h2 id="7-五分钟打扫房间法则"><a href="#7-五分钟打扫房间法则" class="headerlink" title="7.五分钟打扫房间法则"></a>7.五分钟打扫房间法则</h2><p>告诉自己只花5分钟去打扫一下房间，看起来很快很简单的样子。事实上，一旦你开始打扫，你就很可能不会在5分钟之后真的停止打扫。打扫后的改观让你得到了成就感，并且想要一鼓作气打扫完毕。在这种观念下，想要再拖延一段时间在开始的想法，就被攻破了。</p>
-<h2 id="8-设定一个你难以承受的惩罚措施"><a href="#8-设定一个你难以承受的惩罚措施" class="headerlink" title="8.设定一个你难以承受的惩罚措施"></a>8.设定一个你难以承受的惩罚措施</h2><p>为自己设定一个完不成目标就必须接受的惩罚措施，而且，这个惩罚必须是你很难承受的。比如，在你经济紧张的情况下，告诉朋友，如果自己没有达到目标，就给他一千块钱，并立下字据。如果输了那一千，你很可能接下来的日子会十分拮据，避免不受到惩罚，会迫使你提高执行力。</p>
-<p>《为学》里曾说到：</p>
-<blockquote>
-<p>“自恃其聪与敏而不学者，自败者也；不自限其昏与庸而力学不卷者，自力者也。”</p>
-</blockquote>
-<p>智力有高低，思想有深浅，但如果不付诸行动去执行，一切都是无用的。在职业成长过程中，执行力才是最好的催促剂。就如老大Ella所说的：“甩开膀子干，赢过一切造作。每一个人，无论今天是什么起点，一切皆有可能。”</p>
-<p>新的一年马上要来了，开始行动吧!!</p>
-
           
+文章来源：微信公众号
+
+海尔的企业文化内刊上，刊着一张员工砸冰箱的黑白照片。这件事发生在1985年，海尔公司涣散不堪，只能长期靠借钱维持工厂运营。砸冰箱事件源于一封举报信，用户反映海尔的电冰箱有质量问题。经检查，这类不合格的冰箱还有76台，张瑞敏当即决定把冰箱全部砸掉，并由生产者自己动手。
+至此，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2015/12/生活感悟-2015-12-30-executive-ability.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2260,6 +1746,28 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">生活感悟</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -2308,20 +1816,16 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
       
         
           
-            <h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><p>都说开通博客，要写篇文章纪念一下，借此感谢Github，Jekyll,MarkDown,感谢像闫肃,黄玄这样的爱分享的童鞋，2014年对我来说，是很重要的一年，认识了很多人，失去了很多人，总得来说，成长了很多，借此写一篇，纪念我逝去的2014。</p>
-<h3 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h3><p>2014年，换了工作，离开了PBI，离开了原来熟悉的环境，离开了熟悉的同事，告别了朝九晚五熟悉的生活节奏，当然也搬离了住了2年的海淀，一切都像当年，从学校出来，搬到海淀的情景。时光荏苒，场景再现，不变的是自己，变了的是身边的人。</p>
-<p>以前都是在Android源码的环境下，编译代码，调试应用，曾经一度以为自己对很多知识已经足够了解了，可是突然到了一个更大的平台，你才发现，突来的状况，还是会让你措手不及，所以，当你以为自己很牛了，那是因为你见识的还不够多，在更大的🐂面前，你还是攻击力只有5的渣儿渣儿。</p>
-<p>来到了Letv，一切都要从零开始，昨天的已经成为过去，对于未来，还需要今天的积攒，未来还有很长的路要走。</p>
-<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>2014年，研究生进入了第二年，习惯了没有休息日的节奏，突然闲下来，还会有些不适应。在读研之前，没有认真的想过，自己为什么要读，可能是因为曾经考研未果的不甘吧。如果说，读研的收获是为了见识的更多，学到的更多，那我最大的收获，就是认识了很多小伙伴，是他们让我改变了很多，让我发现自己很多性格上的缺点，从而去弥补不足。</p>
-<p>2014年，顺利的通过了开题报告，接下来就安心的准备毕业答辩了，在准备的过程中，把工作中内容和答辩的内容结合起来，深入的去了解移动流媒体的内容，相信在未来的工作中，会有很大的帮助。</p>
-<h3 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h3><p>2014年，去了江西的三清山，当时还没想到，那竟然是最后一次和同事们一起出去玩，好在当时还没有这种离别的情绪，不然也不会玩的这么尽兴。2015年了，衷心的祝森涛，田田，尚喆，赵哥，晶晶…一切都好。</p>
-<p>2014年，去了筹划了已久的西藏，认识了能歌善舞的ZuoZuo，特别会聊天的DiDi，还有原原，感谢徐老师拍的照片和视频，本想写一篇日记记录一下来着，看来只能把这事儿推到2015了，很感慨，为什么人们都说你们变黑了，唯独说我变白了呢？</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>那时我们有梦，<br>关于青春，关于爱情，<br>关于穿于世界的旅行。</p>
-</blockquote>
-<p>2014年，错过了一些人，有些是因为客观的原因，更多的是因为自己。杰伦结婚了，我们的青春岁月也结束了；科比，阿伦最后一年征战NBA，以后再想看他们打球，只能去翻看以前的视频了，从来没想过他们离开的日子，他们就老了。以后再做错事儿，再也不能拿自己年轻当借口了，遇到合适的人，不能再错过了。</p>
-
-          
+          动机都说开通博客，要写篇文章纪念一下，借此感谢Github，Jekyll,MarkDown,感谢像闫肃,黄玄这样的爱分享的童鞋，2014年对我来说，是很重要的一年，认识了很多人，失去了很多人，总得来说，成长了很多，借此写一篇，纪念我逝去的2014。
+工作2014年，换了工作，离开了PBI，离开了原来
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2015/01/生活感悟-2015-01-21-my-2014.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2363,7 +1867,7 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2012/11/Java-集合框架-2012-11-26-java-collections-5.html">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/blog/2011/08/Android基础-2011-08-14-android-basic-16.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Scott">
@@ -2385,8 +1889,8 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
             
               
                 
-                <a class="post-title-link" href="/blog/2012/11/Java-集合框架-2012-11-26-java-collections-5.html" itemprop="url">
-                  集合框架篇5 Set
+                <a class="post-title-link" href="/blog/2011/08/Android基础-2011-08-14-android-basic-16.html" itemprop="url">
+                  Android基础16 传感器
                 </a>
               
             
@@ -2402,8 +1906,8 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2012-11-26T00:00:00+08:00">
-                2012-11-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2011-08-16T10:27:04+08:00">
+                2011-08-16
               </time>
             
 
@@ -2413,6 +1917,28 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Android基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -2421,9 +1947,9 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/blog/2012/11/Java-集合框架-2012-11-26-java-collections-5.html#comments" itemprop="discussionUrl">
+                <a href="/blog/2011/08/Android基础-2011-08-14-android-basic-16.html#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="/blog/2012/11/Java-集合框架-2012-11-26-java-collections-5.html" itemprop="commentCount"></span>
+                        data-disqus-identifier="/blog/2011/08/Android基础-2011-08-14-android-basic-16.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2431,7 +1957,7 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
 
           
           
-             <span id="/blog/2012/11/Java-集合框架-2012-11-26-java-collections-5.html" class="leancloud_visitors" data-flag-title="集合框架篇5 Set">
+             <span id="/blog/2011/08/Android基础-2011-08-14-android-basic-16.html" class="leancloud_visitors" data-flag-title="Android基础16 传感器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2461,121 +1987,29 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
       
         
           
-            <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>Java -中的Set和正好和数学上直观的集（set）的概念是相同的。Set最大的特性就是不允许在其中存放的元素是重复的。根据这个特点，我们就可以使用Set 这个接口来实现前面提到的关于商品种类的存储需求。Set 可以被用来过滤在其他集合中存放的元素，从而得到一个没有包含重复新的集合。</p>
-<h2 id="2-常用方法"><a href="#2-常用方法" class="headerlink" title="2.  常用方法"></a>2.  常用方法</h2><p>按照定义，Set 接口继承 Collection 接口，而且它不允许集合中存在重复项。所有原始方法都是现成的，没有引入新方法。具体的 Set 实现类依赖添加的对象的 equals() 方法来检查等同性。<br>我们简单的描述一下各个方法的作用：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public int size() ：返回set中元素的数目，如果set包含的元素数大于            Integer.MAX_VALUE，返回Integer.MAX_VALUE 
-public boolean isEmpty() ：如果set中不含元素，返回true 
-public boolean contains(Object o) ：如果set包含指定元素，返回true 
-public Iterator iterator() ：返回set中元素的迭代器，元素返回没有特定的顺序，除非set是提高了该保证的某些类的实例 
-public Object[] toArray() ：返回包含set中所有元素的数组 
-public Object[] toArray(Object[] a) ：返回包含set中所有元素的数组，返回数组的运行时类型是指定数组的运行时类型 
-public boolean add(Object o) ：如果set中不存在指定元素，则向set加入
-public boolean remove(Object o) ：如果set中存在指定元素，则从set中删除 
-public boolean removeAll(Collection c) ：如果set包含指定集合，则从set中删除指定集合的所有元素 
-public boolean containsAll(Collection c) ：如果set包含指定集合的所有元素，返回  true。如果指定集合也是一个set，只有是当前set的子集时，方法返回true 
-public boolean addAll(Collection c) ：如果set中中不存在指定集合的元素，则向set中加入所有元素 
-public boolean retainAll(Collection c) ：只保留set中所含的指定集合的元素（可选操作）。换言之，从set中删除所有指定集合不包含的元素。 如果指定集合也是一个 set，那么该操作修改set的效果是使它的值为两个set的交集 
-public boolean removeAll(Collection c) ：如果set包含指定集合，则从set中删除指定集合的所有元素 
-public void clear() ：从set中删除所有元素
-</pre>
+          1. 传感器传感器类型：方向、加速度(重力)、光线、磁场、距离(临近性)、温度等。 
 
-<p>“集合框架” 支持 Set 接口两种普通的实现：HashSet 和 TreeSet以及LinkedHashSet。下表中是Set的常用实现类的描述：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%883.46.13.png" alt=""></p>
-<p>在更多情况下，您会使用 HashSet 存储重复自由的集合。同时HashSet中也是采用了Hash算法的方式进行存取对象元素的。所以添加到 HashSet 的对象对应的类也需要采用恰当方式来实现 hashCode() 方法。虽然大多数系统类覆盖了 Object 中缺省的 hashCode() 实现，但创建您自己的要添加到 HashSet 的类时，别忘了覆盖 hashCode()。</p>
-<p>对于Set的使用，我们先以一个简单的例子来说明：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-import java.util.*;
-public class HashSetDemo {
-    public static void main(String[] args) {
-        Set set1 = new HashSet();
-        if (set1.add("a")) {//添加成功
-            System.out.println("1 add true");
-        }
-        if (set1.add("a")) {//添加失败
-            System.out.println("2 add true");
-        }        
-        set1.add("000");//添加对象到Set集合中
-        set1.add("111");
-        set1.add("222");
-        System.out.println("集合set1的大小："+set1.size());
-        System.out.println("集合set1的内容："+set1);
-        set1.remove("000");//从集合set1中移除掉 "000" 这个对象
-        System.out.println("集合set1移除 000 后的内容："+set1);
-        System.out.println("集合set1中是否包含000 ："+set1.contains("000"));
-        System.out.println("集合set1中是否包含111 ："+set1.contains("111"));
-        Set set2=new HashSet();
-        set2.add("111");
-        set2.addAll(set1);//将set1 集合中的元素全部都加到set2中
-        System.out.println("集合set2的内容："+set2);
-        set2.clear();//清空集合 set1 中的元素
-        System.out.println("集合set2是否为空 ："+set2.isEmpty());
-        Iterator iterator = set1.iterator();//得到一个迭代器
-        while (iterator.hasNext()) {//遍历
-            Object element = iterator.next();
-            System.out.println("iterator = " + element);
-        }
-        //将集合set1转化为数组
-        Object s[]= set1.toArray();
-        for(int i=0;i<s.length;i++){ system.out.println(s[i]);="" }="" <="" pre="">
 
-<p>程序执行的结果为：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-1 add true
-集合set1的大小：4
-集合set1的内容：[222, a, 000, 111]
-集合set1移除 000 后的内容：[222, a, 111]
-集合set1中是否包含000 ：false
-集合set1中是否包含111 ：true
-集合set2的内容：[222, a, 111]
-集合set2是否为空 ：true
-iterator = 222
-iterator = a
-iterator = 111
-222
-a
-111
-</pre>
 
-<p>从上面的这个简单的例子中，我们可以发现，Set中的方法与直接使用Collection中的方法一样。唯一需要注意的就是Set中存放的元素不能重复。</p>
-<p>我们再看一个例子，来了解一下其它的Set的实现类的特性：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-package c08;
-import java.util.*;
-public class SetSortExample {
-  public static void main(String args[]) {
-    Set set1 = new HashSet(); 
-    Set set2 = new LinkedHashSet();
-    for(int i=0;i<5;i++){ 产生一个随机数，并将其放入set中="" int="" s="(int)" (math.random()*100);="" set1.add(new="" integer(="" s));="" set2.add(new="" system.out.println("第="" "+i+"="" 次随机数产生为："+s);="" }="" system.out.println("未排序前hashset："+set1);="" system.out.println("未排序前linkedhashset："+set2);="" 使用treeset来对另外的set进行重构和排序="" set="" sortedset="new" treeset(set1);="" system.out.println("排序后="" treeset="" ："+sortedset);="" <="" pre="">
+方向传感器
+Sensor.TYPE_ORIENTATION
 
-<p>该程序的一次执行结果为：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-第 0 次随机数产生为：96
-第 1 次随机数产生为：64
-第 2 次随机数产生为：14
-第 3 次随机数产生为：95
-第 4 次随机数产生为：57
-未排序前HashSet：[64, 96, 95, 57, 14]
-未排序前LinkedHashSet：[96, 64, 14, 95, 57]
-排序后 TreeSet ：[14, 57, 64, 95, 96]
-</pre>
 
-<p>从这个例子中，我们可以知道HashSet的元素存放顺序和我们添加进去时候的顺序没有任何关系，而LinkedHashSet 则保持元素的添加顺序。TreeSet则是对我们的Set中的元素进行排序存放。</p>
-<p>一般来说，当您要从集合中以有序的方式抽取元素时，TreeSet 实现就会有用处。为了能顺利进行，添加到 TreeSet 的元素必须是可排序的。 而您同样需要对添加到TreeSet中的类对象实现 Comparable 接口的支持。对于Comparable接口的实现，在前一小节的Map中已经简单的介绍了一下。我们暂且假定一棵树知道如何保持 java.lang 包装程序器类元素的有序状态。一般说来，先把元素添加到 HashSet，再把集合转换为 TreeSet 来进行有序遍历会更快。这点和HashMap的使用非常的类似。</p>
-<p>其实Set的实现原理是基于Map上面的。通过下面我们对Set的进一步分析大家就能更加清楚的了解这点了。</p>
-<h2 id="3-实现原理"><a href="#3-实现原理" class="headerlink" title="3. 实现原理"></a>3. 实现原理</h2><p>Java中Set的概念和数学中的集合(set)一致，都表示一个集内可以存放的元素是不能重复的。前面我们会发现，Set中很多实现类和Map中的一些实现类的使用上非常的相似。而且前面再讲解Map的时候，我们也提到：Map中的“键值对”，其中的“键”是不能重复的。这个和Set中的元素不能重复一致。我们以HashSet为例来分析一下，会发现其实Set利用的就是Map中“键”不能重复的特性来实现的。</p>
-<p>先看看HashSet中的有哪些属性,再结合构造函数来看看：</p>
-<p>通过这些方法，我们可以发现，其实HashSet的实现，全部的操作都是基于HashMap来进行的。我们看看是如何通过HashMap来保证我们的HashSet的元素不重复性的：</p>
-<p>看到这个操作我们可以发现HashSet的巧妙实现：就是建立一个“键值对”，“键”就是我们要存入的对象，“值”则是一个常量。这样可以确保，我们所需要的存储的信息之是“键”。而“键”在Map中是不能重复的，这就保证了我们存入Set中的所有的元素都不重复。而判断是否添加元素成功，则是通过判断我们向Map中存入的“键值对”是否已经存在，如果存在的话，那么返回值肯定是常量：PRESENT ，表示添加失败。如果不存在，返回值就为null 表示添加成功。<br>我们再看看其他的方法实现：</p>
-<p>了解了这些后，我们就不难理解，为什么HashMap中需要注意的地方，在HashSet中也同样的需要注意。其他的Set的实现类也是差不多的原理。<br>至此对于Set我们就应该能够比较好的理解了。</p>
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>用“集合框架”设计软件时，记住该框架四个基本接口的下列层次结构关系会有用处：</p>
-<ol>
-<li>Collection 接口是一组允许重复的对象。 </li>
-<li>Set 接口继承 Collection，但不允许重复。 </li>
-<li>List 接口继承 Collection，允许重复，并引入位置下标。 </li>
-<li>Map 接口既不继承 Set 也不继承 Collection, 存取的是键值对 </li>
-</ol>
-</5;i++){></pre></s.length;i++){></pre>
-          
+
+
+
+
+
+
+加速度(重力)传感器 | Sensor.TYPE_ACCELEROMETER光线传感器 | Sensor.TYPE_LIGHT磁场传
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2011/08/Android基础-2011-08-14-android-basic-16.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2664,13 +2098,22 @@ public class SetSortExample {
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -2740,6 +2183,26 @@ public class SetSortExample {
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">你是第</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      个来到的小伙伴
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
 
         
       </div>
@@ -2862,6 +2325,300 @@ public class SetSortExample {
 
   
 
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
 
 
 
@@ -2978,6 +2735,28 @@ public class SetSortExample {
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
