@@ -1609,10 +1609,28 @@ pre .javascript .function {
 .site-author-image {
   display: block;
   margin: 0 auto;
-  padding: 2px;
   max-width: 96px;
   height: auto;
   border: 2px solid #333;
+  padding: 2px;
+/*头像圆形*/
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  box-shadow: inset 0 -1px 0 #333 sf;
+  -webkit-transition: 0.4s;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out;
+  -moz-transition: -moz-transform 0.4s ease-out;
+}
+img:hover {
+  -webkit-transform: rotateZ(360deg);
+  -moz-transform: rotateZ(360deg);
+  -ms-transform: rotateZ(360deg);
+  -o-transform: rotateZ(360deg);
+  transform: rotateZ(360deg); /*图像旋转360度*/
+  -webkit-transform: rotateZ(360deg);
+  -moz-transform: rotateZ(360deg);
 }
 .site-author-name {
   margin: 5px 0 0;
@@ -1694,7 +1712,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #da14ac;
+  background: #ff8299;
 }
 .links-of-blogroll {
   font-size: 13px;
