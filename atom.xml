@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.sguotao.com/"/>
-  <updated>2017-04-27T03:04:42.000Z</updated>
+  <updated>2017-05-03T10:32:33.000Z</updated>
   <id>http://www.sguotao.com/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用gradle 多渠道打包</title>
+    <link href="http://www.sguotao.com//blog/2017/05/Android%E8%BF%9B%E9%98%B6-2017-05-03-android-multi-channel.html"/>
+    <id>http://www.sguotao.com//blog/2017/05/Android进阶-2017-05-03-android-multi-channel.html</id>
+    <published>2017-05-02T02:27:04.000Z</published>
+    <updated>2017-05-03T10:32:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>本文链接：<a href="http://www.sguotao.com/blog/2017/05/Android进阶-2017-05-03-android-multi-channel.html">http://www.sguotao.com/blog/2017/05/Android进阶-2017-05-03-android-multi-channel.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;本文链接：&lt;a href=&quot;http://www.sguotao.com/blog/2017/05/Android进阶-2017-05-03-android-multi-channel.html&quot;&gt;http://www.sguotao.com/blog/2017/
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>ReactNative样式整理</title>
@@ -1838,352 +1863,6 @@ registerReceiver(receiver, filter);
     <summary type="html">
     
       &lt;h2 id=&quot;1-广播的类型&quot;&gt;&lt;a href=&quot;#1-广播的类型&quot; class=&quot;headerlink&quot; title=&quot;1. 广播的类型&quot;&gt;&lt;/a&gt;1. 广播的类型&lt;/h2&gt;&lt;p&gt;广播被分为两种不同的类型：普通广播（Normal broadcasts）和“有序广播（Order
-    
-    </summary>
-    
-      <category term="Android基础" scheme="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android基础6 活动(Activity)</title>
-    <link href="http://www.sguotao.com//blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-27-android-basic-6.html"/>
-    <id>http://www.sguotao.com//blog/2011/06/Android基础-2011-06-27-android-basic-6.html</id>
-    <published>2011-06-27T02:27:04.000Z</published>
-    <updated>2017-04-27T02:37:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-创建Activity"><a href="#1-创建Activity" class="headerlink" title="1. 创建Activity"></a>1. 创建Activity</h2><h2 id="1-1-定义Activity"><a href="#1-1-定义Activity" class="headerlink" title="1.1 定义Activity"></a>1.1 定义Activity</h2><p><strong>定义类继承Activity</strong><br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class NewActivity extends Activity {
-    @Override protected void onCreate(Bundle savedInstanceState) {
-                   super.onCreate(savedInstanceState);
-      //这里可以使用setContentView(R.layout.xxx)显示某个视图....
-     }
-}
-</pre>
-
-<p><strong>在AndroidManifest.xml的&lt;application&gt;节点中声明&lt;activity&gt;</strong></p>
-<p>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="cn.ncist.action"     android:versionCode="1"  android:versionName="1.0"&gt;
-    &lt;application android:icon="@drawable/icon" android:label="@string/app_name"&gt;
-        .....
-    &lt;activity android:name=".NewActivity" android:label="新activity的页面标题"/&gt;
-    &lt;/application&gt;
-    ...
-&lt;/manifest&gt;
-</pre>
-
-<p>android:name属性值的前面加了一个点表示NewActivity是当前包cn.ncist.action下的类，如果类在应用的当前包下，可以省略点符号，如果类在应用的子包下必须加点，如：NewActivity类在cn.ncist.action.user包下可以这样写：<activity android:name="“.user.NewActivity“"></activity></p>
-<h3 id="1-2-显式意图创建方式"><a href="#1-2-显式意图创建方式" class="headerlink" title="1.2 显式意图创建方式"></a>1.2 显式意图创建方式</h3><ol>
-<li>构造函数，代码少<br>new Intent(this, NewActivity.class);</li>
-<li>类名形式，灵活，可扩展性强<br>intent.setClassName(this, “cn.ncist.activity.NewActivity”);</li>
-<li>包名类名形式，可启动其他程序中的Activity<br>intent.setClassName(“cn.ncist.downloader”, “cn.ncist.downloader.MainActivity”);</li>
-</ol>
-<h3 id="1-3-创建Activity并传递数据"><a href="#1-3-创建Activity并传递数据" class="headerlink" title="1.3 创建Activity并传递数据"></a>1.3 创建Activity并传递数据</h3><ol>
-<li>在意图对象中封装了一个Bundle对象，可以用来携带数据</li>
-<li>在新Activity中可以获得意图对象以获取其中Bundle保存的数据<br>&lt;?prettify?&gt;<br><pre class="prettyprint"><br>public class MainActivity extends Activity {<br>@Override protected void onCreate(Bundle savedInstanceState) {<br> …….<br>  button.setOnClickListener(new View.OnClickListener(){//点击该按钮会打开一个新的Activity<pre><code>public void onClick(View v) {
- Intent intent = new Intent(MainActivity.this, NewActivity.class)
-</code></pre>Bundle bundle = new Bundle();//该类用作携带数据<br>bundle.putString(“name”, “华北科技”);<br>bundle.putInt(“age”, 4);<br>intent.putExtras(bundle);//附带上额外的数据<br>startActivity(intent);<br> }}); }<br>}</pre></li>
-</ol>
-<p>public class NewActivity extends Activity {<br>            @Override protected void onCreate(Bundle savedInstanceState) {<br>         ……..<br>         Bundle bundle = this.getIntent().getExtras();<br>         String name = bundle.getString(“name”);<br>                        int age = bundle.getInt(“age”);<br>            }<br>}<br></p>
-<h3 id="1-4-创建Activity获取返回数据"><a href="#1-4-创建Activity获取返回数据" class="headerlink" title="1.4 创建Activity获取返回数据"></a>1.4 创建Activity获取返回数据</h3><ol>
-<li>使用startActivityForResult(Intent intent, int requestCode) 方法打开Activity</li>
-<li>重写onActivityResult(int requestCode, int resultCode, Intent data) 方法</li>
-<li>新Activity中调用setResult(int resultCode, Intent data) 设置返回数据之后，关闭Activity就会调用onActivityResult方法</li>
-</ol>
-<h3 id="1-5-隐式意图创建Activity"><a href="#1-5-隐式意图创建Activity" class="headerlink" title="1.5 隐式意图创建Activity"></a>1.5 隐式意图创建Activity</h3><ol>
-<li>显式意图是指在创建意图时指定了组件，而隐式意图则不指定组件，通过动作、类型、数据匹配对应的组件</li>
-<li>在清单文件中定义&lt;activity&gt;时需要定义&lt;intent-filter&gt;才能被隐式意图启动</li>
-<li>&lt;intent-filter&gt;中至少配置一个&lt;action&gt;和一个&lt;category&gt;，否则无法被启动</li>
-<li>Intent对象中设置的action、category、data在&lt;intent-filter&gt;必须全部包含才能启动</li>
-<li>&lt;intent-filter&gt;中的&lt;action&gt;、&lt;category&gt;、&lt;data&gt;都可以配置多个，Intent对象中不用全部匹配，每样匹配一个即可启动<br>如果一个意图可以匹配多个Activity，Android系统会提示选择</li>
-</ol>
-<h2 id="2-Bundle类的作用"><a href="#2-Bundle类的作用" class="headerlink" title="2. Bundle类的作用"></a>2. Bundle类的作用</h2><p>Bundle类用作携带数据，它类似于Map，用于存放key-value名值对形式的值。相对于Map，它提供了各种常用类型的putXxx()/getXxx()方法，如:putString()/getString()和putInt()/getInt()，putXxx()用于往Bundle对象放入数据，getXxx()方法用于从Bundle对象里获取数据。Bundle的内部实际上是使用了HashMap&lt;String, Object&gt;类型的变量来存放putXxx()方法放入的值：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public final class Bundle implements Parcelable, Cloneable {
-            ......
- Map&lt;String, Object&gt; mMap;
- public Bundle() {
-       mMap = new HashMap<string, object="">();
-        ......
- }
- public void putString(String key, String value) {
-      mMap.put(key, value);
- }
-public String getString(String key) {
-       Object o = mMap.get(key);
-        return (String) o;
-        ........//类型转换失败后会返回null，这里省略了类型转换失败后的处理代码
-}
-}
-</string,></pre>
-
-<p>在调用Bundle对象的getXxx()方法时，方法内部会从该变量中获取数据，然后对数据进行类型转换，转换成什么类型由方法的Xxx决定，getXxx()方法会把转换后的值返回。</p>
-<h2 id="3-Intent意图"><a href="#3-Intent意图" class="headerlink" title="3. Intent意图"></a>3. Intent意图</h2><p>Android基本的设计理念是鼓励减少组件间的耦合，因此Android提供了Intent (意图) ，Intent提供了一种通用的消息系统，它允许在你的应用程序与其它的应用程序间传递Intent来执行动作和产生事件。使用Intent可以激活Android应用的三个核心组件：活动、服务和广播接收器。</p>
-<p><strong>Intent可以划分成显式意图和隐式意图</strong><br>显式意图：调用Intent.setComponent()或Intent.setClass()方法明确指定了组件名的Intent为显式意图，显式意图明确指定了Intent应该传递给哪个组件。<br>隐式意图:没有明确指定组件名的Intent为隐式意图。 Android系统会根据隐式意图中设置的动作(action)、类别(category)、数据（URI和数据类型）找到最合适的组件来处理这个意图。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-&lt;intent-filter&gt; 
-&lt;action android:name="android.intent.action.CALL" /&gt; 
-&lt;category android:name="android.intent.category.DEFAULT" /&gt; 
-&lt;data android:scheme="tel" /&gt; 
-&lt;/intent-filter&gt; 
-&lt;intent-filter&gt; 
-&lt;action android:name="android.intent.action.CALL" /&gt; 
-&lt;category android:name="android.intent.category.DEFAULT" /&gt; 
-&lt;data android:mimeType="vnd.android.cursor.item/phone" /&gt; 
-&lt;/intent-filter&gt;
-</pre>
-
-<p>对于隐式意图，Android是怎样寻找到这个最合适的组件呢？记的前面我们在定义活动时，指定了一个intent-filter，Intent Filter（意图过滤器）其实就是用来匹配隐式Intent的，当一个意图对象被一个意图过滤器进行匹配测试时，只有三个方面会被参考到：动作、数据（URI以及数据类型）和类别。</p>
-<p><strong>动作测试（Action test）</strong><br>一个意图对象只能指定一个动作名称，而一个过滤器可能列举多个动作名称。如果意图对象或过滤器没有指定任何动作，结果将如下：</p>
-<ol>
-<li>如果过滤器没有指定任何动作，那么将阻塞所有的意图，因此所有的意图都会测试失败。没有意图能够通过这个过滤器。 </li>
-<li>另一方面，只要过滤器包含至少一个动作，一个没有指定动作的意图对象自动通过这个测试</li>
-</ol>
-<p><strong>类别测试（Category test）</strong><br>对于一个能够通过类别匹配测试的意图，意图对象中的类别必须匹配过滤器中的类别。这个过滤器可以列举另外的类别，但它不能遗漏在这个意图中的任何类别。原则上一个没有类别的意图对象应该总能够通过匹配测试，而不管过滤器里有什么。大部分情况下这个是对的。但有一个例外，Android把所有传给startActivity()的隐式意图当作他们包含至少一个类别：”android.intent.category.DEFAULT” （CATEGORY_DEFAULT常量）。 因此，想要接收隐式意图的活动必须在它们的意图过滤器中包含”android.intent.category.DEFAULT”。（带”android.intent.action.MAIN”和”android.intent.category.LAUNCHER”设置的过滤器是例外）</p>
-<p><strong>数据测试（Data test）</strong><br>当一个意图对象中的URI被用来和一个过滤器中的URI比较时，比较的是URI的各个组成部分。例如，如果过滤器仅指定了一个scheme，所有该scheme的URIs都能够和这个过滤器相匹配；如果过滤器指定了一个scheme、主机名但没有路经部分，所有具有相同scheme和主机名的URIs都可以和这个过滤器相匹配，而不管它们的路经；如果过滤器指定了一个scheme、主机名和路经，只有具有相同scheme、主机名和路经的URIs才可以和这个过滤器相匹配。当然，一个过滤器中的路径规格可以包含通配符，这样只需要部分匹配即可。</p>
-<p>数据测试同时比较意图对象和过滤器中指定的URI和数据类型。规则如下：</p>
-<ol>
-<li>一个既不包含URI也不包含数据类型的意图对象仅在过滤器也同样没有指定任何URIs和数据类型的情况下才能通过测试。</li>
-<li>一个包含URI但没有数据类型的意图对象仅在它的URI和一个同样没有指定数据类型的过滤器里的URI匹配时才能通过测试。这通常发生在类似于mailto:和tel：这样的URIs上：它们并不引用实际数据。</li>
-<li>一个包含数据类型但不包含URI的意图对象仅在这个过滤器列举了同样的数据类型而且也没有指定一个URI的情况下才能通过测试。</li>
-<li>一个同时包含URI和数据类型（或者可从URI推断出数据类型）的意图对象可以通过测试，如果它的类型和过滤器中列举的类型相匹配的话。如果它的URI和这个过滤器中的一个URI相匹配或者它有一个内容content:或者文件file: URI而且这个过滤器没有指定一个URI，那么它也能通过测试。换句话说，一个组件被假定为支持content:和file: 数据如果它的过滤器仅列举了一个数据类型。</li>
-</ol>
-<p><strong>为Intent附加数据的两种形式</strong>：<br>第一种写法，用于批量添加数据到Intent：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-Intent intent = new Intent();
-Bundle bundle = new Bundle();//该类用作携带数据
-bundle.putString("name", "华北科技");
-intent.putExtras(bundle);//为意图追加额外的数据，意图原来已经具有的数据不会丢失，但key同名的数据会被替换
-</pre>
-
-<p>第二种写法：这种写法的作用等价于上面的写法，只不过这种写法是把数据一个个地添加进Intent，这种写法使用起来比较方便，而且只需要编写少量的代码。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-Intent intent = new Intent();
-intent.putExtra("name", "华北科技");
-</pre>
-
-<p>Intent提供了各种常用类型重载后的putExtra()方法，如： putExtra(String name, String value)、 putExtra(String name, long value)，在putExtra()方法内部会判断当前Intent对象内部是否已经存在一个Bundle对象，如果不存在就会新建Bundle对象，以后调用putExtra()方法传入的值都会存放于该Bundle对象，下面是Intent的putExtra(String name, String value)方法代码片断：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class Intent implements Parcelable {
-private Bundle mExtras;
-public Intent putExtra(String name, String value) {
-        if (mExtras == null) {
-            mExtras = new Bundle();
-        }
-        mExtras.putString(name, value);
-        return this;
- }
-</pre>
-
-<h2 id="4-生命周期"><a href="#4-生命周期" class="headerlink" title="4. 生命周期"></a>4. 生命周期</h2><p><strong>Acitivity三种状态</strong></p>
-<ol>
-<li>运行：activity在屏幕最前端运行（位于当前任务栈的顶部）</li>
-<li>暂停：当它上面有另外一个Activity，使它失去了焦点但任然对用户可见时，它处于暂停状态，在它之上的Activity没有完全覆盖屏幕或者是透明的，被暂停的Activity仍然对用户可见，并且是存活状态（它保留着所有的状态和成员信息并保持和窗口管理器的连接）。如果系统处于内存不足时，会杀死这个Activity。</li>
-<li>停止：activity不可见，完全被覆盖，它仍然保留着所有的状态和成员信息，然而对用户是不可见的，所以它的窗口被隐藏，如果其它地方需要内存，则系统经常会杀死这个Activity。</li>
-</ol>
-<p><strong>生命周期相关方法</strong><br>当Activity从一种状态转变到另外一种状态时，会调用以下保护方法来通知这种变化。</p>
-<ol>
-<li>onCreate：创建时调用，或者程序在暂停、停止状态下被杀死之后重新打开时也会调用</li>
-<li>onStart：onCreate之后或者从停止状态恢复时调用</li>
-<li>onResume：onStart之后或者从暂停状态恢复时调用，从停止状态恢复时由于调用onStart，也会调用onResume</li>
-<li>onPause：进入暂停、停止状态，或者销毁时会调用</li>
-<li>onStop：进入停止状态，或者销毁时会调用</li>
-<li>onDestroy：销毁时调用</li>
-<li>onRestart：从停止状态恢复时调用<br>这七个方法定义了Activity的完整的声明周期。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-06-14%20%E4%B8%8B%E5%8D%884.46.59.png" alt=""></li>
-</ol>
-<p><strong>Activity的完整声明周期</strong><br>自第一次调用onCreate()开始，直至调用onDestroy()为止。Activity在onCreate()中设置所有“全局”状态以完成初始化，而在onDestroy()中释放所有系统资源。</p>
-<p><strong>Activity的可视声明周期</strong><br>自onStart()调用开始直到相应的onStop()调用结束，在此期间，用户可以在屏幕上看到Activity，尽管它也许并不是位于前台或者也不予用户进行交互，在这两个方法之间，可以保留用来向用户显示这个Activity所需的资源。</p>
-<p><strong>Activity的前台声明周期</strong><br>自onResume()调用起，至相应的onPause()调用为止，在此期间，Activity位于前台最上面并于用户进行交互。Activity会经常在暂停和恢复之间进行状态转换。</p>
-<p>Activity的前台生命周期循环例子:</p>
-<ol>
-<li>创建一个Activity，添加七个生命周期方法，方法内输出各个方法名称。再添加一个按钮用于打开下面新添加的Activity。<br> startActivity(new Intent(LifeActivity.this, CustomDialogActivity.class));</li>
-<li>添加一个新Activity，代码如下：<br>&lt;?prettify?&gt;<pre class="prettyprint">
-public class CustomDialogActivity extends Activity {
- @Override protected void onCreate(Bundle savedInstanceState) {
-     super.onCreate(savedInstanceState);
-     //必须在调用setContentView()之前调用requestWindowFeature()
-     requestWindowFeature(Window.FEATURE_LEFT_ICON);//要标题栏显示图标
-     setContentView(R.layout.dialog_activity);       
-     getWindow().setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, android.R.drawable.ic_dialog_alert);//设置图标
- }
-}
-</pre>
-
-</li>
-</ol>
-<p>在AndroidManifest.xml文件配置Activity，并且通过主题指定该Activity以对话框样式显示。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-&lt;application android:icon="@drawable/icon" android:label="@string/app_name"&gt;
-        .....
-       &lt;activity android:name=".CustomDialogActivity" android:label="对话框activity" 
-    android:theme="@android:style/Theme.Dialog"/&gt;
- &lt;/application&gt;
-</pre>
-
-<h2 id="5-保存信息相关方法"><a href="#5-保存信息相关方法" class="headerlink" title="5. 保存信息相关方法"></a>5. 保存信息相关方法</h2><p>Activity的 onSaveInstanceState() 和 onRestoreInstanceState()并不是生命周期方法，它们不同于 onCreate()、onPause()等生命周期方法，它们并不一定会被触发。当应用遇到意外情况（如：内存不足、用户直接按Home键）由系统销毁一个Activity时，onSaveInstanceState() 会被调用。但是当用户主动去销毁一个Activity时，例如在应用中按返回键，onSaveInstanceState()就不会被调用。因为在这种情况下，用户的行为决定了不需要保存Activity的状态。通常onSaveInstanceState()只适合用于保存一些临时性的状态，而onPause()适合用于数据的持久化保存。</p>
-<p>另外，当屏幕的方向发生了改变， Activity会被摧毁并且被重新创建，如果你想在Activity被摧毁前缓存一些数据，并且在Activity被重新创建后恢复缓存的数据。可以重写Activity的 onSaveInstanceState() 和 onRestoreInstanceState()方法，如下：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class PreferencesActivity extends Activity {
-    private String name;
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-    name = savedInstanceState.getString("name"); //被重新创建后恢复缓存的数据
-    super.onRestoreInstanceState(savedInstanceState);
-    }
-    protected void onSaveInstanceState(Bundle outState) {
-    outState.putString("name", "liming");//被摧毁前缓存一些数据
-    super.onSaveInstanceState(outState);
-    }
-}
-</pre>
-
-<p>onSaveInstanceState()：在Activity被动的摧毁或停止的时候调用，用于保存运行数据，可以将数据存在在Bundle中。</p>
-<p>onRestoreInstanceState()：该方法在Activity被重新绘制的时候调用，例如改变屏幕方向，savedInstanceState为onSaveInstanceState保存的数据。</p>
-<p><strong>横竖屏幕的切换</strong><br>默认情况下，当“屏幕方向”或“键盘显示隐藏” 变化时都会销毁当前Activity，创建新的Activity。如果不希望重新创建Activity实例，可以按如下配置Activity：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-&lt;activity android:name=".MainActivity" android:configChanges="keyboardHidden|orientation"&gt;
-</pre>
-
-<p>上面的android:configChanges属性指定了要捕获“屏幕方向”和“键盘显示隐藏”变化，当捕获到这些变化后会调用Activity的onConfigurationChanged()方法。默认情况下(没有配置android:configChanges属性)：</p>
-<ol>
-<li>竖屏切横屏，销毁当前Activity之后，创建一个新Activity实例。</li>
-<li>横屏切竖屏，销毁当前Activity之后，创建一个新Activity实例，新的Activity实例很快就被销毁，接着又会创建一个新Activity实例。如果只希望创建一个实例，可以配置<br>android:configChanges=”orientation”</li>
-</ol>
-<h2 id="6-得到新打开的Activity关闭后返回的数据"><a href="#6-得到新打开的Activity关闭后返回的数据" class="headerlink" title="6. 得到新打开的Activity关闭后返回的数据"></a>6. 得到新打开的Activity关闭后返回的数据</h2><p>如果你想在Activity中得到新打开Activity 关闭后返回的数据，你需要使用系统提供的startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，新的Activity 关闭后会向前面的Activity 传回数据，为了得到传回的数据，你必须在前面的Activity中重写onActivityResult(int requestCode, int resultCode, Intent data)方法：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class MainActivity extends Activity {
-      @Override 
-    protected void onCreate(Bundle savedInstanceState) {
-    .......
-    Button button =(Button) this.findViewById(R.id.button);
-    button.setOnClickListener(new View.OnClickListener(){//点击该按钮会打开一个新的Activity
-        public void onClick(View v) {
-        //第二个参数为请求码，可以根据业务需求自己编号
-        startActivityForResult (new Intent(MainActivity.this, NewActivity.class),  1);
-    }});
-         }
-    //第一个参数为请求码，即调用startActivityForResult()传递过去的值
-    //第二个参数为结果码，结果码用于标识返回数据来自哪个新Activity
-   @Override 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    String result = data.getExtras().getString(“result”));//得到新Activity 关闭后返回的数据
-    }
-}    
-</pre>
-
-<p>当新Activity关闭后，新Activity返回的数据通过Intent进行传递，android平台会调用前面Activity 的onActivityResult()方法，把存放了返回数据的Intent作为第三个输入参数传入，在onActivityResult()方法中使用第三个输入参数可以取出新Activity返回的数据。</p>
-<p>使用startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，新Activity关闭前需要向前面的Activity返回数据需要使用系统提供的setResult(int resultCode, Intent data)方法实现：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class NewActivity extends Activity {
-    @Override 
-protected void onCreate(Bundle savedInstanceState) {
-        ......
-      button.setOnClickListener(new View.OnClickListener(){
-        public void onClick(View v) {
-            Intent intent = new Intent();//数据是使用Intent返回
-            intent.putExtra(“result”, “华北科技的学生很可爱”);//把返回数据存入Intent
-             NewActivity.this.setResult(RESULT_OK, intent);//设置返回数据
-             NewActivity.this.finish();//关闭Activity
-        }});
-    }
-}
-</pre>
-
-<p>setResult()方法的第一个参数值可以根据业务需要自己定义，上面代码中使用到的RESULT_OK是系统Activity类定义的一个常量，值为-1，代码片断如下：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class android.app.Activity extends ......{
-  public static final int RESULT_CANCELED = 0;
-  public static final int RESULT_OK = -1;
-  public static final int RESULT_FIRST_USER = 1;
-}
-</pre>
-
-<p><strong>请求码的作用</strong><br>使用startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，我们需要为startActivityForResult()方法传入一个请求码(第二个参数)。请求码的值是根据业务需要由自已设定，用于标识请求来源。</p>
-<p>例如：一个Activity有两个按钮，点击这两个按钮都会打开同一个Activity，不管是那个按钮打开新Activity，当这个新Activity关闭后，系统都会调用前面Activity的onActivityResult(int requestCode, int resultCode, Intent data)方法。在onActivityResult()方法如果需要知道新Activity是由那个按钮打开的，并且要做出相应的业务处理，这时可以这样做：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
- @Override  
-public void onCreate(Bundle savedInstanceState) {
-        ....
-        button1.setOnClickListener(new View.OnClickListener(){
-      public void onClick(View v) {
-           startActivityForResult (new Intent(MainActivity.this, NewActivity.class), 1);
-       }});
-        button2.setOnClickListener(new View.OnClickListener(){
-      public void onClick(View v) {
-           startActivityForResult (new Intent(MainActivity.this, NewActivity.class), 2);
-       }}); 
-       @Override 
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-               switch(requestCode){
-                   case 1:
-                       //来自按钮1的请求，作相应业务处理
-                   case 2:
-                    //来自按钮2的请求，作相应业务处理
-                }
-          }
-}
-</pre>
-
-<p><strong>结果码的作用</strong><br>在一个Activity中，可能会使用startActivityForResult()方法打开多个不同的Activity处理不同的业务，当这些新Activity关闭后，系统都会调用前面Activity的onActivityResult(int requestCode, int resultCode, Intent data)方法。为了知道返回的数据来自于哪个新Activity，在onActivityResult()方法中可以这样做(ResultActivity和NewActivity为要打开的新Activity)：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class ResultActivity extends Activity {
-       .....
-       ResultActivity.this.setResult(1, intent);
-       ResultActivity.this.finish();
-}
-public class NewActivity extends Activity {
-       ......
-        NewActivity.this.setResult(2, intent);
-        NewActivity.this.finish();
-}
-public class MainActivity extends Activity { // 在该Activity会打开ResultActivity和NewActivity
-       @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-               switch(resultCode){
-                   case 1:
-                       // ResultActivity的返回数据
-                   case 2:
-                   // NewActivity的返回数据
-                }
-          }
-}
-</pre>
-
-<h2 id="7-内存管理"><a href="#7-内存管理" class="headerlink" title="7. 内存管理"></a>7. 内存管理</h2><p>Android系统在运行多个进程时，如果系统资源不足，会强制结束一些进程。优先选择哪个进程来结束是有优先级的。以下顺序靠上的优先结束</p>
-<ol>
-<li>空：进程中所有Activity都已销毁</li>
-<li>后台：进程中有一个停止状态的Activity</li>
-<li>服务：进程中一个运行中的Service</li>
-<li>可见：进程中有一个暂停状态的Activity</li>
-<li>前台：进程中正在运行一个Activity</li>
-</ol>
-<h2 id="8-应用的响应性ANR"><a href="#8-应用的响应性ANR" class="headerlink" title="8. 应用的响应性ANR"></a>8. 应用的响应性ANR</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-06-14%20%E4%B8%8B%E5%8D%884.53.41.png" alt=""><br>在Android中，应用的响应性被活动管理器（Activity Manager）和窗口管理器（Window Manager）这两个系统服务所监视。当用户触发了输入事件（如键盘输入，点击按钮等），如果应用5秒内没有响应用户的输入事件，那么，Android会认为该应用无响应，便弹出ANR（Application No Response）对话框。</p>
-<p>在正常情况下，Android程序会在一条单线程里运行。如果Activity要处理一件比较耗时的工作，应该交给子线程完成，否侧会因为主线程被阻塞，后面的用户输入事件因没能在5秒内响应，导致应用出现ANR对话框。</p>
-<h2 id="9-姻缘属性affinities"><a href="#9-姻缘属性affinities" class="headerlink" title="9. 姻缘属性affinities"></a>9. 姻缘属性affinities</h2><p>应用场景：有两个android应用程序：旅游应用.apk，天气查询.apk，在Activity中配置<br>  android:allowTaskReparenting=”true”<br>   android:taskAffinity=”tianqi”<br>会将两个Activity放在同一个task任务栈，可以减少上下文切换到开销，节省资源。</p>
-<h2 id="10-启动模式"><a href="#10-启动模式" class="headerlink" title="10.启动模式"></a>10.启动模式</h2><p>在AndroidManifest.xml中的<activity>标签中可以配置android:launchMode属性，用来控制Actvity的启动模式<br>在Android系统中我们创建的Acitivity是以栈的形式呈现的(task 任务栈) 一个应用程序可能包涵多个activity ,这些activity都是被放置在任务栈中的。可以把一个应用程序理解成一组任务的集合,即用户看到的界面(activity) 是被放置在任务栈当中的。</activity></p>
-<ol>
-<li>standard：默认的启动模式，每次调用startActivity()启动时都会创建一个新的Activity放在栈顶</li>
-<li>singleTop：如果启动的Activity时，指定Activity不在栈顶就创建，如在栈顶，则不再创建，去调用onNewIntent()的方法。应用场景如浏览器的书签 ( bookmark ) 采用了该启动模式，不让用    户多次退出同一书签，增强用户的操作体验,  </li>
-<li>singleTask：如果启动的Activity不存在就创建，如果存在直接跳转到指定的Activity所在位置，保证了当前的task栈中只有一个任务的实例</li>
-<li>singleInstance：如果启动的Activity不存在就创建，如果存在就将指定的Activity移动到栈顶，开启一个新的task任务栈，用来维护新打开的Activity，原来的Activity中维护对其引用；</li>
-</ol>
-<p><strong>task任务栈，应用程序和进程之间关系</strong></p>
-<ol>
-<li>task任务栈：用来维护一组Activity的集合，通过设置task,可以更加合理的管理Activity;</li>
-<li>应用程序：应用程序可以分为可见和不可见两种，可见的应用程序可以理解成一组任务的集合（Activity），不可见部分包括其它三大组件；</li>
-<li>进程：操作系统的概念，开启的应用程序都会开启一个进程</li>
-</ol>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/blog/2011/06/Android基础-2011-06-27-android-basic-6.html">http://www.sguotao.com/blog/2011/06/Android基础-2011-06-27-android-basic-6.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-创建Activity&quot;&gt;&lt;a href=&quot;#1-创建Activity&quot; class=&quot;headerlink&quot; title=&quot;1. 创建Activity&quot;&gt;&lt;/a&gt;1. 创建Activity&lt;/h2&gt;&lt;h2 id=&quot;1-1-定义Activity&quot;&gt;&lt;a href
     
     </summary>
     
