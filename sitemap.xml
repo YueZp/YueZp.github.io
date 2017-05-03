@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-14-android-basic-4.html</loc>
+    
+    <lastmod>2017-05-03T13:00:43.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-09-android-basic-3.html</loc>
+    
+    <lastmod>2017-05-03T12:49:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-07-android-basic-2.html</loc>
+    
+    <lastmod>2017-05-03T12:46:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-01-android-basic-1.html</loc>
+    
+    <lastmod>2017-05-03T12:28:01.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.sguotao.com/blog/2017/03/Android%E8%BF%9B%E9%98%B6-2017-03-24-android-memory-leak.html</loc>
+    
+    <lastmod>2017-05-03T12:27:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.sguotao.com/blog/2017/05/Android%E8%BF%9B%E9%98%B6-2017-05-03-android-multi-channel.html</loc>
     
-    <lastmod>2017-05-03T10:32:33.000Z</lastmod>
+    <lastmod>2017-05-03T10:35:25.000Z</lastmod>
     
   </url>
   
@@ -19,13 +54,6 @@
     <loc>http://www.sguotao.com/tags/index.html</loc>
     
     <lastmod>2017-04-27T05:40:16.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-01-android-basic-1.html</loc>
-    
-    <lastmod>2017-04-27T03:19:23.000Z</lastmod>
     
   </url>
   
@@ -198,13 +226,6 @@
   </url>
   
   <url>
-    <loc>http://www.sguotao.com/blog/2017/03/Android%E8%BF%9B%E9%98%B6-2017-03-24-android-memory-leak.html</loc>
-    
-    <lastmod>2017-04-27T02:48:27.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.sguotao.com/blog/2011/08/Android%E5%9F%BA%E7%A1%80-2011-08-14-android-basic-16.html</loc>
     
     <lastmod>2017-04-27T02:45:39.000Z</lastmod>
@@ -285,27 +306,6 @@
     <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-15-android-basic-5.html</loc>
     
     <lastmod>2017-04-27T02:33:12.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-14-android-basic-4.html</loc>
-    
-    <lastmod>2017-04-27T02:32:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-09-android-basic-3.html</loc>
-    
-    <lastmod>2017-04-27T02:32:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.sguotao.com/blog/2011/06/Android%E5%9F%BA%E7%A1%80-2011-06-07-android-basic-2.html</loc>
-    
-    <lastmod>2017-04-27T02:31:48.000Z</lastmod>
     
   </url>
   

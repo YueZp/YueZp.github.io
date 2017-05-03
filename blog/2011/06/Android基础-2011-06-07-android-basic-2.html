@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Android,布局," />
 
 
 
@@ -92,20 +92,20 @@
 
 
 
-<meta name="description" content="1. 布局Android 有4种布局方式，分别是Linearlayout(线性布局)、RelativeLayout（相对布局）、TableLayout（表格布局）、FrameLayout（帧布局）。 1.1 Linearlayout(线性布局)&amp;lt;?prettify?&amp;gt;  &amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com">
-<meta name="keywords" content="Android">
+<meta name="description" content="1. 布局Android 有4种布局方式，分别是Linearlayout(线性布局)、RelativeLayout（相对布局）、TableLayout（表格布局）、FrameLayout（帧布局）。 1.1 Linearlayout(线性布局)1234&amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android">
+<meta name="keywords" content="Android,布局">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android基础2 布局">
 <meta property="og:url" content="http://www.sguotao.com/blog/2011/06/Android基础-2011-06-07-android-basic-2.html">
 <meta property="og:site_name" content="Scott-小白">
-<meta property="og:description" content="1. 布局Android 有4种布局方式，分别是Linearlayout(线性布局)、RelativeLayout（相对布局）、TableLayout（表格布局）、FrameLayout（帧布局）。 1.1 Linearlayout(线性布局)&amp;lt;?prettify?&amp;gt;  &amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com">
+<meta property="og:description" content="1. 布局Android 有4种布局方式，分别是Linearlayout(线性布局)、RelativeLayout（相对布局）、TableLayout（表格布局）、FrameLayout（帧布局）。 1.1 Linearlayout(线性布局)1234&amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-06-01%20%E4%B8%8B%E5%8D%886.39.18.png">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-06-01%20%E4%B8%8B%E5%8D%886.40.31.png">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-06-01%20%E4%B8%8B%E5%8D%886.44.36.png">
-<meta property="og:updated_time" content="2017-04-27T02:31:48.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:46:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android基础2 布局">
-<meta name="twitter:description" content="1. 布局Android 有4种布局方式，分别是Linearlayout(线性布局)、RelativeLayout（相对布局）、TableLayout（表格布局）、FrameLayout（帧布局）。 1.1 Linearlayout(线性布局)&amp;lt;?prettify?&amp;gt;  &amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com">
+<meta name="twitter:description" content="1. 布局Android 有4种布局方式，分别是Linearlayout(线性布局)、RelativeLayout（相对布局）、TableLayout（表格布局）、FrameLayout（帧布局）。 1.1 Linearlayout(线性布局)1234&amp;lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android">
 <meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-06-01%20%E4%B8%8B%E5%8D%886.39.18.png">
 
 
@@ -433,14 +433,7 @@
 
       
         <h2 id="1-布局"><a href="#1-布局" class="headerlink" title="1. 布局"></a>1. 布局</h2><p>Android 有4种布局方式，分别是Linearlayout(线性布局)、RelativeLayout（相对布局）、TableLayout（表格布局）、FrameLayout（帧布局）。</p>
-<h3 id="1-1-Linearlayout-线性布局"><a href="#1-1-Linearlayout-线性布局" class="headerlink" title="1.1 Linearlayout(线性布局)"></a>1.1 Linearlayout(线性布局)</h3><p>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-android:layout_height="fill_parent"    
-android:orientation="vertical"&gt;
-</pre>
-
+<h3 id="1-1-Linearlayout-线性布局"><a href="#1-1-Linearlayout-线性布局" class="headerlink" title="1.1 Linearlayout(线性布局)"></a>1.1 Linearlayout(线性布局)</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;LinearLayout <span class="string">xmlns:</span>android=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line"><span class="symbol">    android:</span>layout_width=<span class="string">"fill_parent"</span></div><div class="line"><span class="string">android:</span>layout_height=<span class="string">"fill_parent"</span>    </div><div class="line"><span class="string">android:</span>orientation=<span class="string">"vertical&gt;</span></div></pre></td></tr></table></figure>
 <ul>
 <li>属性“xmlns:android”指定命名空间，顶级元素必须指定命名空间，而在该命名空间中的控件的属性，要在属性前加上“android”做前缀。</li>
 <li>属性“layout_width”指定该元素的宽度，可选值有三种，“fill_parent”、“wrap_content”、具体数字。其中，“fill_parent”代表填满其父元素，对于顶级元素来说，其父元素就是整个手机屏幕。“wrap_content”代表该元素的大小仅包裹其自身的内容，而数字则代表其占相应的px。</li>
@@ -452,12 +445,8 @@ android:orientation="vertical"&gt;
 <h3 id="1-3-TableLayout（表格布局）"><a href="#1-3-TableLayout（表格布局）" class="headerlink" title="1.3 TableLayout（表格布局）"></a>1.3 TableLayout（表格布局）</h3><p>文档位置：android-sdk-windows/docs/guide/topics/ui/layout-objects.html#tablelayout<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-06-01%20%E4%B8%8B%E5%8D%886.40.31.png" alt=""></p>
 <h3 id="1-4-FrameLayout（帧布局）"><a href="#1-4-FrameLayout（帧布局）" class="headerlink" title="1.4 FrameLayout（帧布局）"></a>1.4 FrameLayout（帧布局）</h3><p>文档位置：android-sdk-windows/docs/guide/topics/ui/layout-objects.html#framelayout</p>
 <h2 id="2-Junit"><a href="#2-Junit" class="headerlink" title="2. Junit"></a>2. Junit</h2><ol>
-<li><p>项目中添加测试类<br>在AndroidManifest.xml清单文件中添加配置<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-&lt;uses-library android:name="android.test.runner" /&gt;    
-&lt;instrumentation 
- android:targetPackage="cn.ncist.junit"     android:name="android.test.InstrumentationTestRunner" /&gt;
-</pre>
+<li><p>项目中添加测试类<br>在AndroidManifest.xml清单文件中添加配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-library</span> <span class="attr">android:name</span>=<span class="string">"android.test.runner"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">instrumentation</span> </span></div><div class="line">	<span class="attr">android:targetPackage</span>=<span class="string">"cn.ncist.junit"</span> 	</div><div class="line">	<span class="attr">android:name</span>=<span class="string">"android.test.InstrumentationTestRunner"</span> /&gt;</div></pre></td></tr></table></figure>
 </li>
 <li><p>定义一个类继承AndroidTestCase，定义测试方法</p>
 </li>
@@ -527,6 +516,8 @@ android:orientation="vertical"&gt;
         <div class="post-tags">
           
             <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/布局/" rel="tag"># 布局</a>
           
         </div>
       
@@ -647,7 +638,7 @@ android:orientation="vertical"&gt;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
