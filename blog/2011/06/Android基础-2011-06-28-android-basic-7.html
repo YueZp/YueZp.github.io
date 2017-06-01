@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Android,Broadcast," />
 
 
 
@@ -93,13 +93,13 @@
 
 
 <meta name="description" content="1. 广播的类型广播被分为两种不同的类型：普通广播（Normal broadcasts）和“有序广播（Ordered broadcasts）。普通广播是完全异步的，可以在同一时刻（逻辑上）被所有接收者接收到，消息传递的效率比较高，但缺点是：接收者不能将处理结果传递给下一个接收者，并且无法终止广播Intent的传播； 有序广播是按照接收者声明的优先级别，被接收者依次接收广播。如A的级别高于B,B的级">
-<meta name="keywords" content="Android">
+<meta name="keywords" content="Android,Broadcast">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android基础7 广播接收者(BroadcastReceiver)">
 <meta property="og:url" content="http://www.sguotao.com/blog/2011/06/Android基础-2011-06-28-android-basic-7.html">
 <meta property="og:site_name" content="Scott-小白">
 <meta property="og:description" content="1. 广播的类型广播被分为两种不同的类型：普通广播（Normal broadcasts）和“有序广播（Ordered broadcasts）。普通广播是完全异步的，可以在同一时刻（逻辑上）被所有接收者接收到，消息传递的效率比较高，但缺点是：接收者不能将处理结果传递给下一个接收者，并且无法终止广播Intent的传播； 有序广播是按照接收者声明的优先级别，被接收者依次接收广播。如A的级别高于B,B的级">
-<meta property="og:updated_time" content="2017-04-27T02:39:36.000Z">
+<meta property="og:updated_time" content="2017-05-04T02:58:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android基础7 广播接收者(BroadcastReceiver)">
 <meta name="twitter:description" content="1. 广播的类型广播被分为两种不同的类型：普通广播（Normal broadcasts）和“有序广播（Ordered broadcasts）。普通广播是完全异步的，可以在同一时刻（逻辑上）被所有接收者接收到，消息传递的效率比较高，但缺点是：接收者不能将处理结果传递给下一个接收者，并且无法终止广播Intent的传播； 有序广播是按照接收者声明的优先级别，被接收者依次接收广播。如A的级别高于B,B的级">
@@ -429,38 +429,11 @@
 
       
         <h2 id="1-广播的类型"><a href="#1-广播的类型" class="headerlink" title="1. 广播的类型"></a>1. 广播的类型</h2><p>广播被分为两种不同的类型：普通广播（Normal broadcasts）和“有序广播（Ordered broadcasts）。普通广播是完全异步的，可以在同一时刻（逻辑上）被所有接收者接收到，消息传递的效率比较高，但缺点是：接收者不能将处理结果传递给下一个接收者，并且无法终止广播Intent的传播；</p>
-<p>有序广播是按照接收者声明的优先级别，被接收者依次接收广播。如A的级别高于B,B的级别高于C,那么，广播先传给A，再传给B，最后传给C 。优先级别声明在intent-filter元素的android:priority属性中，数越大优先级别越高,取值范围:-1000到1000，优先级别也可以调用IntentFilter对象的setPriority()进行设置 。有序广播的接收者可以终止广播Intent的传播，广播Intent的传播一旦终止，后面的接收者就无法接收到广播。另外，有序广播的接收者可以将数据传递给下一个接收者，如A得到广播后，可以往它的结果对象中存入数据，当广播传给B时,B可以从A的结果对象中得到A存入的数据。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-//发送的是普通广播，所有订阅者都有机会获得并进行处理。
-Context.sendBroadcast()
-//发送有序广播
-Context.sendOrderedBroadcast()
-</pre>
-
+<p>有序广播是按照接收者声明的优先级别，被接收者依次接收广播。如A的级别高于B,B的级别高于C,那么，广播先传给A，再传给B，最后传给C 。优先级别声明在intent-filter元素的android:priority属性中，数越大优先级别越高,取值范围:-1000到1000，优先级别也可以调用IntentFilter对象的setPriority()进行设置 。有序广播的接收者可以终止广播Intent的传播，广播Intent的传播一旦终止，后面的接收者就无法接收到广播。另外，有序广播的接收者可以将数据传递给下一个接收者，如A得到广播后，可以往它的结果对象中存入数据，当广播传给B时,B可以从A的结果对象中得到A存入的数据。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//发送的是普通广播，所有订阅者都有机会获得并进行处理。</span></div><div class="line"><span class="selector-tag">Context</span><span class="selector-class">.sendBroadcast</span>()</div><div class="line"><span class="comment">//发送有序广播</span></div><div class="line"><span class="selector-tag">Context</span><span class="selector-class">.sendOrderedBroadcast</span>()</div></pre></td></tr></table></figure></p>
 <p>发送的是有序广播，系统会根据接收者声明的优先级别按顺序逐个执行接收者，前面的接收者有权终止广播(BroadcastReceiver.abortBroadcast())，如果广播被前面的接收者终止，后面的接收者就再也无法获取到广播。对于有序广播，前面的接收者可以将数据通过setResultExtras(Bundle)方法存放进结果对象，然后传给下一个接收者，下一个接收者通过代码：Bundle bundle = getResultExtras(true))可以获取上一个接收者存入在结果对象中的数据。</p>
 <p>系统收到短信，发出的广播属于有序广播。如果想阻止用户收到短信，可以通过设置优先级，让你们自定义的接收者先获取到广播，然后终止广播，这样用户就接收不到短信了。</p>
-<h2 id="2-定义广播接收者"><a href="#2-定义广播接收者" class="headerlink" title="2. 定义广播接收者"></a>2. 定义广播接收者</h2><p>广播接收者（BroadcastReceiver）用于接收广播Intent，广播Intent的发送是通过调用Context.sendBroadcast()、Context.sendOrderedBroadcast()来实现的。通常一个广播Intent可以被订阅了此Intent的多个广播接收者所接收，这个特性跟JMS中的Topic消息接收者类似。要实现一个广播接收者方法如下：<br>第一步：继承BroadcastReceiver，并重写onReceive()方法。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class IncomingSMSReceiver extends BroadcastReceiver {
-    @Override public void onReceive(Context context, Intent intent) {
-    }
-}
-</pre>
-
-<p>第二步：订阅感兴趣的广播Intent，订阅方法有两种：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-//1.使用代码进行订阅
-IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
-IncomingSMSReceiver receiver = new IncomingSMSReceiver();
-registerReceiver(receiver, filter);
-//2.在AndroidManifest.xml文件中的&lt;application&gt;节点里进行订阅:
-&lt;receiver android:name=".IncomingSMSReceiver"&gt;
-    &lt;intent-filter&gt;
-         &lt;action android:name="android.provider.Telephony.SMS_RECEIVED"/&gt;
-    &lt;/intent-filter&gt;
-&lt;/receiver&gt;
-</pre>
-
+<h2 id="2-定义广播接收者"><a href="#2-定义广播接收者" class="headerlink" title="2. 定义广播接收者"></a>2. 定义广播接收者</h2><p>广播接收者（BroadcastReceiver）用于接收广播Intent，广播Intent的发送是通过调用Context.sendBroadcast()、Context.sendOrderedBroadcast()来实现的。通常一个广播Intent可以被订阅了此Intent的多个广播接收者所接收，这个特性跟JMS中的Topic消息接收者类似。要实现一个广播接收者方法如下：<br>第一步：继承BroadcastReceiver，并重写onReceive()方法。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">IncomingSMSReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span> public void onReceive(<span class="type">Context</span> context, <span class="type">Intent</span> intent) &#123;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>第二步：订阅感兴趣的广播Intent，订阅方法有两种：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.使用代码进行订阅</span></div><div class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);</div><div class="line">IncomingSMSReceiver receiver = <span class="keyword">new</span> IncomingSMSReceiver();</div><div class="line">registerReceiver(receiver, filter);</div><div class="line"><span class="comment">//2.在AndroidManifest.xml文件中的&lt;application&gt;节点里进行订阅:</span></div><div class="line">&lt;receiver android:name=<span class="string">".IncomingSMSReceiver"</span>&gt;</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span></div><div class="line">         <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <h2 id="3-发送广播（无序广播和有序广播的比较）"><a href="#3-发送广播（无序广播和有序广播的比较）" class="headerlink" title="3. 发送广播（无序广播和有序广播的比较）"></a>3. 发送广播（无序广播和有序广播的比较）</h2><h3 id="3-1-无序广播"><a href="#3-1-无序广播" class="headerlink" title="3.1 无序广播"></a>3.1 无序广播</h3><ol>
 <li>使用sendBroadcast方法发送</li>
 <li>被所有广播接收者接收，无序，不可中断</li>
@@ -524,7 +497,7 @@ registerReceiver(receiver, filter);
         
 
 <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
-  <div>生活不止眼前的苟且,还有诗和远方的田野</div>
+  <div>「真诚赞赏，手留余香」</div>
   <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
     <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
   </button>
@@ -559,6 +532,8 @@ registerReceiver(receiver, filter);
         <div class="post-tags">
           
             <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Broadcast/" rel="tag"># Broadcast</a>
           
         </div>
       
@@ -657,7 +632,7 @@ registerReceiver(receiver, filter);
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -679,7 +654,7 @@ registerReceiver(receiver, filter);
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

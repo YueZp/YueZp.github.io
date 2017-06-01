@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="多线程," />
+  <meta name="keywords" content="Java,多线程," />
 
 
 
@@ -93,14 +93,14 @@
 
 
 <meta name="description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 1. 线程的状态一个线程在其生命周期中可以从一种状态改变到另一种状态，线程状态的变迁如图5所示： 2. 控制线程">
-<meta name="keywords" content="多线程">
+<meta name="keywords" content="Java,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多线程 4 线程状态的改变">
 <meta property="og:url" content="http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-4-multi-thread-4.html">
 <meta property="og:site_name" content="Scott-小白">
 <meta property="og:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 1. 线程的状态一个线程在其生命周期中可以从一种状态改变到另一种状态，线程状态的变迁如图5所示： 2. 控制线程">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.32.58.png">
-<meta property="og:updated_time" content="2017-04-27T03:00:24.000Z">
+<meta property="og:updated_time" content="2017-05-04T09:21:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程 4 线程状态的改变">
 <meta name="twitter:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 1. 线程的状态一个线程在其生命周期中可以从一种状态改变到另一种状态，线程状态的变迁如图5所示： 2. 控制线程">
@@ -434,32 +434,7 @@
 <p><a href="http://sguotao.com/2010/10/01/multi-thread-1/" target="_blank" rel="external">多线程 1 线程与线程类</a><br><br><a href="http://sguotao.com/2010/10/02/multi-thread-2/" target="_blank" rel="external">多线程 2 线程的创建</a><br><br><a href="http://sguotao.com/2010/10/03/multi-thread-3/" target="_blank" rel="external">多线程 3 线程的状态与调度</a><br><br><a href="http://sguotao.com/2010/10/04/multi-thread-4/" target="_blank" rel="external">多线程 4 线程状态的改变</a><br><br><a href="http://sguotao.com/2010/10/05/multi-thread-5/" target="_blank" rel="external">多线程 5 线程的同步与共享</a><br><br><a href="http://sguotao.com/2010/10/06/multi-thread-6/" target="_blank" rel="external">多线程 6 线程组</a></p>
 <h2 id="1-线程的状态"><a href="#1-线程的状态" class="headerlink" title="1. 线程的状态"></a>1. 线程的状态</h2><p>一个线程在其生命周期中可以从一种状态改变到另一种状态，线程状态的变迁如图5所示：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.32.58.png" alt=""></p>
 <h2 id="2-控制线程的启动和结束"><a href="#2-控制线程的启动和结束" class="headerlink" title="2. 控制线程的启动和结束"></a>2. 控制线程的启动和结束</h2><p>当一个新建的线程调用它的start()方法后即进入就绪状态，处于就绪状态的线程被线程调度程序选中就可以获得CPU时间，进入运行状态，该线程就开始运行run()方法。</p>
-<p>控制线程的结束稍微复杂一点。如果线程的run()方法是一个确定次数的循环，则循环结束后，线程运行就结束了，线程对象即进入死亡状态。如果run()方法是一个不确定循环，早期的方法是调用线程对象的stop()方法，然而由于该方法可能导致线程死锁，因此从1.1版开始，不推荐使用该方法结束线程。一般是通过设置一个标志变量，在程序中改变标志变量的值实现结束线程。请看下面的例子：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-import java.util.*;
-class Timer implements Runnable{
-    boolean flag=true;
-    public void run(){
-      while(flag){
-        System.out.print("\r\t"+new Date()+"...");
-        try{
-            Thread.sleep(1000);
-        }catch(InterruptedException e){}    
-      }
-      System.out.println("\n"+Thread.currentThread().getName()+" Stop");
-    }
-    public void stopRun(){
-        flag = false;
-    }
-}
-public class ThreadStop{
-    public static void main(String args[]){
-       Timer timer = new Timer();
-       Thread thread = new Thread(timer);    
-       thread.setName("Timer");
-       thread.start();
-       for(int i=0;i<100;i++){ system.out.print("\r"+i);="" try{="" thread.sleep(100);="" }catch(interruptedexception="" e){}="" }="" timer.stoprun();}}="" <="" pre="">
-
+<p>控制线程的结束稍微复杂一点。如果线程的run()方法是一个确定次数的循环，则循环结束后，线程运行就结束了，线程对象即进入死亡状态。如果run()方法是一个不确定循环，早期的方法是调用线程对象的stop()方法，然而由于该方法可能导致线程死锁，因此从1.1版开始，不推荐使用该方法结束线程。一般是通过设置一个标志变量，在程序中改变标志变量的值实现结束线程。请看下面的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Timer</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">	<span class="keyword">boolean</span> flag=<span class="keyword">true</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">	  <span class="keyword">while</span>(flag)&#123;</div><div class="line">	    System.out.print(<span class="string">"\r\t"</span>+<span class="keyword">new</span> Date()+<span class="string">"..."</span>);</div><div class="line">	    <span class="keyword">try</span>&#123;</div><div class="line">	    	Thread.sleep(<span class="number">1000</span>);</div><div class="line">	    &#125;<span class="keyword">catch</span>(InterruptedException e)&#123;&#125;	</div><div class="line">	  &#125;</div><div class="line">	  System.out.println(<span class="string">"\n"</span>+Thread.currentThread().getName()+<span class="string">" Stop"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stopRun</span><span class="params">()</span></span>&#123;</div><div class="line">		flag = <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadStop</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">	   Timer timer = <span class="keyword">new</span> Timer();</div><div class="line">	   Thread thread = <span class="keyword">new</span> Thread(timer);	</div><div class="line">	   thread.setName(<span class="string">"Timer"</span>);</div><div class="line">	   thread.start();</div><div class="line">	   <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)&#123;</div><div class="line">	   	 System.out.print(<span class="string">"\r"</span>+i);</div><div class="line">	   	 <span class="keyword">try</span>&#123;</div><div class="line">	    	Thread.sleep(<span class="number">100</span>);</div><div class="line">	    &#125;<span class="keyword">catch</span>(InterruptedException e)&#123;&#125;	</div><div class="line">	   &#125;</div><div class="line">	   timer.stopRun();&#125;&#125;</div></pre></td></tr></table></figure></p>
 <p>该程序在Timer类中定义了一个布而变量flag，同时定义了一个stopRun()方法，在其中将该变量设置为false。在主程序中通过调用该方法，从而改变该变量的值，使得run()方法的while循环条件不满足，从而实现结束线程的运行。</p>
 <p><strong> 在Thread类中除了stop()方法被标注为不推荐(deprecated) 使用外，suspend()方法和resume()方法也被标明不推荐使用，这两个方法原来用作线程的挂起和恢复。</strong></p>
 <h2 id="3-线程阻塞条件"><a href="#3-线程阻塞条件" class="headerlink" title="3. 线程阻塞条件"></a>3. 线程阻塞条件</h2><p>处于运行状态的线程除了可以进入死亡状态外，还可能进入就绪状态和阻塞状态。下面分别讨论这两种情况：</p>
@@ -468,19 +443,10 @@ public class ThreadStop{
 <ol>
 <li>线程调用了sleep()方法，线程进入睡眠状态，此时该线程停止执行一段时间。当时间到时该线程回到就绪状态，与其他线程竞争CPU时间。<br>Thread类中定义了一个interrupt()方法。一个处于睡眠中的线程若调用了interrupt()方法，该线程立即结束睡眠进入就绪状态。</li>
 <li>如果一个线程的运行需要进行I/O操作，比如从键盘接收数据，这时程序可能需要等待用户的输入，这时如果该线程一直占用CPU，其他线程就得不到运行。这种情况称为I/O阻塞。这时该线程就会离开运行状态而进入阻塞状态。Java语言的所有I/O方法都具有这种行为。</li>
-<li>有时要求当前线程的执行在另一个线程执行结束后再继续执行，这时可以调用join()方法实现，join()方法有下面三种格式：<br>&lt;?prettify?&gt;<pre class="prettyprint">
-public void join() throws InterruptedException 使当前线程暂停执行，等待调用该方法的线程结束后再执行当前线程。
-public void join(long millis) throws InterruptedException 最多等待millis毫秒后，当前线程继续执行。
-public void join(long millis, int nanos) throws InterruptedException 可以指定多少毫秒、多少纳秒后继续执行当前线程。
-</pre>
-
+<li>有时要求当前线程的执行在另一个线程执行结束后再继续执行，这时可以调用join()方法实现，join()方法有下面三种格式：<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">join</span>() <span class="keyword">throws</span> InterruptedException 使当前线程暂停执行，等待调用该方法的线程结束后再执行当前线程。</div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">join</span>(<span class="keyword">long</span> <span class="built_in">millis</span>) <span class="keyword">throws</span> InterruptedException 最多等待<span class="built_in">millis</span>毫秒后，当前线程继续执行。</div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">join</span>(<span class="keyword">long</span> <span class="built_in">millis</span>, <span class="built_in">int</span> nanos) <span class="keyword">throws</span> InterruptedException 可以指定多少毫秒、多少纳秒后继续执行当前线程。</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>上述方法使当前线程暂停执行，进入阻塞状态，当调用线程结束或指定的时间过后，当前线程线程进入就绪状态，例如执行下面代码：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-t.join();
-</pre>
-
+<p>上述方法使当前线程暂停执行，进入阻塞状态，当调用线程结束或指定的时间过后，当前线程线程进入就绪状态，例如执行下面代码：<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">t.join()<span class="comment">;</span></div></pre></td></tr></table></figure></p>
 <p>将使当前线程进入阻塞状态，当线程t执行结束后，当前线程才能继续执行。</p>
 <ol>
 <li>线程调用了wait()方法，等待某个条件变量，此时该线程进入阻塞状态。直到被通知(调用了notify()或notifyAll()方法)结束等待后，线程回到就绪状态。</li>
@@ -488,7 +454,7 @@ t.join();
 </ol>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-4-multi-thread-4.html">http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-4-multi-thread-4.html</a></p>
-</100;i++){></pre>
+
       
     </div>
 
@@ -504,7 +470,7 @@ t.join();
         
 
 <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
-  <div>生活不止眼前的苟且,还有诗和远方的田野</div>
+  <div>「真诚赞赏，手留余香」</div>
   <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
     <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
   </button>
@@ -538,6 +504,8 @@ t.join();
       
         <div class="post-tags">
           
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
             <a href="/tags/多线程/" rel="tag"># 多线程</a>
           
         </div>
@@ -551,8 +519,8 @@ t.join();
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2010/10/Java-多线程-2010-10-6-multi-thread-6.html" rel="next" title="多线程 6 线程组">
-                <i class="fa fa-chevron-left"></i> 多线程 6 线程组
+              <a href="/blog/2010/10/Java-多线程-2010-10-5-multi-thread-5.html" rel="next" title="多线程 5 线程的同步与共享">
+                <i class="fa fa-chevron-left"></i> 多线程 5 线程的同步与共享
               </a>
             
           </div>
@@ -561,8 +529,8 @@ t.join();
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2010/10/Java-多线程-2010-10-5-multi-thread-5.html" rel="prev" title="多线程 5 线程的同步与共享">
-                多线程 5 线程的同步与共享 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2010/10/Java-多线程-2010-10-3-multi-thread-3.html" rel="prev" title="多线程 3 线程的状态与调度">
+                多线程 3 线程的状态与调度 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -637,7 +605,7 @@ t.join();
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -659,7 +627,7 @@ t.join();
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

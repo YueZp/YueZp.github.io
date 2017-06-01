@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ReactNative," />
+  <meta name="keywords" content="ReactNative,CSS," />
 
 
 
@@ -93,15 +93,15 @@
 
 
 <meta name="description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
-<meta name="keywords" content="ReactNative">
+<meta name="keywords" content="ReactNative,CSS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ReactNative样式整理">
+<meta property="og:title" content="【学习笔记】ReactNative样式整理">
 <meta property="og:url" content="http://www.sguotao.com/blog/2017/03/ReactNative-2017-04-25-rn-css.html">
 <meta property="og:site_name" content="Scott-小白">
 <meta property="og:description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
-<meta property="og:updated_time" content="2017-04-27T03:04:42.000Z">
+<meta property="og:updated_time" content="2017-05-17T07:59:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReactNative样式整理">
+<meta name="twitter:title" content="【学习笔记】ReactNative样式整理">
 <meta name="twitter:description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <title>ReactNative样式整理 | Scott-小白</title>
+  <title>【学习笔记】ReactNative样式整理 | Scott-小白</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -340,7 +340,7 @@
             
             
               
-                ReactNative样式整理
+                【学习笔记】ReactNative样式整理
               
             
           </h2>
@@ -395,7 +395,7 @@
 
           
           
-             <span id="/blog/2017/03/ReactNative-2017-04-25-rn-css.html" class="leancloud_visitors" data-flag-title="ReactNative样式整理">
+             <span id="/blog/2017/03/ReactNative-2017-04-25-rn-css.html" class="leancloud_visitors" data-flag-title="【学习笔记】ReactNative样式整理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -434,8 +434,7 @@
 <h3 id="2-外联方式"><a href="#2-外联方式" class="headerlink" title="2. 外联方式"></a>2. 外联方式</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="string">const</span> <span class="string">Styles</span> <span class="string">=</span> <span class="string">StyleSheet.create(&#123;</span></div><div class="line"><span class="attr">    container:</span> <span class="string">&#123;</span></div><div class="line"><span class="attr">        marginTop:</span><span class="number">200</span><span class="string">,</span></div><div class="line"><span class="attr">        marginLeft:</span><span class="number">5</span><span class="string">,</span></div><div class="line"><span class="attr">        marginRight:</span><span class="number">5</span><span class="string">,</span></div><div class="line"><span class="attr">        height:</span><span class="number">84</span><span class="string">,</span></div><div class="line"><span class="attr">        flexDirection:</span><span class="string">'row'</span><span class="string">,</span></div><div class="line"><span class="attr">        backgroundColor:</span><span class="string">'#FF0067'</span><span class="string">,</span></div><div class="line">    <span class="string">&#125;</span></div><div class="line"><span class="string">&#125;);</span></div></pre></td></tr></table></figure>
 <h3 id="3-混合方式"><a href="#3-混合方式" class="headerlink" title="3. 混合方式"></a>3. 混合方式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">export <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">appProject</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="comment">//外层容器</span></div><div class="line">            &lt;<span class="type">View</span> style=&#123;[<span class="type">Styles</span>.container,<span class="type">Styles</span>.bg,&#123;color:<span class="symbol">'re</span>d'&#125;]&#125;&gt;</div><div class="line">            &lt;/<span class="type">View</span>&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="4-import引用"><a href="#4-import引用" class="headerlink" title="4.import引用"></a>4.import引用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    StyleSheet,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"><span class="keyword">const</span> styles = StyleSheet.create(&#123;</div><div class="line">    <span class="attr">container</span>: &#123;</div><div class="line">        <span class="attr">marginTop</span>:<span class="number">200</span>,</div><div class="line">        <span class="attr">marginLeft</span>:<span class="number">5</span>,</div><div class="line">        <span class="attr">marginRight</span>:<span class="number">5</span>,</div><div class="line">        <span class="attr">height</span>:<span class="number">84</span>,</div><div class="line">        <span class="attr">flexDirection</span>:<span class="string">'row'</span>,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">bg</span>:&#123;</div><div class="line">        <span class="attr">backgroundColor</span>:<span class="string">'#FF0067'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"><span class="built_in">module</span>.exports = styles;</div></pre></td></tr></table></figure>
-<p>通过import进行引入</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./styles/style'</span>;</div></pre></td></tr></table></figure>
+<p>通过import进行引入<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./styles/style'</span>;</div></pre></td></tr></table></figure></p>
 <h2 id="常见的属性及说明"><a href="#常见的属性及说明" class="headerlink" title="常见的属性及说明"></a>常见的属性及说明</h2><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h3><table>
 <thead>
 <tr>
@@ -935,7 +934,7 @@
         
 
 <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
-  <div>生活不止眼前的苟且,还有诗和远方的田野</div>
+  <div>「真诚赞赏，手留余香」</div>
   <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
     <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
   </button>
@@ -970,6 +969,8 @@
         <div class="post-tags">
           
             <a href="/tags/ReactNative/" rel="tag"># ReactNative</a>
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
           
         </div>
       
@@ -1068,7 +1069,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1090,7 +1091,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

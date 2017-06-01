@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="插件框架," />
+  <meta name="keywords" content="JVM,插件框架,ClassLoader," />
 
 
 
@@ -93,7 +93,7 @@
 
 
 <meta name="description" content="Java的类加载机制ClassLoader我们编写的java代码，最终会编译成.class字节码的形式，一个完整的Java程序，通常会由若干个.class文件组成，在程序运行时，通过该程序的入口函数来调用系统的各个功能，但是程序启动时，并不会一次性将.class文件加载到内存中，根据程序的需要，通过Java的类加载机制来动态加载.class文件，ClassLoader就是来实现.class文件的动">
-<meta name="keywords" content="插件框架">
+<meta name="keywords" content="JVM,插件框架,ClassLoader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android动态加载机制">
 <meta property="og:url" content="http://www.sguotao.com/blog/2017/03/插件框架-2017-03-17-classloader.html">
@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974220124844.png">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170322149015010153287.png">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170322149015373793574.png">
-<meta property="og:updated_time" content="2017-04-27T03:08:22.000Z">
+<meta property="og:updated_time" content="2017-05-04T11:35:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android动态加载机制">
 <meta name="twitter:description" content="Java的类加载机制ClassLoader我们编写的java代码，最终会编译成.class字节码的形式，一个完整的Java程序，通常会由若干个.class文件组成，在程序运行时，通过该程序的入口函数来调用系统的各个功能，但是程序启动时，并不会一次性将.class文件加载到内存中，根据程序的需要，通过Java的类加载机制来动态加载.class文件，ClassLoader就是来实现.class文件的动">
@@ -452,9 +452,9 @@
 </ul>
 <p>当AppClassLoader开始加载xxx.class时，类加载器会现将加载的任务交给其parent来完成，如果parent找不到，则自己负责加载。所以在加载xxx.class时的顺序是，BootstrapClassLoader –&gt; ExtClassLoader –&gt; AppClassLoader，如果都找不到，则抛出ClassNotFoundException。这就是非常有名的双亲委托模型。</p>
 <p>使用双亲委托模型，有效地解决了.class字节码重复加载的问题，当parent已经加载类某各类的.class字节码时，子类就没有必要再重新进行加载。举个例子，来说明一下双亲委托模型。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974220124844.png" alt="20170317148974220124844.png"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 取得SomeClass的Class实例</span></div><div class="line">   Class c = Class.forName(<span class="string">"SomeClass"</span>);</div><div class="line">   <span class="comment">// 取得ClassLoader</span></div><div class="line">   ClassLoader loader = c.getClassLoader();</div><div class="line">   System.out.println(loader);</div><div class="line">   <span class="comment">// 取得父ClassLoader</span></div><div class="line">   System.out.println(loader.getParent());</div><div class="line">   <span class="comment">// 再取得父ClassLoader</span></div><div class="line">   System.out.println(loader.getParent().getParent());</div></pre></td></tr></table></figure>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 取得SomeClass的Class实例</span></div><div class="line">   <span class="keyword">Class</span> c = <span class="keyword">Class</span>.forName(<span class="string">"SomeClass"</span>);</div><div class="line">   <span class="comment">// 取得ClassLoader</span></div><div class="line">   ClassLoader loader = c.getClassLoader();</div><div class="line">   System.out.<span class="keyword">println</span>(loader);</div><div class="line">   <span class="comment">// 取得父ClassLoader</span></div><div class="line">   System.out.<span class="keyword">println</span>(loader.getParent());</div><div class="line">   <span class="comment">// 再取得父ClassLoader</span></div><div class="line">   System.out.<span class="keyword">println</span>(loader.getParent().getParent());</div></pre></td></tr></table></figure>
 <p>运行结果：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sun.misc.Launcher\$AppClassLoader@<span class="number">19821f</span></div><div class="line">sun.misc.Launcher\$ExtClassLoader<span class="meta">@addbf</span>1</div><div class="line"><span class="keyword">null</span></div></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sun<span class="selector-class">.misc</span><span class="selector-class">.Launcher</span>\<span class="variable">$AppClassLoader</span>@<span class="number">19821</span>f</div><div class="line">sun<span class="selector-class">.misc</span><span class="selector-class">.Launcher</span>\<span class="variable">$ExtClassLoader</span>@addbf1</div><div class="line">null</div></pre></td></tr></table></figure>
 <p>由于SomeClass是自定义的一个Java类，通常会java.class.path中产生字节码，首先AppClassLoader会将加载的任务交给其parent,ExtClassLaoder,ExtClassLoader将加载任务交给其parent，BootStrapClassLoader,由于BootStrapLoader在其目录(sun.boot.class.path)下没有找到该类的字节码，所以由ExtClassLoader来加载，ExtClassLoader在其目录(java.ext.dirs)也没有发现SomeClass的字节码，交给AppClassLoader进行加载，AppClassLoader在(java.class.path)中找到，并进行加载。</p>
 <p>加载SomeClass的ClassLoader是AppClassLoader,其parent是ExtClassLoader,<br>而ExtClassLoader的parent是null，这是因为BootStrapClassLoader是由c代码编写的，在JVM中并没有对应的实例对象，所以显示为null。</p>
 <h2 id="Dalvik与JVM"><a href="#Dalvik与JVM" class="headerlink" title="Dalvik与JVM"></a>Dalvik与JVM</h2><p>在Java中，把一些Java类编译成.class文件，通过ClassLoader进行加载，但是在Android上边，情况有所不同，主要的原因在于Android中使用的虚拟机是Dalvik。Android中的Dalvik和Java中的JVM都是将对应的Java类加载到内存中运行。不同的是JVM加载的是.class字节码文件，或是通过defineClass方式产生class，进行加载。Dalvik加载的是.dex文件，.dex文件是Android对.class文件进行了优化，更加适合内存和处理器有限的系统。</p>
@@ -497,7 +497,7 @@
         
 
 <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
-  <div>生活不止眼前的苟且,还有诗和远方的田野</div>
+  <div>「真诚赞赏，手留余香」</div>
   <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
     <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
   </button>
@@ -531,7 +531,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
+          
             <a href="/tags/插件框架/" rel="tag"># 插件框架</a>
+          
+            <a href="/tags/ClassLoader/" rel="tag"># ClassLoader</a>
           
         </div>
       
@@ -544,8 +548,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/03/ReactNative-2017-04-25-rn-css.html" rel="next" title="ReactNative样式整理">
-                <i class="fa fa-chevron-left"></i> ReactNative样式整理
+              <a href="/blog/2017/03/ReactNative-2017-04-25-rn-css.html" rel="next" title="【学习笔记】ReactNative样式整理">
+                <i class="fa fa-chevron-left"></i> 【学习笔记】ReactNative样式整理
               </a>
             
           </div>
@@ -554,8 +558,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2017/01/读书笔记-2017-01-04-追风筝的人.html" rel="prev" title="【读书笔记】追风筝的人">
-                【读书笔记】追风筝的人 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2017/01/读书笔记-2016-11-16-跟任何人都聊得来.html" rel="prev" title="【读书笔记】跟任何人都聊得来">
+                【读书笔记】跟任何人都聊得来 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -630,7 +634,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -652,7 +656,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

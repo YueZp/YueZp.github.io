@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="多线程," />
+  <meta name="keywords" content="Java,多线程," />
 
 
 
@@ -93,14 +93,14 @@
 
 
 <meta name="description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 如何创建和运行线程的两种方法。线程运行的代码就是实现了Runnable接口的类的run()方法或者是Thread">
-<meta name="keywords" content="多线程">
+<meta name="keywords" content="Java,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多线程 2 线程的创建">
 <meta property="og:url" content="http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html">
 <meta property="og:site_name" content="Scott-小白">
 <meta property="og:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 如何创建和运行线程的两种方法。线程运行的代码就是实现了Runnable接口的类的run()方法或者是Thread">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.10.58.png">
-<meta property="og:updated_time" content="2017-04-27T02:59:18.000Z">
+<meta property="og:updated_time" content="2017-05-04T09:19:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程 2 线程的创建">
 <meta name="twitter:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。 多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 如何创建和运行线程的两种方法。线程运行的代码就是实现了Runnable接口的类的run()方法或者是Thread">
@@ -437,126 +437,19 @@
 <li>继承Thread类并覆盖它的run()方法；</li>
 <li>实现Runnable接口并实现它的run()方法。</li>
 </ul>
-<h2 id="1-继承Thread类创建线程"><a href="#1-继承Thread类创建线程" class="headerlink" title="1. 继承Thread类创建线程"></a>1. 继承Thread类创建线程</h2><p>通过继承Thread类，并覆盖run()方法，这时就可以用该类的实例作为线程的目标对象。下面的程序定义了SimpleThread类，它继承了Thread类并覆盖了run()方法。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class SimpleThread extends Thread{
-  public SimpleThread(String str){
-    super(str);
-}
-public void run(){
-    for(int i=0; i<100; i++){="" system.out.println(getname()+"="+ i);
-      try{
-         sleep((int)(Math.random()*100));
-      }catch(InterruptedException e){}
-    } 
-System.out.println(getName()+ " done");="" }="" <="" pre="">
-
-<p> SimpleThread类继承了Thread类，并覆盖了run()方法，该方法就是线程体。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class ThreadTest{
-  public static void main(String args[]){
-    Thread t1 = new SimpleThread("Runner A");
-    Thread t2 = new SimpleThread("Runner B");
-    t1.start();
-t2.start(); 
-    }
-}
-</pre>
-
+<h2 id="1-继承Thread类创建线程"><a href="#1-继承Thread类创建线程" class="headerlink" title="1. 继承Thread类创建线程"></a>1. 继承Thread类创建线程</h2><p>通过继承Thread类，并覆盖run()方法，这时就可以用该类的实例作为线程的目标对象。下面的程序定义了SimpleThread类，它继承了Thread类并覆盖了run()方法。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SimpleThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">  public <span class="type">SimpleThread</span>(<span class="type">String</span> str)&#123;</div><div class="line">    <span class="keyword">super</span>(str);</div><div class="line">&#125;</div><div class="line">public void run()&#123;</div><div class="line">    <span class="keyword">for</span>(int i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++)&#123;</div><div class="line">      <span class="type">System</span>.out.println(getName()+<span class="string">" = "</span>+ i);</div><div class="line">      <span class="keyword">try</span>&#123;</div><div class="line">         sleep((int)(<span class="type">Math</span>.random()*<span class="number">100</span>));</div><div class="line">      &#125;<span class="keyword">catch</span>(<span class="type">InterruptedException</span> e)&#123;&#125;</div><div class="line">    &#125; </div><div class="line"><span class="type">System</span>.out.println(getName()+ <span class="string">" DONE"</span>);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> SimpleThread类继承了Thread类，并覆盖了run()方法，该方法就是线程体。<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span></span>&#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span> args[])&#123;</div><div class="line">    Thread t1 = <span class="keyword">new</span> <span class="type">SimpleThread</span>(<span class="string">"Runner A"</span>);</div><div class="line">    Thread t2 = <span class="keyword">new</span> <span class="type">SimpleThread</span>(<span class="string">"Runner B"</span>);</div><div class="line">    t1.start();</div><div class="line">t2.start(); </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>在ThreadTest类的main()方法中创建了两个SimpleThread类的线程对象并调用线程类的start()方法启动线程。构造线程时没有指定目标对象，所以线程启动后执行本类的run()方法。</p>
-<p>注意，实际上ThreadTest程序中有三个线程同时运行。请试着将下段代码加到main()方法中，分析程序运行结果。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-for(int i=0; i<100; i++){="" system.out.println(thread.currentthread().getname()+"="+ i);
-   try{
-     Thread.sleep((int)(Math.random()*500));
-   }catch(InterruptedException e){}
-System.out.println(Thread.currentThread().getName()+ " done");="" }="" <="" pre="">
-
-<p>从上述代码执行结果可以看到，在应用程序的main()方法启动时，JVM就创建一个主线程，在主线程中可以创建其他线程。再看下面的程序：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-public class MainThreadDemo{
-  public static void main(String args[]){
-    Thread t = Thread.currentThread();
-    t.setName("MyThread");
-    System.out.println(t);
-    System.out.println(t.getName());
-    System.out.println(t.getThreadGroup().getName());
-  }
-}
-</pre>
-
-<p>该程序输出结果为：<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-Thread[MyThread, 5, main]
-MyThread
-main
-</pre>
-
+<p>注意，实际上ThreadTest程序中有三个线程同时运行。请试着将下段代码加到main()方法中，分析程序运行结果。<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++)&#123;</div><div class="line">   System.out.<span class="built_in">println</span>(Thread.currentThread().getName()+<span class="string">"="</span>+ i);</div><div class="line">   <span class="built_in">try</span>&#123;</div><div class="line">     Thread.sleep((<span class="keyword">int</span>)(Math.<span class="built_in">random</span>()*<span class="number">500</span>));</div><div class="line">   &#125;<span class="built_in">catch</span>(InterruptedException e)&#123;&#125;</div><div class="line">System.out.<span class="built_in">println</span>(Thread.currentThread().getName()+ <span class="string">" DONE"</span>);  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从上述代码执行结果可以看到，在应用程序的main()方法启动时，JVM就创建一个主线程，在主线程中可以创建其他线程。再看下面的程序：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MainThreadDemo</span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String args[]</span>)</span>&#123;</div><div class="line">    Thread t = Thread.currentThread();</div><div class="line">    t.setName(<span class="string">"MyThread"</span>);</div><div class="line">    System.<span class="keyword">out</span>.println(t);</div><div class="line">    System.<span class="keyword">out</span>.println(t.getName());</div><div class="line">    System.<span class="keyword">out</span>.println(t.getThreadGroup().getName());</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该程序输出结果为：<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Thread<span class="string">[MyThread, 5, main]</span></div><div class="line">MyThread</div><div class="line">main</div></pre></td></tr></table></figure></p>
 <p>上述程序在main()方法中声明了一个Thread对象t，然后调用Thread类的静态方法currentThread()获得当前线程对象。然后重新设置该线程对象的名称，最后输出线程对象、线程组对象名和线程对象名。</p>
-<h2 id="2-实现Runnable接口创建线程"><a href="#2-实现Runnable接口创建线程" class="headerlink" title="2. 实现Runnable接口创建线程"></a>2. 实现Runnable接口创建线程</h2><p>可以定义一个类实现Runnable接口，然后将该类对象作为线程的目标对象。实现Runnable接口就是实现run()方法。下面程序通过实现Runnable接口构造线程体。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-class T1 implements Runnable{
-  public void run(){
-    for(int i=0;i<15;i++) system.out.println("runner="" a="+i);
-  }
-}
-class T2 implements Runnable{
-  public void run(){
-    for(int j=0;j<15;j++)
-      System.out.println(" runner="" b="+j);
-  }
-}
-public class ThreadTest{
-  public static void main(String args[]){
-    Thread t1=new Thread(new T1()," thread="" a");="" t2="new" thread(new="" t2(),"thread="" b");="" t1.start();="" t2.start();="" }="" <="" pre="">
-
-<p>下面是一个小应用程序，利用线程对象在其中显示当前时间。<br>&lt;?prettify?&gt;</p>
-<pre class="prettyprint">
-import java.awt.*;
-import java.util.*;
-import javax.swing.*;
-import java.text.DateFormat;
-public class ClockDemo extends JApplet{
-  private Thread clockThread = null;
-  private ClockPanel cp=new ClockPanel();
-  public void init(){
-      getContentPane().add(cp);
-  } 
-  public void start() {
- if (clockThread == null) {
-        clockThread = new Thread(cp, "Clock");
-    clockThread.start();
-     }
-}
-  public void stop() {
-     clockThread = null;
-  }
-}
-class ClockPanel extends JPanel implements Runnable{
-    public void paintComponent(Graphics g) {
-super.paintComponent(g);
-      Calendar cal = Calendar.getInstance();
-    Date date = cal.getTime();
-    DateFormat dateFormatter = DateFormat.getTimeInstance();
-    g.setColor(Color.BLUE);
-    g.setFont(new Font("TimesNewRoman",Font.BOLD,36));
-    g.drawString(dateFormatter.format(date), 50, 50);
-  }
-    public void run() {
-     while (true) {
-       repaint();
-       try {
-          Thread.sleep(1000);
-        } catch (InterruptedException e){ }
-    }
-}
-}
-</pre>
-
+<h2 id="2-实现Runnable接口创建线程"><a href="#2-实现Runnable接口创建线程" class="headerlink" title="2. 实现Runnable接口创建线程"></a>2. 实现Runnable接口创建线程</h2><p>可以定义一个类实现Runnable接口，然后将该类对象作为线程的目标对象。实现Runnable接口就是实现run()方法。下面程序通过实现Runnable接口构造线程体。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">T1</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">15</span>;i++)</div><div class="line">      System.out.println(<span class="string">"Runner A="</span>+i);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">T2</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">15</span>;j++)</div><div class="line">      System.out.println(<span class="string">"Runner B="</span>+j);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">    Thread t1=<span class="keyword">new</span> Thread(<span class="keyword">new</span> T1(),<span class="string">"Thread A"</span>);</div><div class="line">    Thread t2=<span class="keyword">new</span> Thread(<span class="keyword">new</span> T2(),<span class="string">"Thread B"</span>);</div><div class="line">    t1.start();</div><div class="line">    t2.start();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是一个小应用程序，利用线程对象在其中显示当前时间。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.awt.*;</div><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">import</span> javax.swing.*;</div><div class="line"><span class="keyword">import</span> java.text.DateFormat;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClockDemo</span> <span class="keyword">extends</span> <span class="title">JApplet</span></span>&#123;</div><div class="line">  <span class="keyword">private</span> Thread clockThread = <span class="keyword">null</span>;</div><div class="line">  <span class="keyword">private</span> ClockPanel cp=<span class="keyword">new</span> ClockPanel();</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">  	getContentPane().add(cp);</div><div class="line">  &#125; </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</div><div class="line"> <span class="keyword">if</span> (clockThread == <span class="keyword">null</span>) &#123;</div><div class="line">        clockThread = <span class="keyword">new</span> Thread(cp, <span class="string">"Clock"</span>);</div><div class="line">    clockThread.start();</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</div><div class="line">     clockThread = <span class="keyword">null</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClockPanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paintComponent</span><span class="params">(Graphics g)</span> </span>&#123;</div><div class="line"><span class="keyword">super</span>.paintComponent(g);</div><div class="line">	  Calendar cal = Calendar.getInstance();</div><div class="line">    Date date = cal.getTime();</div><div class="line">    DateFormat dateFormatter = DateFormat.getTimeInstance();</div><div class="line">    g.setColor(Color.BLUE);</div><div class="line">    g.setFont(<span class="keyword">new</span> Font(<span class="string">"TimesNewRoman"</span>,Font.BOLD,<span class="number">36</span>));</div><div class="line">    g.drawString(dateFormatter.format(date), <span class="number">50</span>, <span class="number">50</span>);</div><div class="line">  &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">     <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">       repaint();</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">          Thread.sleep(<span class="number">1000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e)&#123; &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>该小应用程序的运行结果如图3所示：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.10.58.png" alt=""></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html">http://www.sguotao.com/blog/2010/10/Java-多线程-2010-10-2-multi-thread-2.html</a></p>
-</15;i++)></pre></100;></pre></100;></pre>
+
       
     </div>
 
@@ -572,7 +465,7 @@ super.paintComponent(g);
         
 
 <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
-  <div>生活不止眼前的苟且,还有诗和远方的田野</div>
+  <div>「真诚赞赏，手留余香」</div>
   <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
     <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
   </button>
@@ -605,6 +498,8 @@ super.paintComponent(g);
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
             <a href="/tags/多线程/" rel="tag"># 多线程</a>
           
@@ -705,7 +600,7 @@ super.paintComponent(g);
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -727,7 +622,7 @@ super.paintComponent(g);
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

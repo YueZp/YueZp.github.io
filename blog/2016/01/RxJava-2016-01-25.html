@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://www.sguotao.com/blog/2016/01/RxJava-2016-01-25.html">
 <meta property="og:site_name" content="Scott-小白">
 <meta property="og:description" content="1.RxJava是什么？GitHub官方给出的解释：  RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.  即一个运行在JVM上的库，通过一个可观测的序">
-<meta property="og:updated_time" content="2017-04-27T03:06:47.000Z">
+<meta property="og:updated_time" content="2017-05-04T11:34:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【RxJava】一 RxJava是什么">
 <meta name="twitter:description" content="1.RxJava是什么？GitHub官方给出的解释：  RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.  即一个运行在JVM上的库，通过一个可观测的序">
@@ -434,16 +434,16 @@
 </blockquote>
 <p>即一个运行在JVM上的库，通过一个<strong>可观测的序列</strong>，组成的<strong>异步的</strong>、<strong>基于事件的</strong>程序。</p>
 <h2 id="2-为什么要使用RxJava"><a href="#2-为什么要使用RxJava" class="headerlink" title="2.为什么要使用RxJava?"></a>2.为什么要使用RxJava?</h2><p>在平时的开发中，当遇到如进行访问网络请求，数据库的查询操作，文件读写操作等耗时操作时，都会放在子线程中来进行。<br>让复杂的业务逻辑，回归简单和清晰。</p>
-<h2 id="3-怎样使用RxJava"><a href="#3-怎样使用RxJava" class="headerlink" title="3.怎样使用RxJava?"></a>3.怎样使用RxJava?</h2><h3 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h3><p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">https://github.com/ReactiveX/RxJava</a></p>
-<p>RxAndroid响应式开发</p>
-<p>1，Rx是响应式编程的意思，本质是观察者模式，是以观察者（Observer）和订阅者（Subscriber)为基础的异步响应方式。<br>2，在Android编程时，经常会使用后台线程，那么就可以使用这种方式，目前的异步编程方式都会导致一些问题，如：</p>
-<p>Asynctasks can easily lead to memory leaks.<br>CursorLoaders with a ContentProvider require a large amount of configuration and boilerplate code to setup.<br>Services are intentded for longer running background tasks and not fast-finishing operations,such as making<br>a network call or loading content from a database.<br>访问网络接口调用返回数据，尤其在使用接口回调时，处理数据比较麻烦。</p>
 <p>Rx模式以及优点<br>1，使用观察者模式；<br>    创建：Rx可以方便的创建事件流和数据流；<br>    组合：Rx使用查询式的操作符组合和变换数据流；<br>    监听：Rx可以订阅任何可观察数据流并执行操作；<br>2，简化代码<br>    函数式风格:对可观察数据流使用无副作用的输入输出函数，避免了程序里错综复杂的状态；<br>    简化代码:Rx的操作符通常可以将复杂的难题简化成为很少的几行代码；<br>    异步错误处理:传统的try/catch没办法处理异步计算，Rx提供了合适的错误处理机制；<br>    轻松使用并发:Rx的Observerables和Schedulers让开发者可以摆脱底层的线程同步和各种并发问题。</p>
-<p>响应式编程<br>    Rx提供了一系列的操作符，你可以使用它们来过滤（filter）、选择（select）、变换（transform)、<br>    结合（combine)和组合（compose)多个Observable，这些操作符让执行和复合变得非常高效。</p>
+<h2 id="3-怎样使用RxJava"><a href="#3-怎样使用RxJava" class="headerlink" title="3.怎样使用RxJava?"></a>3.怎样使用RxJava?</h2><p>响应式编程<br>    Rx提供了一系列的操作符，你可以使用它们来过滤（filter）、选择（select）、变换（transform)、<br>    结合（combine)和组合（compose)多个Observable，这些操作符让执行和复合变得非常高效。</p>
 <pre><code>你可以把Observable当做Iterable的推送方式的等价物，使用Iterable,消费者从生产者哪里获取数据，
 线程阻塞直至数据准备好。使用Observable，在数据准备好时，生产者将数据推送给消费者。数据可以同步
 或异步的到达，这种方式更灵活。
-</code></pre><p>RxJava的观察者模式<br>    观察者模式面向的需求是：A对象（观察者）对B对象（被观察者）的某种变化高度敏感，<br>    需要在B变化的一瞬间做出反应。</p>
+</code></pre><p>RxAndroid响应式开发</p>
+<p>1，Rx是响应式编程的意思，本质是观察者模式，是以观察者（Observer）和订阅者（Subscriber)为基础的异步响应方式。<br>2，在Android编程时，经常会使用后台线程，那么就可以使用这种方式，目前的异步编程方式都会导致一些问题，如：</p>
+<p>Asynctasks can easily lead to memory leaks.<br>CursorLoaders with a ContentProvider require a large amount of configuration and boilerplate code to setup.<br>Services are intentded for longer running background tasks and not fast-finishing operations,such as making<br>a network call or loading content from a database.<br>访问网络接口调用返回数据，尤其在使用接口回调时，处理数据比较麻烦。</p>
+<p>创建观察者<br>    在异步模型中创建观察者；<br>    定义一个方法，它完成某些任务，然后从异步调用中返回一个值，这个方法时观察者的一部分。<br>    将这个异步调用本身定义为一个Observable<br>    观察者通过订阅（Subscribe)操作关联到那个Observable；<br>    继续业务逻辑，等方法返回时，Observable会发射结果，观察者的方法会开始处理结果或结果集；</p>
+<p>RxJava的观察者模式<br>    观察者模式面向的需求是：A对象（观察者）对B对象（被观察者）的某种变化高度敏感，<br>    需要在B变化的一瞬间做出反应。</p>
 <pre><code>RxJava有四个基本概念：
     Observable（可观察者,即被观察者）
     Observer（观察者）
@@ -452,7 +452,7 @@
 
 Observable和Observer通过subscribe()方法实现订阅关系，从而Observerable可以在需要的时候发出事件来通知Observer。
 </code></pre><p>RxJava基本实现<br>    1.创建Observer<br>        Observer即观察者，它决定事件触发的时候将有怎样的行为。RxJava中的Observer接口实现方式：<br>    2.创建Observable<br>        Observable即被观察者，它决定什么时候触发事件以及触发怎样的事件。RxJava使用create()方法<br>        来创建一个Observable，并为它定义事件触发规则；<br>    3.Subscribe(订阅)<br>        创建了Observable和Observer之后，再用subscribe()方法将它们联结起来，整条链子就可以工作了。</p>
-<p>创建观察者<br>    在异步模型中创建观察者；<br>    定义一个方法，它完成某些任务，然后从异步调用中返回一个值，这个方法时观察者的一部分。<br>    将这个异步调用本身定义为一个Observable<br>    观察者通过订阅（Subscribe)操作关联到那个Observable；<br>    继续业务逻辑，等方法返回时，Observable会发射结果，观察者的方法会开始处理结果或结果集；</p>
+<h3 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h3><p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">https://github.com/ReactiveX/RxJava</a></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.com/blog/2016/01/RxJava-2016-01-25.html">http://www.sguotao.com/blog/2016/01/RxJava-2016-01-25.html</a></p>
 
@@ -471,7 +471,7 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
         
 
 <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
-  <div>生活不止眼前的苟且,还有诗和远方的田野</div>
+  <div>「真诚赞赏，手留余香」</div>
   <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
     <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
   </button>
@@ -518,8 +518,8 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2016/05/生活感悟-2016-05-09-getdown-to-my-work.html" rel="next" title="和光同尘，静水流深">
-                <i class="fa fa-chevron-left"></i> 和光同尘，静水流深
+              <a href="/blog/2016/02/读书笔记-2016-02-20-解忧杂货店.html" rel="next" title="【读书笔记】解忧杂货店">
+                <i class="fa fa-chevron-left"></i> 【读书笔记】解忧杂货店
               </a>
             
           </div>
@@ -604,7 +604,7 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -626,7 +626,7 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
