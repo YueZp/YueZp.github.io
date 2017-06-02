@@ -8,5 +8,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: http://www.sguotao.com/sitemap.xml
-Sitemap: http://www.sguotao.com/baidusitemap.xml
+Sitemap: http://sguotao.com/sitemap.xml
+Sitemap: http://sguotao.com/baidusitemap.xml
