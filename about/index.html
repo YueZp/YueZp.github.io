@@ -16,6 +16,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -96,7 +99,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="以梦为马，莫负韶华">
 <meta property="og:url" content="http://www.sguotao.com/about/index.html">
-<meta property="og:site_name" content="Scott-小白">
+<meta property="og:site_name" content="Scott's Blog">
 <meta property="og:description" content="关于个人 Hey，我是Scott，一枚Android开发工程师（坐标东四环）； 喜欢编程，喜欢阅读，偶尔会从深夜忙到到天明（封板的日子）； 喜欢学习，努力工作，也享受自己的生活（生活不只有代码，还有书和远方）； 崇尚简单的快乐和幸福（家庭地位：大🐱(媳妇) &amp;gt; 小🐱(闺女) &amp;gt; 我）； 和多数的工程师一样，为理想而奋斗（生命不息，coding不止）。  关于博客 2011-09-0">
 <meta property="og:updated_time" content="2017-04-28T02:25:13.000Z">
 <meta name="twitter:card" content="summary">
@@ -135,7 +138,7 @@
 
 
 
-  <title>以梦为马，莫负韶华 | Scott-小白</title>
+  <title>以梦为马，莫负韶华 | Scott's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -165,12 +168,13 @@
 
 
 
+
   
   
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -181,7 +185,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Scott-小白</span>
+        <span class="site-title">Scott's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -283,7 +287,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+      <input autocomplete="off"
              placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
@@ -376,8 +380,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -392,7 +405,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -459,6 +472,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于个人"><span class="nav-number">1.</span> <span class="nav-text">关于个人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于博客"><span class="nav-number">2.</span> <span class="nav-text">关于博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于工作"><span class="nav-number">3.</span> <span class="nav-text">关于工作</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -592,6 +621,10 @@
   
 
   
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+  
 
   
 
@@ -646,10 +679,13 @@
   <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
+    var isXml = true;
     // Search DB path;
     var search_path = "search.xml";
     if (search_path.length === 0) {
       search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
     }
     var path = "/" + search_path;
     // monitor main search box;
@@ -669,27 +705,41 @@
         .css('overflow', 'hidden');
       $('.search-popup-overlay').click(onPopupClose);
       $('.popup').toggle();
-      $('#local-search-input').focus();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
     }
 
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
       $.ajax({
         url: path,
-        dataType: "xml",
+        dataType: isXml ? "xml" : "json",
         async: true,
-        success: function( xmlResponse ) {
+        success: function(res) {
           // get the contents from search data
           isfetched = true;
           $('.popup').detach().appendTo('.header-inner');
-          var datas = $( "entry", xmlResponse ).map(function() {
+          var datas = isXml ? $("entry", res).map(function() {
             return {
-              title: $( "title", this ).text(),
+              title: $("title", this).text(),
               content: $("content",this).text(),
-              url: $( "url" , this).text()
+              url: $("url" , this).text()
             };
-          }).get();
+          }).get() : res;
           var input = document.getElementById(search_id);
           var resultContent = document.getElementById(content_id);
           var inputEventFunction = function() {
@@ -910,9 +960,15 @@
               }
             });
           }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
           proceedsearch();
         }
-      });}
+      });
+    }
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
@@ -1066,6 +1122,8 @@
 })();
 </script>
 
+
+  
 
   
 

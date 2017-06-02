@@ -16,6 +16,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -97,7 +100,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="【读书笔记】激荡三十年(上)">
 <meta property="og:url" content="http://www.sguotao.com/blog/2016/04/读书笔记-2016-04-21-激荡三十年-上.html">
-<meta property="og:site_name" content="Scott-小白">
+<meta property="og:site_name" content="Scott's Blog">
 <meta property="og:description" content="本文链接：http://www.sguotao.com/blog/2016/04/读书笔记-2016-04-21-激荡三十年-上.html">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170516149490195231958.png?imageView/2/w/200/q/100">
 <meta property="og:updated_time" content="2017-05-16T02:33:03.000Z">
@@ -138,7 +141,7 @@
 
 
 
-  <title>【读书笔记】激荡三十年(上) | Scott-小白</title>
+  <title>【读书笔记】激荡三十年(上) | Scott's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,6 +171,7 @@
 
 
 
+
   
   
     
@@ -184,7 +188,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Scott-小白</span>
+        <span class="site-title">Scott's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -286,7 +290,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+      <input autocomplete="off"
              placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
@@ -330,7 +334,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Scott-小白">
+      <meta itemprop="name" content="Scott's Blog">
     </span>
 
     
@@ -338,14 +342,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                【读书笔记】激荡三十年(上)
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">【读书笔记】激荡三十年(上)</h2>
         
 
         <div class="post-meta">
@@ -433,7 +430,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7u2np3.com1.z0.glb.clouddn.com/20170516149490195231958.png?imageView/2/w/200/q/100" rel="gallery_cj3drtuee004hm4t8cm70pdg1"
+                 href="http://7u2np3.com1.z0.glb.clouddn.com/20170516149490195231958.png?imageView/2/w/200/q/100" rel="gallery_cj3fbi1q9004k9nt8el436lbj"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://7u2np3.com1.z0.glb.clouddn.com/20170516149490195231958.png?imageView/2/w/200/q/100" itemprop="contentUrl"/>
               </a>
@@ -504,7 +501,7 @@
       
 
       
-        
+      
       
 
       
@@ -588,7 +585,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -846,10 +843,13 @@
   <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
+    var isXml = true;
     // Search DB path;
     var search_path = "search.xml";
     if (search_path.length === 0) {
       search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
     }
     var path = "/" + search_path;
     // monitor main search box;
@@ -869,27 +869,41 @@
         .css('overflow', 'hidden');
       $('.search-popup-overlay').click(onPopupClose);
       $('.popup').toggle();
-      $('#local-search-input').focus();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
     }
 
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
       $.ajax({
         url: path,
-        dataType: "xml",
+        dataType: isXml ? "xml" : "json",
         async: true,
-        success: function( xmlResponse ) {
+        success: function(res) {
           // get the contents from search data
           isfetched = true;
           $('.popup').detach().appendTo('.header-inner');
-          var datas = $( "entry", xmlResponse ).map(function() {
+          var datas = isXml ? $("entry", res).map(function() {
             return {
-              title: $( "title", this ).text(),
+              title: $("title", this).text(),
               content: $("content",this).text(),
-              url: $( "url" , this).text()
+              url: $("url" , this).text()
             };
-          }).get();
+          }).get() : res;
           var input = document.getElementById(search_id);
           var resultContent = document.getElementById(content_id);
           var inputEventFunction = function() {
@@ -1110,9 +1124,15 @@
               }
             });
           }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
           proceedsearch();
         }
-      });}
+      });
+    }
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
@@ -1266,6 +1286,8 @@
 })();
 </script>
 
+
+  
 
   
 

@@ -16,6 +16,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -97,7 +100,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="【学习笔记】ReactNative样式整理">
 <meta property="og:url" content="http://www.sguotao.com/blog/2017/03/ReactNative-2017-04-25-rn-css.html">
-<meta property="og:site_name" content="Scott-小白">
+<meta property="og:site_name" content="Scott's Blog">
 <meta property="og:description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
 <meta property="og:updated_time" content="2017-05-17T07:59:13.000Z">
 <meta name="twitter:card" content="summary">
@@ -136,7 +139,7 @@
 
 
 
-  <title>【学习笔记】ReactNative样式整理 | Scott-小白</title>
+  <title>【学习笔记】ReactNative样式整理 | Scott's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -166,6 +169,7 @@
 
 
 
+
   
   
     
@@ -182,7 +186,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Scott-小白</span>
+        <span class="site-title">Scott's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -284,7 +288,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+      <input autocomplete="off"
              placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
@@ -328,7 +332,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Scott-小白">
+      <meta itemprop="name" content="Scott's Blog">
     </span>
 
     
@@ -336,14 +340,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                【学习笔记】ReactNative样式整理
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">【学习笔记】ReactNative样式整理</h2>
         
 
         <div class="post-meta">
@@ -976,7 +973,7 @@
       
 
       
-        
+      
       
 
       
@@ -1069,7 +1066,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1343,10 +1340,13 @@
   <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
+    var isXml = true;
     // Search DB path;
     var search_path = "search.xml";
     if (search_path.length === 0) {
       search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
     }
     var path = "/" + search_path;
     // monitor main search box;
@@ -1366,27 +1366,41 @@
         .css('overflow', 'hidden');
       $('.search-popup-overlay').click(onPopupClose);
       $('.popup').toggle();
-      $('#local-search-input').focus();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
     }
 
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
       $.ajax({
         url: path,
-        dataType: "xml",
+        dataType: isXml ? "xml" : "json",
         async: true,
-        success: function( xmlResponse ) {
+        success: function(res) {
           // get the contents from search data
           isfetched = true;
           $('.popup').detach().appendTo('.header-inner');
-          var datas = $( "entry", xmlResponse ).map(function() {
+          var datas = isXml ? $("entry", res).map(function() {
             return {
-              title: $( "title", this ).text(),
+              title: $("title", this).text(),
               content: $("content",this).text(),
-              url: $( "url" , this).text()
+              url: $("url" , this).text()
             };
-          }).get();
+          }).get() : res;
           var input = document.getElementById(search_id);
           var resultContent = document.getElementById(content_id);
           var inputEventFunction = function() {
@@ -1607,9 +1621,15 @@
               }
             });
           }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
           proceedsearch();
         }
-      });}
+      });
+    }
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
@@ -1763,6 +1783,8 @@
 })();
 </script>
 
+
+  
 
   
 

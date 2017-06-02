@@ -16,6 +16,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -76,7 +79,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,代码库,动画," />
+  <meta name="keywords" content="Android,动画,代码库," />
 
 
 
@@ -93,13 +96,13 @@
 
 
 <meta name="description" content="Android的动画可以大体分为两类，分别是传统动画和Android3.0之后出现的属性动画(Property Animation)，关于传统动画的介绍在此前的两篇笔记中，进行了整理。Android动画分析一 View AnimationAndroid动画分析二 Drawable Animation在这一篇中，将对Android3.0之后出现的属性动画(Property Animation)进行整">
-<meta name="keywords" content="Android,代码库,动画">
+<meta name="keywords" content="Android,动画,代码库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android动画分析三 Property Animation">
 <meta property="og:url" content="http://www.sguotao.com/blog/2017/05/Android进阶-2016-05-20-android-property-animation.html">
-<meta property="og:site_name" content="Scott-小白">
+<meta property="og:site_name" content="Scott's Blog">
 <meta property="og:description" content="Android的动画可以大体分为两类，分别是传统动画和Android3.0之后出现的属性动画(Property Animation)，关于传统动画的介绍在此前的两篇笔记中，进行了整理。Android动画分析一 View AnimationAndroid动画分析二 Drawable Animation在这一篇中，将对Android3.0之后出现的属性动画(Property Animation)进行整">
-<meta property="og:updated_time" content="2017-05-31T07:53:58.000Z">
+<meta property="og:updated_time" content="2017-06-01T07:08:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android动画分析三 Property Animation">
 <meta name="twitter:description" content="Android的动画可以大体分为两类，分别是传统动画和Android3.0之后出现的属性动画(Property Animation)，关于传统动画的介绍在此前的两篇笔记中，进行了整理。Android动画分析一 View AnimationAndroid动画分析二 Drawable Animation在这一篇中，将对Android3.0之后出现的属性动画(Property Animation)进行整">
@@ -136,7 +139,7 @@
 
 
 
-  <title>Android动画分析三 Property Animation | Scott-小白</title>
+  <title>Android动画分析三 Property Animation | Scott's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -166,6 +169,7 @@
 
 
 
+
   
   
     
@@ -182,7 +186,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Scott-小白</span>
+        <span class="site-title">Scott's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -284,7 +288,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+      <input autocomplete="off"
              placeholder="搜索..." spellcheck="false"
              type="text" id="local-search-input">
     </div>
@@ -328,7 +332,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Scott-小白">
+      <meta itemprop="name" content="Scott's Blog">
     </span>
 
     
@@ -336,14 +340,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                Android动画分析三 Property Animation
-              
-            
-          </h2>
+          <h2 class="post-title" itemprop="name headline">Android动画分析三 Property Animation</h2>
         
 
         <div class="post-meta">
@@ -433,7 +430,8 @@
 <p>1.使用动画场景的需求超出了移动、缩放、旋转和淡入淡出这四种对View的操作，那么View动画就不能再帮我们忙了，也就是说View动画在功能和可扩展方面都有相当大的局限性。</p>
 <p>2.Property Animation是改变对象的属性，不仅仅是对view本身做操作。传统的View动画只是改变view的显示效果，并不改变view的属性。郭霖介绍一个比较形象的例子🌰，比如说，现在屏幕的左上角有一个按钮，然后我们通过View动画将它移动到了屏幕的右下角，点击一下这个按钮，点击事件是绝对不会触发的，因为实际上这个按钮还是停留在屏幕的左上角，只不过View动画将这个按钮绘制到了屏幕的右下角而已。属性动画的实现机制是通过对目标对象进行赋值并修改其属性来实现的，那么之前所说的按钮显示的问题也就不复存在了，如果我们通过属性动画来移动一个按钮，那么这个按钮就是真正的移动了，而不再是仅仅在另外一个位置绘制了而已。</p>
 </blockquote>
-<h2 id="Property-Animation"><a href="#Property-Animation" class="headerlink" title="Property Animation"></a>Property Animation</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://developer.android.com/guide/topics/graphics/prop-animation.html" target="_blank" rel="external">Property Animation</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/43536355" target="_blank" rel="external">Android属性动画完全解析(上)，初识属性动画的基本用法</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/43816093" target="_blank" rel="external">Android属性动画完全解析(中)，ValueAnimator和ObjectAnimator的高级用法</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/44171115" target="_blank" rel="external">Android属性动画完全解析(下)，Interpolator和ViewPropertyAnimator的用法</a></p>
+<h2 id="Property-Animation"><a href="#Property-Animation" class="headerlink" title="Property Animation"></a>Property Animation</h2><p>Property Animation是Android3.0(API11)之后引入的动画，属性动画的引入，极大的地丰富了Android的动画体系，与传统的View动画和Drawable动画还是存在一些差别，在使用的过程中需要留意：<br>1.传统动画的xml文件存放在res/anim/目录下，而属性动画的xml文件存放在res/animator/目录下，虽然animator有这anim的前缀，但这是两个完全不同的目录。由于存放目录的不同，因此在代码中引用的方式也会有所差别，传统动画可以通过R.anim.filename获得动画的引用，属性通过则通过R.animator.filename获得动画的引用。<br>2.属性动画常用的Java类与传统动画Java类很相似，比如属性动画集AnimatorSet和传统动画集AnimationSet，在使用时注意区别，可以简化记忆“后缀是mator的是属性动画，后缀是mation的是传统动画”。属性动画中，常用的类，可以简单的用下面的类图进行概括。</p>
+<h3 id="Animatior"><a href="#Animatior" class="headerlink" title="Animatior"></a>Animatior</h3><h3 id="ValueAnimator-和-ObjectAnimator"><a href="#ValueAnimator-和-ObjectAnimator" class="headerlink" title="ValueAnimator 和 ObjectAnimator"></a>ValueAnimator 和 ObjectAnimator</h3><h3 id="AnimatorSet"><a href="#AnimatorSet" class="headerlink" title="AnimatorSet"></a>AnimatorSet</h3><h2 id="属性动画实现点赞效果"><a href="#属性动画实现点赞效果" class="headerlink" title="属性动画实现点赞效果"></a>属性动画实现点赞效果</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://developer.android.com/guide/topics/graphics/prop-animation.html" target="_blank" rel="external">Property Animation</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/43536355" target="_blank" rel="external">Android属性动画完全解析(上)，初识属性动画的基本用法</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/43816093" target="_blank" rel="external">Android属性动画完全解析(中)，ValueAnimator和ObjectAnimator的高级用法</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/44171115" target="_blank" rel="external">Android属性动画完全解析(下)，Interpolator和ViewPropertyAnimator的用法</a></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.com/blog/2017/05/Android进阶-2016-05-20-android-property-animation.html">http://www.sguotao.com/blog/2017/05/Android进阶-2016-05-20-android-property-animation.html</a></p>
 
@@ -488,15 +486,15 @@
           
             <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/代码库/" rel="tag"># 代码库</a>
-          
             <a href="/tags/动画/" rel="tag"># 动画</a>
+          
+            <a href="/tags/代码库/" rel="tag"># 代码库</a>
           
         </div>
       
 
       
-        
+      
       
 
       
@@ -589,7 +587,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -666,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Property-Animation"><span class="nav-number">1.</span> <span class="nav-text">Property Animation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Property-Animation"><span class="nav-number">1.</span> <span class="nav-text">Property Animation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Animatior"><span class="nav-number">1.1.</span> <span class="nav-text">Animatior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ValueAnimator-和-ObjectAnimator"><span class="nav-number">1.2.</span> <span class="nav-text">ValueAnimator 和 ObjectAnimator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AnimatorSet"><span class="nav-number">1.3.</span> <span class="nav-text">AnimatorSet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性动画实现点赞效果"><span class="nav-number">2.</span> <span class="nav-text">属性动画实现点赞效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -863,10 +861,13 @@
   <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
+    var isXml = true;
     // Search DB path;
     var search_path = "search.xml";
     if (search_path.length === 0) {
       search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
     }
     var path = "/" + search_path;
     // monitor main search box;
@@ -886,27 +887,41 @@
         .css('overflow', 'hidden');
       $('.search-popup-overlay').click(onPopupClose);
       $('.popup').toggle();
-      $('#local-search-input').focus();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
     }
 
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
       $.ajax({
         url: path,
-        dataType: "xml",
+        dataType: isXml ? "xml" : "json",
         async: true,
-        success: function( xmlResponse ) {
+        success: function(res) {
           // get the contents from search data
           isfetched = true;
           $('.popup').detach().appendTo('.header-inner');
-          var datas = $( "entry", xmlResponse ).map(function() {
+          var datas = isXml ? $("entry", res).map(function() {
             return {
-              title: $( "title", this ).text(),
+              title: $("title", this).text(),
               content: $("content",this).text(),
-              url: $( "url" , this).text()
+              url: $("url" , this).text()
             };
-          }).get();
+          }).get() : res;
           var input = document.getElementById(search_id);
           var resultContent = document.getElementById(content_id);
           var inputEventFunction = function() {
@@ -1127,9 +1142,15 @@
               }
             });
           }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
           proceedsearch();
         }
-      });}
+      });
+    }
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
@@ -1283,6 +1304,8 @@
 })();
 </script>
 
+
+  
 
   
 
