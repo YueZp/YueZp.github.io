@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.sguotao.com/"/>
-  <updated>2017-06-02T09:54:02.000Z</updated>
+  <updated>2017-06-02T10:40:10.000Z</updated>
   <id>http://www.sguotao.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2017-06-02-%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BF%A7%E8%99%91%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%AA%E6%9D%A5.html"/>
     <id>http://www.sguotao.com/生活感悟-2017-06-02-程序员为什么会忧虑自己的未来.html</id>
     <published>2017-06-02T02:22:08.000Z</published>
-    <updated>2017-06-02T09:54:02.000Z</updated>
+    <updated>2017-06-02T10:40:10.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>所谓的稳定，是最大的谎言。在高速发展的行业，根本没有一个稳定的职业。解决焦虑的最终办法是重新定位自己的职业生涯，尽量不以所谓的熟练度和经验作为自己的竞争力，将自己的职业生涯押注在某项低门槛的技术上，而是根据自身的情况，持续不断提高综合竞争力，加强自己的不可替代性。</p>
@@ -82,7 +82,7 @@
     <link href="http://www.sguotao.com/ReactNative-2017-05-17-rn-flex.html"/>
     <id>http://www.sguotao.com/ReactNative-2017-05-17-rn-flex.html</id>
     <published>2017-05-17T02:27:04.000Z</published>
-    <updated>2017-05-17T08:04:40.000Z</updated>
+    <updated>2017-06-02T10:39:21.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Flex容器属性"><a href="#Flex容器属性" class="headerlink" title="Flex容器属性"></a>Flex容器属性</h2><ul>
 <li><p><strong>flex-direction 属性决定主轴的方向（即项目的排列方向）。</strong></p>
@@ -185,7 +185,7 @@ stretch（默认值）：轴线占满整个交叉轴。
     <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-20-android-property-animation.html"/>
     <id>http://www.sguotao.com/Android进阶-2016-05-20-android-property-animation.html</id>
     <published>2017-05-02T02:27:04.000Z</published>
-    <updated>2017-06-01T07:08:46.000Z</updated>
+    <updated>2017-06-02T10:37:55.000Z</updated>
     
     <content type="html"><![CDATA[<p>Android的动画可以大体分为两类，分别是传统动画和Android3.0之后出现的属性动画(Property Animation)，关于传统动画的介绍在此前的两篇笔记中，进行了整理。<br><a href="/blog/2016/05/Android进阶-2016-05-18-android-view-animation.html">Android动画分析一 View Animation</a><br><a href="/blog/2016/05/Android进阶-2016-05-19-android-drawable-animation.html">Android动画分析二 Drawable Animation</a><br>在这一篇中，将对Android3.0之后出现的属性动画(Property Animation)进行整理。既然已经有了View Animation和Drawable Animation了，为什么还要引入Property Animation呢？</p>
 <blockquote>
@@ -245,7 +245,7 @@ stretch（默认值）：轴线占满整个交叉轴。
     <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-03-24-android-memory-leak.html"/>
     <id>http://www.sguotao.com/Android进阶-2017-03-24-android-memory-leak.html</id>
     <published>2017-03-24T02:27:04.000Z</published>
-    <updated>2017-05-03T12:27:14.000Z</updated>
+    <updated>2017-06-02T10:37:59.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="内存泄露与内存溢出"><a href="#内存泄露与内存溢出" class="headerlink" title="内存泄露与内存溢出"></a>内存泄露与内存溢出</h2><h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>内存泄露(Memory Leak)是指无用对象（不再使用的对象）持续占有内存，或者无用对象的内存得不到及时释放，从而造成内存空间得不到有效的利用。在Java中，内存泄露的原因，通常是长生命周期的对象，持有短生命周期对象的引用。在《深入理解Java虚拟机》中的解释是，当无用对象一直被有用对象引用，导致无用对象可达，JVM无法对无用对象完成回收。从而造成内存泄露。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170327149058275225194.png" alt="内存泄露"></p>
 <h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>内存溢出(Out of Memory)是指程序在运行过程中，无法申请到足够的的内存导致的一种错误。内存泄露是会导致内存溢出，但不是导致内存溢出的唯一原因。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170327149058290012605.png" alt="20170327149058290012605.png"></p>
@@ -394,7 +394,7 @@ stretch（默认值）：轴线占满整个交叉轴。
     <link href="http://www.sguotao.com/ReactNative-2017-04-25-rn-css.html"/>
     <id>http://www.sguotao.com/ReactNative-2017-04-25-rn-css.html</id>
     <published>2017-03-24T02:27:04.000Z</published>
-    <updated>2017-05-17T07:59:13.000Z</updated>
+    <updated>2017-06-02T10:39:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。</p>
 <h2 id="引入样式的几种方法"><a href="#引入样式的几种方法" class="headerlink" title="引入样式的几种方法"></a>引入样式的几种方法</h2><p>常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。</p>
@@ -909,7 +909,7 @@ stretch（默认值）：轴线占满整个交叉轴。
     <link href="http://www.sguotao.com/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6-2017-03-17-classloader.html"/>
     <id>http://www.sguotao.com/插件框架-2017-03-17-classloader.html</id>
     <published>2017-03-17T02:27:04.000Z</published>
-    <updated>2017-05-04T11:35:53.000Z</updated>
+    <updated>2017-06-02T10:39:37.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Java的类加载机制ClassLoader"><a href="#Java的类加载机制ClassLoader" class="headerlink" title="Java的类加载机制ClassLoader"></a>Java的类加载机制ClassLoader</h2><p>我们编写的java代码，最终会编译成.class字节码的形式，一个完整的Java程序，通常会由若干个.class文件组成，在程序运行时，通过该程序的入口函数来调用系统的各个功能，但是程序启动时，并不会一次性将.class文件加载到内存中，根据程序的需要，通过Java的类加载机制来动态加载.class文件，ClassLoader就是来实现.class文件的动态加载的。</p>
 <h2 id="Java中各类加载器的关系"><a href="#Java中各类加载器的关系" class="headerlink" title="Java中各类加载器的关系"></a>Java中各类加载器的关系</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974200061820.png" alt="20170317148974200061820.png"><br>Java默认会提供三个类加载器，分别为BootStrapClassLoader,ExtClassLoader和AppClassLoader;</p>
@@ -978,6 +978,32 @@ stretch（默认值）：轴线占满整个交叉轴。
   </entry>
   
   <entry>
+    <title>【读书笔记】跟任何人都聊得来</title>
+    <link href="http://www.sguotao.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2016-11-16-%E8%B7%9F%E4%BB%BB%E4%BD%95%E4%BA%BA%E9%83%BD%E8%81%8A%E5%BE%97%E6%9D%A5.html"/>
+    <id>http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html</id>
+    <published>2017-01-04T04:00:00.000Z</published>
+    <updated>2017-05-16T02:58:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>本文链接：<a href="http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html">http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;本文链接：&lt;a href=&quot;http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html&quot;&gt;http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html&lt;/a&gt;&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://www.sguotao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="读书笔记" scheme="http://www.sguotao.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【读书笔记】追风筝的人</title>
     <link href="http://www.sguotao.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2017-01-04-%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA.html"/>
     <id>http://www.sguotao.com/读书笔记-2017-01-04-追风筝的人.html</id>
@@ -1007,32 +1033,6 @@ stretch（默认值）：轴线占满整个交叉轴。
     
       &lt;p&gt;为你，千千万万遍&lt;/p&gt;
 &lt;p&gt;阿米尔问哈桑为什么知道被切断绳线的风筝的掉落地点，&lt;br&gt;哈桑肯定会对阿米尔说，我就是知道，然后反问，我什么时候骗过你。&lt;br&gt;阿米尔轻声说，我怎么知道有没有骗过我。&lt;br&gt;哈桑发誓，为了你，我宁可啃烂泥。阿米尔进一步确定，你真的会为我啃烂泥
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://www.sguotao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="读书笔记" scheme="http://www.sguotao.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【读书笔记】跟任何人都聊得来</title>
-    <link href="http://www.sguotao.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2016-11-16-%E8%B7%9F%E4%BB%BB%E4%BD%95%E4%BA%BA%E9%83%BD%E8%81%8A%E5%BE%97%E6%9D%A5.html"/>
-    <id>http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html</id>
-    <published>2017-01-04T04:00:00.000Z</published>
-    <updated>2017-05-16T02:58:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<p>本文链接：<a href="http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html">http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;p&gt;本文链接：&lt;a href=&quot;http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html&quot;&gt;http://www.sguotao.com/读书笔记-2016-11-16-跟任何人都聊得来.html&lt;/a&gt;&lt;/p&gt;
-
     
     </summary>
     
@@ -1223,7 +1223,7 @@ stretch（默认值）：轴线占满整个交叉轴。
     <link href="http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2016-08-17-pleasure-working-with-you.html"/>
     <id>http://www.sguotao.com/生活感悟-2016-08-17-pleasure-working-with-you.html</id>
     <published>2016-08-17T09:00:00.000Z</published>
-    <updated>2017-05-04T11:36:57.000Z</updated>
+    <updated>2017-06-02T10:40:05.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>文章作者：咪喵<br>文章来源： TalentGuide </p>

@@ -4,19 +4,21 @@
 
     
   <url>
-    <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2015-01-21-my-2014.html</loc>
-    <lastmod>2017-06-02T10:17:33.000Z</lastmod>
+    <loc>http://www.sguotao.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2016-02-20-%E8%A7%A3%E5%BF%A7%E6%9D%82%E8%B4%A7%E5%BA%97.html</loc>
+    <lastmod>2017-06-02T10:40:23.000Z</lastmod>
     <data>
         <display>
-        <title>Hello 2015</title>
-        <pubTime>2015-01-01T04:00:00.000Z</pubTime>
+        <title>【读书笔记】解忧杂货店</title>
+        <pubTime>2016-02-20T04:00:00.000Z</pubTime>
         
-        <tag>生活</tag>
+        <tag>读书笔记</tag>
+         
+        <tag>解忧杂货店</tag>
          
          
            
              
-              <breadCrumb title="生活感悟" url="http://www.sguotao.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/"/>
+              <breadCrumb title="读书笔记" url="http://www.sguotao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
           
         </display>
     </data>
@@ -25,7 +27,7 @@
     
   <url>
     <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2017-06-02-%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BF%A7%E8%99%91%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%AA%E6%9D%A5.html</loc>
-    <lastmod>2017-06-02T09:54:02.000Z</lastmod>
+    <lastmod>2017-06-02T10:40:10.000Z</lastmod>
     <data>
         <display>
         <title>【转】程序员为什么会忧虑自己的未来?</title>
@@ -43,10 +45,533 @@
     </url>
 
     
+  <url>
+    <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2016-08-17-pleasure-working-with-you.html</loc>
+    <lastmod>2017-06-02T10:40:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>怎样才能让别人觉得与你合作愉快</title>
+        <pubTime>2016-08-17T09:00:00.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活感悟" url="http://www.sguotao.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2016-05-09-getdown-to-my-work.html</loc>
+    <lastmod>2017-06-02T10:39:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>和光同尘，静水流深</title>
+        <pubTime>2016-05-08T09:00:00.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活感悟" url="http://www.sguotao.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2015-12-30-executive-ability.html</loc>
+    <lastmod>2017-06-02T10:39:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>听了好多道理，却还是做不好工作</title>
+        <pubTime>2015-12-30T13:18:59.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活感悟" url="http://www.sguotao.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6-2017-03-17-classloader.html</loc>
+    <lastmod>2017-06-02T10:39:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android动态加载机制</title>
+        <pubTime>2017-03-17T02:27:04.000Z</pubTime>
+        
+        <tag>JVM</tag>
+         
+        <tag>插件框架</tag>
+         
+        <tag>ClassLoader</tag>
+         
+         
+           
+             
+              <breadCrumb title="插件框架" url="http://www.sguotao.com/categories/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/RxJava-2016-01-25.html</loc>
+    <lastmod>2017-06-02T10:39:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>【RxJava】一 RxJava是什么</title>
+        <pubTime>2016-01-25T02:27:04.000Z</pubTime>
+        
+        <tag>RxJava</tag>
+         
+         
+           
+             
+              <breadCrumb title="RxJava" url="http://www.sguotao.com/categories/RxJava/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/ReactNative-2017-05-17-rn-flex.html</loc>
+    <lastmod>2017-06-02T10:39:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>【学习笔记】ReactNative Flex整理</title>
+        <pubTime>2017-05-17T02:27:04.000Z</pubTime>
+        
+        <tag>ReactNative</tag>
+         
+        <tag>Flex</tag>
+         
+         
+           
+             
+              <breadCrumb title="ReactNative" url="http://www.sguotao.com/categories/ReactNative/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/ReactNative-2017-04-25-rn-css.html</loc>
+    <lastmod>2017-06-02T10:39:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>【学习笔记】ReactNative样式整理</title>
+        <pubTime>2017-03-24T02:27:04.000Z</pubTime>
+        
+        <tag>ReactNative</tag>
+         
+        <tag>CSS</tag>
+         
+         
+           
+             
+              <breadCrumb title="ReactNative" url="http://www.sguotao.com/categories/ReactNative/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-26-java-collections-5.html</loc>
+    <lastmod>2017-06-02T10:39:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>集合框架篇5 Set</title>
+        <pubTime>2010-11-10T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>集合框架</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-25-java-collection-4-map.html</loc>
+    <lastmod>2017-06-02T10:39:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>集合框架篇4 Map</title>
+        <pubTime>2010-11-09T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>集合框架</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-24-java-collection-3.html</loc>
+    <lastmod>2017-06-02T10:39:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>集合框架篇3 List</title>
+        <pubTime>2010-11-08T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>集合框架</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-23-java-collection-2.html</loc>
+    <lastmod>2017-06-02T10:38:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>集合框架篇2 Collection</title>
+        <pubTime>2010-11-07T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>集合框架</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-22-java-collection-1.html</loc>
+    <lastmod>2017-06-02T10:38:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>集合框架篇1 容器简介</title>
+        <pubTime>2010-11-06T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>集合框架</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-6-multi-thread-6.html</loc>
+    <lastmod>2017-06-02T10:38:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>多线程 6 线程组</title>
+        <pubTime>2010-10-06T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-5-multi-thread-5.html</loc>
+    <lastmod>2017-06-02T10:38:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>多线程 5 线程的同步与共享</title>
+        <pubTime>2010-10-05T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-4-multi-thread-4.html</loc>
+    <lastmod>2017-06-02T10:38:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>多线程 4 线程状态的改变</title>
+        <pubTime>2010-10-05T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-3-multi-thread-3.html</loc>
+    <lastmod>2017-06-02T10:38:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>多线程 3 线程的状态与调度</title>
+        <pubTime>2010-10-03T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-2-multi-thread-2.html</loc>
+    <lastmod>2017-06-02T10:38:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>多线程 2 线程的创建</title>
+        <pubTime>2010-10-02T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-1-multi-thread-1.html</loc>
+    <lastmod>2017-06-02T10:38:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>多线程 1 线程与线程类</title>
+        <pubTime>2010-10-01T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-12-04-io-5.html</loc>
+    <lastmod>2017-06-02T10:38:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java IO流 序列流</title>
+        <pubTime>2010-12-04T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>IO流</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-12-03-io-4.html</loc>
+    <lastmod>2017-06-02T10:38:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java IO流 File类</title>
+        <pubTime>2010-12-03T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>IO流</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-12-02-io-3.html</loc>
+    <lastmod>2017-06-02T10:38:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java IO流 字节流</title>
+        <pubTime>2010-12-02T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>IO流</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-12-01-io-2.html</loc>
+    <lastmod>2017-06-02T10:38:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java IO流 字符流</title>
+        <pubTime>2010-12-01T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>IO流</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-11-30-io-1.html</loc>
+    <lastmod>2017-06-02T10:38:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java IO流 IO流的介绍</title>
+        <pubTime>2010-11-30T02:27:04.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>IO流</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-03-24-android-memory-leak.html</loc>
+    <lastmod>2017-06-02T10:37:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android内存泄露</title>
+        <pubTime>2017-03-24T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>内存泄露</tag>
+         
+        <tag>MAT</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android进阶" url="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-20-android-property-animation.html</loc>
-    <lastmod>2017-06-01T07:08:46.000Z</lastmod>
+    <lastmod>2017-06-02T10:37:55.000Z</lastmod>
     <data>
         <display>
         <title>Android动画分析三 Property Animation</title>
@@ -70,7 +595,7 @@
     
   <url>
     <loc>http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-19-android-drawable-animation.html</loc>
-    <lastmod>2017-05-31T06:37:35.000Z</lastmod>
+    <lastmod>2017-06-02T10:37:51.000Z</lastmod>
     <data>
         <display>
         <title>Android动画分析二 Drawable Animation</title>
@@ -94,7 +619,7 @@
     
   <url>
     <loc>http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-18-android-view-animation.html</loc>
-    <lastmod>2017-05-31T02:30:32.000Z</lastmod>
+    <lastmod>2017-06-02T10:37:47.000Z</lastmod>
     <data>
         <display>
         <title>Android动画分析一 View Animation</title>
@@ -117,8 +642,32 @@
 
     
   <url>
+    <loc>http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2013-11-11-activity-task-affinity.html</loc>
+    <lastmod>2017-06-02T10:37:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>Activity Task栈及启动模式</title>
+        <pubTime>2013-11-11T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Activity</tag>
+         
+        <tag>启动模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android进阶" url="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2012-08-15-android%E8%AE%BE%E7%BD%AE%E5%85%A8%E5%B1%8F%E6%98%BE%E7%A4%BA.html</loc>
-    <lastmod>2017-05-18T10:16:42.000Z</lastmod>
+    <lastmod>2017-06-02T10:37:35.000Z</lastmod>
     <data>
         <display>
         <title>Android 设置全屏显示</title>
@@ -140,7 +689,7 @@
     
   <url>
     <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-14-android-basic-16.html</loc>
-    <lastmod>2017-05-18T09:52:17.000Z</lastmod>
+    <lastmod>2017-06-02T10:37:30.000Z</lastmod>
     <data>
         <display>
         <title>Android基础16 传感器</title>
@@ -161,21 +710,23 @@
 
     
   <url>
-    <loc>http://www.sguotao.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2016-02-20-%E8%A7%A3%E5%BF%A7%E6%9D%82%E8%B4%A7%E5%BA%97.html</loc>
-    <lastmod>2017-05-18T02:59:25.000Z</lastmod>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-13-android-basic-15.html</loc>
+    <lastmod>2017-06-02T10:37:25.000Z</lastmod>
     <data>
         <display>
-        <title>【读书笔记】解忧杂货店</title>
-        <pubTime>2016-02-20T04:00:00.000Z</pubTime>
+        <title>Android基础15 动画特效</title>
+        <pubTime>2011-08-13T02:27:04.000Z</pubTime>
         
-        <tag>读书笔记</tag>
+        <tag>Android</tag>
          
-        <tag>解忧杂货店</tag>
+        <tag>UI</tag>
+         
+        <tag>动画</tag>
          
          
            
              
-              <breadCrumb title="读书笔记" url="http://www.sguotao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
           
         </display>
     </data>
@@ -183,21 +734,21 @@
 
     
   <url>
-    <loc>http://www.sguotao.com/ReactNative-2017-05-17-rn-flex.html</loc>
-    <lastmod>2017-05-17T08:04:40.000Z</lastmod>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-12-android-basic-14.html</loc>
+    <lastmod>2017-06-02T10:37:19.000Z</lastmod>
     <data>
         <display>
-        <title>【学习笔记】ReactNative Flex整理</title>
-        <pubTime>2017-05-17T02:27:04.000Z</pubTime>
+        <title>Android基础14 样式与主题</title>
+        <pubTime>2011-08-12T02:27:04.000Z</pubTime>
         
-        <tag>ReactNative</tag>
+        <tag>Android</tag>
          
-        <tag>Flex</tag>
+        <tag>UI</tag>
          
          
            
              
-              <breadCrumb title="ReactNative" url="http://www.sguotao.com/categories/ReactNative/"/>
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
           
         </display>
     </data>
@@ -205,26 +756,317 @@
 
     
   <url>
-    <loc>http://www.sguotao.com/ReactNative-2017-04-25-rn-css.html</loc>
-    <lastmod>2017-05-17T07:59:13.000Z</lastmod>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-11-android-basic-13.html</loc>
+    <lastmod>2017-06-02T10:37:13.000Z</lastmod>
     <data>
         <display>
-        <title>【学习笔记】ReactNative样式整理</title>
-        <pubTime>2017-03-24T02:27:04.000Z</pubTime>
+        <title>Android基础13 常用UI（下）</title>
+        <pubTime>2011-08-11T02:27:04.000Z</pubTime>
         
-        <tag>ReactNative</tag>
+        <tag>Android</tag>
          
-        <tag>CSS</tag>
+        <tag>UI</tag>
          
          
            
              
-              <breadCrumb title="ReactNative" url="http://www.sguotao.com/categories/ReactNative/"/>
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
           
         </display>
     </data>
     </url>
 
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-10-android-basic-12.html</loc>
+    <lastmod>2017-06-02T10:37:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础12 常用UI（中）</title>
+        <pubTime>2011-08-10T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>UI</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-07-21-android-basic-11.html</loc>
+    <lastmod>2017-06-02T10:36:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础11 常用UI（上）</title>
+        <pubTime>2011-07-21T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>UI</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-07-15-android-basic-10.html</loc>
+    <lastmod>2017-06-02T10:36:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础10 通知</title>
+        <pubTime>2011-07-15T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Toast</tag>
+         
+        <tag>Notification</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-07-09-android-basic-9.html</loc>
+    <lastmod>2017-06-02T10:36:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础9 多媒体</title>
+        <pubTime>2011-07-09T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Media</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-07-03-android-basic-8.html</loc>
+    <lastmod>2017-06-02T10:36:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础8 服务(Service)</title>
+        <pubTime>2011-07-03T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Service</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-28-android-basic-7.html</loc>
+    <lastmod>2017-06-02T10:36:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础7 广播接收者(BroadcastReceiver)</title>
+        <pubTime>2011-06-28T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Broadcast</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-27-android-basic-6.html</loc>
+    <lastmod>2017-06-02T10:36:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础6 活动(Activity)</title>
+        <pubTime>2011-06-27T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Activity</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-15-android-basic-5.html</loc>
+    <lastmod>2017-06-02T10:36:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础5 网络通信</title>
+        <pubTime>2011-06-15T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>网络通信</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-14-android-basic-4.html</loc>
+    <lastmod>2017-06-02T10:36:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础4 内容提供者（ContentProvider）</title>
+        <pubTime>2011-06-14T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>ContentProvider</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-09-android-basic-3.html</loc>
+    <lastmod>2017-06-02T10:36:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础3 Android文件操作</title>
+        <pubTime>2011-06-11T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>XML</tag>
+         
+        <tag>数据库</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-07-android-basic-2.html</loc>
+    <lastmod>2017-06-02T10:36:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础2 布局</title>
+        <pubTime>2011-06-07T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>布局</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-01-android-basic-1.html</loc>
+    <lastmod>2017-06-02T10:36:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android基础1 Android项目的结构</title>
+        <pubTime>2011-06-01T02:27:04.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>JVM</tag>
+         
+        <tag>Davlik</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2015-01-21-my-2014.html</loc>
+    <lastmod>2017-06-02T10:17:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello 2015</title>
+        <pubTime>2015-01-01T04:00:00.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活感悟" url="http://www.sguotao.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://www.sguotao.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2017-05-11-%E6%98%8E%E6%9C%9D%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF.html</loc>
@@ -858,848 +1700,6 @@
            
              
               <breadCrumb title="读书笔记" url="http://www.sguotao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2013-11-11-activity-task-affinity.html</loc>
-    <lastmod>2017-05-10T08:12:27.000Z</lastmod>
-    <data>
-        <display>
-        <title>Activity Task栈及启动模式</title>
-        <pubTime>2013-11-11T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Activity</tag>
-         
-        <tag>启动模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android进阶" url="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2016-08-17-pleasure-working-with-you.html</loc>
-    <lastmod>2017-05-04T11:36:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>怎样才能让别人觉得与你合作愉快</title>
-        <pubTime>2016-08-17T09:00:00.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活感悟" url="http://www.sguotao.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2016-05-09-getdown-to-my-work.html</loc>
-    <lastmod>2017-05-04T11:36:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>和光同尘，静水流深</title>
-        <pubTime>2016-05-08T09:00:00.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活感悟" url="http://www.sguotao.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2015-12-30-executive-ability.html</loc>
-    <lastmod>2017-05-04T11:36:33.000Z</lastmod>
-    <data>
-        <display>
-        <title>听了好多道理，却还是做不好工作</title>
-        <pubTime>2015-12-30T13:18:59.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活感悟" url="http://www.sguotao.com/categories/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6-2017-03-17-classloader.html</loc>
-    <lastmod>2017-05-04T11:35:53.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android动态加载机制</title>
-        <pubTime>2017-03-17T02:27:04.000Z</pubTime>
-        
-        <tag>JVM</tag>
-         
-        <tag>插件框架</tag>
-         
-        <tag>ClassLoader</tag>
-         
-         
-           
-             
-              <breadCrumb title="插件框架" url="http://www.sguotao.com/categories/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/RxJava-2016-01-25.html</loc>
-    <lastmod>2017-05-04T11:34:53.000Z</lastmod>
-    <data>
-        <display>
-        <title>【RxJava】一 RxJava是什么</title>
-        <pubTime>2016-01-25T02:27:04.000Z</pubTime>
-        
-        <tag>RxJava</tag>
-         
-         
-           
-             
-              <breadCrumb title="RxJava" url="http://www.sguotao.com/categories/RxJava/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-26-java-collections-5.html</loc>
-    <lastmod>2017-05-04T09:43:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>集合框架篇5 Set</title>
-        <pubTime>2010-11-10T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>集合框架</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-25-java-collection-4-map.html</loc>
-    <lastmod>2017-05-04T09:41:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>集合框架篇4 Map</title>
-        <pubTime>2010-11-09T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>集合框架</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-24-java-collection-3.html</loc>
-    <lastmod>2017-05-04T09:36:56.000Z</lastmod>
-    <data>
-        <display>
-        <title>集合框架篇3 List</title>
-        <pubTime>2010-11-08T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>集合框架</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-23-java-collection-2.html</loc>
-    <lastmod>2017-05-04T09:33:45.000Z</lastmod>
-    <data>
-        <display>
-        <title>集合框架篇2 Collection</title>
-        <pubTime>2010-11-07T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>集合框架</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-2012-11-22-java-collection-1.html</loc>
-    <lastmod>2017-05-04T09:31:41.000Z</lastmod>
-    <data>
-        <display>
-        <title>集合框架篇1 容器简介</title>
-        <pubTime>2010-11-06T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>集合框架</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 集合框架" url="http://www.sguotao.com/categories/Java-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-6-multi-thread-6.html</loc>
-    <lastmod>2017-05-04T09:28:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>多线程 6 线程组</title>
-        <pubTime>2010-10-06T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-5-multi-thread-5.html</loc>
-    <lastmod>2017-05-04T09:27:19.000Z</lastmod>
-    <data>
-        <display>
-        <title>多线程 5 线程的同步与共享</title>
-        <pubTime>2010-10-05T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-4-multi-thread-4.html</loc>
-    <lastmod>2017-05-04T09:21:51.000Z</lastmod>
-    <data>
-        <display>
-        <title>多线程 4 线程状态的改变</title>
-        <pubTime>2010-10-05T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-3-multi-thread-3.html</loc>
-    <lastmod>2017-05-04T09:20:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>多线程 3 线程的状态与调度</title>
-        <pubTime>2010-10-03T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-2-multi-thread-2.html</loc>
-    <lastmod>2017-05-04T09:19:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>多线程 2 线程的创建</title>
-        <pubTime>2010-10-02T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B-2010-10-1-multi-thread-1.html</loc>
-    <lastmod>2017-05-04T09:16:55.000Z</lastmod>
-    <data>
-        <display>
-        <title>多线程 1 线程与线程类</title>
-        <pubTime>2010-10-01T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java 多线程" url="http://www.sguotao.com/categories/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-12-04-io-5.html</loc>
-    <lastmod>2017-05-04T09:15:26.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java IO流 序列流</title>
-        <pubTime>2010-12-04T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>IO流</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-12-03-io-4.html</loc>
-    <lastmod>2017-05-04T09:15:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java IO流 File类</title>
-        <pubTime>2010-12-03T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>IO流</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-12-02-io-3.html</loc>
-    <lastmod>2017-05-04T09:15:15.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java IO流 字节流</title>
-        <pubTime>2010-12-02T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>IO流</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-12-01-io-2.html</loc>
-    <lastmod>2017-05-04T09:15:09.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java IO流 字符流</title>
-        <pubTime>2010-12-01T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>IO流</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Java-IO%E6%B5%81-2010-11-30-io-1.html</loc>
-    <lastmod>2017-05-04T09:15:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>Java IO流 IO流的介绍</title>
-        <pubTime>2010-11-30T02:27:04.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>IO流</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java IO流" url="http://www.sguotao.com/categories/Java-IO%E6%B5%81/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-13-android-basic-15.html</loc>
-    <lastmod>2017-05-04T03:03:00.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础15 动画特效</title>
-        <pubTime>2011-08-13T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>UI</tag>
-         
-        <tag>动画</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-12-android-basic-14.html</loc>
-    <lastmod>2017-05-04T03:02:39.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础14 样式与主题</title>
-        <pubTime>2011-08-12T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>UI</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-11-android-basic-13.html</loc>
-    <lastmod>2017-05-04T03:02:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础13 常用UI（下）</title>
-        <pubTime>2011-08-11T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>UI</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-10-android-basic-12.html</loc>
-    <lastmod>2017-05-04T03:01:19.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础12 常用UI（中）</title>
-        <pubTime>2011-08-10T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>UI</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-07-21-android-basic-11.html</loc>
-    <lastmod>2017-05-04T03:00:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础11 常用UI（上）</title>
-        <pubTime>2011-07-21T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>UI</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-07-15-android-basic-10.html</loc>
-    <lastmod>2017-05-04T03:00:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础10 通知</title>
-        <pubTime>2011-07-15T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Toast</tag>
-         
-        <tag>Notification</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-07-09-android-basic-9.html</loc>
-    <lastmod>2017-05-04T02:59:51.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础9 多媒体</title>
-        <pubTime>2011-07-09T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Media</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-07-03-android-basic-8.html</loc>
-    <lastmod>2017-05-04T02:58:47.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础8 服务(Service)</title>
-        <pubTime>2011-07-03T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Service</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-28-android-basic-7.html</loc>
-    <lastmod>2017-05-04T02:58:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础7 广播接收者(BroadcastReceiver)</title>
-        <pubTime>2011-06-28T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Broadcast</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-27-android-basic-6.html</loc>
-    <lastmod>2017-05-04T02:55:53.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础6 活动(Activity)</title>
-        <pubTime>2011-06-27T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Activity</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-15-android-basic-5.html</loc>
-    <lastmod>2017-05-04T02:41:16.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础5 网络通信</title>
-        <pubTime>2011-06-15T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>网络通信</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-14-android-basic-4.html</loc>
-    <lastmod>2017-05-03T13:00:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础4 内容提供者（ContentProvider）</title>
-        <pubTime>2011-06-14T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>ContentProvider</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-09-android-basic-3.html</loc>
-    <lastmod>2017-05-03T12:49:18.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础3 Android文件操作</title>
-        <pubTime>2011-06-11T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>XML</tag>
-         
-        <tag>数据库</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-07-android-basic-2.html</loc>
-    <lastmod>2017-05-03T12:46:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础2 布局</title>
-        <pubTime>2011-06-07T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>布局</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-06-01-android-basic-1.html</loc>
-    <lastmod>2017-05-03T12:28:01.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android基础1 Android项目的结构</title>
-        <pubTime>2011-06-01T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>JVM</tag>
-         
-        <tag>Davlik</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android基础" url="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-03-24-android-memory-leak.html</loc>
-    <lastmod>2017-05-03T12:27:14.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android内存泄露</title>
-        <pubTime>2017-03-24T02:27:04.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>内存泄露</tag>
-         
-        <tag>MAT</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android进阶" url="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
           
         </display>
     </data>

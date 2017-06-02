@@ -102,7 +102,7 @@
 <meta property="og:url" content="http://www.sguotao.com/ReactNative-2017-04-25-rn-css.html">
 <meta property="og:site_name" content="Scott's Blog">
 <meta property="og:description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
-<meta property="og:updated_time" content="2017-05-17T07:59:13.000Z">
+<meta property="og:updated_time" content="2017-06-02T10:39:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【学习笔记】ReactNative样式整理">
 <meta name="twitter:description" content="ReactNative的样式是CSS样式的一个子集，并且属性名称与CSS中规定的也不完全相同。 引入样式的几种方法常见的引用样式的几种方法，包括内嵌方式，外联方式和混合方式，还可以把样式定义在单独的文件中，通过import引用。 1. 内嵌方式1234567891011121314151617export default class appProject extends Component &amp;#1">
@@ -927,6 +927,34 @@
     </div>
 
     
+      <div>
+        
+          
+
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>「真诚赞赏，手留余香」</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+<div>
+
+        
+      </div>
+    
 
     <div>
       
@@ -992,7 +1020,7 @@
           
   <div class="comments" id="comments">
     
-      <div id="uyan_frame"></div>
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODkyOC81NDk3"></div>
     
   </div>
 
@@ -1288,14 +1316,6 @@
 
 
 
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132060"></script>
-      <!-- UY END -->
-    
   
 
 
