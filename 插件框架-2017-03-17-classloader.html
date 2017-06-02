@@ -449,9 +449,9 @@
 </ul>
 <p>当AppClassLoader开始加载xxx.class时，类加载器会现将加载的任务交给其parent来完成，如果parent找不到，则自己负责加载。所以在加载xxx.class时的顺序是，BootstrapClassLoader –&gt; ExtClassLoader –&gt; AppClassLoader，如果都找不到，则抛出ClassNotFoundException。这就是非常有名的双亲委托模型。</p>
 <p>使用双亲委托模型，有效地解决了.class字节码重复加载的问题，当parent已经加载类某各类的.class字节码时，子类就没有必要再重新进行加载。举个例子，来说明一下双亲委托模型。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974220124844.png" alt="20170317148974220124844.png"></p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 取得SomeClass的Class实例</span></div><div class="line">   <span class="keyword">Class</span> c = <span class="keyword">Class</span>.forName(<span class="string">"SomeClass"</span>);</div><div class="line">   <span class="comment">// 取得ClassLoader</span></div><div class="line">   ClassLoader loader = c.getClassLoader();</div><div class="line">   System.out.<span class="keyword">println</span>(loader);</div><div class="line">   <span class="comment">// 取得父ClassLoader</span></div><div class="line">   System.out.<span class="keyword">println</span>(loader.getParent());</div><div class="line">   <span class="comment">// 再取得父ClassLoader</span></div><div class="line">   System.out.<span class="keyword">println</span>(loader.getParent().getParent());</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 取得SomeClass的Class实例</div><div class="line">   Class c = Class.forName(&quot;SomeClass&quot;);</div><div class="line">   // 取得ClassLoader</div><div class="line">   ClassLoader loader = c.getClassLoader();</div><div class="line">   System.out.println(loader);</div><div class="line">   // 取得父ClassLoader</div><div class="line">   System.out.println(loader.getParent());</div><div class="line">   // 再取得父ClassLoader</div><div class="line">   System.out.println(loader.getParent().getParent());</div></pre></td></tr></table></figure>
 <p>运行结果：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sun<span class="selector-class">.misc</span><span class="selector-class">.Launcher</span>\<span class="variable">$AppClassLoader</span>@<span class="number">19821</span>f</div><div class="line">sun<span class="selector-class">.misc</span><span class="selector-class">.Launcher</span>\<span class="variable">$ExtClassLoader</span>@addbf1</div><div class="line">null</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sun.misc.Launcher\$AppClassLoader@19821f</div><div class="line">sun.misc.Launcher\$ExtClassLoader@addbf1</div><div class="line">null</div></pre></td></tr></table></figure>
 <p>由于SomeClass是自定义的一个Java类，通常会java.class.path中产生字节码，首先AppClassLoader会将加载的任务交给其parent,ExtClassLaoder,ExtClassLoader将加载任务交给其parent，BootStrapClassLoader,由于BootStrapLoader在其目录(sun.boot.class.path)下没有找到该类的字节码，所以由ExtClassLoader来加载，ExtClassLoader在其目录(java.ext.dirs)也没有发现SomeClass的字节码，交给AppClassLoader进行加载，AppClassLoader在(java.class.path)中找到，并进行加载。</p>
 <p>加载SomeClass的ClassLoader是AppClassLoader,其parent是ExtClassLoader,<br>而ExtClassLoader的parent是null，这是因为BootStrapClassLoader是由c代码编写的，在JVM中并没有对应的实例对象，所以显示为null。</p>
 <h2 id="Dalvik与JVM"><a href="#Dalvik与JVM" class="headerlink" title="Dalvik与JVM"></a>Dalvik与JVM</h2><p>在Java中，把一些Java类编译成.class文件，通过ClassLoader进行加载，但是在Android上边，情况有所不同，主要的原因在于Android中使用的虚拟机是Dalvik。Android中的Dalvik和Java中的JVM都是将对应的Java类加载到内存中运行。不同的是JVM加载的是.class字节码文件，或是通过defineClass方式产生class，进行加载。Dalvik加载的是.dex文件，.dex文件是Android对.class文件进行了优化，更加适合内存和处理器有限的系统。</p>
@@ -545,8 +545,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/ReactNative-2017-04-25-rn-css.html" rel="next" title="【学习笔记】ReactNative样式整理">
-                <i class="fa fa-chevron-left"></i> 【学习笔记】ReactNative样式整理
+              <a href="/Android进阶-2017-03-24-android-memory-leak.html" rel="next" title="Android内存泄露">
+                <i class="fa fa-chevron-left"></i> Android内存泄露
               </a>
             
           </div>
@@ -555,8 +555,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/读书笔记-2017-01-04-追风筝的人.html" rel="prev" title="【读书笔记】追风筝的人">
-                【读书笔记】追风筝的人 <i class="fa fa-chevron-right"></i>
+              <a href="/读书笔记-2016-11-16-跟任何人都聊得来.html" rel="prev" title="【读书笔记】跟任何人都聊得来">
+                【读书笔记】跟任何人都聊得来 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
