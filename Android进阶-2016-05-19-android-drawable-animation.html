@@ -100,10 +100,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android动画分析二 Drawable Animation">
 <meta property="og:url" content="http://www.sguotao.com/Android进阶-2016-05-19-android-drawable-animation.html">
-<meta property="og:site_name" content="Scott's Blog">
+<meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="在上一篇中对Android传统动画中的View动画进行了一些整理，Android动画分析一 View Animation 在这一篇中，将对Android传统动画中的Drawable动画进行整理。什么是Drawable动画，Drawable动画是将一些列的Drawable资源一个接一个的播放，从而产生动画的效果，可以理解为是Frame Animation。 Drawable Animation这里介">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170531149619977711659.gif">
-<meta property="og:updated_time" content="2017-06-02T10:37:51.000Z">
+<meta property="og:updated_time" content="2017-06-07T09:23:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android动画分析二 Drawable Animation">
 <meta name="twitter:description" content="在上一篇中对Android传统动画中的View动画进行了一些整理，Android动画分析一 View Animation 在这一篇中，将对Android传统动画中的Drawable动画进行整理。什么是Drawable动画，Drawable动画是将一些列的Drawable资源一个接一个的播放，从而产生动画的效果，可以理解为是Frame Animation。 Drawable Animation这里介">
@@ -427,7 +427,7 @@
       
 
       
-        <p>在上一篇中对Android传统动画中的View动画进行了一些整理，<a href="/blog/2016/05/Android%E8%BF%9B%E9%98%B6-2016-05-18-android-view-animation.html">Android动画分析一 View Animation</a> 在这一篇中，将对Android传统动画中的Drawable动画进行整理。什么是Drawable动画，Drawable动画是将一些列的Drawable资源一个接一个的播放，从而产生动画的效果，可以理解为是Frame Animation。</p>
+        <p>在上一篇中对Android传统动画中的View动画进行了一些整理，<a href="/Android%E8%BF%9B%E9%98%B6-2016-05-18-android-view-animation.html">Android动画分析一 View Animation</a> 在这一篇中，将对Android传统动画中的Drawable动画进行整理。什么是Drawable动画，Drawable动画是将一些列的Drawable资源一个接一个的播放，从而产生动画的效果，可以理解为是Frame Animation。</p>
 <h2 id="Drawable-Animation"><a href="#Drawable-Animation" class="headerlink" title="Drawable Animation"></a>Drawable Animation</h2><p>这里介绍实现Drawable Animation的两种方式，一种是使用&lt;animation-list&gt;标签，一种是使用AnimationDrawable对象。</p>
 <h3 id="Drawable动画的示例"><a href="#Drawable动画的示例" class="headerlink" title="Drawable动画的示例"></a>Drawable动画的示例</h3><p>在res/drawable目录下定义一个动画文件(<strong>注:不是res/anim目录</strong>)，文件的根节点是&lt;animation-list&gt;其中android:oneshot属性当值为true时,动画只执行一次，当值为false时，动画重复执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;animation-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:oneshot=&quot;false&quot;&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification01&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification02&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification03&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification04&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification05&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification06&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">&lt;/animation-list&gt;</div></pre></td></tr></table></figure></p>
 <p>在Activity中处理的逻辑:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">ImageView imageView;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_test_view_animation);</div><div class="line"></div><div class="line">        imageView = (ImageView) this.findViewById(R.id.imageView);</div><div class="line">        Button mButton = (Button) this.findViewById(R.id.button);</div><div class="line"></div><div class="line">        mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                AnimationDrawable drawableAnim = (AnimationDrawable) imageView.getBackground();</div><div class="line">                if (drawableAnim.isRunning()) &#123;</div><div class="line">                    drawableAnim.stop();</div><div class="line">                &#125; else &#123;</div><div class="line">                    drawableAnim.start();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
@@ -510,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/读书笔记-2016-05-24-三体-全集.html" rel="next" title="【读书笔记】三体(全集）">
-                <i class="fa fa-chevron-left"></i> 【读书笔记】三体(全集）
+              <a href="/Android进阶-2016-05-18-android-view-animation.html" rel="next" title="Android动画分析一 View Animation">
+                <i class="fa fa-chevron-left"></i> Android动画分析一 View Animation
               </a>
             
           </div>
@@ -520,8 +520,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Android进阶-2016-05-18-android-view-animation.html" rel="prev" title="Android动画分析一 View Animation">
-                Android动画分析一 View Animation <i class="fa fa-chevron-right"></i>
+              <a href="/生活感悟-2016-08-17-pleasure-working-with-you.html" rel="prev" title="怎样才能让别人觉得与你合作愉快">
+                怎样才能让别人觉得与你合作愉快 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -596,7 +596,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
