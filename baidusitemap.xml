@@ -4,6 +4,72 @@
 
     
   <url>
+    <loc>http://www.sguotao.com/Kotlin-2017-06-09-Kotlin-note1.html</loc>
+    <lastmod>2017-06-09T03:35:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>【Kotlin】Kotlin的前世今生</title>
+        <pubTime>2017-06-09T02:30:37.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Kotlin</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android进阶" url="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/ReactNative-2017-05-17-rn-flex.html</loc>
+    <lastmod>2017-06-08T10:44:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>【RN笔记】ReactNative Flex整理</title>
+        <pubTime>2017-05-17T02:27:04.000Z</pubTime>
+        
+        <tag>ReactNative</tag>
+         
+        <tag>Flex</tag>
+         
+         
+           
+             
+              <breadCrumb title="ReactNative" url="http://www.sguotao.com/categories/ReactNative/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.com/ReactNative-2017-04-25-rn-css.html</loc>
+    <lastmod>2017-06-08T10:44:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>【RN笔记】ReactNative样式整理</title>
+        <pubTime>2017-03-24T02:27:04.000Z</pubTime>
+        
+        <tag>ReactNative</tag>
+         
+        <tag>CSS</tag>
+         
+         
+           
+             
+              <breadCrumb title="ReactNative" url="http://www.sguotao.com/categories/ReactNative/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.sguotao.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2016-02-20-%E8%A7%A3%E5%BF%A7%E6%9D%82%E8%B4%A7%E5%BA%97.html</loc>
     <lastmod>2017-06-08T10:37:38.000Z</lastmod>
     <data>
@@ -155,7 +221,7 @@
 
     
   <url>
-    <loc>http://www.sguotao.com/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6-2017-03-17-classloader.html</loc>
+    <loc>http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-03-17-classloader.html</loc>
     <lastmod>2017-06-02T10:39:37.000Z</lastmod>
     <data>
         <display>
@@ -192,50 +258,6 @@
            
              
               <breadCrumb title="RxJava" url="http://www.sguotao.com/categories/RxJava/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/ReactNative-2017-05-17-rn-flex.html</loc>
-    <lastmod>2017-06-02T10:39:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>【学习笔记】ReactNative Flex整理</title>
-        <pubTime>2017-05-17T02:27:04.000Z</pubTime>
-        
-        <tag>ReactNative</tag>
-         
-        <tag>Flex</tag>
-         
-         
-           
-             
-              <breadCrumb title="ReactNative" url="http://www.sguotao.com/categories/ReactNative/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.com/ReactNative-2017-04-25-rn-css.html</loc>
-    <lastmod>2017-06-02T10:39:17.000Z</lastmod>
-    <data>
-        <display>
-        <title>【学习笔记】ReactNative样式整理</title>
-        <pubTime>2017-03-24T02:27:04.000Z</pubTime>
-        
-        <tag>ReactNative</tag>
-         
-        <tag>CSS</tag>
-         
-         
-           
-             
-              <breadCrumb title="ReactNative" url="http://www.sguotao.com/categories/ReactNative/"/>
           
         </display>
     </data>
