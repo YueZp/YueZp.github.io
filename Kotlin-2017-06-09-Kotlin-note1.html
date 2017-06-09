@@ -98,14 +98,14 @@
 <meta name="description" content="三周前的Google IO大会上，官方宣布将Kotlin作为除Java、C++外的官方编程语言，在最新一期的TIOBE排行榜中，Kotlin就首次挤进编程语言TOP50。Kotlin是怎样的编程语言？Google为何将Kotlin作为官方的编程语言？Kotlin与其它语言(尤其是Java)相比，有哪些特点呢？带着这些问题，来了解Kotlin。 Kotlin是什么？ Kotlin是一种在Java虚拟">
 <meta name="keywords" content="Android,Kotlin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Kotlin】Kotlin的前世今生">
+<meta property="og:title" content="【Kotlin笔记】Kotlin的前世今生">
 <meta property="og:url" content="http://www.sguotao.com/Kotlin-2017-06-09-Kotlin-note1.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="三周前的Google IO大会上，官方宣布将Kotlin作为除Java、C++外的官方编程语言，在最新一期的TIOBE排行榜中，Kotlin就首次挤进编程语言TOP50。Kotlin是怎样的编程语言？Google为何将Kotlin作为官方的编程语言？Kotlin与其它语言(尤其是Java)相比，有哪些特点呢？带着这些问题，来了解Kotlin。 Kotlin是什么？ Kotlin是一种在Java虚拟">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/201706091496976207210.jpg">
-<meta property="og:updated_time" content="2017-06-09T03:35:39.000Z">
+<meta property="og:updated_time" content="2017-06-09T08:57:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Kotlin】Kotlin的前世今生">
+<meta name="twitter:title" content="【Kotlin笔记】Kotlin的前世今生">
 <meta name="twitter:description" content="三周前的Google IO大会上，官方宣布将Kotlin作为除Java、C++外的官方编程语言，在最新一期的TIOBE排行榜中，Kotlin就首次挤进编程语言TOP50。Kotlin是怎样的编程语言？Google为何将Kotlin作为官方的编程语言？Kotlin与其它语言(尤其是Java)相比，有哪些特点呢？带着这些问题，来了解Kotlin。 Kotlin是什么？ Kotlin是一种在Java虚拟">
 <meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/201706091496976207210.jpg">
 
@@ -141,7 +141,7 @@
 
 
 
-  <title>【Kotlin】Kotlin的前世今生 | Scott's Blog</title>
+  <title>【Kotlin笔记】Kotlin的前世今生 | Scott's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -342,7 +342,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">【Kotlin】Kotlin的前世今生</h2>
+          <h2 class="post-title" itemprop="name headline">【Kotlin笔记】Kotlin的前世今生</h2>
         
 
         <div class="post-meta">
@@ -394,7 +394,7 @@
 
           
           
-             <span id="/Kotlin-2017-06-09-Kotlin-note1.html" class="leancloud_visitors" data-flag-title="【Kotlin】Kotlin的前世今生">
+             <span id="/Kotlin-2017-06-09-Kotlin-note1.html" class="leancloud_visitors" data-flag-title="【Kotlin笔记】Kotlin的前世今生">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -445,7 +445,23 @@
 <li>工具友好，由JetBrains开发，一家创造开发工具而闻名的公司；</li>
 <li>互操作，与Java和Android 100%互操作；</li>
 </ol>
-<h2 id="一点感想"><a href="#一点感想" class="headerlink" title="一点感想"></a>一点感想</h2><p>Android程序员和其他程序员甚至其他职业相比，在<strong>本质上的竞争力表现在解决问题的能力上</strong>。想要具备这种能力，核心还是我们对问题和技术的准确认识程度及扎实的基础。编程语言本质上还是工具，好的工具能带来更好的效率，但是如何运用好，将效率和质量提升到最高，则还是更主要的依赖于开发者的能力。选用好的工具，更侧重夯实基础和加强对事物本质认识的能力，才能回归到提升竞争力的本质上。</p>
+<h2 id="与Java相比优势是什么？"><a href="#与Java相比优势是什么？" class="headerlink" title="与Java相比优势是什么？"></a>与Java相比优势是什么？</h2><p>由于Android 应用使用了JVM，这意味着可以使用任何语言去编写app，只要能够编译成被JVM识别的字节码文件就可以了，同样编译字节码Kotlin与Java相比的优势：</p>
+<ol>
+<li><p>更加易表现，这个重要的特点意味着可以少些很多代码，比如定义一个数据类，只需要进行如下定义，Kotlin会自动生成所有属性和他们的访问器，以及一些常用的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">data class Person(</div><div class="line">        var id: Long,</div><div class="line">        var name: String,</div><div class="line">        var gender: Int,</div><div class="line">        var address: String</div><div class="line">        )</div></pre></td></tr></table></figure>
+</li>
+<li><p>更加安全，Kotlin是空安全的，即在编译期间处理了各种null的场景，避免了运行时异常。在Java开发中，需要通过判断是否为null来避免NullPointerException,在Kotlin中通过一个安全调用操作符(?)来明确地指定一个对象是否为空。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var person:Person ?=null //person可以是null</div><div class="line">person.speak() //编译不过,person可能是null</div><div class="line">person?.speak() //person不为null,调用speak()</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数式，Kotlin是基于面向对象语言，使用了很多函数式编程的概念，主要是Lambda，Java8中也支持Lambda表达式。</p>
+</li>
+<li><p>可以扩展函数，可以扩展类的更多特性，甚至是一些没有权限访问类的代码；如给fragment添加一个显示toast的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fun Fragment.toast(message: CharSequence, duration:Int = Toast.LENGTH_LONG)&#123;</div><div class="line">    Toast.makeText(getActivity(),message,duration).show()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>高度互操作，可以使用所有用Java写的代码和第三方库，因为Kotlin和Java之间的相互操作是完美的，甚至可以在项目中进行混合编程。</p>
+</li>
+</ol>
+<h2 id="一点感想"><a href="#一点感想" class="headerlink" title="一点感想"></a>一点感想</h2><p>Android程序员和其它程序员相比，甚至是其它职业相比，<strong>竞争力在本质上还是体现在解决问题的能力上</strong>。想要提升这种能力，核心还是建立在扎实的基础和对问题技术的准确认识程度上。编程语言本质上只是一种工具，一个顺手的工具能带来更高的效率，但是如何用好这个工具，将效率和质量提升到最高，还是依赖于开发者的能力。选用一个趁手的工具，夯实基础，加强对事物本质透彻的分析和认识，才是真正回归到提升竞争力的本质上来。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://www.tiobe.com/tiobe-index/" target="_blank" rel="external">TIOBE 编程语言社区</a><br><a href="https://kotlinlang.org/docs/tutorials/koans.html" target="_blank" rel="external">kotlin-koans</a></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.com/Kotlin-2017-06-09-Kotlin-note1.html">http://www.sguotao.com/Kotlin-2017-06-09-Kotlin-note1.html</a></p>
@@ -675,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin是什么？"><span class="nav-number">1.</span> <span class="nav-text">Kotlin是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么是Kotlin"><span class="nav-number">2.</span> <span class="nav-text">为什么是Kotlin?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一点感想"><span class="nav-number">3.</span> <span class="nav-text">一点感想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin是什么？"><span class="nav-number">1.</span> <span class="nav-text">Kotlin是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么是Kotlin"><span class="nav-number">2.</span> <span class="nav-text">为什么是Kotlin?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与Java相比优势是什么？"><span class="nav-number">3.</span> <span class="nav-text">与Java相比优势是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一点感想"><span class="nav-number">4.</span> <span class="nav-text">一点感想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
