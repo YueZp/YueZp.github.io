@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.sguotao.com/"/>
-  <updated>2017-06-09T08:57:03.000Z</updated>
+  <updated>2017-06-23T01:12:34.000Z</updated>
   <id>http://www.sguotao.com/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【Kotlin笔记】Hello Kotlin</title>
+    <link href="http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html"/>
+    <id>http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html</id>
+    <published>2017-06-09T02:30:37.000Z</published>
+    <updated>2017-06-23T01:12:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在上一篇 <em><a href="/Kotlin-2017-06-09-Kotlin-note1.html">Kotlin的前世今生</a></em> 中介绍了Kotlin的一些特点，下面记录一下Kotlin开发环境的配置，并且完成“Hello Kotlin”的打印输出。</p>
+<h2 id="AndroidStudio"><a href="#AndroidStudio" class="headerlink" title="AndroidStudio"></a>AndroidStudio</h2><p>由于AndroidStudio是基于Intllij Idead的插件实现，Intellij Idea也是JetBrains开发的，所有AndroidStudio就与Kotlin天生有一层紧密的联系，在AndroidStudio的预览版中已经将Kotlin作为了一个基础插件进行了集成，官方最新的2.3版本还暂时没有集成Kotlin插件，需要手动进行安装，安装的过程也非常的简单，具体路径Preferences–&gt;Plugin,选择Kotlin，安装，重启编译器。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812368551731.png" alt="20170622149812368551731.png"><br>Eclipse编译器同样需要手动安装插件，从Intellij 15开始，Kotlin也默认是安装的。</p>
+<h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><p>使用gradle构建Kotlin项目时，需要添加kotlin的依赖，对不同的项目，gradle文件也有所不同。</p>
+<h3 id="Java项目"><a href="#Java项目" class="headerlink" title="Java项目"></a>Java项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    ext.kotlin_version = &apos;1.1.2&apos;</div><div class="line"></div><div class="line">    repositories &#123;</div><div class="line">        mavenCentral()</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin: &apos;java&apos;</div><div class="line">apply plugin: &apos;kotlin&apos;</div><div class="line"></div><div class="line">sourceCompatibility = 1.7</div><div class="line"></div><div class="line">repositories &#123;</div><div class="line">    mavenCentral()</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile &quot;org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version&quot;</div><div class="line">    testCompile group: &apos;junit&apos;, name: &apos;junit&apos;, version: &apos;4.12&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="JavaScript项目"><a href="#JavaScript项目" class="headerlink" title="JavaScript项目"></a>JavaScript项目</h3><p>JavaScript使用不同的插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply plugin: &quot;kotlin2js&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="Android项目"><a href="#Android项目" class="headerlink" title="Android项目"></a>Android项目</h3><p>如果通过编译器新建Kotlin项目工程，Gradle文件是默认生成的，如果要手动修改，需要手动添加Kotlin的引用包。在工程的gradle文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    ext.kotlin_version = &apos;1.1.0&apos; //使用的kotlin版本</div><div class="line"></div><div class="line">    repositories &#123;</div><div class="line">        mavenCentral()</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dependencies &#123;</div><div class="line">        classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建一个变量来保存当前使用的kotlin的版本号，在每个module的gradle文件中，都会用到这个变量，当使用高版本的kotlin时，直接修改这个变量即可。</p>
+<h2 id="Hello-Kotlin"><a href="#Hello-Kotlin" class="headerlink" title="Hello Kotlin"></a>Hello Kotlin</h2><p>打开IntelliJ，新建project，选中Kotlin。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812594181308.png" alt="20170622149812594181308.png"><br>输入GroupID（项目组织唯一的标识符，建议对应JAVA的包的结构）和 ArtifactID（项目的唯一的标识符，建议对应项目的名称），一路Next。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812620532141.png" alt="20170622149812620532141.png"><br>新建的工程中，是没有src文件的，需要手动添加，新建directory，名称src/main/kotlin。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812643655117.png" alt="20170622149812643655117.png"><br>新建一个package，创建HelloKotlin.kt。<br> <img src="http://7u2np3.com1.z0.glb.clouddn.com/2017062214981267486665.png" alt="2017062214981267486665.png"><br>添加一个main方法，输出“Hello Kotlin”。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812693961350.png" alt="20170622149812693961350.png"><br>至此，完成了“Hello Kotlin”的输出。</p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html">http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在上一篇 &lt;em&gt;&lt;a href=&quot;/Kotlin-2017-06-09-Kotlin-note1.html&quot;&gt;Kotlin的前世今生&lt;/a&gt;&lt;/em&gt; 中介绍了Kotlin的一些特点，下面记录一下Kotlin开发环境的配置，并且完成“Hello Kotlin”的打印输出。
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="Kotlin" scheme="http://www.sguotao.com/tags/Kotlin/"/>
+    
+  </entry>
   
   <entry>
     <title>【Kotlin笔记】Kotlin的前世今生</title>
@@ -218,6 +252,53 @@ stretch（默认值）：轴线占满整个交叉轴。
   </entry>
   
   <entry>
+    <title>【读书笔记】人民的名义</title>
+    <link href="http://www.sguotao.com/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2017-05-04-%E4%BA%BA%E6%B0%91%E7%9A%84%E5%90%8D%E4%B9%89.html"/>
+    <id>http://www.sguotao.com/读书笔记-2017-05-04-人民的名义.html</id>
+    <published>2017-05-04T04:00:00.000Z</published>
+    <updated>2017-06-17T12:31:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>车窗外，严酷的冬季让广袤大地褪尽了五彩缤纷，裸露出素朴的本色，宛如卸妆后的母亲。<br>北风凛冽，裹挟着原野上的残草败叶，不时地扑打着路面。<br>然而冷峻的荒漠中，不也孕育着春天的希望吗？<br><a id="more"></a></p>
+</blockquote>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017060914970149358704.png" alt="2017060914970149358704.png"><br>酣畅淋漓的读完了整本书，热播的电视剧也进入了收官，如何评价书中的人物？我想，不同的人，会因为个人经历的不同，看问题的角度不同，人生观、世界观和价值观不同，对同一个人物，会做出完全不同的评价。</p>
+<blockquote>
+<p>摘自公众号：闲人笔潭</p>
+</blockquote>
+<p>这部剧播出至今，不仅收视率火热，关于剧情、人物的讨论更是一浪高过一浪。而且有意思的地方在于，舆论的反转。</p>
+<p>正义精明的检察官变成了何不食肉糜的既得利益者；<br>祁同伟从一个腐败官员变成了一个“寒门难出贵子”的悲情人物；<br>达康书记从一个有能力有抱负的政治家变成了伪君子。<br>而与之相对应的，是孙连城、高育良、沙瑞金甚至陈岩石评价的反转。</p>
+<p>公众话题的有趣之处就在于：<strong>面对同一个问题，不同人会因为个人经历的不同、三观的不同、立场的不同与角度的不同发表出截然不同的评价。</strong></p>
+<p>替祁同伟打抱不平，是因为祁同伟的悲情遭遇让诸多还在奋斗以及奋斗失败的人们心生共鸣。甚至不少人反对“阶级固化”更胜于反腐：<strong>腐败损失的是人民的经济利益，阶级固化是近乎堵死了寒门子弟上升的渠道与奋斗的动力。</strong></p>
+<p>觉得侯亮平夫妇、陆亦可他们“何不食肉糜”的，也再正常不过。这个世界确实是分层的，但在你心里，可以不分。可钟小艾一句“摆得正自己的位置”，不知让多少人感受到了这种分层，以及优越感。</p>
+<p>觉得李达康横行霸道的，是因为谁都不愿意身边有个这样一个聪明、有能力却“不粘锅”的人，“先生如万年青草，可以傲霜雪而不可充栋梁”大家都知道这个人好，但都想离他远点。</p>
+<p>而大家讨论着，甚至吵得面红耳赤，当真是为了这么几个角色么？<strong>其实大多都是在讲自己的价值观，寻求价值认同啊</strong>。</p>
+<p>价值观源自于出身、经历、读书思考，是每个人自身的精神之源，这样的动力才让我们每一个人都在为自己深有感触的地方发声。我们理解某些悲剧的时候也在潜意识的担心这些悲剧会不会在自己身上上演，我们控诉某些不公的时候更加感触得到这些不公就在自己的生活中，讨论的是剧情，共鸣的是每个人的经历。所以窃以为，大家最关注的、最感同身受的问题，恐怕也是当下社会存在的最显著的问题。</p>
+<p>没错，就是阶级固化。中国是一个伪装成世界的国家，沿海是高楼大厦的现代社会，西部是还在等待扶贫的山区；南部的商业意识已发展数十年，深入人心，东北的人情关系更世代未变，根深蒂固；北上广的孩子们在排歌剧话剧的时候河南河北的学生还在“只要学不死，就往死里学”的标语下挑灯夜读。虽然在同一片土地上，却是不同的世界。</p>
+<p>阶级固化所给人带来的就是像祁同伟那样“品学兼优的学生会主席，主动参加缉毒，身中三枪的英雄也被权力任意支配”的恐惧与无力感；还有钟小艾的“只要再努力一下就好了”的“何不食肉糜”般的轻描淡写。但是更会有人认为贪腐了就是贪腐了，没有任何贪腐的理由。这种撕裂的观点可能就是大家不同的经历：有些人苦于成才无门，有些人则受难于贪官污吏，正是这些不同的角度才有了前些天对“达康书记”的赞誉与这些天对“祁厅长”遭遇的同情，以及对这部剧的各种评判。</p>
+<p>祁同伟是一个可惜可叹的悲剧，其实剧中哪一位有血有肉的人物不是呢？农民出身一分钱不敢花的赵德汉、善于谋划学识渊博的教授书记高育良、爷爷闹革命出身能熟练背出《共产党宣言》的刘新建。他们都曾拼搏奋斗，也都有了一般人很难拥有的学识、能力，他们最终也都贪污腐化了。有个人的原因，也有制度的原因。</p>
+<p>想起几年前的“民国热”，当时还在热心科普民国的种种“真相”，想让向往民国的朋友们知道那是一个路有冻死骨的乱世，可应者渺渺。后来才被一句话点醒：“除了年轻学生，谁会真想去民国，连个手机都没有，只不过都是对现实有些不满罢了。”就如同文艺复兴从来就不是想回到希腊。</p>
+<p>评《人民的名义》也不是真的想过天下大同，每个人都是圣人。<strong>这些激烈争吵，只是希望我们的价值观能得到更多的认同，希望社会能往更好的一点发展。当人们“一切向钱看”，而没有了价值信仰和精神寄托时，社会的稳定与繁荣就很难持续。当收入不高和升迁无望的政府官员面对诱惑而没有抵抗力时，就很难指望可以一劳永逸地使干部队伍保持廉洁。当某地的政治平衡和权力格局需要借助外力才能打破时，该地政治生态系统的自我修复功能就值得警惕。讨论《人民的名义》时，大概讨论的，可能都是自己的人生吧。</strong></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/读书笔记-2017-05-04-人民的名义.html">http://www.sguotao.com/读书笔记-2017-05-04-人民的名义.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;车窗外，严酷的冬季让广袤大地褪尽了五彩缤纷，裸露出素朴的本色，宛如卸妆后的母亲。&lt;br&gt;北风凛冽，裹挟着原野上的残草败叶，不时地扑打着路面。&lt;br&gt;然而冷峻的荒漠中，不也孕育着春天的希望吗？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://www.sguotao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="读书笔记" scheme="http://www.sguotao.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="人民的名义" scheme="http://www.sguotao.com/tags/%E4%BA%BA%E6%B0%91%E7%9A%84%E5%90%8D%E4%B9%89/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android动画分析三 Property Animation</title>
     <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-20-android-property-animation.html"/>
     <id>http://www.sguotao.com/Android进阶-2016-05-20-android-property-animation.html</id>
@@ -393,6 +474,155 @@ stretch（默认值）：轴线占满整个交叉轴。
       <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
     
       <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android内存泄露</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-03-24-android-memory-leak.html"/>
+    <id>http://www.sguotao.com/Android进阶-2017-03-24-android-memory-leak.html</id>
+    <published>2017-03-24T02:27:04.000Z</published>
+    <updated>2017-06-02T10:37:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="内存泄露与内存溢出"><a href="#内存泄露与内存溢出" class="headerlink" title="内存泄露与内存溢出"></a>内存泄露与内存溢出</h2><h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>内存泄露(Memory Leak)是指无用对象（不再使用的对象）持续占有内存，或者无用对象的内存得不到及时释放，从而造成内存空间得不到有效的利用。在Java中，内存泄露的原因，通常是长生命周期的对象，持有短生命周期对象的引用。在《深入理解Java虚拟机》中的解释是，当无用对象一直被有用对象引用，导致无用对象可达，JVM无法对无用对象完成回收。从而造成内存泄露。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170327149058275225194.png" alt="内存泄露"></p>
+<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>内存溢出(Out of Memory)是指程序在运行过程中，无法申请到足够的的内存导致的一种错误。内存泄露是会导致内存溢出，但不是导致内存溢出的唯一原因。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170327149058290012605.png" alt="20170327149058290012605.png"></p>
+<h2 id="Java中的内存泄露"><a href="#Java中的内存泄露" class="headerlink" title="Java中的内存泄露"></a>Java中的内存泄露</h2><h3 id="Java-内存分配"><a href="#Java-内存分配" class="headerlink" title="Java 内存分配"></a>Java 内存分配</h3><p>Java中的内存分配主要分三块，静态存储区，栈区和堆区。</p>
+<ul>
+<li>静态存储区，编译时分配，存在于程序的整个运行期间，主要用于存放静态数据和常量。</li>
+<li>栈区，在方法执行时，用于存放方法内部的局部变量，方法结束后，内存释放。</li>
+<li>堆区，通常用来存放new出来的对象，由JVM进行回收处理。</li>
+</ul>
+<h3 id="四种引用类型"><a href="#四种引用类型" class="headerlink" title="四种引用类型"></a>四种引用类型</h3><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170329149077275371348.png" alt="20170329149077275371348.png"><br>从JDK1.2开始，Java将对象的引用分为了强引用、软引用、弱引用和虚引用。</p>
+<ul>
+<li>强引用(Strong Reference),平时使用最多的一种引用，<strong>如果一个对象的引用方式是强引用，垃圾回收器不会对该对象进行回收，即使出现了内存空间不足的情况，JVM会抛出Out of Memory,也不会对强引用的对象进行回收。</strong></li>
+<li>软引用(Soft Reference),在对象的引用强度上若于强引用，对于弱引用的对象，<strong>当内存不足时，JVM会回收软引用对象，释放内存空间</strong>。通常情况下，缓存的创建，适合使用软引用的方式。</li>
+<li>弱引用(Weak Reference),在对象的引用强度上，弱于软引用，相对于强引用对象的不可回收，弱引用的对象，不存在这种情况，<strong>在垃圾回收器工作时，不论内存空间是否充足，都会对弱引用的对象进行回收。</strong>弱引用的作用，主要在于解决强引用对象之前的耦合关系，如在集合类中，任何Java对象都可以作为键来使用，当一个键值对被放入到集合中，集合对象本身就对这些键和值产生引用，如果是强引用，只要集合对象本身存在，其中包含的键和值就不会被回收，当集合包含的键和值越来越多时，最后会消耗掉JVM中的全部内存。</li>
+<li>虚引用(Phantom Reference)，使用的情况并不多见，主要用来实现比较清晰的内存控制，这对于内存有限的移动设备是很有意义的。<strong>虚引用用来跟踪对象被垃圾回收器回收的活动</strong>，虚引用和软引用，弱引用的一个明显的区别是，虚引用必须和引用队列联合使用，通过检查引用队列中的内容，可以判断一个对象是否即将被回收。</li>
+</ul>
+<p>一个对象的引用类型有多个，怎么判断？<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170329149077630884381.png" alt="20170329149077630884381.png"><br>判定规则如下：</p>
+<ul>
+<li>单条引用链上的可达性，以最弱的一个引用类型来决定；</li>
+<li>多条引用链上的可达性，以最强的一个引用类型来决定；</li>
+</ul>
+<p>我们假设上图中，1和3为强引用，5为软引用，7为弱引用。对于对象5的引用类型，在路径1–5中，5为软引用类型，依据规则1，对象5为软引用类型。在路径3–7中，7为弱引用类型，所以对象5为弱引用类型。依据规则2，多条引用链上的可达性，以最强的一个引用类型决定，因此，对象5的引用类型为软引用类型。</p>
+<h2 id="内存泄露检测工具"><a href="#内存泄露检测工具" class="headerlink" title="内存泄露检测工具"></a>内存泄露检测工具</h2><h3 id="Monitors"><a href="#Monitors" class="headerlink" title="Monitors"></a>Monitors</h3><p>Memory Monitors是AndroidStudio自带的一个性能检测工具，主要包含以下几个功能：</p>
+<ul>
+<li>实时查看app的内存使用情况；</li>
+<li>能够比较直观的了解到app的运行卡顿是否跟GC的频繁操作有关；</li>
+<li>能够了解到app的crash是否跟内存溢出有关；</li>
+<li>能够发现内存抖动(在短时间内分配大量内存，频繁的引起GC操作)</li>
+</ul>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170401149101636441749.png" alt="20170401149101636441749.png"></p>
+<h3 id="DDMS-Dump"><a href="#DDMS-Dump" class="headerlink" title="DDMS Dump"></a>DDMS Dump</h3><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017040114910150822979.png" alt="2017040114910150822979.png"><br><strong>什么是Java Heap Dump？</strong>首先需要搞明白什么是Java Heap，Java Heap是分配给实例类和数组对象运行数据区，所有Java线程在运行期间共享heap中的数据，Java Heap Dump相当于在应用运行时，某个时间点进行一次快照，在AndroidStudio中，快照会被保存为.hprof类型的文件，保存在captures目录中。</p>
+<p>分析.hprof文件，我们可以将.hprof视图分成A、B、C三个部分，在A部分中，可以看到app的整个堆内存信息，显示了在堆内存中的所有的java类。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Total Count</td>
+<td style="text-align:center">内存中，当前Java类的实例数量</td>
+</tr>
+<tr>
+<td style="text-align:center">Heap Count</td>
+<td style="text-align:center">堆内存中，当前Java类的实例数量</td>
+</tr>
+<tr>
+<td style="text-align:center">Size of</td>
+<td style="text-align:center">当前Java类每个实例对象需要占用内存的物理大小</td>
+</tr>
+<tr>
+<td style="text-align:center">Shallow Size</td>
+<td style="text-align:center">当前Java实例对象占有的内存大小</td>
+</tr>
+<tr>
+<td style="text-align:center">Retained Size</td>
+<td style="text-align:center">释放当前Java实例对象后，节省的内存大小</td>
+</tr>
+</tbody>
+</table>
+<p>当选中A区域中的某个Java类，可以在B区域中看到选中Java类的所有实例对象。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Depth</td>
+<td style="text-align:center">当前对象的深度</td>
+</tr>
+<tr>
+<td style="text-align:center">Shallow Size</td>
+<td style="text-align:center">当前对象占有的内存大小</td>
+</tr>
+<tr>
+<td style="text-align:center">Dominating Size</td>
+<td style="text-align:center">当前对象可支配的内存大小</td>
+</tr>
+</tbody>
+</table>
+<p>在B中看到选中Java类的所有实例对象的同时，在C区域能够看到哪些对象引用了该对象。</p>
+<p><strong>什么是Allocation Tracker？</strong>Allocation Tracker主要用来追踪内存分配信息，Start Allocation Tracking 相当于在程序运行时，某个时间节点，对内存分配信息进行一次快照，生成的快照文件被保存为.alloc类型，保存在captures目录中。Allocation Tracker 也可以在Devices Monitor中启动，在Devices Monitor中使用时，需要设备有Root权限。</p>
+<h3 id="MAT"><a href="#MAT" class="headerlink" title="MAT"></a>MAT</h3><p>MAT(Eclipse Memory Analyzer)是一个堆转储文件分析工具，在Monitor的快照文件(.hprof)，需要转换成MAT可以打开的标准.hprof文件，使用Mat工具打开转换后的.hprof文件，会生成一个内存消耗整体状况的报告，从饼状图中，可以比较直观地看到哪些对象占用了多少的内存空间。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170419149258510813625.png" alt="20170419149258510813625.png"><br>这里介绍一下，MAT给我们提供的几个分析的维度。</p>
+<ul>
+<li>Histogram，在该视图中可以清晰的看出内存中对象的数量，及所占用内存空间的大小。</li>
+<li>Dominator Tree:在该视图中，可以在线程的角度观察到哪些对象占用内存空间。</li>
+<li>Top Consumers:从包，对象等角度，显示内存的占用情况，能够比较直观的找出占用内存比较多的对象。</li>
+<li>Leak Suspects:分析内存泄露的情况，生成一份报表，给出一些problem的建议。</li>
+</ul>
+<p>下面介绍一些常用的操作，视图中支持正则表达式筛选，可以过滤出我们比较关心的对象，可以以列表或者树形的结构显示出来，其中：</p>
+<ul>
+<li>with incoming references:过滤出那些类引用了当前选中的类；</li>
+<li>with outcoming references:过滤出当前选中类引用了哪些类；</li>
+</ul>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017042014926559112895.png" alt="2017042014926559112895.png"></p>
+<p>垃圾回收器会对虚拟机的内存空间，即堆空间中已经存在的对象进行识别，如果对象正在被引用，那么称其为存活对象，如果对象不在被引用，则为垃圾回收器回收的对象，这部分对象占用的内存空间可以被回收。</p>
+<p>在垃圾回收机制中有一组元素被称为根元素集合，它们是一组被虚拟机直接引用的对象。堆空间中的每个对象都是由一个根元素为起点被层层调用的。所以，一个对象如果被一个存活的根元素所引用，就会被认为是存活对象，不能被回收。这时，可以通过分析一个对象到根元素的引用路径来分析该对象为什么不能够被顺利回收。</p>
+<p>当选中某个对象，通过Merge Shortest Paths to GC Root的操作，可以显示对象之间的排除了软引用，弱引用和虚引用的引用关系，这样我们看到的就是被选中对象是否还存在强引用，通过分析 ，能够直接找到内存没有释放的原因。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170420149269042589662.png" alt="20170420149269042589662.png"></p>
+<h2 id="开发中常见内存泄露的场景"><a href="#开发中常见内存泄露的场景" class="headerlink" title="开发中常见内存泄露的场景"></a>开发中常见内存泄露的场景</h2><h3 id="1-Context对象使用不当；"><a href="#1-Context对象使用不当；" class="headerlink" title="1.Context对象使用不当；"></a>1.Context对象使用不当；</h3><p>在Android中经常使用的单例模式，如果使用不当，会出现内存泄露，泄露的主要原因是因为，单例模式中的静态成员变量的生命周期与应用的生命周期一样长。比较常见的场景是，经常在一些工具类中使用单例模式，如xxManager,xxHelper，xxUtils,这些工具类中需要使用Context,由于Activity是间接继承Context，当Activity退出时，单例对象中持有了它的引用，导致Activity回收失败，从而出现内存泄露。处理方式是使用Application,由于Application的生命周期贯穿整个应用，所以当这些工具类需要使用到Context时，使用getApplication()或者getApplicationContext()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">    public class Util &#123;</div><div class="line">        private Context mContext;</div><div class="line">        private static Util sInstance;</div><div class="line"></div><div class="line">        private Util(Context context) &#123;</div><div class="line">            this.mContext = context;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public static Util getInstance(Context context) &#123;</div><div class="line">            if (sInstance == null) &#123;</div><div class="line">//                sInstance = new Util(context);</div><div class="line">                sInstance = new Util(context.getApplicationContext());</div><div class="line">            &#125;</div><div class="line">            return sInstance;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="2-内部类使用不当"><a href="#2-内部类使用不当" class="headerlink" title="2.内部类使用不当"></a>2.内部类使用不当</h3><p>当使用非静态的内部类时，如果出现内部类持有外部类的引用，就会出现内存泄露，优化方法，可以使用静态的内部类，这样内部类就不在持有外部类的引用，不会影响GC对于外部类的回收。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class MyActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 静态成员变量</div><div class="line">     */</div><div class="line">    public static InnerClass innerClass = null;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_my);</div><div class="line"></div><div class="line">        innerClass = new InnerClass();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    class InnerClass &#123;</div><div class="line"></div><div class="line">        public void doSomeThing() &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-Handler的异步消息通信"><a href="#3-Handler的异步消息通信" class="headerlink" title="3.Handler的异步消息通信"></a>3.Handler的异步消息通信</h3><p>在使用Handler时出现内存泄露的主要原因是Handler的生命周期与Activity的生命周期不一致，当应用启动时，创建UI主线程Looper对象，Looper实现了简单的消息队列，主线程Looper对象存在整个应用的生命周期中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class HandlerActivity extends Activity &#123;</div><div class="line"></div><div class="line">    private final Handler mHandler = new Handler() &#123;</div><div class="line">        @Override</div><div class="line">        public void handleMessage(Message msg) &#123;</div><div class="line">            // ...</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        mHandler.sendMessageDelayed(Message.obtain(), 10*000);</div><div class="line">        finish();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当在Actiivity中使用Handler时，就可能会产生内存泄露，究其根本原因，是我们使用的非静态内部类(或者匿名内部类)默认隐性持有外部类的引用，静态内部类不会持有外部类的引用。在Activity结束时，由于Message是延迟消息，会在主线程的消息队列中，该消息持有Activity中的Handler的引用，Handler默认持有Activity的引用，直至该消息被处理完。此时导致Activity对象无法被回收，就会出现内存泄露。优化方法，可以使用静态内部类继承Handler对象，或者在Activity的onDestory()方法中，调用mHandler.removeCallbacksAndMessages(null);</p>
+<h3 id="4-Bitmap使用不当"><a href="#4-Bitmap使用不当" class="headerlink" title="4.Bitmap使用不当"></a>4.Bitmap使用不当</h3><p>使用Bitmap如果回收不及时，也会出现内存泄露。原因在于Bitmap类没有对外创建对象的构造方法，获得Bitmap对象只能通过BitmapFactory中的各种静态方法，生成Bitmap对象是通过JNI调用底层c来实现的。所以，当我们获取一个Bitmap对象时，其对应的内存中包含两部分内容，一部分是Java，一部分是c,Java部分的内存可以通过GC进行回收，但是c部分的内存GC是不会进行自动回收的，所以，我们在使用Bitmap对象时，需要调用recycle()来主动释放c部分的内存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 判断是否已经回收</div><div class="line">if(bitmap != null &amp;&amp; !bitmap.isRecycled())&#123; </div><div class="line">        // 回收并且置为null</div><div class="line">        bitmap.recycle(); </div><div class="line">        bitmap = null; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-资源性对象没有及时关闭"><a href="#5-资源性对象没有及时关闭" class="headerlink" title="5.资源性对象没有及时关闭"></a>5.资源性对象没有及时关闭</h3><p>当我们使用一些资源性对象时，如果没有做关闭操作，也会出现内存泄露，常见的资源性对象包括(Cursor、ContentProvider、File、Stream)等。还有一类如EventBus、BroadCastReceiver在注册后，为了避免重复注册，需要在退出时及时的销毁。</p>
+<h3 id="6-集合列表相关"><a href="#6-集合列表相关" class="headerlink" title="6.集合列表相关"></a>6.集合列表相关</h3><p>集合类如果仅仅有添加元素的方法，而没有相应的删除机制，导致内存被占用。如果这个集合类是全局性的变量 (比如类中的静态属性，全局性的 map 等即有静态引用或 final 一直指向它)，那么没有相应的删除机制，很可能导致集合所占用的内存只增不减。</p>
+<h3 id="7-Native中存在内存泄露"><a href="#7-Native中存在内存泄露" class="headerlink" title="7.Native中存在内存泄露"></a>7.Native中存在内存泄露</h3><p>由于Native层的代码多用c或c++来实现，GC无法对这部分内存进行会后处理，这时可能会出现内存泄露，这时候就需要c工程师帮助分析，如Malloc的内存是否做了free处理，指针使用完成后，是否进行了置空处理等等。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ol>
+<li><a href="http://www.jianshu.com/p/e97ed5d8a403" target="_blank" rel="external">科普：内存泄漏与内存溢出</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/" target="_blank" rel="external">Java的内存泄漏</a></li>
+<li><a href="https://segmentfault.com/a/1190000006852540" target="_blank" rel="external">Android 内存泄露总结</a></li>
+<li><a href="https://segmentfault.com/a/1190000003910496" target="_blank" rel="external">Java四种引用类型</a></li>
+<li><a href="http://blog.csdn.net/itomge/article/details/48719527" target="_blank" rel="external">MAT使用教程</a></li>
+</ol>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2017-03-24-android-memory-leak.html">http://www.sguotao.com/Android进阶-2017-03-24-android-memory-leak.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;内存泄露与内存溢出&quot;&gt;&lt;a href=&quot;#内存泄露与内存溢出&quot; class=&quot;headerlink&quot; title=&quot;内存泄露与内存溢出&quot;&gt;&lt;/a&gt;内存泄露与内存溢出&lt;/h2&gt;&lt;h3 id=&quot;内存泄露&quot;&gt;&lt;a href=&quot;#内存泄露&quot; class=&quot;headerli
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="内存泄露" scheme="http://www.sguotao.com/tags/%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/"/>
+    
+      <category term="MAT" scheme="http://www.sguotao.com/tags/MAT/"/>
     
   </entry>
   
@@ -912,160 +1142,11 @@ stretch（默认值）：轴线占满整个交叉轴。
   </entry>
   
   <entry>
-    <title>Android内存泄露</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-03-24-android-memory-leak.html"/>
-    <id>http://www.sguotao.com/Android进阶-2017-03-24-android-memory-leak.html</id>
-    <published>2017-03-24T02:27:04.000Z</published>
-    <updated>2017-06-02T10:37:59.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="内存泄露与内存溢出"><a href="#内存泄露与内存溢出" class="headerlink" title="内存泄露与内存溢出"></a>内存泄露与内存溢出</h2><h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>内存泄露(Memory Leak)是指无用对象（不再使用的对象）持续占有内存，或者无用对象的内存得不到及时释放，从而造成内存空间得不到有效的利用。在Java中，内存泄露的原因，通常是长生命周期的对象，持有短生命周期对象的引用。在《深入理解Java虚拟机》中的解释是，当无用对象一直被有用对象引用，导致无用对象可达，JVM无法对无用对象完成回收。从而造成内存泄露。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170327149058275225194.png" alt="内存泄露"></p>
-<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>内存溢出(Out of Memory)是指程序在运行过程中，无法申请到足够的的内存导致的一种错误。内存泄露是会导致内存溢出，但不是导致内存溢出的唯一原因。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170327149058290012605.png" alt="20170327149058290012605.png"></p>
-<h2 id="Java中的内存泄露"><a href="#Java中的内存泄露" class="headerlink" title="Java中的内存泄露"></a>Java中的内存泄露</h2><h3 id="Java-内存分配"><a href="#Java-内存分配" class="headerlink" title="Java 内存分配"></a>Java 内存分配</h3><p>Java中的内存分配主要分三块，静态存储区，栈区和堆区。</p>
-<ul>
-<li>静态存储区，编译时分配，存在于程序的整个运行期间，主要用于存放静态数据和常量。</li>
-<li>栈区，在方法执行时，用于存放方法内部的局部变量，方法结束后，内存释放。</li>
-<li>堆区，通常用来存放new出来的对象，由JVM进行回收处理。</li>
-</ul>
-<h3 id="四种引用类型"><a href="#四种引用类型" class="headerlink" title="四种引用类型"></a>四种引用类型</h3><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170329149077275371348.png" alt="20170329149077275371348.png"><br>从JDK1.2开始，Java将对象的引用分为了强引用、软引用、弱引用和虚引用。</p>
-<ul>
-<li>强引用(Strong Reference),平时使用最多的一种引用，<strong>如果一个对象的引用方式是强引用，垃圾回收器不会对该对象进行回收，即使出现了内存空间不足的情况，JVM会抛出Out of Memory,也不会对强引用的对象进行回收。</strong></li>
-<li>软引用(Soft Reference),在对象的引用强度上若于强引用，对于弱引用的对象，<strong>当内存不足时，JVM会回收软引用对象，释放内存空间</strong>。通常情况下，缓存的创建，适合使用软引用的方式。</li>
-<li>弱引用(Weak Reference),在对象的引用强度上，弱于软引用，相对于强引用对象的不可回收，弱引用的对象，不存在这种情况，<strong>在垃圾回收器工作时，不论内存空间是否充足，都会对弱引用的对象进行回收。</strong>弱引用的作用，主要在于解决强引用对象之前的耦合关系，如在集合类中，任何Java对象都可以作为键来使用，当一个键值对被放入到集合中，集合对象本身就对这些键和值产生引用，如果是强引用，只要集合对象本身存在，其中包含的键和值就不会被回收，当集合包含的键和值越来越多时，最后会消耗掉JVM中的全部内存。</li>
-<li>虚引用(Phantom Reference)，使用的情况并不多见，主要用来实现比较清晰的内存控制，这对于内存有限的移动设备是很有意义的。<strong>虚引用用来跟踪对象被垃圾回收器回收的活动</strong>，虚引用和软引用，弱引用的一个明显的区别是，虚引用必须和引用队列联合使用，通过检查引用队列中的内容，可以判断一个对象是否即将被回收。</li>
-</ul>
-<p>一个对象的引用类型有多个，怎么判断？<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170329149077630884381.png" alt="20170329149077630884381.png"><br>判定规则如下：</p>
-<ul>
-<li>单条引用链上的可达性，以最弱的一个引用类型来决定；</li>
-<li>多条引用链上的可达性，以最强的一个引用类型来决定；</li>
-</ul>
-<p>我们假设上图中，1和3为强引用，5为软引用，7为弱引用。对于对象5的引用类型，在路径1–5中，5为软引用类型，依据规则1，对象5为软引用类型。在路径3–7中，7为弱引用类型，所以对象5为弱引用类型。依据规则2，多条引用链上的可达性，以最强的一个引用类型决定，因此，对象5的引用类型为软引用类型。</p>
-<h2 id="内存泄露检测工具"><a href="#内存泄露检测工具" class="headerlink" title="内存泄露检测工具"></a>内存泄露检测工具</h2><h3 id="Monitors"><a href="#Monitors" class="headerlink" title="Monitors"></a>Monitors</h3><p>Memory Monitors是AndroidStudio自带的一个性能检测工具，主要包含以下几个功能：</p>
-<ul>
-<li>实时查看app的内存使用情况；</li>
-<li>能够比较直观的了解到app的运行卡顿是否跟GC的频繁操作有关；</li>
-<li>能够了解到app的crash是否跟内存溢出有关；</li>
-<li>能够发现内存抖动(在短时间内分配大量内存，频繁的引起GC操作)</li>
-</ul>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170401149101636441749.png" alt="20170401149101636441749.png"></p>
-<h3 id="DDMS-Dump"><a href="#DDMS-Dump" class="headerlink" title="DDMS Dump"></a>DDMS Dump</h3><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017040114910150822979.png" alt="2017040114910150822979.png"><br><strong>什么是Java Heap Dump？</strong>首先需要搞明白什么是Java Heap，Java Heap是分配给实例类和数组对象运行数据区，所有Java线程在运行期间共享heap中的数据，Java Heap Dump相当于在应用运行时，某个时间点进行一次快照，在AndroidStudio中，快照会被保存为.hprof类型的文件，保存在captures目录中。</p>
-<p>分析.hprof文件，我们可以将.hprof视图分成A、B、C三个部分，在A部分中，可以看到app的整个堆内存信息，显示了在堆内存中的所有的java类。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Total Count</td>
-<td style="text-align:center">内存中，当前Java类的实例数量</td>
-</tr>
-<tr>
-<td style="text-align:center">Heap Count</td>
-<td style="text-align:center">堆内存中，当前Java类的实例数量</td>
-</tr>
-<tr>
-<td style="text-align:center">Size of</td>
-<td style="text-align:center">当前Java类每个实例对象需要占用内存的物理大小</td>
-</tr>
-<tr>
-<td style="text-align:center">Shallow Size</td>
-<td style="text-align:center">当前Java实例对象占有的内存大小</td>
-</tr>
-<tr>
-<td style="text-align:center">Retained Size</td>
-<td style="text-align:center">释放当前Java实例对象后，节省的内存大小</td>
-</tr>
-</tbody>
-</table>
-<p>当选中A区域中的某个Java类，可以在B区域中看到选中Java类的所有实例对象。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Depth</td>
-<td style="text-align:center">当前对象的深度</td>
-</tr>
-<tr>
-<td style="text-align:center">Shallow Size</td>
-<td style="text-align:center">当前对象占有的内存大小</td>
-</tr>
-<tr>
-<td style="text-align:center">Dominating Size</td>
-<td style="text-align:center">当前对象可支配的内存大小</td>
-</tr>
-</tbody>
-</table>
-<p>在B中看到选中Java类的所有实例对象的同时，在C区域能够看到哪些对象引用了该对象。</p>
-<p><strong>什么是Allocation Tracker？</strong>Allocation Tracker主要用来追踪内存分配信息，Start Allocation Tracking 相当于在程序运行时，某个时间节点，对内存分配信息进行一次快照，生成的快照文件被保存为.alloc类型，保存在captures目录中。Allocation Tracker 也可以在Devices Monitor中启动，在Devices Monitor中使用时，需要设备有Root权限。</p>
-<h3 id="MAT"><a href="#MAT" class="headerlink" title="MAT"></a>MAT</h3><p>MAT(Eclipse Memory Analyzer)是一个堆转储文件分析工具，在Monitor的快照文件(.hprof)，需要转换成MAT可以打开的标准.hprof文件，使用Mat工具打开转换后的.hprof文件，会生成一个内存消耗整体状况的报告，从饼状图中，可以比较直观地看到哪些对象占用了多少的内存空间。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170419149258510813625.png" alt="20170419149258510813625.png"><br>这里介绍一下，MAT给我们提供的几个分析的维度。</p>
-<ul>
-<li>Histogram，在该视图中可以清晰的看出内存中对象的数量，及所占用内存空间的大小。</li>
-<li>Dominator Tree:在该视图中，可以在线程的角度观察到哪些对象占用内存空间。</li>
-<li>Top Consumers:从包，对象等角度，显示内存的占用情况，能够比较直观的找出占用内存比较多的对象。</li>
-<li>Leak Suspects:分析内存泄露的情况，生成一份报表，给出一些problem的建议。</li>
-</ul>
-<p>下面介绍一些常用的操作，视图中支持正则表达式筛选，可以过滤出我们比较关心的对象，可以以列表或者树形的结构显示出来，其中：</p>
-<ul>
-<li>with incoming references:过滤出那些类引用了当前选中的类；</li>
-<li>with outcoming references:过滤出当前选中类引用了哪些类；</li>
-</ul>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017042014926559112895.png" alt="2017042014926559112895.png"></p>
-<p>垃圾回收器会对虚拟机的内存空间，即堆空间中已经存在的对象进行识别，如果对象正在被引用，那么称其为存活对象，如果对象不在被引用，则为垃圾回收器回收的对象，这部分对象占用的内存空间可以被回收。</p>
-<p>在垃圾回收机制中有一组元素被称为根元素集合，它们是一组被虚拟机直接引用的对象。堆空间中的每个对象都是由一个根元素为起点被层层调用的。所以，一个对象如果被一个存活的根元素所引用，就会被认为是存活对象，不能被回收。这时，可以通过分析一个对象到根元素的引用路径来分析该对象为什么不能够被顺利回收。</p>
-<p>当选中某个对象，通过Merge Shortest Paths to GC Root的操作，可以显示对象之间的排除了软引用，弱引用和虚引用的引用关系，这样我们看到的就是被选中对象是否还存在强引用，通过分析 ，能够直接找到内存没有释放的原因。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170420149269042589662.png" alt="20170420149269042589662.png"></p>
-<h2 id="开发中常见内存泄露的场景"><a href="#开发中常见内存泄露的场景" class="headerlink" title="开发中常见内存泄露的场景"></a>开发中常见内存泄露的场景</h2><h3 id="1-Context对象使用不当；"><a href="#1-Context对象使用不当；" class="headerlink" title="1.Context对象使用不当；"></a>1.Context对象使用不当；</h3><p>在Android中经常使用的单例模式，如果使用不当，会出现内存泄露，泄露的主要原因是因为，单例模式中的静态成员变量的生命周期与应用的生命周期一样长。比较常见的场景是，经常在一些工具类中使用单例模式，如xxManager,xxHelper，xxUtils,这些工具类中需要使用Context,由于Activity是间接继承Context，当Activity退出时，单例对象中持有了它的引用，导致Activity回收失败，从而出现内存泄露。处理方式是使用Application,由于Application的生命周期贯穿整个应用，所以当这些工具类需要使用到Context时，使用getApplication()或者getApplicationContext()。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">    public class Util &#123;</div><div class="line">        private Context mContext;</div><div class="line">        private static Util sInstance;</div><div class="line"></div><div class="line">        private Util(Context context) &#123;</div><div class="line">            this.mContext = context;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public static Util getInstance(Context context) &#123;</div><div class="line">            if (sInstance == null) &#123;</div><div class="line">//                sInstance = new Util(context);</div><div class="line">                sInstance = new Util(context.getApplicationContext());</div><div class="line">            &#125;</div><div class="line">            return sInstance;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h3 id="2-内部类使用不当"><a href="#2-内部类使用不当" class="headerlink" title="2.内部类使用不当"></a>2.内部类使用不当</h3><p>当使用非静态的内部类时，如果出现内部类持有外部类的引用，就会出现内存泄露，优化方法，可以使用静态的内部类，这样内部类就不在持有外部类的引用，不会影响GC对于外部类的回收。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class MyActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 静态成员变量</div><div class="line">     */</div><div class="line">    public static InnerClass innerClass = null;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_my);</div><div class="line"></div><div class="line">        innerClass = new InnerClass();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    class InnerClass &#123;</div><div class="line"></div><div class="line">        public void doSomeThing() &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="3-Handler的异步消息通信"><a href="#3-Handler的异步消息通信" class="headerlink" title="3.Handler的异步消息通信"></a>3.Handler的异步消息通信</h3><p>在使用Handler时出现内存泄露的主要原因是Handler的生命周期与Activity的生命周期不一致，当应用启动时，创建UI主线程Looper对象，Looper实现了简单的消息队列，主线程Looper对象存在整个应用的生命周期中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class HandlerActivity extends Activity &#123;</div><div class="line"></div><div class="line">    private final Handler mHandler = new Handler() &#123;</div><div class="line">        @Override</div><div class="line">        public void handleMessage(Message msg) &#123;</div><div class="line">            // ...</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        mHandler.sendMessageDelayed(Message.obtain(), 10*000);</div><div class="line">        finish();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当在Actiivity中使用Handler时，就可能会产生内存泄露，究其根本原因，是我们使用的非静态内部类(或者匿名内部类)默认隐性持有外部类的引用，静态内部类不会持有外部类的引用。在Activity结束时，由于Message是延迟消息，会在主线程的消息队列中，该消息持有Activity中的Handler的引用，Handler默认持有Activity的引用，直至该消息被处理完。此时导致Activity对象无法被回收，就会出现内存泄露。优化方法，可以使用静态内部类继承Handler对象，或者在Activity的onDestory()方法中，调用mHandler.removeCallbacksAndMessages(null);</p>
-<h3 id="4-Bitmap使用不当"><a href="#4-Bitmap使用不当" class="headerlink" title="4.Bitmap使用不当"></a>4.Bitmap使用不当</h3><p>使用Bitmap如果回收不及时，也会出现内存泄露。原因在于Bitmap类没有对外创建对象的构造方法，获得Bitmap对象只能通过BitmapFactory中的各种静态方法，生成Bitmap对象是通过JNI调用底层c来实现的。所以，当我们获取一个Bitmap对象时，其对应的内存中包含两部分内容，一部分是Java，一部分是c,Java部分的内存可以通过GC进行回收，但是c部分的内存GC是不会进行自动回收的，所以，我们在使用Bitmap对象时，需要调用recycle()来主动释放c部分的内存。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 判断是否已经回收</div><div class="line">if(bitmap != null &amp;&amp; !bitmap.isRecycled())&#123; </div><div class="line">        // 回收并且置为null</div><div class="line">        bitmap.recycle(); </div><div class="line">        bitmap = null; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="5-资源性对象没有及时关闭"><a href="#5-资源性对象没有及时关闭" class="headerlink" title="5.资源性对象没有及时关闭"></a>5.资源性对象没有及时关闭</h3><p>当我们使用一些资源性对象时，如果没有做关闭操作，也会出现内存泄露，常见的资源性对象包括(Cursor、ContentProvider、File、Stream)等。还有一类如EventBus、BroadCastReceiver在注册后，为了避免重复注册，需要在退出时及时的销毁。</p>
-<h3 id="6-集合列表相关"><a href="#6-集合列表相关" class="headerlink" title="6.集合列表相关"></a>6.集合列表相关</h3><p>集合类如果仅仅有添加元素的方法，而没有相应的删除机制，导致内存被占用。如果这个集合类是全局性的变量 (比如类中的静态属性，全局性的 map 等即有静态引用或 final 一直指向它)，那么没有相应的删除机制，很可能导致集合所占用的内存只增不减。</p>
-<h3 id="7-Native中存在内存泄露"><a href="#7-Native中存在内存泄露" class="headerlink" title="7.Native中存在内存泄露"></a>7.Native中存在内存泄露</h3><p>由于Native层的代码多用c或c++来实现，GC无法对这部分内存进行会后处理，这时可能会出现内存泄露，这时候就需要c工程师帮助分析，如Malloc的内存是否做了free处理，指针使用完成后，是否进行了置空处理等等。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ol>
-<li><a href="http://www.jianshu.com/p/e97ed5d8a403" target="_blank" rel="external">科普：内存泄漏与内存溢出</a></li>
-<li><a href="https://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/" target="_blank" rel="external">Java的内存泄漏</a></li>
-<li><a href="https://segmentfault.com/a/1190000006852540" target="_blank" rel="external">Android 内存泄露总结</a></li>
-<li><a href="https://segmentfault.com/a/1190000003910496" target="_blank" rel="external">Java四种引用类型</a></li>
-<li><a href="http://blog.csdn.net/itomge/article/details/48719527" target="_blank" rel="external">MAT使用教程</a></li>
-</ol>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2017-03-24-android-memory-leak.html">http://www.sguotao.com/Android进阶-2017-03-24-android-memory-leak.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;内存泄露与内存溢出&quot;&gt;&lt;a href=&quot;#内存泄露与内存溢出&quot; class=&quot;headerlink&quot; title=&quot;内存泄露与内存溢出&quot;&gt;&lt;/a&gt;内存泄露与内存溢出&lt;/h2&gt;&lt;h3 id=&quot;内存泄露&quot;&gt;&lt;a href=&quot;#内存泄露&quot; class=&quot;headerli
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="内存泄露" scheme="http://www.sguotao.com/tags/%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/"/>
-    
-      <category term="MAT" scheme="http://www.sguotao.com/tags/MAT/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Android动态加载机制</title>
     <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-03-17-classloader.html"/>
     <id>http://www.sguotao.com/Android进阶-2017-03-17-classloader.html</id>
     <published>2017-03-17T02:27:04.000Z</published>
-    <updated>2017-06-02T10:39:37.000Z</updated>
+    <updated>2017-06-13T07:13:08.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Java的类加载机制ClassLoader"><a href="#Java的类加载机制ClassLoader" class="headerlink" title="Java的类加载机制ClassLoader"></a>Java的类加载机制ClassLoader</h2><p>我们编写的java代码，最终会编译成.class字节码的形式，一个完整的Java程序，通常会由若干个.class文件组成，在程序运行时，通过该程序的入口函数来调用系统的各个功能，但是程序启动时，并不会一次性将.class文件加载到内存中，根据程序的需要，通过Java的类加载机制来动态加载.class文件，ClassLoader就是来实现.class文件的动态加载的。</p>
 <h2 id="Java中各类加载器的关系"><a href="#Java中各类加载器的关系" class="headerlink" title="Java中各类加载器的关系"></a>Java中各类加载器的关系</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974200061820.png" alt="20170317148974200061820.png"><br>Java默认会提供三个类加载器，分别为BootStrapClassLoader,ExtClassLoader和AppClassLoader;</p>
@@ -1122,14 +1203,14 @@ stretch（默认值）：轴线占满整个交叉轴。
     
     </summary>
     
-      <category term="插件框架" scheme="http://www.sguotao.com/categories/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6/"/>
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
     
-    
-      <category term="JVM" scheme="http://www.sguotao.com/tags/JVM/"/>
     
       <category term="插件框架" scheme="http://www.sguotao.com/tags/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6/"/>
     
       <category term="ClassLoader" scheme="http://www.sguotao.com/tags/ClassLoader/"/>
+    
+      <category term="JVM" scheme="http://www.sguotao.com/tags/JVM/"/>
     
   </entry>
   
@@ -1191,6 +1272,80 @@ stretch（默认值）：轴线占满整个交叉轴。
     
     
       <category term="生活" scheme="http://www.sguotao.com/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java String的不可变性</title>
+    <link href="http://www.sguotao.com/Java%E8%BF%9B%E9%98%B6-2016-06-15-java-string.html"/>
+    <id>http://www.sguotao.com/Java进阶-2016-06-15-java-string.html</id>
+    <published>2016-06-15T02:27:04.000Z</published>
+    <updated>2017-06-15T07:27:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Java String类有一个特点，即它是一个不可变类，一旦被实例化后，就无法被修改。于是就有一个疑问，为什么将String类设计成不可变的？这样设计有什么好处呢？</p>
+<h2 id="什么是不可变对象？"><a href="#什么是不可变对象？" class="headerlink" title="什么是不可变对象？"></a>什么是不可变对象？</h2><p>一个对象在其被实例化完成后，不能够改变其成员变量，包括基本数据类型的值不能够改变及引用类型索引的对象也不能够被修改。</p>
+<h2 id="String的不可变性"><a href="#String的不可变性" class="headerlink" title="String的不可变性"></a>String的不可变性</h2><p>String类的实例变量，存在一块特殊区域，这部分区域可以称为字符串池，这是在堆存储区中，方法区中的一部分存储区域。当一个字符串被创建的时候，会在字符串池中查找，如果找到，则直接返回该字符串的引用。比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//声明两个字符串</div><div class="line">String str1 = &quot;abcd&quot;;</div><div class="line">String str2 = &quot;abcd&quot;;</div></pre></td></tr></table></figure></p>
+<p>用图来表示这两个字符串的声明过程：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170615149750940366064.png" alt="20170615149750940366064.png"><br>在声明str2时，在字符串池中存在“abcd”，因此直接将“abcd”的引用返回。</p>
+<h2 id="对象和对象的引用"><a href="#对象和对象的引用" class="headerlink" title="对象和对象的引用"></a>对象和对象的引用</h2><p>下面一段代码，先看代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String str1 = &quot;abcd&quot;</div><div class="line">str1=&quot;1234&quot;</div><div class="line">System.out.println(str1);</div></pre></td></tr></table></figure></p>
+<p>打印结果”1234”。<br>很容易让人产生一个误区，str1的值是改变的，怎么解释呢？这里需要区分一下对象及对象的引用。对象是存放在堆内存中的，类的实例。引用，存放在栈内存中的，存放指向堆内存中对象的索引。上面这段代码的执行过程可以用下面的图形表示：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170615149751091924228.png" alt="20170615149751091924228.png"><br>str1只是一个引用，它指向一个具体的对象，当str1=”1234”执行时，创建了一个新的对象”1234”,引用str1指向了这个新对象，原来的对象“abcd”还存在内存中，没有发生改变。</p>
+<h2 id="String的不可变性有哪些特点"><a href="#String的不可变性有哪些特点" class="headerlink" title="String的不可变性有哪些特点"></a>String的不可变性有哪些特点</h2><ol>
+<li>线程安全，不可变对象不能够被改变，所以可以再多线程之间共享，不需要任何同步处理。</li>
+<li>高效性，在String中的源码中<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//this is used to cache hash code.</div><div class="line">private int hash;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>由于String是不可变的，随意一旦对象被创建，该Hash值也无法修改。所以在使用该对象的hashcode时，可以直接返回。比如在HashMap中，字符串对象的hashcode不可变且永远唯一，这就意味着使用在HashMap中的字符串时，不需要重新计算hashcode值，更加的高效。</p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Java进阶-2016-06-15-java-string.html">http://www.sguotao.com/Java进阶-2016-06-15-java-string.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Java String类有一个特点，即它是一个不可变类，一旦被实例化后，就无法被修改。于是就有一个疑问，为什么将String类设计成不可变的？这样设计有什么好处呢？&lt;/p&gt;
+&lt;h2 id=&quot;什么是不可变对象？&quot;&gt;&lt;a href=&quot;#什么是不可变对象？&quot; class=&quot;hea
+    
+    </summary>
+    
+      <category term="Java" scheme="http://www.sguotao.com/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://www.sguotao.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android实现点赞效果</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-06-13-thumbs-up-anim.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-06-13-thumbs-up-anim.html</id>
+    <published>2016-06-13T06:39:39.000Z</published>
+    <updated>2017-06-13T09:52:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。</p>
+<h3 id="添加平移动画"><a href="#添加平移动画" class="headerlink" title="添加平移动画"></a>添加平移动画</h3><p>先来实现一个简单的平移动画，查看一下效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</div><div class="line">translationY.setDuration(1000);</div><div class="line">translationY.start();</div></pre></td></tr></table></figure></p>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733811463543.gif" alt="20170613149733811463543.gif"></p>
+<h3 id="添加渐变动画"><a href="#添加渐变动画" class="headerlink" title="添加渐变动画"></a>添加渐变动画</h3><p>再加入一个渐变的效果，查看一下效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//translate动画</div><div class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</div><div class="line">//alpha动画</div><div class="line">ObjectAnimator alpha = ObjectAnimator.ofFloat(view, &quot;alpha&quot;, 1f, 0f);</div><div class="line">AnimatorSet animatorSet = new AnimatorSet();</div><div class="line">animatorSet.play(translationY).before(alpha);</div><div class="line">animatorSet.setDuration(1000);</div><div class="line">animatorSet.start();</div></pre></td></tr></table></figure></p>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733732652528.gif" alt="20170613149733732652528.gif"></p>
+<h3 id="实现-1效果"><a href="#实现-1效果" class="headerlink" title="实现+1效果"></a>实现+1效果</h3><p>怎样实现+1的效果呢？可以考虑添加TextView，通过监听动画的状态实现对TextView显示状态的控制，查看一下运行效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">final TextView tv = (TextView) findViewById(R.id.tv);</div><div class="line"></div><div class="line">        //translate动画</div><div class="line">        ObjectAnimator translationY = ObjectAnimator.ofFloat(tv, &quot;translationY&quot;, 0f, -100f);</div><div class="line">        //alpha动画</div><div class="line">        ObjectAnimator alpha = ObjectAnimator.ofFloat(tv, &quot;alpha&quot;, 1f, 0f);</div><div class="line">        alpha.addListener(new Animator.AnimatorListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onAnimationStart(Animator animation) &#123;</div><div class="line">                tv.setVisibility(View.VISIBLE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationEnd(Animator animation) &#123;</div><div class="line">                tv.setVisibility(View.GONE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationCancel(Animator animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationRepeat(Animator animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        AnimatorSet animatorSet = new AnimatorSet();</div><div class="line">        animatorSet.play(translationY).with(alpha);</div><div class="line">        animatorSet.setDuration(1000);</div><div class="line">        animatorSet.start();</div></pre></td></tr></table></figure></p>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149734463770366.gif" alt="20170613149734463770366.gif"></p>
+<h3 id="封装成View"><a href="#封装成View" class="headerlink" title="封装成View"></a>封装成View</h3><p>考虑到后期的扩展性和可维护性，将上面这个动画封装成一个自定义View。</p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-06-13-thumbs-up-anim.html">http://www.sguotao.com/Android进阶-2016-06-13-thumbs-up-anim.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。&lt;/p&gt;
+&lt;h3 id=&quot;添加平移动画&quot;&gt;&lt;a href=&quot;#添加平移动画
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
+    
+      <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
     
   </entry>
   
@@ -1848,298 +2003,6 @@ Observable和Observer通过subscribe()方法实现订阅关系，从而Observera
       <category term="Activity" scheme="http://www.sguotao.com/tags/Activity/"/>
     
       <category term="启动模式" scheme="http://www.sguotao.com/tags/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android 设置全屏显示</title>
-    <link href="http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2012-08-15-android%E8%AE%BE%E7%BD%AE%E5%85%A8%E5%B1%8F%E6%98%BE%E7%A4%BA.html"/>
-    <id>http://www.sguotao.com/Android基础-2012-08-15-android设置全屏显示.html</id>
-    <published>2012-08-15T02:27:04.000Z</published>
-    <updated>2017-06-02T10:37:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Android中实现全屏显示的两种方式:</p>
-<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p>在AndroidManifest.xml文件中通过设置Application或Activity的android:theme属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;activity</div><div class="line">            android:theme=&quot;@android:style/Theme.NoTitleBar.Fullscreen&quot;</div><div class="line">            android:name=&quot;.TestViewAnimation&quot;&gt;</div><div class="line">            &lt;intent-filter&gt;</div><div class="line">                &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;</div><div class="line">                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;</div><div class="line">            &lt;/intent-filter&gt;</div><div class="line">        &lt;/activity&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p>在Activity的onCreate()方法中进行设置(<strong>两行代码还必须写在setContentView()前面。</strong>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">          /*set it to be no title*/</div><div class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE);</div><div class="line">        /*set it to be full screen*/</div><div class="line">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);</div><div class="line">        setContentView(R.layout.activity_test_view_animation);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<h2 id="方式三-补充"><a href="#方式三-补充" class="headerlink" title="方式三(补充)"></a>方式三(补充)</h2><p>在AppCompatActivity设置全屏，情况有些特殊。发现当Activity继承AppCompatActivity时，以上两种方法会出现Crash和无法编译的情况。这时需要我们创建一个style样式，并在AndroidManifest.xml文件中需要全屏显示的Activity使用该样式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;theme_fullscreen&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;</div><div class="line">    &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</div><div class="line">    &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;</div><div class="line">    &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android基础-2012-08-15-android设置全屏显示.html">http://www.sguotao.com/Android基础-2012-08-15-android设置全屏显示.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Android中实现全屏显示的两种方式:&lt;/p&gt;
-&lt;h2 id=&quot;方式一&quot;&gt;&lt;a href=&quot;#方式一&quot; class=&quot;headerlink&quot; title=&quot;方式一&quot;&gt;&lt;/a&gt;方式一&lt;/h2&gt;&lt;p&gt;在AndroidManifest.xml文件中通过设置Application
-    
-    </summary>
-    
-      <category term="Android基础" scheme="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android基础16 传感器</title>
-    <link href="http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-14-android-basic-16.html"/>
-    <id>http://www.sguotao.com/Android基础-2011-08-14-android-basic-16.html</id>
-    <published>2011-08-14T02:27:04.000Z</published>
-    <updated>2017-06-02T10:37:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-传感器"><a href="#1-传感器" class="headerlink" title="1. 传感器"></a>1. 传感器</h2><p>传感器类型：方向、加速度(重力)、光线、磁场、距离(临近性)、温度等。 </p>
-<table>
-<thead>
-<tr>
-<th>方向传感器</th>
-<th style="text-align:center">Sensor.TYPE_ORIENTATION</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>加速度(重力)传感器 | Sensor.TYPE_ACCELEROMETER<br>光线传感器 | Sensor.TYPE_LIGHT<br>磁场传感器 | Sensor.TYPE_MAGNETIC_FIELD<br>距离(临近性)传感器 | Sensor.TYPE_PROXIMITY<br>温度传感器 | Sensor.TYPE_TEMPERATURE</p>
-<p>代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//获取某种类型的感应器</div><div class="line">Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line">//注册监听，获取传感器变化值</div><div class="line">sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_GAME);</div></pre></td></tr></table></figure>
-<p>上面第三个参数为采样率：最快、游戏、普通、用户界面。当应用程序请求特定的采样率时，其实只是对传感器子系统的一个建议，不保证特定的采样率可用。</p>
-<table>
-<thead>
-<tr>
-<th>最快</th>
-<th style="text-align:center">SensorManager.SENSOR_DELAY_FASTEST</th>
-<th style="text-align:center">最低延迟，一般不是特别敏感的处理不推荐使用，该种模式可能造成手机电力大量消耗，由于传递的为原始数据，算法不处理好将会影响游戏逻辑和UI的性能。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p> 游戏 | SensorManager.SENSOR_DELAY_GAME | 游戏延迟，一般绝大多数的实时性较高的游戏都使用该级别。<br>普通 | SensorManager.SENSOR_DELAY_NORMAL | 标准延迟，对于一般的益智类或EASY级别的游戏可以使用，但过低的采样率可能对一些赛车类游戏有跳帧现象。<br>用户界面 | SensorManager.SENSOR_DELAY_UI | 一般对于屏幕方向自动旋转使用，相对节省电能和逻辑处理，一般游戏开发中我们不使用。</p>
-<p>下面介绍如何获取加速度(重力)传感器和方向传感器的测量值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends Activity &#123;</div><div class="line">	private TextView accelerometer;</div><div class="line">	private TextView orientation;</div><div class="line">	private SensorManager sensorManager;</div><div class="line">	</div><div class="line">    @Override</div><div class="line">    public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.main);</div><div class="line">        //①获取感应器管理器</div><div class="line">        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);</div><div class="line">        accelerometer = (TextView) findViewById(R.id.accelerometer);  </div><div class="line">        orientation = (TextView) findViewById(R.id.orientation);  </div><div class="line">    &#125;</div><div class="line">		@Override</div><div class="line">		protected void onResume() &#123;</div><div class="line">		//②获取重力加速度传感器</div><div class="line">		Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);</div><div class="line">		//③注册监听器</div><div class="line">	 	sensorManager.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_GAME);	</div><div class="line">		Sensor sensor1 = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);//获取方向传感器</div><div class="line">		sensorManager.registerListener(listener, sensor1, SensorManager.SENSOR_DELAY_GAME);	</div><div class="line">		super.onResume();</div><div class="line">	&#125; </div><div class="line">    @Override</div><div class="line">	protected void onPause() &#123;</div><div class="line">		//④注消所有传感器监听</div><div class="line">    	sensorManager.unregisterListener(listener); </div><div class="line">		super.onPause();</div><div class="line">	&#125;</div><div class="line">	private SensorEventListener listener = new SensorEventListener() &#123;		</div><div class="line">		@Override</div><div class="line">		public void onSensorChanged(SensorEvent event) &#123;//当传感器的值发生变化			</div><div class="line">			float x = event.values[SensorManager.DATA_X];      </div><div class="line">        	float y = event.values[SensorManager.DATA_Y];      </div><div class="line">		    float z = event.values[SensorManager.DATA_Z];  </div><div class="line">		switch (event.sensor.getType()) &#123;</div><div class="line">			case Sensor.TYPE_ACCELEROMETER:</div><div class="line">				accelerometer.setText(&quot;Accelerometer Sensor: &quot; + x + &quot;, &quot; + y + &quot;, &quot; + z); </div><div class="line">				break;</div><div class="line">			case Sensor.TYPE_ORIENTATION:</div><div class="line">				orientation.setText(&quot;Orientation Sensor: &quot; + x + &quot;, &quot; + y + &quot;, &quot; + z); </div><div class="line">				break;</div><div class="line">			&#125;</div><div class="line">		&#125;		</div><div class="line">		@Override</div><div class="line">		public void onAccuracyChanged(Sensor sensor, int accuracy) &#123;//当传感器的精度变化时	</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>方法orientation.setText(x，y，z);参数的含义</strong></p>
-<ol>
-<li>x该值表示方位，0代表北（North）；90代表东（East）；180代表南（South）；270代表西（West）如果x值正好是这4个值之一，并且手机是水平放置，手机的顶部对准的方向就是该值代表的方向。</li>
-<li>y值表示倾斜度，或手机翘起的程度。当手机绕着X轴倾斜时该值发生变化。y值的取值范围是-180≤y值 ≤180。</li>
-<li>z值来测量桌子等物体的倾斜度。<br>z值表示手机沿着Y轴的滚动角度。表示手机沿着Y轴的滚动角度。取值范围是-90≤z值≤90。假设将手机屏幕朝上水平放在桌面上，这时如果桌面是平的，z值应为0。将手机左侧逐渐抬起时，z值逐渐变小，直到手机垂直于桌面放置，这时z值是-90。将手机右侧逐渐抬起时，z值逐渐增大，    直到手机垂直于桌面放置，这时z值是90。在垂直位置时继续向右或向左滚动，z值会继续在-90至90之间变化。</li>
-</ol>
-<p>假设将手机屏幕朝上水平放在桌子上，这时如果桌子是完全水平的，y值应该是0（由于很少有桌子是绝对水平的，因此，该值很可能不为0，但一般都是-5和5之间的某个值）。这时从手机顶部开始抬起，直到将手机沿X轴旋转180度（屏幕向下水平放在桌面上）。在这个旋转过程中，y值会在0到-180之间变化，也就是说，从手机顶部抬起时，y的值会逐渐变小，直到等于-180。如果从手机底部开始抬起，直到将手机沿X轴旋转180度，这时y值会在0到180之间变化。也就是y值会逐渐增大，直到等于180。可以利用y值和使用方向传感器（案例：指南针）</p>
-<h2 id="2-NinePatch图片"><a href="#2-NinePatch图片" class="headerlink" title="2. NinePatch图片"></a>2. NinePatch图片</h2><p><img src="http://obovytgzz.bkt.clouddn.com/9patch1.png" alt="图片1"><br>NinePatch是一种很有用的PNG图片格式，它可以在特定区域随文字大小进行缩放。如下：</p>
-<p>从上图可以看到，背景图片的中间区域会随着文字的大小进行缩放。背景图片是一张NinePatch图片。 NinePatch图片可以使用android自带的draw9patch工具来制作，该工具在SDK安装路径的tools目录下。执行该工具，然后点击“File”-&gt;“open 9-path”打开一张用于制作NinePatch图片的原来图片。在画布的上方和左方的边上画线指定缩放区域，勾选“Show patches”可显示画定的区域，绿色为固定大小区域，红色为缩放区域，文字会摆放在红色区域。制作完后，点击“File” “save 9-path”保存图片，draw9patch工具会自动为图片加上*.9.png后缀。</p>
-<p>把制作好的图片拷贝进项目的res/drawable目录，然后编写代码。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;TextView android:layout_width=&quot;wrap_content&quot; </div><div class="line">    android:layout_height=&quot;wrap_content&quot;</div><div class="line">    android:text=&quot;退出&quot; android:textColor=&quot;#330000&quot;</div><div class="line">    android:background=&quot;@drawable/button&quot;/&gt;</div></pre></td></tr></table></figure>
-<p><img src="http://obovytgzz.bkt.clouddn.com/9patch2.png" alt="图片2"></p>
-<h2 id="3-触摸事件"><a href="#3-触摸事件" class="headerlink" title="3. 触摸事件"></a>3. 触摸事件</h2><h3 id="3-1-拖拽"><a href="#3-1-拖拽" class="headerlink" title="3.1 拖拽"></a>3.1 拖拽</h3><p>XML配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;ImageView  </div><div class="line">		android:id=&quot;@+id/img&quot;</div><div class="line">	    android:layout_width=&quot;wrap_content&quot; </div><div class="line">	    android:layout_height=&quot;wrap_content&quot; </div><div class="line">	    android:scaleType=&quot;matrix&quot;</div><div class="line">	    android:src=&quot;@drawable/bb2&quot;   /&gt;</div></pre></td></tr></table></figure>
-<p>Java代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">ImageView imageView = (ImageView) findViewById(R.id.img);</div><div class="line">imageView.setOnTouchListener(new MyListener());</div><div class="line">private final class MyListener implements OnTouchListener &#123;</div><div class="line">		private float x;	</div><div class="line">		private float y;</div><div class="line">		private Matrix startMatrix = new Matrix();</div><div class="line">		private Matrix matrix = new Matrix();</div><div class="line">		public boolean onTouch(View v, MotionEvent event) &#123;</div><div class="line">			switch (event.getAction()) &#123;</div><div class="line">				case MotionEvent.ACTION_DOWN:</div><div class="line">					x = event.getX();</div><div class="line">					y = event.getY();</div><div class="line">					startMatrix.set(imageView.getImageMatrix());</div><div class="line">					break;</div><div class="line">				case MotionEvent.ACTION_MOVE:</div><div class="line">					matrix.set(startMatrix);</div><div class="line">					matrix.postTranslate(event.getX() - x, event.getY() - y);</div><div class="line">					break;</div><div class="line">			&#125;</div><div class="line">			imageView.setImageMatrix(matrix);</div><div class="line">			return true;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="3-2-多点触控"><a href="#3-2-多点触控" class="headerlink" title="3.2 多点触控"></a>3.2 多点触控</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">private final class MyListener implements OnTouchListener &#123;</div><div class="line">		private float x;</div><div class="line">		private float y;</div><div class="line">		private Matrix matrix = new Matrix();</div><div class="line">		private Matrix startMatrix = new Matrix();</div><div class="line">		private int type;</div><div class="line">		private float startDis;</div><div class="line">		private PointF point;</div><div class="line">		public boolean onTouch(View v, MotionEvent event) &#123;</div><div class="line">			System.out.println(event.getAction());</div><div class="line">			switch (event.getAction()) &#123;</div><div class="line">				case MotionEvent.ACTION_DOWN:</div><div class="line">					type = 1;</div><div class="line">					x = event.getX();</div><div class="line">					y = event.getY();</div><div class="line">					startMatrix.set(imageView.getImageMatrix());</div><div class="line">					break;</div><div class="line">				case MotionEvent.ACTION_MOVE:</div><div class="line">					matrix.set(startMatrix);</div><div class="line">					if (type == 1)</div><div class="line">						matrix.postTranslate(event.getX() - x, event.getY() - y);</div><div class="line">					else &#123;</div><div class="line">						float scale = getDis(event) / startDis;</div><div class="line">						matrix.postScale(scale, scale, point.x, point.y);</div><div class="line">					&#125;</div><div class="line">					break;</div><div class="line">				case MotionEvent.ACTION_POINTER_DOWN:</div><div class="line">					type = 2;</div><div class="line">					startMatrix.set(imageView.getImageMatrix());</div><div class="line">					startDis = getDis(event);</div><div class="line">					point = getPoint(event);</div><div class="line">					break;</div><div class="line">			&#125;</div><div class="line">			imageView.setImageMatrix(matrix);</div><div class="line">			return true;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	private float getDis(MotionEvent event) &#123;</div><div class="line">		float a = event.getX(1) - event.getX(0);</div><div class="line">		float b = event.getY(1) - event.getY(0);</div><div class="line">		return (float) Math.sqrt(a * a + b * b);</div><div class="line">	&#125;</div><div class="line">	private PointF getPoint(MotionEvent event) &#123;</div><div class="line">		float x = (event.getX(0) + event.getX(1)) / 2;</div><div class="line">		float y = (event.getY(0) + event.getY(1)) / 2;</div><div class="line">		return new PointF(x, y);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="4-读取SIM卡"><a href="#4-读取SIM卡" class="headerlink" title="4. 读取SIM卡"></a>4. 读取SIM卡</h2><p>文档位置：<br>android-sdk-windows\platforms\android-8\sources\ContactsProvider\src\com\android\providers\contacts\ CallLogProvider.java</p>
-<h3 id="4-1-判断SIM卡属于那个运营商"><a href="#4-1-判断SIM卡属于那个运营商" class="headerlink" title="4.1 判断SIM卡属于那个运营商"></a>4.1 判断SIM卡属于那个运营商</h3><p>SIM卡的IMSI码是SIM卡唯一标识：IMSI 国际移动用户识别码（IMSI：International Mobile Subscriber Identification Number）是区别移动用户的标志，储存在SIM卡中，可用于区别移动用户的有效信息。IMSI由MCC、MNC、MSIN组成，其中MCC为移动国家号码，由3位数字组成，唯一地识别移动客户所属的国家，我国为460；MNC为网络id，由2位数字组成，用于识别移动客户所归属的移动网络，中国移动为00，中国联通为01,中国电信为03；MSIN为移动客户识别码，采用等长11位数字构成。唯一地识别国内GSM.移动通信网中移动客户。所以要区分是移动还是联通，只需取得SIM卡中的MNC字段即可。<br>需要权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;</div></pre></td></tr></table></figure>
-<p>Java代码实现：<br>第一种方法:获取手机的IMSI码,并判断是中国移动\中国联通\中国电信</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);</div><div class="line">        String imsi = telManager.getSubscriberId();</div><div class="line"> if(imsi!=null)&#123;</div><div class="line">//因为移动网络编号46000下的IMSI已经用完,所以虚拟了一个46002编号，134/159号段使用了此编号</div><div class="line">        if(imsi.startsWith(&quot;46000&quot;) || imsi.startsWith(&quot;46002&quot;))&#123;  //中国移动</div><div class="line">        &#125;else if(imsi.startsWith(&quot;46001&quot;))&#123; //中国联通        </div><div class="line">        &#125;else if(imsi.startsWith(&quot;46003&quot;))&#123; //中国电信</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>第二种方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);</div><div class="line">        String operator = telManager.getSimOperator();</div><div class="line"> if(operator!=null)&#123;</div><div class="line">        if(operator.equals(&quot;46000&quot;) || operator.equals(&quot;46002&quot;))&#123;  //中国移动</div><div class="line">        &#125;else if(operator.equals(&quot;46001&quot;))&#123;//中国联通</div><div class="line">        &#125;else if(operator.equals(&quot;46003&quot;))&#123;//中国电信</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="4-2-从SIM卡中获取联系人信息"><a href="#4-2-从SIM卡中获取联系人信息" class="headerlink" title="4.2 从SIM卡中获取联系人信息"></a>4.2 从SIM卡中获取联系人信息</h3><p>Android系统内部通过Contentprovider对外共享Sim卡存放的联系人等信息，你可以通过操作Contentprovider来实现Sim卡信息的添删改查操作。 需要权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt;</div></pre></td></tr></table></figure>
-<p>Java代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(&quot;content://icc/adn&quot;);</div><div class="line">		Cursor c = getContentResolver().query(uri, null, null, null, null);</div><div class="line">		while (c.moveToNext())</div><div class="line">			System.out.println(c.getString(c.getColumnIndex(&quot;name&quot;)) + &quot;: &quot; </div><div class="line">        + c.getString(c.getColumnIndex(&quot;number&quot;)));</div></pre></td></tr></table></figure>
-<h3 id="4-3-删除呼叫记录"><a href="#4-3-删除呼叫记录" class="headerlink" title="4.3 删除呼叫记录"></a>4.3 删除呼叫记录</h3><p>需要权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot; /&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.WRITE_CONTACTS&quot; /&gt;</div></pre></td></tr></table></figure>
-<p>负责存放呼叫记录的内容提供者源码在ContactsProvider项目下：</p>
-<ol>
-<li>源码路径：com\android\providers\contacts\CallLogProvider.java</li>
-<li>使用到的数据库在：/data/data/com.android.providers.contacts/databases/contacts2.db</li>
-<li>表名:calls</li>
-</ol>
-<p><strong>呼叫记录有三种类型</strong></p>
-<ol>
-<li>来电：CallLog.Calls.INCOMING_TYPE （常量值：1）</li>
-<li>外拔：CallLog.Calls.OUTGOING_TYPE（常量值：2）</li>
-<li>未接：CallLog.Calls.MISSED_TYPE（常量值：3）</li>
-</ol>
-<p>删除指定号码的来电或未接呼叫记录：Java代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">IncomingCallLogContentObserver observer = new IncomingCallLogContentObserver(new Handler());</div><div class="line">observer.setNumber(&quot;5554&quot;);</div><div class="line">getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, true, observer);</div><div class="line">private class IncomingCallLogContentObserver extends ContentObserver &#123;</div><div class="line">        private String number;</div><div class="line">        public IncomingCallLogContentObserver(Handler handler)&#123;    	 </div><div class="line">      	  super(handler);      	 </div><div class="line">        &#125;</div><div class="line">        public void setNumber(String number)&#123;</div><div class="line">        	 this.number = number;</div><div class="line">        &#125;</div><div class="line">        public void onChange(boolean paramBoolean)&#123;</div><div class="line">        	ContentResolver contentResolver = getContentResolver();</div><div class="line">        	if(number!=null)&#123;              </div><div class="line">              Uri localUri = CallLog.Calls.CONTENT_URI;</div><div class="line"> Cursor cursor = contentResolver.query(localUri, new String[]&#123;&quot;_id&quot;&#125;, &quot;number=? AND (type=1 OR type=3)&quot;, </div><div class="line">              		new String[]&#123;number&#125;, &quot;_id desc limit 1&quot;);</div><div class="line">              if(cursor.moveToFirst())&#123;</div><div class="line">  	            contentResolver.delete(localUri, &quot;_id=?&quot;, new String[]&#123;cursor.getString(0)&#125;);</div><div class="line">              &#125;</div><div class="line">              cursor.close();</div><div class="line">        	&#125;</div><div class="line">            contentResolver.unregisterContentObserver(this);</div><div class="line">        &#125;｝</div></pre></td></tr></table></figure>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android基础-2011-08-14-android-basic-16.html">http://www.sguotao.com/Android基础-2011-08-14-android-basic-16.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-传感器&quot;&gt;&lt;a href=&quot;#1-传感器&quot; class=&quot;headerlink&quot; title=&quot;1. 传感器&quot;&gt;&lt;/a&gt;1. 传感器&lt;/h2&gt;&lt;p&gt;传感器类型：方向、加速度(重力)、光线、磁场、距离(临近性)、温度等。 &lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-    
-    </summary>
-    
-      <category term="Android基础" scheme="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="传感器" scheme="http://www.sguotao.com/tags/%E4%BC%A0%E6%84%9F%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android基础15 动画特效</title>
-    <link href="http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-13-android-basic-15.html"/>
-    <id>http://www.sguotao.com/Android基础-2011-08-13-android-basic-15.html</id>
-    <published>2011-08-13T02:27:04.000Z</published>
-    <updated>2017-06-02T10:37:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-Tween动画"><a href="#1-Tween动画" class="headerlink" title="1. Tween动画"></a>1. Tween动画</h2><p>将某个组件以渐变的方式实现透明、缩放、移动、旋转等动画效果。<br><img src="http://obovytgzz.bkt.clouddn.com/anni1.png" alt="图片1"></p>
-<p>详见文档android-sdk-windows/docs/guide/topics/resources/animation-resource.html</p>
-<h2 id="2-Frame动画"><a href="#2-Frame动画" class="headerlink" title="2. Frame动画"></a>2. Frame动画</h2><p>通过多个画面连续播放实现动画效果，开发步骤：</p>
-<ul>
-<li>把准备好的图片放进项目res/ drawable下。</li>
-<li>在项目的res目录下创建文件夹anim，然后在anim文件夹下面定义动画XML文件，文件名称        可以自定义。当然也可以采用编码方式定义动画效果（使用AnimationDrawable类）。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;animation-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">android:oneshot=&quot;false&quot;&gt;</div><div class="line">&lt;item android:drawable=&quot;@drawable/girl_1&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">&lt;item android:drawable=&quot;@drawable/girl_2&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">&lt;item android:drawable=&quot;@drawable/girl_3&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">&lt;/animation-list&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>为View控件绑定动画效果。调用代表动画的AnimationDrawable的start()方法开始动画。<br>详见文档 android-sdk-windows/docs/guide/topics/resources/animation-resource.html</li>
-</ul>
-<h2 id="3-使用动画切换Activity"><a href="#3-使用动画切换Activity" class="headerlink" title="3. 使用动画切换Activity"></a>3. 使用动画切换Activity</h2><p>在startActivity()方法调用之后调用<br>overridePendingTransition(int enterAnim, int exitAnim)方法<br>enterAnim 进入的动画资源id<br>exitAnim 退出的动画    资源id</p>
-<h2 id="4-使用动画翻页"><a href="#4-使用动画翻页" class="headerlink" title="4. 使用动画翻页"></a>4. 使用动画翻页</h2><p>XML配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;ViewFlipper</div><div class="line">	android:id=&quot;@+id/viewFlipper&quot;</div><div class="line">	android:layout_width=&quot;fill_parent&quot;</div><div class="line">	android:layout_height=&quot;fill_parent&quot;&gt;</div><div class="line">   	&lt;ImageView</div><div class="line">	    android:layout_width=&quot;wrap_content&quot;</div><div class="line">	    android:layout_height=&quot;wrap_content&quot;</div><div class="line">   		android:src=&quot;@drawable/bb2&quot;/&gt;</div><div class="line">   	&lt;ImageView</div><div class="line">	    android:layout_width=&quot;wrap_content&quot;</div><div class="line">	    android:layout_height=&quot;wrap_content&quot;</div><div class="line">   		android:src=&quot;@drawable/bb3&quot;/&gt;</div><div class="line">&lt;/ViewFlipper&gt;</div></pre></td></tr></table></figure>
-<p>Java代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public boolean onTouchEvent(MotionEvent event) &#123;</div><div class="line">	ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);</div><div class="line">	switch (event.getAction()) &#123;</div><div class="line">		case MotionEvent.ACTION_DOWN:</div><div class="line">			start = event.getX();</div><div class="line">			break;</div><div class="line">		case MotionEvent.ACTION_UP:</div><div class="line">			float end = event.getX();</div><div class="line">			if (end &gt; start) &#123;</div><div class="line">				viewFlipper.setInAnimation(this, R.anim.previous_enter);</div><div class="line">				viewFlipper.setOutAnimation(this, R.anim.previous_exit);</div><div class="line">				viewFlipper.showPrevious();</div><div class="line">			&#125; else if (end &lt; start) &#123;</div><div class="line">				viewFlipper.setInAnimation(this, R.anim.next_enter);</div><div class="line">				viewFlipper.setOutAnimation(this, R.anim.next_exit);</div><div class="line">				viewFlipper.showNext();</div><div class="line">			&#125;</div><div class="line">			break;</div><div class="line">	&#125;</div><div class="line">	return super.onTouchEvent(event);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="5-动画练习"><a href="#5-动画练习" class="headerlink" title="5. 动画练习"></a>5. 动画练习</h2><h3 id="5-1-本例要实现对ImageView对象进行渐变尺寸缩放动画效果"><a href="#5-1-本例要实现对ImageView对象进行渐变尺寸缩放动画效果" class="headerlink" title="5.1 本例要实现对ImageView对象进行渐变尺寸缩放动画效果"></a>5.1 本例要实现对ImageView对象进行渐变尺寸缩放动画效果</h3><ul>
-<li>在项目的res目录下创建文件夹anim，然后在anim文件夹下面定义动画XML文件,文件名称可以自定义，如：scale.xml，内容如下：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line"> &lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt; </div><div class="line">    &lt;scale android:interpolator=&quot;@android:anim/accelerate_decelerate_interpolator&quot; </div><div class="line">        android:fromXScale=&quot;0.0&quot; </div><div class="line">        android:fromYScale=&quot;0.0&quot;  </div><div class="line">        android:toXScale=&quot;5&quot; </div><div class="line">        android:toYScale=&quot;5&quot; </div><div class="line">        android:pivotX=&quot;50%&quot; </div><div class="line">        android:pivotY=&quot;50%&quot; </div><div class="line">        android:fillAfter=&quot;false&quot; </div><div class="line">        android:duration=&quot;5000&quot;  /&gt; </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
-<p>动画的进度使用interpolator控制，android提供了几个Interpolator 子类，实现了不同的速度曲线，如LinearInterpolator实现了匀速效果、Accelerateinterpolator实现了加速效果、DecelerateInterpolator实现了减速效果等。还可以定义自己的Interpolator子类，实现抛物线、自由落体等物理效果。</p>
-<p>fromXScale（浮点型） 属性为动画起始时X坐标上的缩放尺寸<br>fromYScale（浮点型） 属性为动画起始时Y坐标上的缩放尺寸<br>toXScale（浮点型）   属性为动画结束时X坐标上的缩放尺寸<br>toYScale（浮点型）   属性为动画结束时Y坐标上的缩放尺寸</p>
-<p>说明: 以上四种属性值<br>0.0表示收缩到没有<br>1.0表示正常无缩放<br>值小于1.0表示收缩<br>值大于1.0表示放大<br>pivotX（浮点型）     属性为动画相对于物件的X坐标的开始位置<br>pivotY（浮点型）     属性为动画相对于物件的Y坐标的开始位置 </p>
-<p>说明:<br>以上两个属性值 从0%-100%中取值<br>50%为物件的X或Y方向坐标上的中点位置<br>duration（长整型）属性为动画持续时间 。说明:   时间以毫秒为单位<br>fillAfter（布尔型）属性当设置为true，该动画转化在动画结束后被应用</p>
-<ul>
-<li>在layout文件添加&lt;ImageView&gt;节点：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:orientation=&quot;horizontal&quot;</div><div class="line">    android:layout_width=&quot;fill_parent&quot;</div><div class="line">    android:layout_height=&quot;fill_parent&quot;&gt;</div><div class="line">&lt;ImageView</div><div class="line">   android:layout_width=&quot;wrap_content&quot;</div><div class="line">   android:layout_height=&quot;wrap_content&quot;</div><div class="line">   android:src=&quot;@drawable/icon&quot;</div><div class="line">   android:id=&quot;@+id/imageView&quot; /&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure>
-<p>说明：除了可以对&lt;ImageView&gt;实现动画效果，其实也可以对其他View实现动画效果，如：&lt;TextView&gt;</p>
-<ul>
-<li>在Activity里对ImageView使用前面定义好的动画效果：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class AnimationActivity extends Activity &#123;</div><div class="line">	@Override</div><div class="line">	public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.main);</div><div class="line">		ImageView imageView = (ImageView)this.findViewById(R.id.imageView);</div><div class="line">		//加载动画XML文件,生成动画指令</div><div class="line">		Animation animation = AnimationUtils.loadAnimation(this, R.anim.scale);</div><div class="line">		//开始执行动画</div><div class="line">		imageView.startAnimation(animation);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>备注：上面采用的是xml文件定义动画效果，作为代替，也可以采用编码方式实现。下面采用编码方式实现上述例子同样的效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class AnimationActivity extends Activity &#123;</div><div class="line">	@Override	</div><div class="line">	public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.main);</div><div class="line">		ImageView imageView = (ImageView)this.findViewById(R.id.imageView);</div><div class="line">		ScaleAnimation animation = new ScaleAnimation(0.0f, 5f, 0.0f, 5f, </div><div class="line">		Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);</div><div class="line">		animation.setDuration(5000); //设置持续时间5秒</div><div class="line">		imageView.startAnimation(animation);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="5-2-其他动画效果定义例子"><a href="#5-2-其他动画效果定义例子" class="headerlink" title="5.2 其他动画效果定义例子"></a>5.2 其他动画效果定义例子</h3><ul>
-<li>渐变透明度动画效果</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">	&lt;alpha</div><div class="line">		android:fromAlpha=&quot;0.1&quot;	</div><div class="line">		android:toAlpha=&quot;1.0&quot;</div><div class="line">		android:duration=&quot;3000&quot;/&gt;</div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
-<p>编码实现透明度动画效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class AnimationActivity extends Activity &#123;</div><div class="line">	@Override</div><div class="line">	public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.main);</div><div class="line">		ImageView imageView = (ImageView)this.findViewById(R.id.imageView);</div><div class="line">		AlphaAnimation animation = new AlphaAnimation(0.1, 1.0); </div><div class="line">		animation.setDuration(5000); //设置持续时间5秒</div><div class="line">		imageView.startAnimation(animation);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>画面位置移动动画效果</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">&lt;translate</div><div class="line">android:repeatCount=&quot;2&quot;</div><div class="line">android:fromXDelta=&quot;0&quot;</div><div class="line">android:fromYDelta=&quot;0&quot;</div><div class="line">android:toXDelta=&quot;120&quot;</div><div class="line">android:toYDelta=&quot;120&quot;</div><div class="line">android:duration=&quot;3000&quot;/&gt;</div><div class="line">&lt;!-- fromXDelta fromYDelta 为动画起始时 X和Y坐标上的位置</div><div class="line">toXDelta toYDelta为动画结束起始时  X和Y坐标上的位置 --&gt;</div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
-<p>编码实现位置移动动画效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class AnimationActivity extends Activity &#123;</div><div class="line">	@Override</div><div class="line">	public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.main);</div><div class="line">		ImageView imageView = (ImageView)this.findViewById(R.id.imageView);</div><div class="line">		TranslateAnimation animation = new TranslateAnimation(0, 120, 0, 120); </div><div class="line">		animation.setDuration(5000); //设置持续时间5秒</div><div class="line">		imageView.startAnimation(animation);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>画面旋转动画效果</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">&lt;rotate</div><div class="line">android:interpolator=&quot;@android:anim/accelerate_interpolator&quot;</div><div class="line">android:repeatCount=&quot;2&quot;</div><div class="line">android:fromDegrees=&quot;0&quot;</div><div class="line">android:toDegrees=&quot;+360&quot;</div><div class="line">android:pivotX=&quot;50%&quot;</div><div class="line">android:pivotY=&quot;50%&quot;</div><div class="line">android:duration=&quot;3000&quot;/&gt;</div><div class="line">&lt;!-- </div><div class="line">repeatCount 重复次数</div><div class="line">fromDegrees为动画起始时物件的角度:</div><div class="line">当角度为负数——表示逆时针旋转</div><div class="line">当角度为正数——表示顺时针旋转</div><div class="line">(负数fromDegrees——toDegrees正数:顺时针旋转)</div><div class="line">(负数fromDegrees——toDegrees负数:逆时针旋转)</div><div class="line">(正数fromDegrees——toDegrees正数:顺时针旋转)</div><div class="line">(正数fromDegrees——toDegrees负数:逆时针旋转)</div><div class="line">toDegrees属性为动画结束时物件旋转的角度 可以大于360度</div><div class="line">pivotX,pivotY  为动画相对于物件的X、Y坐标的开始位置。说明：以上两个属性值 从0%-100%中取值,50%为物件的X或Y方向坐标上的中点位置</div><div class="line"> --&gt;</div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
-<p>编码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RotateAnimation animation = new RotateAnimation(0, -90, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);</div><div class="line">animation.setDuration(500);</div><div class="line">imageView.startAnimation(animation);</div></pre></td></tr></table></figure>
-<ul>
-<li>Frame动画例子<br>a)    把准备好的图片放进项目res/ drawable下。图片有：girl_1.gif, girl_2.gif, girl_3.gif<br>b)    在项目的res目录下创建文件夹anim，然后在anim文件夹下面定义动画XML文件，文件名称可以自定义,如：frame.xml。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;animation-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:oneshot=&quot;false&quot;&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/girl_1&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/girl_2&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/girl_3&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">&lt;/animation-list&gt;</div></pre></td></tr></table></figure>
-<p>上面的XML就定义了一个Frame动画，其包含3帧动画，3帧动画中分别应用了drawable中的3张图片：girl_1.gif, girl_2.gif, girl_3.gif，每帧动画持续200毫秒。android:oneshot属性如果为true，表示动画只播放一次停止在最后一帧上，如果设置为false表示动画循环播放。</p>
-<p>c)    为View控件绑定动画效果，调用代表动画的AnimationDrawable的start()方法开始动画。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class FrameActivity extends Activity &#123;</div><div class="line">	private AnimationDrawable animationDrawable;</div><div class="line">	@Override</div><div class="line">	public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.main);</div><div class="line">		ImageView imageView = (ImageView)this.findViewById(R.id.imageView);</div><div class="line">		imageView.setBackgroundResource(R.anim.frame);</div><div class="line">		animationDrawable = (AnimationDrawable) imageView.getBackground();</div><div class="line">	&#125;</div><div class="line">	@Override</div><div class="line">	public boolean onTouchEvent(MotionEvent event) &#123;</div><div class="line">		  if (event.getAction() == MotionEvent.ACTION_DOWN) &#123;//按下</div><div class="line">			  animationDrawable.start();</div><div class="line">			  return true;</div><div class="line">		  &#125;</div><div class="line">		  return super.onTouchEvent(event);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>有一点需要强调的是：启动Frame动画的代码animationDrawable.start();不能应用在OnCreate()方法中，因为在OnCreate()中 AnimationDrawable还没有完全的与ImageView绑定。在OnCreate()中启动动画，只能看到第一张图片。这里在触摸事件中实现的。</p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android基础-2011-08-13-android-basic-15.html">http://www.sguotao.com/Android基础-2011-08-13-android-basic-15.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-Tween动画&quot;&gt;&lt;a href=&quot;#1-Tween动画&quot; class=&quot;headerlink&quot; title=&quot;1. Tween动画&quot;&gt;&lt;/a&gt;1. Tween动画&lt;/h2&gt;&lt;p&gt;将某个组件以渐变的方式实现透明、缩放、移动、旋转等动画效果。&lt;br&gt;&lt;img s
-    
-    </summary>
-    
-      <category term="Android基础" scheme="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="UI" scheme="http://www.sguotao.com/tags/UI/"/>
-    
-      <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android基础14 样式与主题</title>
-    <link href="http://www.sguotao.com/Android%E5%9F%BA%E7%A1%80-2011-08-12-android-basic-14.html"/>
-    <id>http://www.sguotao.com/Android基础-2011-08-12-android-basic-14.html</id>
-    <published>2011-08-12T02:27:04.000Z</published>
-    <updated>2017-06-02T10:37:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-样式-style"><a href="#1-样式-style" class="headerlink" title="1. 样式(style)"></a>1. 样式(style)</h2><p>android中的样式和CSS样式作用相似，都是用于为界面元素定义显示风格，它是一个包含一个或者多个view控件属性的集合。如：需要定义字体的颜色和大小。在CSS中是这样定义的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    .ncist&#123;COLOR:#0000CC;font-size:18px;&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
-<p>可以像这样使用上面的css样式：<div class="ncist">华北科技</div>，在Android中可以这样定义样式：在res/values/styles.xml文件中添加以下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;resources&gt;</div><div class="line">    &lt;style name=“ncist”&gt; &lt;!-- 为样式定义一个全局唯一的名字--&gt;</div><div class="line">     &lt;item name=“android:textSize”&gt;18px&lt;/item&gt; &lt;!-- name属性的值为使用了该样式的View控件的属性 --&gt;</div><div class="line">     &lt;item name=&quot;android:textColor&quot;&gt;#0000CC&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
-<p>在layout文件中可以像下面这样使用上面的android样式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; ....&gt;</div><div class="line">    &lt;TextView style=&quot;@style/ncist&quot;</div><div class="line">        .....  /&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure>
-<p>&lt;style&gt;元素中有一个parent属性。这个属性可以让当前样式继承一个父样式，并且具有父样式的值。当然，如果父样式的值不符合你的需求，你也可以对它进行修改，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;resources&gt;</div><div class="line">    &lt;style name=&quot;ncist&quot;&gt;</div><div class="line">        &lt;item name=&quot;android:textSize&quot;&gt;18px&lt;/item&gt; &lt;!-- name属性为样式要用在的View控件持有的属性 --&gt;</div><div class="line">        &lt;item name=&quot;android:textColor&quot;&gt;#0000CC&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div><div class="line">    &lt;style name=&quot;subncist&quot; parent=&quot;@style/ncist&quot;&gt;</div><div class="line">        &lt;item name=&quot;android:textColor&quot;&gt;#FF0000&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
-<p><strong>继承样式有两种定义方式</strong></p>
-<ol>
-<li>继承样式，在&lt;style&gt;标签中配置属性parent</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;style2&quot; parent=&quot;@style/style1&quot;&gt;</div><div class="line">			&lt;item name=&quot;android:textColor&quot;&gt;#FF0000&lt;/item&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
-<ol>
-<li>继承样式，在name中引用其他样式</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;style2.style3&quot;&gt;</div><div class="line">			&lt;item name=&quot;android:textSize&quot;&gt;30sp&lt;/item&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
-<p><strong>使用样式</strong><br>在layout文件的标签中配置style属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;Button  	style=&quot;@style/style2.style3&quot;</div><div class="line">	    		android:text=&quot;这是一个按钮&quot;/&gt;</div></pre></td></tr></table></figure>
-<h2 id="2-主题-theme"><a href="#2-主题-theme" class="headerlink" title="2. 主题(theme)"></a>2. 主题(theme)</h2><p>android中主题也是用于为应用定义显示风格，它的定义和样式的定义相同，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;resources&gt;</div><div class="line">&lt;style name=“ncistTheme&quot;&gt;</div><div class="line">	&lt;item name=“android:windowNoTitle”&gt;true&lt;/item&gt; &lt;!– 没标题 </div><div class="line">	&lt;item name=“android:windowFullscreen”&gt;?android:windowNoTitle&lt;/item&gt; &lt;!– 全屏显示 </div><div class="line">&lt;/style&gt;</div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
-<p>上面“?android:windowNoTitle”中的问号用于引用在当前主题中定义过的资源的值。下面代码显示在AndroidManifest.xml中如何为应用设置上面定义的主题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;</div><div class="line">     android:theme=&quot;@style/ncistTheme&quot;&gt;</div><div class="line">   ......</div><div class="line">&lt;/application&gt;</div></pre></td></tr></table></figure>
-<p>除了可以在AndroidManifest.xml中设置主题，同样也可以在代码中设置主题，如下：<br>setTheme(R.style.ncistTheme);</p>
-<h2 id="3-样式与主题的区别"><a href="#3-样式与主题的区别" class="headerlink" title="3. 样式与主题的区别"></a>3. 样式与主题的区别</h2><p>尽管在定义上，样式和主题基本相同，但是它们使用的地方不同。</p>
-<ol>
-<li>样式用在单独的View，如：EditText、TextView等；</li>
-<li>主题通过AndroidManifest.xml中的&lt;application&gt;和&lt;activity&gt;用在整个应用或者某个 Activity，主题对整个应用或某个Activity进行全局性影响。</li>
-<li>如果一个应用使用了主题，同时应用下的view也使用了样式，那么当主题和样式属性发生冲突时，样式的优先级高于主题。</li>
-</ol>
-<p>另外android系统也定义了一些主题，例如：<br>&lt;activity android:theme=“@android:style/Theme.Dialog”&gt;，该主题可以让Activity看起来像一个对话框，还有透明主题：@android:style/Theme.Translucent 。如果需要查阅这些主题，可以在文档的referenceandroid–&gt;R.style 中查看。</p>
-<p><strong>注意：如果使用android内置的样式，IDE自动提示的“_”要替换成“.”</strong></p>
-<h2 id="4-国际化与屏幕适配"><a href="#4-国际化与屏幕适配" class="headerlink" title="4. 国际化与屏幕适配"></a>4. 国际化与屏幕适配</h2><h3 id="4-1-国际化"><a href="#4-1-国际化" class="headerlink" title="4.1 国际化"></a>4.1 国际化</h3><p><img src="http://obovytgzz.bkt.clouddn.com/i18n1.png" alt="图片1"><br>在values和drawable文件夹后加上语言以及地区名，程序中需要国际化的部分使用资源ID<br>values-en-rUS ；values-zh-rCN；values-zh-rTW</p>
-<p><strong>匹配规则</strong></p>
-<ol>
-<li>在匹配资源时先会找语言、地区完全匹配的</li>
-<li>如果没有地区匹配的，则查找语言匹配的<br>如果没有语言匹配的则找默认values</li>
-</ol>
-<h3 id="4-2-屏幕适配"><a href="#4-2-屏幕适配" class="headerlink" title="4.2 屏幕适配"></a>4.2 屏幕适配</h3><p><img src="http://obovytgzz.bkt.clouddn.com/i18n2.png" alt="图片2"><br>在layout文件夹后加上分辨率，系统会根据屏幕尺寸自动选择，注意分辨率中的乘号是“x”不是“*”，并且大的数字在“x”之前，否则编译无法通过；如果没有匹配的分辨率会找默认layout文件夹。</p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android基础-2011-08-12-android-basic-14.html">http://www.sguotao.com/Android基础-2011-08-12-android-basic-14.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-样式-style&quot;&gt;&lt;a href=&quot;#1-样式-style&quot; class=&quot;headerlink&quot; title=&quot;1. 样式(style)&quot;&gt;&lt;/a&gt;1. 样式(style)&lt;/h2&gt;&lt;p&gt;android中的样式和CSS样式作用相似，都是用于为界面元素定义显
-    
-    </summary>
-    
-      <category term="Android基础" scheme="http://www.sguotao.com/categories/Android%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="UI" scheme="http://www.sguotao.com/tags/UI/"/>
     
   </entry>
   
