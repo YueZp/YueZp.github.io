@@ -13,6 +13,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -103,7 +110,7 @@
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="三周前的Google IO大会上，官方宣布将Kotlin作为除Java、C++外的官方编程语言，在最新一期的TIOBE排行榜中，Kotlin就首次挤进编程语言TOP50。Kotlin是怎样的编程语言？Google为何将Kotlin作为官方的编程语言？Kotlin与其它语言(尤其是Java)相比，有哪些特点呢？带着这些问题，来了解Kotlin。 Kotlin是什么？ Kotlin是一种在Java虚拟">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/201706091496976207210.jpg">
-<meta property="og:updated_time" content="2017-06-09T08:57:03.000Z">
+<meta property="og:updated_time" content="2017-06-23T11:06:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Kotlin笔记】Kotlin的前世今生">
 <meta name="twitter:description" content="三周前的Google IO大会上，官方宣布将Kotlin作为除Java、C++外的官方编程语言，在最新一期的TIOBE排行榜中，Kotlin就首次挤进编程语言TOP50。Kotlin是怎样的编程语言？Google为何将Kotlin作为官方的编程语言？Kotlin与其它语言(尤其是Java)相比，有哪些特点呢？带着这些问题，来了解Kotlin。 Kotlin是什么？ Kotlin是一种在Java虚拟">
@@ -377,8 +384,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">Android进阶</span>
+                  <a href="/categories/Kotlin/" itemprop="url" rel="index">
+                    <span itemprop="name">Kotlin</span>
                   </a>
                 </span>
 
@@ -408,8 +415,8 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
 
@@ -509,6 +516,21 @@
     <div>
       
         
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Scott
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.sguotao.com/Kotlin-2017-06-09-Kotlin-note1.html" title="【Kotlin笔记】Kotlin的前世今生">http://www.sguotao.com/Kotlin-2017-06-09-Kotlin-note1.html</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
 
       
     </div>
@@ -532,8 +554,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/生活感悟-2017-06-02-程序员为什么会忧虑自己的未来.html" rel="next" title="【转】程序员为什么会忧虑自己的未来?">
-                <i class="fa fa-chevron-left"></i> 【转】程序员为什么会忧虑自己的未来?
+              <a href="/Kotlin-2017-06-10-Kotlin-note2.html" rel="next" title="【Kotlin笔记】Hello Kotlin">
+                <i class="fa fa-chevron-left"></i> 【Kotlin笔记】Hello Kotlin
               </a>
             
           </div>
@@ -541,10 +563,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Kotlin-2017-06-10-Kotlin-note2.html" rel="prev" title="【Kotlin笔记】Hello Kotlin">
-                【Kotlin笔记】Hello Kotlin <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -618,7 +636,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -629,7 +647,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -640,7 +658,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -717,7 +735,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2013 - 
+  &copy;  2012 - 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -744,17 +762,17 @@
 
   
     <span class="site-uv">
-      <i class="fa fa-user">你是第</i>
+      <i class="fa fa-user"></i>
       <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      个来到这里的小伙伴
+      
     </span>
   
 
   
     <span class="site-pv">
-      <i class="fa fa-eye">本站总访问量</i>
+      <i class="fa fa-eye"></i>
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
+      
     </span>
   
 </div>
@@ -792,8 +810,6 @@
   
 
 
-  
-
 
 
 
@@ -821,9 +837,6 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   

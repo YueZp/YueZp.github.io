@@ -1,0 +1,1403 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googlea8ba7e863392b1ab" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,View," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在Android中，Activity承担着与UI相关的可视化功能，在Activity中会使用到系统提供的大量控件，而View是Android中所有控件的基类,可以认为View是用户界面最基本的控件。 View的位置参数在Android中，默认View的形状是矩形，只要确定View的左上角位置和右下角位置，就可以确定View的位置。在View中，这两个顶点的坐标，对应着View的下面四个属性：  t">
+<meta name="keywords" content="Android,View">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探Android中的View">
+<meta property="og:url" content="http://www.sguotao.com/Android进阶-2016-07-05-初探Android中的View.html">
+<meta property="og:site_name" content="Scott&#39;s Blog">
+<meta property="og:description" content="在Android中，Activity承担着与UI相关的可视化功能，在Activity中会使用到系统提供的大量控件，而View是Android中所有控件的基类,可以认为View是用户界面最基本的控件。 View的位置参数在Android中，默认View的形状是矩形，只要确定View的左上角位置和右下角位置，就可以确定View的位置。在View中，这两个顶点的坐标，对应着View的下面四个属性：  t">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170706149933806671638.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170710149965453553546.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170712149981308867779.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170712149981298574432.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170712149981286533870.png">
+<meta property="og:updated_time" content="2017-07-12T03:55:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探Android中的View">
+<meta name="twitter:description" content="在Android中，Activity承担着与UI相关的可视化功能，在Activity中会使用到系统提供的大量控件，而View是Android中所有控件的基类,可以认为View是用户界面最基本的控件。 View的位置参数在Android中，默认View的形状是矩形，只要确定View的左上角位置和右下角位置，就可以确定View的位置。在View中，这两个顶点的坐标，对应着View的下面四个属性：  t">
+<meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170706149933806671638.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/Android进阶-2016-07-05-初探Android中的View.html"/>
+
+
+
+
+
+  <title>初探Android中的View | Scott's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/Android进阶-2016-07-05-初探Android中的View.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">初探Android中的View</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-05T10:27:04+08:00">
+                2016-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/Android进阶-2016-07-05-初探Android中的View.html" class="leancloud_visitors" data-flag-title="初探Android中的View">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170706149933806671638.png" alt="20170706149933806671638.png"><br>在Android中，Activity承担着与UI相关的可视化功能，在Activity中会使用到系统提供的大量控件，而View是Android中所有控件的基类,可以认为View是用户界面最基本的控件。</p>
+<h2 id="View的位置参数"><a href="#View的位置参数" class="headerlink" title="View的位置参数"></a>View的位置参数</h2><p>在Android中，默认View的形状是矩形，只要确定View的左上角位置和右下角位置，就可以确定View的位置。在View中，这两个顶点的坐标，对应着View的下面四个属性：</p>
+<ul>
+<li>top View左上角纵坐标，对应View成员变量mTop,通过getTop()方法得到；</li>
+<li>left View左上角横坐标，对应View成员变量mLeft，通过getLeft()方法得到；</li>
+<li>right View右下角横坐标，对应View成员变量mRight，通过getRight()方法得到；</li>
+<li>bottom View右下角纵坐标，对应View成员变量mBottom,通过getBottom()方法得到。</li>
+</ul>
+<p>根据这两个点的坐标，可以计算出View的宽高：<br>width = right - left;<br>height = bottom - top;<br>也可以通过getWidth()和getHeight()获取，内部的计算方式是一样的。</p>
+<p>在Android3.0中View又增加了几个属性:</p>
+<ul>
+<li>x View左上角横坐标，通过getX()方法获得；</li>
+<li>y View左上角纵坐标，通过getY()方法获得；</li>
+<li>translationX View左上角相对于父容器在X轴上的偏移量，通过getTranslationX()方法获得；</li>
+<li>translationY View左上角相对于父容器在y轴上的偏移量，通过getTranslationY()方法获得；</li>
+</ul>
+<p>translationX和translationY的初始值都是0，x,y与left，top的对应关系：<br>x = left + translationX;<br>y = top + translationY;<br><strong>在View的平移动画中，View的left和top是View起始位置左上角的坐标，不随着动画的运行而改变，x和y随动画的运动而改变。可以认为这几个参数是为属性动画添加的，间接证明了属性动画在运行过程中可以修改View的属性值。</strong></p>
+<p>在Android5.0中View又增加了属性z和translationZ,这两个参数并不会影响View的大小，主要与View的阴影效果有关，z值越大，View的投影越大，可以认为是与Material Design相关的。</p>
+<h2 id="View的相关类"><a href="#View的相关类" class="headerlink" title="View的相关类"></a>View的相关类</h2><h3 id="MotionEvent"><a href="#MotionEvent" class="headerlink" title="MotionEvent"></a>MotionEvent</h3><p>触摸屏幕后产生的事件，比较常用的事件类型：</p>
+<ul>
+<li>ACTION_DOWN 手指刚触摸屏幕</li>
+<li>ACTION_MOVE 手指在屏幕上移动</li>
+<li>ACTION_UP 手指离开屏幕</li>
+<li>ACTION_CANCEL 手势被取消时</li>
+</ul>
+<p>通过MotionEvent可以获取事件发生的位置，getX()和getY()获取的是事件相对于View的坐标，getRawX()和getRawY()获取的是事件相对于屏幕的坐标。为了区别MotionEvent中事件的位置参数与View的位置参数整理为如下图示，图中蓝点表示事件的触发位置。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170710149965453553546.png" alt="20170710149965453553546.png"></p>
+<h3 id="VelocityTacker"><a href="#VelocityTacker" class="headerlink" title="VelocityTacker"></a>VelocityTacker</h3><p>用来追踪手指在滑动过程中的水平速度和竖直方向的速度。获取的速度可以是负值，当收拾滑动的方向与坐标系的方向相反时，得到的速度值是负值。获取速度之前必须要计算速度,通过调用computeCurrentVelocity()来实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">   public boolean onTouchEvent(MotionEvent event) &#123;</div><div class="line">       //添加速度追踪的事件</div><div class="line">       VelocityTracker velocityTracker = VelocityTracker.obtain();</div><div class="line">       velocityTracker.addMovement(event);</div><div class="line"></div><div class="line">       //追踪1000ms内的速度</div><div class="line">       velocityTracker.computeCurrentVelocity(1000);</div><div class="line">       int xVelocity = (int) velocityTracker.getXVelocity();</div><div class="line">       int yVelocity = (int) velocityTracker.getYVelocity();</div><div class="line">       Log.i(&quot;sguotao&quot;, &quot;xVelocity:&quot; + xVelocity);</div><div class="line">       Log.i(&quot;sguotao&quot;, &quot;yVelocity:&quot; + yVelocity);</div><div class="line"></div><div class="line">       //回收</div><div class="line">       velocityTracker.clear();</div><div class="line">       velocityTracker.recycle();</div><div class="line"></div><div class="line">       return super.onTouchEvent(event);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h3 id="GestureDector"><a href="#GestureDector" class="headerlink" title="GestureDector"></a>GestureDector</h3><p>在GestueDector中定义了两个常用的接口，OnGestureListener和OnDoubleTapListener,通过这两个接口，可以完成诸如单击、快速滑动、拖动、长按、双击等动作的监测。如果只是监听滑动相关的，建议自己在onTouchEvent中实现，如果要监听双击这种行为的话，那么就使用GestureDetector。</p>
+<h2 id="View的滑动"><a href="#View的滑动" class="headerlink" title="View的滑动"></a>View的滑动</h2><p>滑动在实际开发中非常常见，而且掌握滑动的方法是实现绚丽自定义控件的基础。实现View滑动的三种方式</p>
+<h3 id="方式一-scrollTo-scrollBy"><a href="#方式一-scrollTo-scrollBy" class="headerlink" title="方式一 scrollTo/scrollBy"></a>方式一 scrollTo/scrollBy</h3><p>View专门提供了scrollTo/scrollBy两个方法来实现滑动，scrollBy内部也是通过调用scrollTo方法实现的，使用这两个方法实现View的移动，只能将View的内容进行移动，不能将View本身进行移动。用一张图描述scrollTo/scrollBy两个方法的滑动效果。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149981308867779.png" alt="20170712149981308867779.png"><br>其中mScrollX表示View左边缘和View中内容的左边缘在水平方向的距离，mScrollY表示View上边缘和View中内容的上边缘在竖直方向的距离。</p>
+<h3 id="方式二-动画给View添加平移效果实现滑动"><a href="#方式二-动画给View添加平移效果实现滑动" class="headerlink" title="方式二 动画给View添加平移效果实现滑动"></a>方式二 动画给View添加平移效果实现滑动</h3><p>使用平移动画也可以实现View的滑动，在Android3.0中引入了属性动画后，我们可以通过操作View的translationX和translationY这两个属性实现动画的平移。使用动画的方式，操作简单，适用于没有交互的View和复杂动画效果的场景。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//targetView在100ms内向右平移100像素</div><div class="line">ObjectAnimator.ofFloat(targetView,&quot;translationX&quot;,0,100).setDuration(100).start();</div></pre></td></tr></table></figure>
+<h3 id="方式三-通过改变View的LayoutParams使View重新布局实现滑动"><a href="#方式三-通过改变View的LayoutParams使View重新布局实现滑动" class="headerlink" title="方式三 通过改变View的LayoutParams使View重新布局实现滑动"></a>方式三 通过改变View的LayoutParams使View重新布局实现滑动</h3><p>通过改变View布局参数的方式，操作起来复杂，适合有交互View的场景。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) targetView.params.width += 100;</div><div class="line">    params.leftMargin += 100;</div><div class="line">    targetView.requestLayout();</div><div class="line">    //或者targetView.setLayoutParams(params);</div></pre></td></tr></table></figure>
+<h2 id="View的弹性滑动"><a href="#View的弹性滑动" class="headerlink" title="View的弹性滑动"></a>View的弹性滑动</h2><p>所谓的弹性滑动，就是在让滑动以一种渐进的方式进行。</p>
+<h3 id="方式一-使用Scroller"><a href="#方式一-使用Scroller" class="headerlink" title="方式一 使用Scroller"></a>方式一 使用Scroller</h3><p>Scroller本身无法让View弹性滑动，它需要和View的computeScroll方法配合使用才能共同完成这个功能。具体实现过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Scroller scroller = new Scroller(mContext);</div><div class="line"></div><div class="line">  //弹性滑动到指定位置 </div><div class="line">  private void smoothScrollTo(int destX, int destY) &#123;</div><div class="line">      int scrollX = getScrollX();</div><div class="line">      int delta = destX - scrollX;</div><div class="line">      // 1000ms内滑向destX，效果就是慢慢滑动mScroller. </div><div class="line">      startScroll(scrollX, 0, delta, 0, 1000);</div><div class="line">      invalidate();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  public void computeScroll() &#123;</div><div class="line">      if (mScroller.computeScrollOffset()) &#123;</div><div class="line">          scrollTo(mScroller.getCurrX(), mScroller.getCurrY());</div><div class="line">          postInvalidate();</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>用一张图来表示Scroller实现弹性滑动的过程，<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149981298574432.png" alt="20170712149981298574432.png"><br>总结一下，Scroller本身并不能实现View的滑动，它需要配合View的computeScroll方法才能完成弹性滑动的效果，它不断地让View重绘，而每一次重绘距滑动起始时间会有一个时间间隔，通过这个时间间隔Scroller就可以得出View当前的滑动位置，知道了滑动位置就可以通过scrollTo方法来完成View的滑动。就这样，View的每一次重绘都会导致View进行小幅度的滑动，而多次的小幅度滑动就组成了弹性滑动，这就是Scroller的工作机制。</p>
+<h3 id="方式二-通过动画"><a href="#方式二-通过动画" class="headerlink" title="方式二 通过动画"></a>方式二 通过动画</h3><p>动画本身就是一个渐进的效果，利用动画天然自带滑动效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ObjectAnimator.ofFloat(targetView,&quot;translationX&quot;,0,100).setDuration(100).start();</div></pre></td></tr></table></figure></p>
+<h3 id="方式三-使用延时策略"><a href="#方式三-使用延时策略" class="headerlink" title="方式三 使用延时策略"></a>方式三 使用延时策略</h3><p>通过使用Handler或View的postDelayed方法，也可以使用线程的sleep方法。来实现渐进式的滑动效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">private static final int MESSAGE_SCROLL_TO = 1;</div><div class="line">    private static final int FRAME_COUNT =30;</div><div class="line">    private static final int DELAYED_TIME =33;</div><div class="line">    private int mCount = 0;</div><div class="line">    @SuppressLint(&quot; HandlerLeak&quot;)</div><div class="line">    private Handler mHandler = new Handler() &#123;</div><div class="line">        public void handleMessage(Message msg) &#123;</div><div class="line">            switch (msg.what) &#123;</div><div class="line">                case MESSAGE_SCROLL_TO:</div><div class="line">                    &#123;</div><div class="line">                    mCount++;</div><div class="line">                    if (mCount &lt;= FRAME_COUNT)&#123;</div><div class="line">                        float fraction = mCount / (float) FRAME_COUNT;</div><div class="line">                        int scrollX = (int) (fraction * 100);</div><div class="line">                        targetView.scrollTo(scrollX, 0);</div><div class="line">                        mHandler.sendEmptyMessageDelayed(MESSAGE_SCROLL_TO, DELAYED_TIME);</div><div class="line"></div><div class="line">                    &#125; break;</div><div class="line">                &#125; </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ;</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<h2 id="滑动冲突的处理"><a href="#滑动冲突的处理" class="headerlink" title="滑动冲突的处理"></a>滑动冲突的处理</h2><p>当界面中出现内外两层同时可以滑动的情况，就有可能会出现滑动冲突。出现滑动冲突可以用一张图来描述：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149981286533870.png" alt="20170712149981286533870.png"></p>
+<h3 id="场景一-外部滑动方向和内部滑动方向不一致"><a href="#场景一-外部滑动方向和内部滑动方向不一致" class="headerlink" title="场景一 外部滑动方向和内部滑动方向不一致"></a>场景一 外部滑动方向和内部滑动方向不一致</h3><p>这种场景主要描述的是内外两层View出现滑动方向不一致的情况，如外层View左右滑动，内层View上下滑动，或者外层View上下滑动，内层View所有滑动。常见的ViewPager与Fragment组合使用中出现的滑动效果，在这种效果中左右滑动来切换页面，如果每个页面内部又使用了ListView,就有可能会出现滑动冲突，但ViewPager内部处理了这种滑动冲突，如果不是ViewPager而是ScrollView，就会出现这种类型的滑动冲突。</p>
+<p>处理场景一中描述的滑动冲突规则：分清是水平滑动还是竖直滑动，来决定哪一层来拦截事件。如图中描述的情况，如果是左右滑动，外层View来拦截事件处理，如果是上下滑动，内层View来拦截事件处理。</p>
+<p>具体实现上，可以根据滑动过程中两个点的坐标，来判断滑动距离，滑动角度等。</p>
+<h3 id="场景二-外部滑动方向和内部滑动方向一致"><a href="#场景二-外部滑动方向和内部滑动方向一致" class="headerlink" title="场景二 外部滑动方向和内部滑动方向一致"></a>场景二 外部滑动方向和内部滑动方向一致</h3><p>这种场景主要描述的是内外两层View滑动方向一致的情况，如外层View和内层View同时左右滑动或者同时上下滑动。</p>
+<p>处理场景二中描述的滑动冲突，就需要结合具体的业务逻辑来进行区分。</p>
+<h3 id="场景三-以上两种场景的嵌套"><a href="#场景三-以上两种场景的嵌套" class="headerlink" title="场景三 以上两种场景的嵌套"></a>场景三 以上两种场景的嵌套</h3><p>这种场景主要描述的是以上两种场景的组合情况。</p>
+<p>处理场景三种描述的滑动冲突与场景二一样，也需要结合具体的业务逻辑来进行区分。</p>
+<h3 id="解决冲突的两种方法"><a href="#解决冲突的两种方法" class="headerlink" title="解决冲突的两种方法"></a>解决冲突的两种方法</h3><h4 id="方法一-外部拦截法"><a href="#方法一-外部拦截法" class="headerlink" title="方法一 外部拦截法"></a>方法一 外部拦截法</h4><p>所谓外部拦截法是指点击事情都先经过父容器的拦截处理，如果父容器需要此事件就拦截，如果不需要此事件就不拦截，这样就可以解决滑动冲突的问题。</p>
+<p>外部拦截法的实现过程：在父容器的onInterceptTouchEvent方法中：</p>
+<ol>
+<li>首先是ACTION_DOWN这个事件，父容器必须返回false，即不拦截ACTION_DOWN事件，这是因为一旦父容器拦截了ACTION_DOWN，那么后续的ACTION_MOVE和ACTION_UP事件都会直接交由父容器处理，这个时候事件没法再传递给子元素了；</li>
+<li>其次是ACTION_MOVE事件，这个事件可以根据需要来决定是否拦截，如果父容器需要拦截就返回true，否则返回false；</li>
+<li>最后是ACTION_UP事件，这里必须要返回false，因为ACTION_UP事件本身没有太多意义。考虑一种情况，假设事件交由子元素处理，如果父容器在ACTION_UP时返回了true，就会导致子元素无法接收到ACTION_UP事件，这个时候子元素中的onClick事件就无法触发，但是父容器比较特殊，一旦它开始拦截任何一个事件，那么后续的事件都会交给它来处理，而ACTION_UP作为最后一个事件也必定可以传递给父容器，即便父容器的onInterceptTouchEvent方法在ACTION_UP时返回了false。</li>
+</ol>
+<h4 id="方法二-内部拦截法"><a href="#方法二-内部拦截法" class="headerlink" title="方法二 内部拦截法"></a>方法二 内部拦截法</h4><p>内部拦截法是指父容器不拦截任何事件，所有的事件都传递给子元素，如果子元素需要此事件就直接消耗掉，否则就交由父容器进行处理，这种方法和Android中View的事件分发机制不一致，需要配合requestDisallowInterceptTouchEvent方法才能正常工作。内部拦截法的实现过程：<br>在子View中需要重写dispathTouchEvent()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public boolean dispatchTouchEvent(MotionEventevent) &#123;</div><div class="line">     switch (event.getAction()) &#123;</div><div class="line">         case MotionEvent.ACTION_DOWN:&#123;</div><div class="line">             parent.requestDisallowInterceptTouchEvent(true);</div><div class="line">             break;</div><div class="line">         &#125;</div><div class="line">         case MotionEvent.ACTION_MOVE:&#123;</div><div class="line">             int deltaX = x - mLastX;</div><div class="line">             int deltaY = y - mLastY;</div><div class="line">             if (父容器需要此类点击事件))&#123;</div><div class="line">                 parent.requestDisallowInterceptTouchEvent(false);</div><div class="line">             &#125;</div><div class="line">             break;</div><div class="line">         &#125; case MotionEvent.ACTION_UP:&#123;</div><div class="line">             break;</div><div class="line">         &#125;</div><div class="line">         default:</div><div class="line">             break;</div><div class="line">     &#125; </div><div class="line">     return super.dispatchTouchEvent(event);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>除此之外，<strong>父容器要拦截除ACTION_DOWN外的所有事件</strong>，这样当子元素调用parent.requestDisallowInterceptTouchEvent(false)方法时，父元素才能继续拦截所需的事件。<strong>为什么父容器不能拦截ACTION_DOWN事件呢？那是因为ACTION_DOWN事件并不受FLAG_DISALLOW_INTERCEPT这个标记位的控制，所以一旦父容器拦截ACTION_DOWN事件，那么所有的事件都无法传递到子元素中去，这样内部拦截就无法起作用了。</strong>父元素所做的修改如下所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public boolean onInterceptTouchEvent(MotionEvent event) &#123;</div><div class="line">    int action = event.getAction();</div><div class="line">    if (action == MotionEvent.ACTION_ DOWN)&#123;</div><div class="line">        return false;</div><div class="line">    &#125; else&#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] 任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507</p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-05-初探Android中的View.html">http://www.sguotao.com/Android进阶-2016-07-05-初探Android中的View.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    
+      <div>
+        
+          
+
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>「真诚赞赏，手留余香」</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+<div>
+
+        
+      </div>
+    
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Scott
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.sguotao.com/Android进阶-2016-07-05-初探Android中的View.html" title="初探Android中的View">http://www.sguotao.com/Android进阶-2016-07-05-初探Android中的View.html</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/View/" rel="tag"># View</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Java进阶-2016-06-15-Java-String的不可变性.html" rel="next" title="Java String的不可变性">
+                <i class="fa fa-chevron-left"></i> Java String的不可变性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Android进阶-2016-07-06-分析Android中View的事件分发流程.html" rel="prev" title="分析Android中View的事件分发流程">
+                分析Android中View的事件分发流程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODkyOC81NDk3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/songguotao" target="_blank" rel="external nofollow" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sguotao" target="_blank" rel="external nofollow" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#View的位置参数"><span class="nav-number">1.</span> <span class="nav-text">View的位置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View的相关类"><span class="nav-number">2.</span> <span class="nav-text">View的相关类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MotionEvent"><span class="nav-number">2.1.</span> <span class="nav-text">MotionEvent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VelocityTacker"><span class="nav-number">2.2.</span> <span class="nav-text">VelocityTacker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GestureDector"><span class="nav-number">2.3.</span> <span class="nav-text">GestureDector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View的滑动"><span class="nav-number">3.</span> <span class="nav-text">View的滑动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一-scrollTo-scrollBy"><span class="nav-number">3.1.</span> <span class="nav-text">方式一 scrollTo/scrollBy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二-动画给View添加平移效果实现滑动"><span class="nav-number">3.2.</span> <span class="nav-text">方式二 动画给View添加平移效果实现滑动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式三-通过改变View的LayoutParams使View重新布局实现滑动"><span class="nav-number">3.3.</span> <span class="nav-text">方式三 通过改变View的LayoutParams使View重新布局实现滑动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View的弹性滑动"><span class="nav-number">4.</span> <span class="nav-text">View的弹性滑动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一-使用Scroller"><span class="nav-number">4.1.</span> <span class="nav-text">方式一 使用Scroller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二-通过动画"><span class="nav-number">4.2.</span> <span class="nav-text">方式二 通过动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式三-使用延时策略"><span class="nav-number">4.3.</span> <span class="nav-text">方式三 使用延时策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑动冲突的处理"><span class="nav-number">5.</span> <span class="nav-text">滑动冲突的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景一-外部滑动方向和内部滑动方向不一致"><span class="nav-number">5.1.</span> <span class="nav-text">场景一 外部滑动方向和内部滑动方向不一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景二-外部滑动方向和内部滑动方向一致"><span class="nav-number">5.2.</span> <span class="nav-text">场景二 外部滑动方向和内部滑动方向一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景三-以上两种场景的嵌套"><span class="nav-number">5.3.</span> <span class="nav-text">场景三 以上两种场景的嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决冲突的两种方法"><span class="nav-number">5.4.</span> <span class="nav-text">解决冲突的两种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一-外部拦截法"><span class="nav-number">5.4.1.</span> <span class="nav-text">方法一 外部拦截法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二-内部拦截法"><span class="nav-number">5.4.2.</span> <span class="nav-text">方法二 内部拦截法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" rel="external nofollow" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iH9ug4Eu98bS8XiH30QEwODs-gzGzoHsz", "D0qgHUsqtcQOClhgS4ElkmDQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
