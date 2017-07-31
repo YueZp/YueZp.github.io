@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.sguotao.com/"/>
-  <updated>2017-07-24T02:50:13.000Z</updated>
+  <updated>2017-06-23T11:06:23.000Z</updated>
   <id>http://www.sguotao.com/</id>
   
   <author>
@@ -14,32 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>【Kotlin笔记】Kotlin学习笔记</title>
-    <link href="http://www.sguotao.com/Kotlin-2017-07-24.html"/>
-    <id>http://www.sguotao.com/Kotlin-2017-07-24.html</id>
-    <published>2017-06-09T02:30:37.000Z</published>
-    <updated>2017-07-24T02:50:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Kotlin基础"><a href="#Kotlin基础" class="headerlink" title="Kotlin基础"></a>Kotlin基础</h2><h2 id="Kotlin-游戏开发-坦克大战"><a href="#Kotlin-游戏开发-坦克大战" class="headerlink" title="Kotlin 游戏开发(坦克大战)"></a>Kotlin 游戏开发(坦克大战)</h2><h2 id="Kotlin-Android开发（黑马新闻客户端）"><a href="#Kotlin-Android开发（黑马新闻客户端）" class="headerlink" title="Kotlin Android开发（黑马新闻客户端）"></a>Kotlin Android开发（黑马新闻客户端）</h2><h2 id="Kotlin-Web开发（团购网站）"><a href="#Kotlin-Web开发（团购网站）" class="headerlink" title="Kotlin Web开发（团购网站）"></a>Kotlin Web开发（团购网站）</h2><hr>
-<p>本文链接：<a href="http://www.sguotao.com/Kotlin-2017-07-24.html">http://www.sguotao.com/Kotlin-2017-07-24.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Kotlin基础&quot;&gt;&lt;a href=&quot;#Kotlin基础&quot; class=&quot;headerlink&quot; title=&quot;Kotlin基础&quot;&gt;&lt;/a&gt;Kotlin基础&lt;/h2&gt;&lt;h2 id=&quot;Kotlin-游戏开发-坦克大战&quot;&gt;&lt;a href=&quot;#Kotlin-游戏开发-坦
-    
-    </summary>
-    
-      <category term="Kotlin" scheme="http://www.sguotao.com/categories/Kotlin/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="Kotlin" scheme="http://www.sguotao.com/tags/Kotlin/"/>
-    
-  </entry>
   
   <entry>
     <title>【Kotlin笔记】Kotlin的前世今生</title>
@@ -1232,11 +1206,11 @@ stretch（默认值）：轴线占满整个交叉轴。
       <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="JVM" scheme="http://www.sguotao.com/tags/JVM/"/>
-    
       <category term="插件框架" scheme="http://www.sguotao.com/tags/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6/"/>
     
       <category term="ClassLoader" scheme="http://www.sguotao.com/tags/ClassLoader/"/>
+    
+      <category term="JVM" scheme="http://www.sguotao.com/tags/JVM/"/>
     
   </entry>
   
@@ -1298,31 +1272,6 @@ stretch（默认值）：轴线占满整个交叉轴。
     
     
       <category term="生活" scheme="http://www.sguotao.com/tags/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分析Android中的Binder</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84Binder.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html</id>
-    <published>2016-07-21T02:27:04.000Z</published>
-    <updated>2017-07-21T07:37:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html">http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;p&gt;本文链接：&lt;a href=&quot;http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html&quot;&gt;http://www.sguotao.com/Android进阶-2016-07-21-分析Andr
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
     
   </entry>
   
@@ -1405,34 +1354,6 @@ stretch（默认值）：轴线占满整个交叉轴。
     
       &lt;h2 id=&quot;Activity的生命周期&quot;&gt;&lt;a href=&quot;#Activity的生命周期&quot; class=&quot;headerlink&quot; title=&quot;Activity的生命周期&quot;&gt;&lt;/a&gt;Activity的生命周期&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;Activity是Andr
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android中Webview的安全漏洞问题</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-Android%E4%B8%ADWebview%E7%9A%84%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E9%97%AE%E9%A2%98.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-07-21-Android中Webview的安全漏洞问题.html</id>
-    <published>2016-07-21T02:27:04.000Z</published>
-    <updated>2017-07-24T11:17:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="WebView中常见的问题"><a href="#WebView中常见的问题" class="headerlink" title="WebView中常见的问题"></a>WebView中常见的问题</h2><p>webview<br>1，webview的安全漏洞 api16及之前，存在远程代码执行安全漏洞，由于程序没有限制使用webview.addJavaScripInterface方法，远程攻击者可以使用java的反射机制利用该漏洞执行任意的java对象的方法 </p>
-<p>2，webview在布局中动态加载时，一定要在最后的时候手动移除掉，防止放生内存泄漏 </p>
-<p>3，jsbride<br>4，webviewClient.onPageFinished –&gt; webChromeclient.onProgresschanged<br>5，后台耗电，webview在后台会启动好多线程，使用不当，这些线程就会在后台一直存在，造成耗电<br>6，硬件加速，可能会造成屏幕白块，闪屏等花屏问题，解决办法临时关闭加速</p>
-<h2 id="关于Webview的内存泄露问题"><a href="#关于Webview的内存泄露问题" class="headerlink" title="关于Webview的内存泄露问题"></a>关于Webview的内存泄露问题</h2><p>1.独立进程，简单暴力，不过可能涉及到进程间通信；<br>2.动态添加Webview，对传入webview中使用的Context使用弱引用，动态添加webview意思在布局创建个viewGroup用来防止webview，Activity创建时add进来，在Activity停止时remove掉；</p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-Android中Webview的安全漏洞问题.html">http://www.sguotao.com/Android进阶-2016-07-21-Android中Webview的安全漏洞问题.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;WebView中常见的问题&quot;&gt;&lt;a href=&quot;#WebView中常见的问题&quot; class=&quot;headerlink&quot; title=&quot;WebView中常见的问题&quot;&gt;&lt;/a&gt;WebView中常见的问题&lt;/h2&gt;&lt;p&gt;webview&lt;br&gt;1，webview的安全漏洞 
     
     </summary>
     
@@ -1822,6 +1743,377 @@ stretch（默认值）：轴线占满整个交叉轴。
     
     
       <category term="Java" scheme="http://www.sguotao.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android实现点赞效果</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-06-13-Android%E5%AE%9E%E7%8E%B0%E7%82%B9%E8%B5%9E%E6%95%88%E6%9E%9C.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-06-13-Android实现点赞效果.html</id>
+    <published>2016-06-13T06:39:39.000Z</published>
+    <updated>2017-07-13T10:02:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。</p>
+<h3 id="添加平移动画"><a href="#添加平移动画" class="headerlink" title="添加平移动画"></a>添加平移动画</h3><p>先来实现一个简单的平移动画，查看一下效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</div><div class="line">translationY.setDuration(1000);</div><div class="line">translationY.start();</div></pre></td></tr></table></figure>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733811463543.gif" alt="20170613149733811463543.gif"></p>
+<h3 id="添加渐变动画"><a href="#添加渐变动画" class="headerlink" title="添加渐变动画"></a>添加渐变动画</h3><p>再加入一个渐变的效果，查看一下效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//translate动画</div><div class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</div><div class="line">//alpha动画</div><div class="line">ObjectAnimator alpha = ObjectAnimator.ofFloat(view, &quot;alpha&quot;, 1f, 0f);</div><div class="line">AnimatorSet animatorSet = new AnimatorSet();</div><div class="line">animatorSet.play(translationY).before(alpha);</div><div class="line">animatorSet.setDuration(1000);</div><div class="line">animatorSet.start();</div></pre></td></tr></table></figure>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733732652528.gif" alt="20170613149733732652528.gif"></p>
+<h3 id="实现-1效果"><a href="#实现-1效果" class="headerlink" title="实现+1效果"></a>实现+1效果</h3><p>怎样实现+1的效果呢？可以考虑添加TextView，通过监听动画的状态实现对TextView显示状态的控制，查看一下运行效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">final TextView tv = (TextView) findViewById(R.id.tv);</div><div class="line"></div><div class="line">        //translate动画</div><div class="line">        ObjectAnimator translationY = ObjectAnimator.ofFloat(tv, &quot;translationY&quot;, 0f, -100f);</div><div class="line">        //alpha动画</div><div class="line">        ObjectAnimator alpha = ObjectAnimator.ofFloat(tv, &quot;alpha&quot;, 1f, 0f);</div><div class="line">        alpha.addListener(new Animator.AnimatorListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onAnimationStart(Animator animation) &#123;</div><div class="line">                tv.setVisibility(View.VISIBLE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationEnd(Animator animation) &#123;</div><div class="line">                tv.setVisibility(View.GONE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationCancel(Animator animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationRepeat(Animator animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        AnimatorSet animatorSet = new AnimatorSet();</div><div class="line">        animatorSet.play(translationY).with(alpha);</div><div class="line">        animatorSet.setDuration(1000);</div><div class="line">        animatorSet.start();</div></pre></td></tr></table></figure>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149734463770366.gif" alt="20170613149734463770366.gif"></p>
+<h3 id="封装成View"><a href="#封装成View" class="headerlink" title="封装成View"></a>封装成View</h3><p>考虑到后期的扩展性和可维护性，将上面这个动画封装成一个自定义View。</p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-06-13-Android实现点赞效果.html">http://www.sguotao.com/Android进阶-2016-06-13-Android实现点赞效果.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。&lt;/p&gt;
+&lt;h3 id=&quot;添加平移动画&quot;&gt;&lt;a href=&quot;#添加平移动画
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
+    
+      <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分析Android中的Drawable Animation</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-19-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84Drawable-Animation.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-05-19-分析Android中的Drawable-Animation.html</id>
+    <published>2016-05-19T02:27:04.000Z</published>
+    <updated>2017-07-13T09:57:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在上一篇中对Android传统动画中的View动画进行了一些整理，<a href="/Android%E8%BF%9B%E9%98%B6-2016-05-18-android-view-animation.html">Android动画分析一 View Animation</a> 在这一篇中，将对Android传统动画中的Drawable动画进行整理。什么是Drawable动画，Drawable动画是将一些列的Drawable资源一个接一个的播放，从而产生动画的效果，可以理解为是Frame Animation。</p>
+<h2 id="Drawable-Animation"><a href="#Drawable-Animation" class="headerlink" title="Drawable Animation"></a>Drawable Animation</h2><p>这里介绍实现Drawable Animation的两种方式，一种是使用&lt;animation-list&gt;标签，一种是使用AnimationDrawable对象。</p>
+<h3 id="Drawable动画的示例"><a href="#Drawable动画的示例" class="headerlink" title="Drawable动画的示例"></a>Drawable动画的示例</h3><p>在res/drawable目录下定义一个动画文件(<strong>注:不是res/anim目录</strong>)，文件的根节点是&lt;animation-list&gt;其中android:oneshot属性当值为true时,动画只执行一次，当值为false时，动画重复执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;animation-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:oneshot=&quot;false&quot;&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification01&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification02&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification03&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification04&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification05&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification06&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">&lt;/animation-list&gt;</div></pre></td></tr></table></figure>
+<p>在Activity中处理的逻辑:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">ImageView imageView;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_test_view_animation);</div><div class="line"></div><div class="line">        imageView = (ImageView) this.findViewById(R.id.imageView);</div><div class="line">        Button mButton = (Button) this.findViewById(R.id.button);</div><div class="line"></div><div class="line">        mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                AnimationDrawable drawableAnim = (AnimationDrawable) imageView.getBackground();</div><div class="line">                if (drawableAnim.isRunning()) &#123;</div><div class="line">                    drawableAnim.stop();</div><div class="line">                &#125; else &#123;</div><div class="line">                    drawableAnim.start();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="Drawable动画显示效果"><a href="#Drawable动画显示效果" class="headerlink" title="Drawable动画显示效果"></a>Drawable动画显示效果</h3><p>实现一个下载提示的动画:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170531149619977711659.gif" alt="20170531149619977711659.gif"></p>
+<h3 id="一点引申"><a href="#一点引申" class="headerlink" title="一点引申"></a>一点引申</h3><p>在实现Drawable动画过程中,做一点引申:</p>
+<ol>
+<li>定义的xml动画文件根元素是&lt;animation-list&gt;，存放在res/drawable目录，如果放在其他目录，会出现警告，但不影响正常的编译。</li>
+<li>AnimationDrawable的start()方法不能够在Activity的onCreate()调用，因为这个时候，AnimationDrawable可能还没有绑定到Window上，如果想实现进入Activity后直接播放动画，可以在onWindowFocusChanged()方法里面调用，因为这个方法是在window已经获取到焦点之后回调的，可以保证已经绑定结束。</li>
+<li>在ImageView设置动画时，需要区分&lt;ImageView&gt;的src属性和background属性，在这个示例中，如果使用src属性，会出现NPE异常。出现异常的原因与src属性的绘制时机有关。background属性是view的属性，Android系统提供的所有控件都有该属性，在View的onDraw之前，就已经被绘制。而src属性是ImageView的特有属性，在ImageView的onDraw()方法中才会被绘制。</li>
+</ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://developer.android.com/guide/topics/graphics/drawable-animation.html" target="_blank" rel="external">drawable-animation</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-05-19-分析Android中的Drawable-Animation.html">http://www.sguotao.com/Android进阶-2016-05-19-分析Android中的Drawable-Animation.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在上一篇中对Android传统动画中的View动画进行了一些整理，&lt;a href=&quot;/Android%E8%BF%9B%E9%98%B6-2016-05-18-android-view-animation.html&quot;&gt;Android动画分析一 View Animation&lt;
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
+    
+      <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分析Android中的View Animation</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-18-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84View-Animation.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-05-18-分析Android中的View-Animation.html</id>
+    <published>2016-05-18T02:27:04.000Z</published>
+    <updated>2017-07-13T10:00:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在进行Android动画内容整理的时候，发现Android的动画有很多，如官方文档中直接给出的有Property Animation、View Animation、Drawable Animation，还有平时接触比较多的帧动画（Frame Animation）和补间动画（Tweened Animation）等，这些概念需要进行一下梳理。</p>
+<p>Android的动画可以分为两类，传统动画和Android3.0之后出现的属性动画(Property Animation)，其中传统动画又包括帧动画(Frame Animation)和补间动画(Tweened Animation)，帧动画的工作原理，类似于动画片，将一个完成的动画拆分为一张张的图片，然后连起来进行播放；补间动画是对View进行的一系列操作，包括淡入淡出(Alpha)，缩放(Scale)，旋转(Rotate)和平移(Translate)。Drawable Animation是将一些列的Drawable资源一个接一个的播放，从而产生动画的效果，可以理解为是Frame Animation。类似的，View Animation可以理解为是Tweened Animation。用一张图来说明一下这几种动画之间的关系。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170518149509230136976.png" alt="20170518149509230136976.png"></p>
+<h2 id="View-Animation"><a href="#View-Animation" class="headerlink" title="View Animation"></a>View Animation</h2><p>View Animation视图动画，只能作用在View上，完成一些基本的动画，淡入淡出，缩放，旋转和平移，以及这些基本动画的组合。视图动画的实现方式有两种，通常在res/anim目录下定义一个xml文件，xml的根元素可以是&lt;alpha&gt;、&lt;scale&gt;、&lt;rotate&gt;、&lt;translate&gt;及&lt;set&gt;。在&lt;set&gt;中定义了一个动画集，包括四种基本动画，也可以包括一个子&lt;set&gt;。另外一种方式，直接使用这些标签对应的Java类，也可以实现相同的效果。View Animation的类图如下所示。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149554073223859.png" alt="20170523149554073223859.png"><br>在介绍几种基本动画之前，先介绍一下动画的一些共有属性，四种基本动画除了继承了这些基本属性外，还有一些自身的属性，这些特有属性的介绍，会在每类动画介绍中做详细的说明。这些共有属性包括：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">XML Attribute</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">android:detachWallpaper</td>
+<td style="text-align:center">设置是否在壁纸上运行，只对设置了壁纸背景的窗口动画(window animation)有效。设为true，则动画只在窗口运行，壁纸背景保持不变</td>
+</tr>
+<tr>
+<td style="text-align:center">android:duration</td>
+<td style="text-align:center">动画从开始到结束持续的时长，单位为毫秒</td>
+</tr>
+<tr>
+<td style="text-align:center">android:fillAfter</td>
+<td style="text-align:center">设置为true时，动画执行完后，View会停留在动画的最后一帧；默认为false；如果是动画集，需在&lt;set&gt;标签中设置该属性才有效</td>
+</tr>
+<tr>
+<td style="text-align:center">android:fillBefore</td>
+<td style="text-align:center">设置为true时，动画执行完后，View回到动画执行前的状态，默认即为true</td>
+</tr>
+<tr>
+<td style="text-align:center">android:fillEnabled</td>
+<td style="text-align:center">设置为true时，android:fillBefore的值才有效，否则android:fillBefore会被忽略</td>
+</tr>
+<tr>
+<td style="text-align:center">android:interpolator</td>
+<td style="text-align:center">设置动画速率的变化，比如加速、减速、匀速等，需要指定Interpolator资源</td>
+</tr>
+<tr>
+<td style="text-align:center">android:repeatCount</td>
+<td style="text-align:center">设置动画重复执行的次数，默认为0，即不重复；可设为-1或infinite，表示无限重复</td>
+</tr>
+<tr>
+<td style="text-align:center">android:repeatMode</td>
+<td style="text-align:center">设置动画重复执行的模式，可设为以下两个值其中之一：restart 动画重复执行时从起点开始，默认为该值;reverse 动画会反方向执行</td>
+</tr>
+<tr>
+<td style="text-align:center">android:startOffset</td>
+<td style="text-align:center">设置动画执行之前的等待时长，毫秒为单位；重复执行时，每次执行前同样也会等待一段时间</td>
+</tr>
+<tr>
+<td style="text-align:center">android:zAdjustment</td>
+<td style="text-align:center">表示被设置动画的内容在动画运行时在Z轴上的位置，取值为以下三个值之一：normal 默认值，保持内容在Z轴上的位置不变;top 保持在Z周最上层;bottom 保持在Z轴最下层</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lt-alpha-gt-淡入淡出"><a href="#lt-alpha-gt-淡入淡出" class="headerlink" title="&lt;alpha&gt;(淡入淡出)"></a>&lt;alpha&gt;(淡入淡出)</h2><p>&lt;alpha&gt;可以实现淡入淡出的渐变效果。</p>
+<h3 id="alpha动画属性"><a href="#alpha动画属性" class="headerlink" title="alpha动画属性"></a>alpha动画属性</h3><p>对应AlphaAnimation，alpha动画有两个特有的属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">XML Attribute</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">android:fromAlpha</td>
+<td style="text-align:center">动画开始时的透明度，0.0为全透明，1.0为不透明，默认为1.0</td>
+</tr>
+<tr>
+<td style="text-align:center">android:toAlpha</td>
+<td style="text-align:center">动画结束时的透明度，0.0为全透明，1.0为不透明，默认为1.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="alpha动画构造方法"><a href="#alpha动画构造方法" class="headerlink" title="alpha动画构造方法"></a>alpha动画构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 需要在res中定义属性集(不常使用）</div><div class="line"> * @param context 上下文</div><div class="line"> * @param attrs 属性集</div><div class="line"> */</div><div class="line">public AlphaAnimation(Context context, AttributeSet attrs)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 在构造法方法中指定动画开始和结束时的透明度(常用方法)</div><div class="line"> * @param fromAlpha 动画开始时的透明度</div><div class="line"> * @param toAlpha 动画结束时的透明度</div><div class="line"> */</div><div class="line">public AlphaAnimation(float fromAlpha, float toAlpha)</div></pre></td></tr></table></figure>
+<h3 id="alpha动画示例"><a href="#alpha动画示例" class="headerlink" title="alpha动画示例"></a>alpha动画示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">final ImageView imageView = (ImageView) this.findViewById(R.id.imageView);</div><div class="line">Button mButton = (Button) this.findViewById(R.id.button);</div><div class="line"></div><div class="line">final AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f,1.0f);</div><div class="line">alphaAnimation.setDuration(3000);</div><div class="line"></div><div class="line">mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        imageView.startAnimation(alphaAnimation);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149551118671554.gif" alt="20170523149551118671554.gif"></p>
+<h2 id="lt-scale-gt-缩放"><a href="#lt-scale-gt-缩放" class="headerlink" title="&lt;scale&gt;(缩放)"></a>&lt;scale&gt;(缩放)</h2><p>&lt;scale&gt;可以实现缩放的效果。</p>
+<h3 id="scale动画属性"><a href="#scale动画属性" class="headerlink" title="scale动画属性"></a>scale动画属性</h3><p>对应ScaleAnimation，scale动画有以下的特有属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">XML Attribute</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fromX</td>
+<td style="text-align:center">动画开始时X坐标上的缩放尺寸，0.0表示缩放到没有，1.0表示正常无缩放，小于1.0表示收缩，大于1.0表示放大</td>
+</tr>
+<tr>
+<td style="text-align:center">toX</td>
+<td style="text-align:center">动画结束时X坐标上的缩放尺寸，0.0表示缩放到没有，1.0表示正常无缩放，小于1.0表示收缩，大于1.0表示放大</td>
+</tr>
+<tr>
+<td style="text-align:center">fromY</td>
+<td style="text-align:center">动画开始时Y坐标上的缩放尺寸，0.0表示缩放到没有，1.0表示正常无缩放，小于1.0表示收缩，大于1.0表示放大</td>
+</tr>
+<tr>
+<td style="text-align:center">toY</td>
+<td style="text-align:center">动画结束时Y坐标上的缩放尺寸，0.0表示缩放到没有，1.0表示正常无缩放，小于1.0表示收缩，大于1.0表示放大</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotX</td>
+<td style="text-align:center">缩放动画相对的固定点X坐标</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotY</td>
+<td style="text-align:center">缩放动画相对的固定点Y坐标</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotXType</td>
+<td style="text-align:center">缩放动画相对的固定点X坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotXValue</td>
+<td style="text-align:center">缩放动画相对的固定点X坐标的位置，与pivotXType相关</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotYType</td>
+<td style="text-align:center">缩放动画相对的固定点Y坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotYValue</td>
+<td style="text-align:center">缩放动画相对的固定点Y坐标的位置，与pivotYType相关</td>
+</tr>
+</tbody>
+</table>
+<h3 id="scale动画构造方法"><a href="#scale动画构造方法" class="headerlink" title="scale动画构造方法"></a>scale动画构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 自定义动画时需要重写的方法</div><div class="line"> * @param context 上下文</div><div class="line"> * @param attrs 属性集</div><div class="line"> */</div><div class="line">public ScaleAnimation(Context context, AttributeSet attrs)</div><div class="line"></div><div class="line">/**</div><div class="line"> *</div><div class="line"> * @param fromX 动画开始时X坐标上的缩放尺寸</div><div class="line"> * @param toX 动画结束时X坐标上的缩放尺寸</div><div class="line"> * @param fromY 动画开始时Y坐标上的缩放尺寸</div><div class="line"> * @param toY 动画结束时Y坐标上的缩放尺寸</div><div class="line"> */</div><div class="line">public ScaleAnimation(float fromX, float toX, float fromY, float toY)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 指定一个固定点,进行动画,固定点的坐标是(pivotX,pivotY)</div><div class="line"> * 第二个构造方法默认固定点的坐标是(0,0),即动画view的的左上角</div><div class="line"> * </div><div class="line"> * @param fromX 动画开始时X坐标上的缩放尺寸</div><div class="line"> * @param toX 动画结束时X坐标上的缩放尺寸</div><div class="line"> * @param fromY 动画开始时Y坐标上的缩放尺寸</div><div class="line"> * @param toY 动画结束时Y坐标上的缩放尺寸</div><div class="line"> * @param pivotX 固定点的X坐标坐标,取值为0时表示动画view的左边沿</div><div class="line"> * @param pivotY 固定点的Y坐标坐标,取值为0时表示动画view的上边沿</div><div class="line"> */</div><div class="line">public ScaleAnimation(float fromX, float toX, float fromY, float toY,</div><div class="line">                      float pivotX, float pivotY)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 通过pivotXType,pivotXValue,pivotYType和pivotYValue确定一个固定点进行动画</div><div class="line"> * 第三个构造方法中,固定点默认的位置类型(pivotXType、pivotYType)为 Animation.ABSOLUTE</div><div class="line"> * </div><div class="line"> * @param fromX 动画开始时X坐标上的缩放尺寸</div><div class="line"> * @param toX 动画结束时X坐标上的缩放尺寸</div><div class="line"> * @param fromY 动画开始时Y坐标上的缩放尺寸</div><div class="line"> * @param toY 动画结束时Y坐标上的缩放尺寸</div><div class="line"> * @param pivotXType 固定点X坐标位置的类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param pivotXValue 固定点X坐标坐标,位置与pivotXType有关</div><div class="line"> * @param pivotYType 固定点Y坐标位置的类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param pivotYValue 固定点Y坐标坐标,位置与pivotYType有关</div><div class="line"> */</div><div class="line">public ScaleAnimation(float fromX, float toX, float fromY, float toY,</div><div class="line">                      int pivotXType, float pivotXValue, int pivotYType, float pivotYValue)</div></pre></td></tr></table></figure>
+<p>这里有必要对这几个构造方法进行一些说明：</p>
+<ol>
+<li>第二个构造方法public ScaleAnimation(float fromX, float toX, float fromY, float toY)固定点的默认坐标是(0,0)，即要发生动画view的左上角，通过该构造方法创建的缩放动画，都是相对于该固定点进行的。</li>
+<li>第三个构造方法public ScaleAnimation(float fromX, float toX, float fromY, float toY,float pivotX, float pivotY)固定点的坐标可以指定为(pivotX,pivotY),即相对于发生动画view的左上角距离(pivotX,pivotY)的位置，通过该构造方法创建的缩放动画,都是相对这个指定的点进行的。</li>
+<li>第四个构造方法public ScaleAnimation(float fromX, float toX, float fromY, float toY,int pivotXType, float pivotXValue, int pivotYType, float pivotYValue)对固定点位置的确定有了更多的方式，固定点位置的确定主要与pivotXType, pivotXValue, pivotYType, pivotYValue这四个值有关。通常pivotXType和pivotYType的值都指定为同一种类型。</li>
+</ol>
+<ul>
+<li>当pivotXType和pivotYType为Animation. ABSOLUTE时，与第三个构造方法效果相同，即第三个构造方法默认的pivotXType和pivotYType为Animation. ABSOLUTE。</li>
+<li>当pivotXType和pivotYType为Animation.RELATIVE_TO_SELF，固定点的位置相对于动画view，固定点的坐标为(width*pivotXValue,height*pivotYValue),其中width为动画view的宽，height为动画view的高。</li>
+<li>当pivotXType和pivotYType为Animation.RELATIVE_TO_PARENT，固定点的位置相对于动画view的父容器view，固定点的坐标为(parentWidth*pivotXValue,parentHeight*pivotYValue),其中parentWidth为父容器view的宽，parentHeight为父容器的高。</li>
+</ul>
+<h3 id="scale动画示例"><a href="#scale动画示例" class="headerlink" title="scale动画示例"></a>scale动画示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//固定点位置相对于imageview,固定点坐标为imageview的中心</div><div class="line">        final ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f, 1.0f, 0.5f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);</div><div class="line">        scaleAnimation.setDuration(3000);</div><div class="line">        scaleAnimation.setFillAfter(true);//动画结束时,保持结束的位置不变</div><div class="line">        mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                imageView.startAnimation(scaleAnimation);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149553277096247.gif" alt="20170523149553277096247.gif"></p>
+<h2 id="lt-rotate-gt-旋转"><a href="#lt-rotate-gt-旋转" class="headerlink" title="&lt;rotate&gt;(旋转)"></a>&lt;rotate&gt;(旋转)</h2><p>&lt;rotate&gt;可以实现旋转的效果。</p>
+<h3 id="rotate动画属性"><a href="#rotate动画属性" class="headerlink" title="rotate动画属性"></a>rotate动画属性</h3><p>对应RotateAnimation，rotate动画有以下的特有属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">XML Attribute</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fromDegrees</td>
+<td style="text-align:center">旋转开始的角度，旋转角度从0到360</td>
+</tr>
+<tr>
+<td style="text-align:center">toDegrees</td>
+<td style="text-align:center">旋转结束的角度，旋转角度从0到360</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotX</td>
+<td style="text-align:center">旋转中心相对的X坐标</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotY</td>
+<td style="text-align:center">旋转中心相对的Y坐标</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotXType</td>
+<td style="text-align:center">旋转动画中心X坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotXValue</td>
+<td style="text-align:center">旋转动画中心X坐标的位置，与pivotXType相关</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotYType</td>
+<td style="text-align:center">旋转动画中心Y坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
+</tr>
+<tr>
+<td style="text-align:center">pivotYValue</td>
+<td style="text-align:center">旋转动画中心Y坐标的位置，与pivotYType相关</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rotate动画构造方法"><a href="#rotate动画构造方法" class="headerlink" title="rotate动画构造方法"></a>rotate动画构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @param context</div><div class="line"> * @param attrs</div><div class="line"> */</div><div class="line">public RotateAnimation(Context context, AttributeSet attrs)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 旋转中心的位置(0,0)</div><div class="line"> * @param fromDegrees 旋转动画开始角度</div><div class="line"> * @param toDegrees 旋转动画结束角度</div><div class="line"> */</div><div class="line">public RotateAnimation(float fromDegrees, float toDegrees)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 旋转中心相对(0,0)的位置(pivotX,pivotY)</div><div class="line"> * @param fromDegrees 旋转动画开始角度</div><div class="line"> * @param toDegrees 旋转动画结束角度</div><div class="line"> * @param pivotX 旋转中心x坐标</div><div class="line"> * @param pivotY 旋转中心y坐标</div><div class="line"> */</div><div class="line">public RotateAnimation(float fromDegrees, float toDegrees, float pivotX, float pivotY)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 通过pivotXType,pivotXValue,pivotYType和pivotYValue确定旋转中心</div><div class="line"> * @param fromDegrees 旋转动画开始角度</div><div class="line"> * @param toDegrees 旋转动画结束角度</div><div class="line"> * @param pivotXType 旋转动画中心x坐标位置类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param pivotXValue 旋转动画中心x坐标的位置,与pivotXType相关</div><div class="line"> * @param pivotYType 旋转中心y坐标位置类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param pivotYValue 旋转动画中心y坐标的位置,与pivotYType相关</div><div class="line"> */</div><div class="line">public RotateAnimation(float fromDegrees, float toDegrees, int pivotXType, float pivotXValue,</div><div class="line">                       int pivotYType, float pivotYValue)</div></pre></td></tr></table></figure>
+<h3 id="rotate动画示例"><a href="#rotate动画示例" class="headerlink" title="rotate动画示例"></a>rotate动画示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">final ImageView imageView = (ImageView) this.findViewById(R.id.imageView);</div><div class="line">Button mButton = (Button) this.findViewById(R.id.button);</div><div class="line"></div><div class="line">final RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);</div><div class="line">rotateAnimation.setDuration(3000);</div><div class="line">rotateAnimation.setFillAfter(true);//动画结束时,保持结束的位置不变</div><div class="line">mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        imageView.startAnimation(rotateAnimation);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149553531557978.gif" alt="20170523149553531557978.gif"></p>
+<h2 id="lt-translate-gt-平移"><a href="#lt-translate-gt-平移" class="headerlink" title="&lt;translate&gt;(平移)"></a>&lt;translate&gt;(平移)</h2><p>&lt;translate&gt;可以实现平移的动画效果。</p>
+<h3 id="translate动画属性"><a href="#translate动画属性" class="headerlink" title="translate动画属性"></a>translate动画属性</h3><p>对应TranslateAnimation，translate动画有以下特有的属性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">XML Attribute</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fromXDelta</td>
+<td style="text-align:center">平移动画开始点X坐标</td>
+</tr>
+<tr>
+<td style="text-align:center">toXDelta</td>
+<td style="text-align:center">平移动画结束点X坐标</td>
+</tr>
+<tr>
+<td style="text-align:center">fromYDelta</td>
+<td style="text-align:center">平移动画开始点Y坐标</td>
+</tr>
+<tr>
+<td style="text-align:center">toYDelta</td>
+<td style="text-align:center">平移动画结束点Y坐标</td>
+</tr>
+<tr>
+<td style="text-align:center">fromXType</td>
+<td style="text-align:center">平移动画开始点X坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
+</tr>
+<tr>
+<td style="text-align:center">fromXValue</td>
+<td style="text-align:center">平移动画开始点X坐标位置，与fromXType有关</td>
+</tr>
+<tr>
+<td style="text-align:center">toXType</td>
+<td style="text-align:center">平移动画结束点X坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
+</tr>
+<tr>
+<td style="text-align:center">toXValue</td>
+<td style="text-align:center">平移动画结束点X坐标位置，与toXType有关</td>
+</tr>
+<tr>
+<td style="text-align:center">fromYType</td>
+<td style="text-align:center">平移动画开始点Y坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
+</tr>
+<tr>
+<td style="text-align:center">fromYValue</td>
+<td style="text-align:center">平移动画开始点坐标位置，与fromYType有关</td>
+</tr>
+<tr>
+<td style="text-align:center">toYType</td>
+<td style="text-align:center">平移动画结束点Y坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
+</tr>
+<tr>
+<td style="text-align:center">toYValue</td>
+<td style="text-align:center">平移动画结束点坐标位置，与toYType有关</td>
+</tr>
+</tbody>
+</table>
+<h3 id="translate动画构造方法"><a href="#translate动画构造方法" class="headerlink" title="translate动画构造方法"></a>translate动画构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @param context 上下文</div><div class="line"> * @param attrs 属性集</div><div class="line"> */</div><div class="line">public TranslateAnimation(Context context, AttributeSet attrs)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 平移动画的起点位置和结束位置坐标都是相对于(0,0)即动画view的左上角.</div><div class="line"> * @param fromXDelta </div><div class="line"> * @param toXDelta</div><div class="line"> * @param fromYDelta</div><div class="line"> * @param toYDelta</div><div class="line"> */</div><div class="line">public TranslateAnimation(float fromXDelta, float toXDelta, float fromYDelta, float toYDelta)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 通过构造参数确定平移动画的起始位置和结束位置的坐标</div><div class="line"> * </div><div class="line"> * @param fromXType 开始点x坐标位置类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param fromXValue 开始点x坐标位置,与fromXType有关</div><div class="line"> * @param toXType 结束点x坐标类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param toXValue 结束点x坐标位置,与toXType有关</div><div class="line"> * @param fromYType 开始点y坐标类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param fromYValue 开始点y坐标位置,与fromYType有关</div><div class="line"> * @param toYType 结束点y坐标类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param toYValue 结束点y坐标类型,与toYType有关</div><div class="line"> */</div><div class="line">public TranslateAnimation(int fromXType, float fromXValue, int toXType, float toXValue,</div><div class="line">                          int fromYType, float fromYValue, int toYType, float toYValue)</div></pre></td></tr></table></figure>
+<h3 id="translate动画示例"><a href="#translate动画示例" class="headerlink" title="translate动画示例"></a>translate动画示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">final TranslateAnimation translateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 1.0f,</div><div class="line">    Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 1.0f);</div><div class="line">translateAnimation.setDuration(3000);</div><div class="line">translateAnimation.setFillAfter(true);//动画结束时,保持结束的位置不变</div><div class="line">mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        imageView.startAnimation(translateAnimation);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149553593494120.gif" alt="20170523149553593494120.gif"></p>
+<h2 id="lt-set-gt-动画集"><a href="#lt-set-gt-动画集" class="headerlink" title="&lt;set&gt;动画集"></a>&lt;set&gt;动画集</h2><p>&lt;set&gt;是一系列动画的集合，对应AnimationSet,可以实现一些动画的组合。在AnimationSet的构造方法中，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">    * Constructor to use when building an AnimationSet from code</div><div class="line">    * </div><div class="line">    * @param shareInterpolator Pass true if all of the animations in this set</div><div class="line">    *        should use the interpolator associated with this AnimationSet.</div><div class="line">    *        Pass false if each animation should use its own interpolator.</div><div class="line">    */</div><div class="line">   public AnimationSet(boolean shareInterpolator) &#123;</div><div class="line">       setFlag(PROPERTY_SHARE_INTERPOLATOR_MASK, shareInterpolator);</div><div class="line">       init();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>当使用代码方式创建动画集时，需要使用到这个构造方法，构造方法需要一个boolean值，当为true时，动画集中的动画使用animationSet的插值器，当为false时，使用每个动画自己的插值器。这里有一个问题，什么是插值器？</p>
+<h3 id="Interpolator"><a href="#Interpolator" class="headerlink" title="Interpolator"></a>Interpolator</h3><p>在Android API 11以前，插值器是Interpolator的直接翻译过来的名称，在Android API 11以后，加入了TimeInterpolator接口。什么是插值器？插值器定义了动画的运行轨迹，如加速和减速等。粗略统计了一下，Android API中关于插值器的接口，抽象类和实现类大概有16个，为了清晰的理解这些接口和类的关系，先抛出一张类图。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170527149586916399293.png" alt="20170527149586916399293.png"><br>这么多的实现类，每个插值器实现类的作用是什么？区别又是什么？在TimeInterpolator接口中声明了一个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * Maps a value representing the elapsed fraction of an animation to a value that represents</div><div class="line">     * the interpolated fraction. This interpolated value is then multiplied by the change in</div><div class="line">     * value of an animation to derive the animated value at the current elapsed animation time.</div><div class="line">     *</div><div class="line">     * @param input A value between 0 and 1.0 indicating our current point</div><div class="line">     *        in the animation where 0 represents the start and 1.0 represents</div><div class="line">     *        the end</div><div class="line">     * @return The interpolation value. This value can be more than 1.0 for</div><div class="line">     *         interpolators which overshoot their targets, or less than 0 for</div><div class="line">     *         interpolators that undershoot their targets.</div><div class="line">     */</div><div class="line">    float getInterpolation(float input);</div></pre></td></tr></table></figure>
+<p>该函数将当前动画运行的点input映射到一个插值函数中。不同的插值器实现类，对应这不同的插值函数。比如在插值器AccelerateInterpolator中，对应的插值函数是一个抛物线。抛物线的斜率跟mFactor参数有关，mFactor的值越大，抛物线的曲率越大。对应的动画效果是开始阶段动画比较慢，此后会越来越快。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public float getInterpolation(float input) &#123;</div><div class="line">        if (mFactor == 1.0f) &#123;</div><div class="line">            return input * input;</div><div class="line">        &#125; else &#123;</div><div class="line">            return (float)Math.pow(input, mDoubleFactor);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>对一些插值器的效果进行一个简单的描述，具体的运动效果，与对应的插值函数有关。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170527149587798346557.png" alt="20170527149587798346557.png"></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://developer.android.com/guide/topics/graphics/prop-animation.html" target="_blank" rel="external">prop-animation</a><br><a href="https://developer.android.com/guide/topics/graphics/view-animation.html" target="_blank" rel="external">view animation</a><br><a href="https://developer.android.com/guide/topics/graphics/drawable-animation.html" target="_blank" rel="external">drawable-animation</a><br><a href="https://developer.android.com/reference/android/view/animation/Animation.html" target="_blank" rel="external">Animation</a><br><a href="https://developer.android.com/reference/android/view/animation/AlphaAnimation.html" target="_blank" rel="external">AlphaAnimation</a><br><a href="https://developer.android.com/reference/android/view/animation/RotateAnimation.html" target="_blank" rel="external">RotateAnimation</a><br><a href="https://developer.android.com/reference/android/view/animation/ScaleAnimation.html" target="_blank" rel="external">ScaleAnimation</a><br><a href="https://developer.android.com/reference/android/view/animation/TranslateAnimation.html" target="_blank" rel="external">TranslateAnimation</a><br><a href="https://developer.android.com/reference/android/view/animation/AnimationSet.html" target="_blank" rel="external">AnimationSet</a><br><a href="https://my.oschina.net/banxi/blog/135633" target="_blank" rel="external">android动画（一）Interpolator</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-05-18-分析Android中的View-Animation.html">http://www.sguotao.com/Android进阶-2016-05-18-分析Android中的View-Animation.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在进行Android动画内容整理的时候，发现Android的动画有很多，如官方文档中直接给出的有Property Animation、View Animation、Drawable Animation，还有平时接触比较多的帧动画（Frame Animation）和补间动画（
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
+    
+      <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
     
   </entry>
   
