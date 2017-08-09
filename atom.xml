@@ -112,6 +112,95 @@
   </entry>
   
   <entry>
+    <title>分析HTTPS协议</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-06-04-%E5%88%86%E6%9E%90HTTPS%E5%8D%8F%E8%AE%AE.html"/>
+    <id>http://www.sguotao.com/Android进阶-2017-06-04-分析HTTPS协议.html</id>
+    <published>2017-06-04T02:27:04.000Z</published>
+    <updated>2017-08-09T02:58:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Https"><a href="#Https" class="headerlink" title="Https"></a>Https</h2><blockquote>
+<p>是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。</p>
+</blockquote>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170809150224326682630.png" alt="20170809150224326682630.png"><br>Https并不是一个单独的协议，而是对工作在一加密连接（SSL/TLS）上的常规Http协议。通过在TCP和HTTP之间加入TLS（Transport Layer Security）来加密。Https实际就是在TCP层与Http层之间加入了SSL/TLS来为上层的安全保驾护航，主要用到对称加密、非对称加密、证书，等技术进行客户端与服务器的数据加密传输，最终达到保证整个通信的安全性。</p>
+<h2 id="HTTPS和HTTP的区别"><a href="#HTTPS和HTTP的区别" class="headerlink" title="HTTPS和HTTP的区别"></a>HTTPS和HTTP的区别</h2><p>超文本传输协议HTTP协议被用于在Web浏览器和网站服务器之间传递信息。HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此HTTP协议不适合传输一些敏感信息，比如信用卡号、密码等。</p>
+<p>为了解决HTTP协议的这一缺陷，需要使用另一种协议：安全套接字层超文本传输协议HTTPS。为了数据传输的安全，HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。</p>
+<p>HTTPS和HTTP的区别主要为以下几点：</p>
+<ol>
+<li>https协议需要到ca申请证书，一般免费证书很少，需要交费。</li>
+<li>http是超文本传输协议，信息是明文传输，https 则是具有安全性的ssl加密传输协议。</li>
+<li>http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</li>
+<li>http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。由于HTTPS要进行加密处理，所有传输速度比HTTP慢。</li>
+</ol>
+<h2 id="SSL-TLS协议"><a href="#SSL-TLS协议" class="headerlink" title="SSL/TLS协议"></a>SSL/TLS协议</h2><p>SSL(Secure Sockets Layer 安全套接层),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。</p>
+<h3 id="SSL协议的作用"><a href="#SSL协议的作用" class="headerlink" title="SSL协议的作用"></a>SSL协议的作用</h3><ol>
+<li>认证用户和服务器，确保数据发送到正确的客户机和服务器;</li>
+<li>加密数据以防止数据中途被窃取;</li>
+<li>维护数据的完整性，确保数据在传输过程中不被改变。</li>
+</ol>
+<h3 id="SSL协议的工作过程"><a href="#SSL协议的工作过程" class="headerlink" title="SSL协议的工作过程"></a>SSL协议的工作过程</h3><p><strong>服务器认证阶段:</strong></p>
+<ol>
+<li>客户端向服务器发送一个开始信息“Hello”以便开始一个新的会话连接；</li>
+<li>服务器根据客户的信息确定是否需要生成新的主密钥，如需要则服务器在响应客户的“Hello”信息时将包含生成主密钥所需的信息；</li>
+<li>客户根据收到的服务器响应信息，产生一个主密钥，并用服务器的公开密钥加密后传给服务器；</li>
+<li>服务器恢复该主密钥，并返回给客户一个用主密钥认证的信息，以此让客户认证服务器。</li>
+</ol>
+<p><strong>用户认证阶段:</strong><br>在此之前，服务器已经通过了客户认证，这一阶段主要完成对客户的认证。经认证的服务器发送一个提问给客户，客户则返回（数字）签名后的提问和其公开密钥，从而向服务器提供认证。</p>
+<h2 id="TLS-SSL握手"><a href="#TLS-SSL握手" class="headerlink" title="TLS/SSL握手"></a>TLS/SSL握手</h2><p>SSL 协议既用到了公钥加密技术又用到了对称加密技术，对称加密技术虽然比公钥加密技术的速度快，可是公钥加密技术提供了更好的身份认证技术。SSL 的握手协议非常有效的让客户和服务器之间完成相互之间的身份认证，其主要过程如下：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170809150224484346357.png" alt="20170809150224484346357.png"></p>
+<p>1.客户端的浏览器向服务器传送客户端SSL 协议的版本号，加密算法的种类，产生的随机数，以及其他服务器和客户端之间通讯所需要的各种信息。</p>
+<p>2.服务器向客户端传送SSL 协议的版本号，加密算法的种类，随机数以及其他相关信息，同时服务器还将向客户端传送自己的证书。</p>
+<p>3.客户利用服务器传过来的信息验证服务器的合法性，<strong>服务器的合法性包括：证书是否过期，发行服务器证书的CA 是否可靠，发行者证书的公钥能否正确解开服务器证书的“发行者的数字签名”，服务器证书上的域名是否和服务器的实际域名相匹配。</strong>如果合法性验证没有通过，通讯将断开；如果合法性验证通过，将继续进行下一步。</p>
+<p>用户端随机产生一个用于后面通讯的“对称密码”，然后用服务器的公钥（服务器的公钥从步骤2中的服务器的证书中获得）对其加密，然后将加密后的“预主密码”传给服务器。</p>
+<p>如果服务器要求客户的身份认证（在握手过程中为可选），用户可以建立一个随机数然后对其进行数据签名，将这个含有签名的随机数和客户自己的证书以及加密过的“预主密码”一起传给服务器。</p>
+<p>如果服务器要求客户的身份认证，服务器必须检验客户证书和签名随机数的合法性，<strong>具体的合法性验证过程包括：客户的证书使用日期是否有效，为客户提供证书的CA 是否可靠，发行CA 的公钥能否正确解开客户证书的发行CA 的数字签名，检查客户的证书是否在证书废止列表（CRL）中。</strong>检验如果没有通过，通讯立刻中断；如果验证通过，服务器将用自己的私钥解开加密的“预主密码”，然后执行一系列步骤来产生主通讯密码（客户端也将通过同样的方法产生相同的主通讯密码）。</p>
+<p>服务器和客户端用相同的主密码即“通话密码”，一个对称密钥用于SSL 协议的安全数据通讯的加解密通讯。同时在SSL 通讯过程中还要完成数据通讯的完整性，防止数据通讯中的任何变化。</p>
+<p>客户端向服务器端发出信息，指明后面的数据通讯将使用主密码为对称密钥，同时通知服务器客户端的握手过程结束。</p>
+<p>4.服务器向客户端发出信息，指明后面的数据通讯将使用主密码为对称密钥，同时通知客户端服务器端的握手过程结束。</p>
+<p>5.SSL 的握手部分结束，SSL 安全通道的数据通讯开始，客户和服务器开始使用相同的对称密钥进行数据通讯，同时进行通讯完整性的检验。</p>
+<h2 id="Https加密算法相关"><a href="#Https加密算法相关" class="headerlink" title="Https加密算法相关"></a>Https加密算法相关</h2><h2 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h2><p>密钥是一种参数，它是在使用密码算法过程中输入的参数，同一个明文在相同的密码算法和不同的密钥计算下会产生不同的密文。</p>
+<h3 id="对称密钥"><a href="#对称密钥" class="headerlink" title="对称密钥"></a>对称密钥</h3><p>又称共享密钥加密，对称密钥在加密和解密的过程中使用的密钥是相同的，常见的对称加密算法有DES、3DES、AES、RC5、RC6.</p>
+<p>优点是计算速度快，缺点是密钥需要在通讯的两端共享。</p>
+<h3 id="非对称密钥"><a href="#非对称密钥" class="headerlink" title="非对称密钥"></a>非对称密钥</h3><p>又称为公开密钥加密。服务端会生成一对密钥，一个私钥保存在服务端，仅自己知道，另一个是公钥，公钥可以自由发布，供任何人使用。</p>
+<p>与对称密钥加密相比，非对称加密无需在客户端和服务端之间共享密钥，只要私钥不发给任何用户，即使公钥在网上被截获，也无法被解密，仅有被窃取的公钥是没有任何用处的。</p>
+<h3 id="RSA加密过程"><a href="#RSA加密过程" class="headerlink" title="RSA加密过程"></a>RSA加密过程</h3><p>RSA密码体制是一种公钥密码体制，公钥公开，私钥保密，它的加密解密算法是公开的。 由公钥加密的内容可以并且只能由私钥进行解密，并且由私钥加密的内容可以并且只能由公钥进行解密。也就是说，RSA的这一对公钥、私钥都可以用来加密和解密，并且一方加密的内容可以由并且只能由对方进行解密。</p>
+<p>RSA加密过程:</p>
+<ol>
+<li>服务端生成配对的公钥和私钥；</li>
+<li>私钥保存在服务端，公钥发送给客户端；</li>
+<li>客户端使用公钥加密明文传输给服务端；</li>
+<li>服务端使用私钥解密密文得到明文；</li>
+</ol>
+<h3 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h3><p>就是互联网通讯中标志通讯各方身份信息的一串数字。数字证书解决的问题，就是保证现在使用的公钥就是真实服务器发送给我们的。</p>
+<p>数字证书简称CA，它由权威机构给某网站颁发的一种认可凭证，这个凭证是被大家（浏览器）所认可的。</p>
+<h2 id="数字签名和CA"><a href="#数字签名和CA" class="headerlink" title="数字签名和CA"></a>数字签名和CA</h2><p>数据在浏览器和服务器之间传输时，如何保证数据传输是真实服务器发送的而不是被掉包的？同时，如何保证传输的数据没有被人篡改？</p>
+<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>数字签名就是用于验证传输的内容是不是真实服务器发送的数据，发送的数据有没有被篡改过，是非对称加密的一种应用场景，不过他是反过来用私钥加密，通过与之配对的公钥来解密。</p>
+<p>数字签名的过程:</p>
+<ol>
+<li>服务端把报文经过Hash处理后生成摘要信息Digest，摘要信息使用私钥private-key加密之后就生成签名，服务器把签名连同报文一起发送给客户端。</li>
+<li>客户端接收到数据后，把签名提取出来用公钥public-key解密，如果能正常的解密出来Digest2，那么就能确认是对方发送的。</li>
+<li>客户端把报文Text提取出来做同样的Hash处理，得到的摘要信息Digest1，再与之前解密出来的Digest2对比。如果一致，则文本内容没有被修改过。</li>
+</ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">超文本传输安全协议</a><br><a href="https://baike.baidu.com/item/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6" target="_blank" rel="external">数字证书</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2017-06-04-分析HTTPS协议.html">http://www.sguotao.com/Android进阶-2017-06-04-分析HTTPS协议.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Https&quot;&gt;&lt;a href=&quot;#Https&quot; class=&quot;headerlink&quot; title=&quot;Https&quot;&gt;&lt;/a&gt;Https&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="Http" scheme="http://www.sguotao.com/tags/Http/"/>
+    
+  </entry>
+  
+  <entry>
     <title>分析HTTP协议</title>
     <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-06-03-%E5%88%86%E6%9E%90HTTP%E5%8D%8F%E8%AE%AE.html"/>
     <id>http://www.sguotao.com/Android进阶-2017-06-03-分析HTTP协议.html</id>
@@ -2131,11 +2220,11 @@ stretch（默认值）：轴线占满整个交叉轴。
     
       <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
     
+      <category term="JVM" scheme="http://www.sguotao.com/tags/JVM/"/>
+    
       <category term="插件框架" scheme="http://www.sguotao.com/tags/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6/"/>
     
       <category term="ClassLoader" scheme="http://www.sguotao.com/tags/ClassLoader/"/>
-    
-      <category term="JVM" scheme="http://www.sguotao.com/tags/JVM/"/>
     
   </entry>
   
@@ -2197,133 +2286,6 @@ stretch（默认值）：轴线占满整个交叉轴。
     
     
       <category term="生活" scheme="http://www.sguotao.com/tags/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分析Android中的Binder</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84Binder.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html</id>
-    <published>2016-07-21T02:27:04.000Z</published>
-    <updated>2017-08-08T03:38:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在分析Binder之前，需要先了解几个Linux的几个概念。</p>
-<h2 id="Linux内核的基础知识"><a href="#Linux内核的基础知识" class="headerlink" title="Linux内核的基础知识"></a>Linux内核的基础知识</h2><ol>
-<li><p>进程隔离/虚拟地址空间:每个程序都有自己独立的进程地址空间，这样就做到了进程隔离。这里的进程地址空间是指虚拟地址。虚拟地址不是现实存在的地址空间。操作系统可以根据分段和分页两种方式，实现虚拟地址到真实物理地址的映射。</p>
-</li>
-<li><p>系统调用:计算机系统的各种硬件资源是有限的，在现代多任务操作系统上同时运行的多个进程都需要访问这些资源，为了更好的管理这些资源，进程是不允许直接操作的，所有对这些资源的访问都必须有操作系统控制。也就是说操作系统是使用这些资源的唯一入口，而这个入口就是操作系统提供的系统调用（System Call）。</p>
-</li>
-<li><p>Binder驱动:Binder驱动是作为一个特殊字符型设备存在，设备节点为/dev/binder，遵循Linux设备驱动模型。在驱动实现过程中，实现与用户空间进程的数据通信。</p>
-</li>
-</ol>
-<h2 id="Binder的通信机制"><a href="#Binder的通信机制" class="headerlink" title="Binder的通信机制"></a>Binder的通信机制</h2><h3 id="什么是Binder？"><a href="#什么是Binder？" class="headerlink" title="什么是Binder？"></a>什么是Binder？</h3><ol>
-<li>通常意义下，Binder是Android中的一个类，它继承了IBinder接口；</li>
-<li>从IPC角度，Binder指的是跨进程通信机制；对于Server进程来说，Binder指的是Binder本地对象,对于Client进程来说，Binder指的是Binder代理对象。在整个传输过程，Binder是可以进行跨进程传递对象的。</li>
-<li>从Android Framework角度，Binder是ServiceManager连接各种Manager（ActivityManager、WindowManager，etc）和相应ManagerService的桥梁；</li>
-<li>从Android应用层，Binder是客户端和服务端进行通信的媒介，当你bindService的时候，服务端会返回一个包含了服务端业务调用的Binder对象，通过这个Binder对象，客户端就可以获取服务端提供的服务或者数据，这里的服务包括普通服务和基于AIDL的服务。</li>
-</ol>
-<h3 id="为什么使用binder"><a href="#为什么使用binder" class="headerlink" title="为什么使用binder"></a>为什么使用binder</h3><p>Android中有大量的CS（Client-Server）应用方式，这就要求Android内部提供IPC方法，Android使用Linux内核，拥有着非常多的跨进程通信机制，但是linux所支持的进程通信方式有两个问题：性能和安全性。</p>
-<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>目前linux支持的IPC包括传统的管道，System V IPC(消息队列/共享内存/信号量)，以及socket，但只有socket支持Client-Server的通信方式，由于socket是一套通用的网络通信方式，其传输效率低下切有很大的开销，比如socket的连接建立过程和中断连接过程都是有一定开销的。消息队列和管道采用存储-转发方式，即数据先从发送方缓存区拷贝到内核开辟的缓存区中，然后再从内核缓存区拷贝到接收方缓存区，至少有两次拷贝过程。共享内存虽然无需拷贝，但控制复杂，难以使用。</p>
-<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p>Android作为一个开放式，拥有众多开发者的的平台，应用程序的来源广泛，确保智能终端的安全是非常重要的。终端用户不希望从网上下载的程序在不知情的情况下偷窥隐私数据，连接无线网络，长期操作底层设备导致电池很快耗尽等等。传统IPC没有任何安全措施，完全依赖上层协议来确保。<strong>传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。Android为每个安装好的应用程序分配了自己的UID，故进程的UID是鉴别进程身份的重要标志。</strong>使用传统IPC只能由用户在数据包里填入UID/PID，但这样不可靠，容易被恶意程序利用。可靠的身份标记只有由IPC机制本身在内核中添加。其次传统IPC访问接入点是开放的，无法建立私有通道。比如命名管道的名称，system V的键值，socket的ip地址或文件名都是开放的，只要知道这些接入点的程序都可以和对端建立连接，不管怎样都无法阻止恶意程序通过猜测接收方地址获得连接。</p>
-<p>基于以上原因，Android需要建立一套新的IPC机制来满足系统对通信方式，传输性能和安全性的要求，这就是Binder。Binder基于Client-Server通信模式，传输过程只需一次拷贝，为发送发添加UID/PID身份，既支持实名Binder也支持匿名Binder，安全性高。</p>
-<h3 id="Binder通信模型"><a href="#Binder通信模型" class="headerlink" title="Binder通信模型"></a>Binder通信模型</h3><p>Binder的通信过程可以用下图来简单的描述。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170807150209709476434.png" alt="20170807150209709476434.png"></p>
-<p>Client与Server通过Binder进行通信的过程可以概括为:</p>
-<ol>
-<li>ServiceManager的建立；</li>
-<li>启动的Service在ServiceManager中进行注册，在已经建立的ServiceManager维护的一张表；</li>
-<li>Client向ServiceManager中进行查询Service中注册的方法；</li>
-<li>ServiceManager返回一个代理对象，Client可以通过该代理对象实现与Server的通信。代理对象中有空方法，代理对象中方法的实现是Binder驱动来完成的。整个过程对Client是透明的。</li>
-</ol>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>1.任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507<br>2.<a href="http://blog.csdn.net/universus/article/details/6211589" target="_blank" rel="external">Android Bander设计与实现 - 设计篇</a><br>3.<a href="http://www.cnblogs.com/innost/archive/2011/01/09/1931456.html" target="_blank" rel="external">Android深入浅出之Binder机制</a></p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html">http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在分析Binder之前，需要先了解几个Linux的几个概念。&lt;/p&gt;
-&lt;h2 id=&quot;Linux内核的基础知识&quot;&gt;&lt;a href=&quot;#Linux内核的基础知识&quot; class=&quot;headerlink&quot; title=&quot;Linux内核的基础知识&quot;&gt;&lt;/a&gt;Linux内核的基础知识
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="Binder" scheme="http://www.sguotao.com/tags/Binder/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分析Android中的Fragment</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Androdi%E4%B8%AD%E7%9A%84Fragment.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html</id>
-    <published>2016-07-21T02:27:04.000Z</published>
-    <updated>2017-08-08T03:39:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Fragment介绍"><a href="#Fragment介绍" class="headerlink" title="Fragment介绍"></a>Fragment介绍</h2><p>Android 在 Android 3.0（API 级别 11）中引入了Fragment，主要是为了给大屏幕（如平板电脑）上更加动态和灵活的 UI 设计提供支持。</p>
-<h3 id="Fragment加载到Activity中的两种方式"><a href="#Fragment加载到Activity中的两种方式" class="headerlink" title="Fragment加载到Activity中的两种方式"></a>Fragment加载到Activity中的两种方式</h3><p><strong>静态加载方式</strong><br>静态加载方式，直接在布局文件中添加fragment，示例代码:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleListFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/list"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleReaderFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/viewer"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><strong>动态加载方式</strong><br>动态加载方式，即在Activity运行过程中，将fragment加载到布局文件中，示例代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.获取一个FragmentTransaction实例</span></div><div class="line">FragmentManager fragmentManager = getFragmentManager();</div><div class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</div><div class="line"><span class="comment">//2.调用add()方法添加Fragment对象</span></div><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line"><span class="comment">//3.调用commit()方法使得fragmentTransaction实例的改变生效</span></div><div class="line">fragmentTransaction.commit();</div></pre></td></tr></table></figure>
-<h3 id="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"><a href="#FragmentPagerAdapter与FragmentStatePagerAdapter的区别" class="headerlink" title="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"></a>FragmentPagerAdapter与FragmentStatePagerAdapter的区别</h3><p>FragmentPagerAdapter和FragmentStatePagerAdapter都是PagerAdapter的子类，先来看他们的父类PagerAdapter。</p>
-<p>PagerAdapter是ViewPager的适配器，ViewPager将调用它来取得所需显示的页，而 PagerAdapter也会在数据变化时，通知ViewPager。如果继承自该类，至少需要实现 instantiateItem(), destroyItem(), getCount() 以及 isViewFromObject()。</p>
-<p>FragmentPagerAdapter继承自PagerAdapter。相比通用的PagerAdapter，该类更专注于每一页均为Fragment的情况。该类内的每一个生成的Fragment都将保存在内存之中，因此适用于那些相对静态的页，数量也比较少的那种；如果需要处理有很多页，并且数据动态性较大、占用内存较多的情况，应该使用FragmentStatePagerAdapter。FragmentPagerAdapter 重载实现了几个必须的函数，因此来自 PagerAdapter 的函数，我们只需要实现 getCount()，即可。且，由于 FragmentPagerAdapter.instantiateItem() 的实现中，调用了一个新增的虚函数 getItem()，因此，我们还至少需要实现一个 getItem()。</p>
-<p>FragmentStatePagerAdapter 和前面的 FragmentPagerAdapter 一样，是继承子 PagerAdapter。和 FragmentPagerAdapter 不一样的是，正如其类名中的 ‘State’ 所表明的含义一样，该 PagerAdapter 的实现将只保留当前页面，当页面离开视线后，就会被消除，释放其资源；而在页面需要显示时，生成新的页面。这么实现的好处就是当拥有大量的页面时，不必在内存中占用大量的内存。</p>
-<p>为什么FragmentPagerAdapter占用内存会比FragmentStatePagerAdapter呢？看一下FragmentPagerAdapter的源码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">        mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Detaching item #"</span> + getItemId(position) + <span class="string">": f="</span> + object</div><div class="line">            + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">    mCurTransaction.detach((Fragment)object);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>再对比看一下FragmentStatePagerAdapter对应的方法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">       Fragment fragment = (Fragment) object;</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">           mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Removing item #"</span> + position + <span class="string">": f="</span> + object</div><div class="line">               + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">       <span class="keyword">while</span> (mSavedState.size() &lt;= position) &#123;</div><div class="line">           mSavedState.add(<span class="keyword">null</span>);</div><div class="line">       &#125;</div><div class="line">       mSavedState.set(position, fragment.isAdded()</div><div class="line">               ? mFragmentManager.saveFragmentInstanceState(fragment) : <span class="keyword">null</span>);</div><div class="line">       mFragments.set(position, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">       mCurTransaction.remove(fragment);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>FragmentStatePagerAdapter在每次destroyItem()时，将Fragment移除掉，而FragmentPagerAdapter只是detach()，失去关联而已。</p>
-<h2 id="Fragment的生命周期"><a href="#Fragment的生命周期" class="headerlink" title="Fragment的生命周期"></a>Fragment的生命周期</h2><p>一个Fragment从创建到销毁的完整的生命周期如图:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170722150069331557277.png" alt="20170722150069331557277.png"><br>图中给出了Fragment在创建和销毁的过程中对一个的Activity的回调方法。对比发现，Fragment生命周期过程中的回调状态比Activity的状态多。</p>
-<p><strong>onAttch（Activity activity）</strong>，这个回调方法是在fragment与activity关联之后调用，我们能在这个方法中获取这个关联的activity的实例。但是当你的sdk更新到android6.0（api-23）是就会显示这个方法是过时的，系统建议使用onAttach（Context  context）这个方法代替。</p>
-<p><strong>onCreate()</strong>，这个回调方法是在fragment初始化的时候调用，我们通常在这个方法中使用getArgument()获取Activity传来的初始化Fragment的参数。需要注意的是，在这个方法中不能获取Activity中的控件，因为此时Activity的onCreate()还没有执行完，即Activity还没有创建完，要想获取Activity相关的资源应该在onActivityCreated()中获取。</p>
-<p><strong>onCreateView()</strong>：这个回调方法中我们主要是通过布局填充器获取Fragment布局。我们在这个方法中通过view.findViewById()初始化Fragment中的控件。</p>
-<p><strong>onActivityCreated()</strong>，这个回调方法是在Activity的onCreate()方法执行完执行，通知Fragment，其关联的Activity的onCreate()方法执行完了，即Activity创建完成，可以在这个方法中获取Activity中的资源。</p>
-<p><strong>onStart()</strong>，这个回调方法是在Activity的onstart()执行完立即执行，这个方法执行完Fragment界面就显示出来了，但是现在还没有获取焦点，用户不能进行交互操作。</p>
-<p><strong>onResume()</strong>，这个回调方法是在Activity的onResume()方法执行完立即执行，此时Fragment的获取了界面，用户可以操作。</p>
-<p><strong>onPause()</strong>，Fragment失去焦点，此时用户是不能操作的，执行完立即执行Activity的onPause()方法。</p>
-<p><strong>onStop()</strong>，Fragment不可见，执行完立即执行Activity的onStop()方法。</p>
-<p><strong>onDestroyView()</strong>,在onCreateView()中创建的Fragment视图会被销毁。Fragment的视图被回收。</p>
-<p><strong>onDestroy()</strong>，当这个Fragment不再使用时调用。需要注意的是，它即使经过了onDestroy()阶段，但仍然能从Activity中找到，因为它还没有Detach()。</p>
-<p><strong>onDetach()</strong>，Fragment与Activity解除关联，Fragment的所有的资源都被回收。</p>
-<h2 id="Fragment的通信"><a href="#Fragment的通信" class="headerlink" title="Fragment的通信"></a>Fragment的通信</h2><p>Fragment的通信，概括起来主要包含以下三种情况:</p>
-<ol>
-<li>在Fragment中调用Activity中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，调用Activity中的方法。</li>
-<li>在Activity中调用Fragment中的方法，Activity中维护着其关联的Fragment的实例，可以直接调用其方法。</li>
-<li>在Fragment中调用Fragment中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，通过findFragmentById()方法，知道要与之通信的Fragment。</li>
-</ol>
-<p>除了上面中介绍的方法，还可以通过接口回调的方法。这里以Fragment调用Activity中的方法为例，介绍接口回调的方式,接口回调主要经历三个步骤:</p>
-<ul>
-<li>在Fragment中定义回调接口，声明回调方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 1.在Fragment中定义回调接口，声明回调方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ComminuteListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>Fragment关联的Activity实现接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFragmentActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">TestFragment</span>.<span class="title">ComminuteListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span> </span>&#123;</div><div class="line">        showToast();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">()</span> </span>&#123;</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"toast from Activity"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在Fragment的onAttach()方法中，获取接口实例，调用回调方法。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttach</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onAttach(context);</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">          comminuteListener = (ComminuteListener) getActivity();</div><div class="line">      &#125;<span class="keyword">catch</span> (ClassCastException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      comminuteListener.comminute();</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]<a href="https://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">Google-API指南-应用组件-Fragment</a></p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html">http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Fragment介绍&quot;&gt;&lt;a href=&quot;#Fragment介绍&quot; class=&quot;headerlink&quot; title=&quot;Fragment介绍&quot;&gt;&lt;/a&gt;Fragment介绍&lt;/h2&gt;&lt;p&gt;Android 在 Android 3.0（API 级别 11）中引入了Fr
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="Fragment" scheme="http://www.sguotao.com/tags/Fragment/"/>
     
   </entry>
   
@@ -2415,6 +2377,133 @@ stretch（默认值）：轴线占满整个交叉轴。
       <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
     
       <category term="Activity" scheme="http://www.sguotao.com/tags/Activity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分析Android中的Fragment</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Androdi%E4%B8%AD%E7%9A%84Fragment.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html</id>
+    <published>2016-07-21T02:27:04.000Z</published>
+    <updated>2017-08-08T03:39:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Fragment介绍"><a href="#Fragment介绍" class="headerlink" title="Fragment介绍"></a>Fragment介绍</h2><p>Android 在 Android 3.0（API 级别 11）中引入了Fragment，主要是为了给大屏幕（如平板电脑）上更加动态和灵活的 UI 设计提供支持。</p>
+<h3 id="Fragment加载到Activity中的两种方式"><a href="#Fragment加载到Activity中的两种方式" class="headerlink" title="Fragment加载到Activity中的两种方式"></a>Fragment加载到Activity中的两种方式</h3><p><strong>静态加载方式</strong><br>静态加载方式，直接在布局文件中添加fragment，示例代码:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleListFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/list"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleReaderFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/viewer"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>动态加载方式</strong><br>动态加载方式，即在Activity运行过程中，将fragment加载到布局文件中，示例代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.获取一个FragmentTransaction实例</span></div><div class="line">FragmentManager fragmentManager = getFragmentManager();</div><div class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</div><div class="line"><span class="comment">//2.调用add()方法添加Fragment对象</span></div><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line"><span class="comment">//3.调用commit()方法使得fragmentTransaction实例的改变生效</span></div><div class="line">fragmentTransaction.commit();</div></pre></td></tr></table></figure>
+<h3 id="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"><a href="#FragmentPagerAdapter与FragmentStatePagerAdapter的区别" class="headerlink" title="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"></a>FragmentPagerAdapter与FragmentStatePagerAdapter的区别</h3><p>FragmentPagerAdapter和FragmentStatePagerAdapter都是PagerAdapter的子类，先来看他们的父类PagerAdapter。</p>
+<p>PagerAdapter是ViewPager的适配器，ViewPager将调用它来取得所需显示的页，而 PagerAdapter也会在数据变化时，通知ViewPager。如果继承自该类，至少需要实现 instantiateItem(), destroyItem(), getCount() 以及 isViewFromObject()。</p>
+<p>FragmentPagerAdapter继承自PagerAdapter。相比通用的PagerAdapter，该类更专注于每一页均为Fragment的情况。该类内的每一个生成的Fragment都将保存在内存之中，因此适用于那些相对静态的页，数量也比较少的那种；如果需要处理有很多页，并且数据动态性较大、占用内存较多的情况，应该使用FragmentStatePagerAdapter。FragmentPagerAdapter 重载实现了几个必须的函数，因此来自 PagerAdapter 的函数，我们只需要实现 getCount()，即可。且，由于 FragmentPagerAdapter.instantiateItem() 的实现中，调用了一个新增的虚函数 getItem()，因此，我们还至少需要实现一个 getItem()。</p>
+<p>FragmentStatePagerAdapter 和前面的 FragmentPagerAdapter 一样，是继承子 PagerAdapter。和 FragmentPagerAdapter 不一样的是，正如其类名中的 ‘State’ 所表明的含义一样，该 PagerAdapter 的实现将只保留当前页面，当页面离开视线后，就会被消除，释放其资源；而在页面需要显示时，生成新的页面。这么实现的好处就是当拥有大量的页面时，不必在内存中占用大量的内存。</p>
+<p>为什么FragmentPagerAdapter占用内存会比FragmentStatePagerAdapter呢？看一下FragmentPagerAdapter的源码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">        mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Detaching item #"</span> + getItemId(position) + <span class="string">": f="</span> + object</div><div class="line">            + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">    mCurTransaction.detach((Fragment)object);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再对比看一下FragmentStatePagerAdapter对应的方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">       Fragment fragment = (Fragment) object;</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">           mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Removing item #"</span> + position + <span class="string">": f="</span> + object</div><div class="line">               + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">       <span class="keyword">while</span> (mSavedState.size() &lt;= position) &#123;</div><div class="line">           mSavedState.add(<span class="keyword">null</span>);</div><div class="line">       &#125;</div><div class="line">       mSavedState.set(position, fragment.isAdded()</div><div class="line">               ? mFragmentManager.saveFragmentInstanceState(fragment) : <span class="keyword">null</span>);</div><div class="line">       mFragments.set(position, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">       mCurTransaction.remove(fragment);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>FragmentStatePagerAdapter在每次destroyItem()时，将Fragment移除掉，而FragmentPagerAdapter只是detach()，失去关联而已。</p>
+<h2 id="Fragment的生命周期"><a href="#Fragment的生命周期" class="headerlink" title="Fragment的生命周期"></a>Fragment的生命周期</h2><p>一个Fragment从创建到销毁的完整的生命周期如图:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170722150069331557277.png" alt="20170722150069331557277.png"><br>图中给出了Fragment在创建和销毁的过程中对一个的Activity的回调方法。对比发现，Fragment生命周期过程中的回调状态比Activity的状态多。</p>
+<p><strong>onAttch（Activity activity）</strong>，这个回调方法是在fragment与activity关联之后调用，我们能在这个方法中获取这个关联的activity的实例。但是当你的sdk更新到android6.0（api-23）是就会显示这个方法是过时的，系统建议使用onAttach（Context  context）这个方法代替。</p>
+<p><strong>onCreate()</strong>，这个回调方法是在fragment初始化的时候调用，我们通常在这个方法中使用getArgument()获取Activity传来的初始化Fragment的参数。需要注意的是，在这个方法中不能获取Activity中的控件，因为此时Activity的onCreate()还没有执行完，即Activity还没有创建完，要想获取Activity相关的资源应该在onActivityCreated()中获取。</p>
+<p><strong>onCreateView()</strong>：这个回调方法中我们主要是通过布局填充器获取Fragment布局。我们在这个方法中通过view.findViewById()初始化Fragment中的控件。</p>
+<p><strong>onActivityCreated()</strong>，这个回调方法是在Activity的onCreate()方法执行完执行，通知Fragment，其关联的Activity的onCreate()方法执行完了，即Activity创建完成，可以在这个方法中获取Activity中的资源。</p>
+<p><strong>onStart()</strong>，这个回调方法是在Activity的onstart()执行完立即执行，这个方法执行完Fragment界面就显示出来了，但是现在还没有获取焦点，用户不能进行交互操作。</p>
+<p><strong>onResume()</strong>，这个回调方法是在Activity的onResume()方法执行完立即执行，此时Fragment的获取了界面，用户可以操作。</p>
+<p><strong>onPause()</strong>，Fragment失去焦点，此时用户是不能操作的，执行完立即执行Activity的onPause()方法。</p>
+<p><strong>onStop()</strong>，Fragment不可见，执行完立即执行Activity的onStop()方法。</p>
+<p><strong>onDestroyView()</strong>,在onCreateView()中创建的Fragment视图会被销毁。Fragment的视图被回收。</p>
+<p><strong>onDestroy()</strong>，当这个Fragment不再使用时调用。需要注意的是，它即使经过了onDestroy()阶段，但仍然能从Activity中找到，因为它还没有Detach()。</p>
+<p><strong>onDetach()</strong>，Fragment与Activity解除关联，Fragment的所有的资源都被回收。</p>
+<h2 id="Fragment的通信"><a href="#Fragment的通信" class="headerlink" title="Fragment的通信"></a>Fragment的通信</h2><p>Fragment的通信，概括起来主要包含以下三种情况:</p>
+<ol>
+<li>在Fragment中调用Activity中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，调用Activity中的方法。</li>
+<li>在Activity中调用Fragment中的方法，Activity中维护着其关联的Fragment的实例，可以直接调用其方法。</li>
+<li>在Fragment中调用Fragment中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，通过findFragmentById()方法，知道要与之通信的Fragment。</li>
+</ol>
+<p>除了上面中介绍的方法，还可以通过接口回调的方法。这里以Fragment调用Activity中的方法为例，介绍接口回调的方式,接口回调主要经历三个步骤:</p>
+<ul>
+<li>在Fragment中定义回调接口，声明回调方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 1.在Fragment中定义回调接口，声明回调方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ComminuteListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Fragment关联的Activity实现接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFragmentActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">TestFragment</span>.<span class="title">ComminuteListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span> </span>&#123;</div><div class="line">        showToast();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">()</span> </span>&#123;</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"toast from Activity"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在Fragment的onAttach()方法中，获取接口实例，调用回调方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttach</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onAttach(context);</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">          comminuteListener = (ComminuteListener) getActivity();</div><div class="line">      &#125;<span class="keyword">catch</span> (ClassCastException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      comminuteListener.comminute();</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]<a href="https://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">Google-API指南-应用组件-Fragment</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html">http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Fragment介绍&quot;&gt;&lt;a href=&quot;#Fragment介绍&quot; class=&quot;headerlink&quot; title=&quot;Fragment介绍&quot;&gt;&lt;/a&gt;Fragment介绍&lt;/h2&gt;&lt;p&gt;Android 在 Android 3.0（API 级别 11）中引入了Fr
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="Fragment" scheme="http://www.sguotao.com/tags/Fragment/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分析Android中的Binder</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84Binder.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html</id>
+    <published>2016-07-21T02:27:04.000Z</published>
+    <updated>2017-08-08T03:38:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在分析Binder之前，需要先了解几个Linux的几个概念。</p>
+<h2 id="Linux内核的基础知识"><a href="#Linux内核的基础知识" class="headerlink" title="Linux内核的基础知识"></a>Linux内核的基础知识</h2><ol>
+<li><p>进程隔离/虚拟地址空间:每个程序都有自己独立的进程地址空间，这样就做到了进程隔离。这里的进程地址空间是指虚拟地址。虚拟地址不是现实存在的地址空间。操作系统可以根据分段和分页两种方式，实现虚拟地址到真实物理地址的映射。</p>
+</li>
+<li><p>系统调用:计算机系统的各种硬件资源是有限的，在现代多任务操作系统上同时运行的多个进程都需要访问这些资源，为了更好的管理这些资源，进程是不允许直接操作的，所有对这些资源的访问都必须有操作系统控制。也就是说操作系统是使用这些资源的唯一入口，而这个入口就是操作系统提供的系统调用（System Call）。</p>
+</li>
+<li><p>Binder驱动:Binder驱动是作为一个特殊字符型设备存在，设备节点为/dev/binder，遵循Linux设备驱动模型。在驱动实现过程中，实现与用户空间进程的数据通信。</p>
+</li>
+</ol>
+<h2 id="Binder的通信机制"><a href="#Binder的通信机制" class="headerlink" title="Binder的通信机制"></a>Binder的通信机制</h2><h3 id="什么是Binder？"><a href="#什么是Binder？" class="headerlink" title="什么是Binder？"></a>什么是Binder？</h3><ol>
+<li>通常意义下，Binder是Android中的一个类，它继承了IBinder接口；</li>
+<li>从IPC角度，Binder指的是跨进程通信机制；对于Server进程来说，Binder指的是Binder本地对象,对于Client进程来说，Binder指的是Binder代理对象。在整个传输过程，Binder是可以进行跨进程传递对象的。</li>
+<li>从Android Framework角度，Binder是ServiceManager连接各种Manager（ActivityManager、WindowManager，etc）和相应ManagerService的桥梁；</li>
+<li>从Android应用层，Binder是客户端和服务端进行通信的媒介，当你bindService的时候，服务端会返回一个包含了服务端业务调用的Binder对象，通过这个Binder对象，客户端就可以获取服务端提供的服务或者数据，这里的服务包括普通服务和基于AIDL的服务。</li>
+</ol>
+<h3 id="为什么使用binder"><a href="#为什么使用binder" class="headerlink" title="为什么使用binder"></a>为什么使用binder</h3><p>Android中有大量的CS（Client-Server）应用方式，这就要求Android内部提供IPC方法，Android使用Linux内核，拥有着非常多的跨进程通信机制，但是linux所支持的进程通信方式有两个问题：性能和安全性。</p>
+<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>目前linux支持的IPC包括传统的管道，System V IPC(消息队列/共享内存/信号量)，以及socket，但只有socket支持Client-Server的通信方式，由于socket是一套通用的网络通信方式，其传输效率低下切有很大的开销，比如socket的连接建立过程和中断连接过程都是有一定开销的。消息队列和管道采用存储-转发方式，即数据先从发送方缓存区拷贝到内核开辟的缓存区中，然后再从内核缓存区拷贝到接收方缓存区，至少有两次拷贝过程。共享内存虽然无需拷贝，但控制复杂，难以使用。</p>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p>Android作为一个开放式，拥有众多开发者的的平台，应用程序的来源广泛，确保智能终端的安全是非常重要的。终端用户不希望从网上下载的程序在不知情的情况下偷窥隐私数据，连接无线网络，长期操作底层设备导致电池很快耗尽等等。传统IPC没有任何安全措施，完全依赖上层协议来确保。<strong>传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。Android为每个安装好的应用程序分配了自己的UID，故进程的UID是鉴别进程身份的重要标志。</strong>使用传统IPC只能由用户在数据包里填入UID/PID，但这样不可靠，容易被恶意程序利用。可靠的身份标记只有由IPC机制本身在内核中添加。其次传统IPC访问接入点是开放的，无法建立私有通道。比如命名管道的名称，system V的键值，socket的ip地址或文件名都是开放的，只要知道这些接入点的程序都可以和对端建立连接，不管怎样都无法阻止恶意程序通过猜测接收方地址获得连接。</p>
+<p>基于以上原因，Android需要建立一套新的IPC机制来满足系统对通信方式，传输性能和安全性的要求，这就是Binder。Binder基于Client-Server通信模式，传输过程只需一次拷贝，为发送发添加UID/PID身份，既支持实名Binder也支持匿名Binder，安全性高。</p>
+<h3 id="Binder通信模型"><a href="#Binder通信模型" class="headerlink" title="Binder通信模型"></a>Binder通信模型</h3><p>Binder的通信过程可以用下图来简单的描述。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170807150209709476434.png" alt="20170807150209709476434.png"></p>
+<p>Client与Server通过Binder进行通信的过程可以概括为:</p>
+<ol>
+<li>ServiceManager的建立；</li>
+<li>启动的Service在ServiceManager中进行注册，在已经建立的ServiceManager维护的一张表；</li>
+<li>Client向ServiceManager中进行查询Service中注册的方法；</li>
+<li>ServiceManager返回一个代理对象，Client可以通过该代理对象实现与Server的通信。代理对象中有空方法，代理对象中方法的实现是Binder驱动来完成的。整个过程对Client是透明的。</li>
+</ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>1.任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507<br>2.<a href="http://blog.csdn.net/universus/article/details/6211589" target="_blank" rel="external">Android Bander设计与实现 - 设计篇</a><br>3.<a href="http://www.cnblogs.com/innost/archive/2011/01/09/1931456.html" target="_blank" rel="external">Android深入浅出之Binder机制</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html">http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在分析Binder之前，需要先了解几个Linux的几个概念。&lt;/p&gt;
+&lt;h2 id=&quot;Linux内核的基础知识&quot;&gt;&lt;a href=&quot;#Linux内核的基础知识&quot; class=&quot;headerlink&quot; title=&quot;Linux内核的基础知识&quot;&gt;&lt;/a&gt;Linux内核的基础知识
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="Binder" scheme="http://www.sguotao.com/tags/Binder/"/>
     
   </entry>
   
@@ -2688,45 +2777,6 @@ stretch（默认值）：轴线占满整个交叉轴。
       <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
     
       <category term="View" scheme="http://www.sguotao.com/tags/View/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java String的不可变性</title>
-    <link href="http://www.sguotao.com/Java%E8%BF%9B%E9%98%B6-2016-06-15-Java-String%E7%9A%84%E4%B8%8D%E5%8F%AF%E5%8F%98%E6%80%A7.html"/>
-    <id>http://www.sguotao.com/Java进阶-2016-06-15-Java-String的不可变性.html</id>
-    <published>2016-06-15T02:27:04.000Z</published>
-    <updated>2017-07-20T08:42:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Java String类有一个特点，即它是一个不可变类，一旦被实例化后，就无法被修改。于是就有一个疑问，为什么将String类设计成不可变的？这样设计有什么好处呢？</p>
-<h2 id="什么是不可变对象？"><a href="#什么是不可变对象？" class="headerlink" title="什么是不可变对象？"></a>什么是不可变对象？</h2><p>一个对象在其被实例化完成后，不能够改变其成员变量，包括基本数据类型的值不能够改变及引用类型索引的对象也不能够被修改。</p>
-<h2 id="String的不可变性"><a href="#String的不可变性" class="headerlink" title="String的不可变性"></a>String的不可变性</h2><p>String类的实例变量，存在一块特殊区域，这部分区域可以称为字符串池，这是在堆存储区中，方法区中的一部分存储区域。当一个字符串被创建的时候，会在字符串池中查找，如果找到，则直接返回该字符串的引用。比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//声明两个字符串</span></div><div class="line">String str1 = <span class="string">"abcd"</span>;</div><div class="line">String str2 = <span class="string">"abcd"</span>;</div></pre></td></tr></table></figure>
-<p>用图来表示这两个字符串的声明过程：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170615149750940366064.png" alt="20170615149750940366064.png"><br>在声明str2时，在字符串池中存在“abcd”，因此直接将“abcd”的引用返回。</p>
-<h2 id="对象和对象的引用"><a href="#对象和对象的引用" class="headerlink" title="对象和对象的引用"></a>对象和对象的引用</h2><p>下面一段代码，先看代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String str1 = <span class="string">"abcd"</span></div><div class="line">str1=<span class="string">"1234"</span></div><div class="line">System.out.println(str1);</div></pre></td></tr></table></figure>
-<p>打印结果”1234”。<br>很容易让人产生一个误区，str1的值是改变的，怎么解释呢？这里需要区分一下对象及对象的引用。对象是存放在堆内存中的，类的实例。引用，存放在栈内存中的，存放指向堆内存中对象的索引。上面这段代码的执行过程可以用下面的图形表示：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170615149751091924228.png" alt="20170615149751091924228.png"><br>str1只是一个引用，它指向一个具体的对象，当str1=”1234”执行时，创建了一个新的对象”1234”,引用str1指向了这个新对象，原来的对象“abcd”还存在内存中，没有发生改变。</p>
-<h2 id="String的不可变性有哪些特点"><a href="#String的不可变性有哪些特点" class="headerlink" title="String的不可变性有哪些特点"></a>String的不可变性有哪些特点</h2><ol>
-<li>线程安全，不可变对象不能够被改变，所以可以再多线程之间共享，不需要任何同步处理。</li>
-<li>高效性，在String中的源码中</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//this is used to cache hash code.</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> hash;</div></pre></td></tr></table></figure>
-<p>由于String是不可变的，随意一旦对象被创建，该Hash值也无法修改。所以在使用该对象的hashcode时，可以直接返回。比如在HashMap中，字符串对象的hashcode不可变且永远唯一，这就意味着使用在HashMap中的字符串时，不需要重新计算hashcode值，更加的高效。</p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Java进阶-2016-06-15-Java-String的不可变性.html">http://www.sguotao.com/Java进阶-2016-06-15-Java-String的不可变性.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Java String类有一个特点，即它是一个不可变类，一旦被实例化后，就无法被修改。于是就有一个疑问，为什么将String类设计成不可变的？这样设计有什么好处呢？&lt;/p&gt;
-&lt;h2 id=&quot;什么是不可变对象？&quot;&gt;&lt;a href=&quot;#什么是不可变对象？&quot; class=&quot;hea
-    
-    </summary>
-    
-      <category term="Java" scheme="http://www.sguotao.com/categories/Java/"/>
-    
-    
-      <category term="Java" scheme="http://www.sguotao.com/tags/Java/"/>
     
   </entry>
   

@@ -109,10 +109,13 @@
 <meta property="og:url" content="http://www.sguotao.com/Android进阶-2017-06-04-分析HTTPS协议.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="Https 是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。  Https并不是一个单独的协议，而是对工作在一加密连接（SSL/TLS）上的常规Http协议。通过在TCP和HTTP之间加入TLS（Transport Layer Security）来加密。">
-<meta property="og:updated_time" content="2017-08-08T08:59:28.000Z">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170809150224326682630.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170809150224484346357.png">
+<meta property="og:updated_time" content="2017-08-09T02:58:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分析HTTPS协议">
 <meta name="twitter:description" content="Https 是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。  Https并不是一个单独的协议，而是对工作在一加密连接（SSL/TLS）上的常规Http协议。通过在TCP和HTTP之间加入TLS（Transport Layer Security）来加密。">
+<meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170809150224326682630.png">
 
 
 
@@ -359,8 +362,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-04T10:27:04+08:00">
-                2016-06-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T10:27:04+08:00">
+                2017-06-04
               </time>
             
 
@@ -429,7 +432,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,083字
+                  2,794字
                 </span>
               
 
@@ -445,7 +448,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4分钟
+                  10分钟
                 </span>
               
             </div>
@@ -466,27 +469,56 @@
         <h2 id="Https"><a href="#Https" class="headerlink" title="Https"></a>Https</h2><blockquote>
 <p>是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。</p>
 </blockquote>
-<p>Https并不是一个单独的协议，而是对工作在一加密连接（SSL/TLS）上的常规Http协议。通过在TCP和HTTP之间加入TLS（Transport Layer Security）来加密。Https实际就是在TCP层与Http层之间加入了SSL/TLS来为上层的安全保驾护航，主要用到对称加密、非对称加密、证书，等技术进行客户端与服务器的数据加密传输，最终达到保证整个通信的安全性。</p>
-<h2 id="SSL-TLS协议"><a href="#SSL-TLS协议" class="headerlink" title="SSL/TLS协议"></a>SSL/TLS协议</h2><p>SSL协议，是一种安全传输协议；<br>TLS是SSL v3.0的升级版；</p>
-<h2 id="Https整体架构图"><a href="#Https整体架构图" class="headerlink" title="Https整体架构图"></a>Https整体架构图</h2><h2 id="Https传输速度"><a href="#Https传输速度" class="headerlink" title="Https传输速度"></a>Https传输速度</h2><ol>
-<li>通信慢</li>
-<li>SSL必须进行加密处理</li>
+<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170809150224326682630.png" alt="20170809150224326682630.png"><br>Https并不是一个单独的协议，而是对工作在一加密连接（SSL/TLS）上的常规Http协议。通过在TCP和HTTP之间加入TLS（Transport Layer Security）来加密。Https实际就是在TCP层与Http层之间加入了SSL/TLS来为上层的安全保驾护航，主要用到对称加密、非对称加密、证书，等技术进行客户端与服务器的数据加密传输，最终达到保证整个通信的安全性。</p>
+<h2 id="HTTPS和HTTP的区别"><a href="#HTTPS和HTTP的区别" class="headerlink" title="HTTPS和HTTP的区别"></a>HTTPS和HTTP的区别</h2><p>超文本传输协议HTTP协议被用于在Web浏览器和网站服务器之间传递信息。HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此HTTP协议不适合传输一些敏感信息，比如信用卡号、密码等。</p>
+<p>为了解决HTTP协议的这一缺陷，需要使用另一种协议：安全套接字层超文本传输协议HTTPS。为了数据传输的安全，HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。</p>
+<p>HTTPS和HTTP的区别主要为以下几点：</p>
+<ol>
+<li>https协议需要到ca申请证书，一般免费证书很少，需要交费。</li>
+<li>http是超文本传输协议，信息是明文传输，https 则是具有安全性的ssl加密传输协议。</li>
+<li>http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</li>
+<li>http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。由于HTTPS要进行加密处理，所有传输速度比HTTP慢。</li>
 </ol>
-<h2 id="TLS-SSL握手"><a href="#TLS-SSL握手" class="headerlink" title="TLS/SSL握手"></a>TLS/SSL握手</h2><h3 id="密码学原理"><a href="#密码学原理" class="headerlink" title="密码学原理"></a>密码学原理</h3><p>对称加密<br>加密数据的密钥跟解密数据用的密钥是一样的。</p>
-<p>不对称加密<br>私有密钥：一方保管<br>共有密钥：双方共有</p>
-<h3 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h3><p>就是互联网通讯中标志通讯各方身份信息的一串数字。</p>
-<h3 id="SSL与TLS握手整个过程"><a href="#SSL与TLS握手整个过程" class="headerlink" title="SSL与TLS握手整个过程"></a>SSL与TLS握手整个过程</h3><p>图</p>
-<h1 id="Https加密算法相关"><a href="#Https加密算法相关" class="headerlink" title="Https加密算法相关"></a>Https加密算法相关</h1><h2 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h2><p>密钥是一种参数，它是在使用密码算法过程中输入的参数，同一个明文在相同的密码算法和不同的密钥计算下会产生不同的密文。</p>
+<h2 id="SSL-TLS协议"><a href="#SSL-TLS协议" class="headerlink" title="SSL/TLS协议"></a>SSL/TLS协议</h2><p>SSL(Secure Sockets Layer 安全套接层),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。</p>
+<h3 id="SSL协议的作用"><a href="#SSL协议的作用" class="headerlink" title="SSL协议的作用"></a>SSL协议的作用</h3><ol>
+<li>认证用户和服务器，确保数据发送到正确的客户机和服务器;</li>
+<li>加密数据以防止数据中途被窃取;</li>
+<li>维护数据的完整性，确保数据在传输过程中不被改变。</li>
+</ol>
+<h3 id="SSL协议的工作过程"><a href="#SSL协议的工作过程" class="headerlink" title="SSL协议的工作过程"></a>SSL协议的工作过程</h3><p><strong>服务器认证阶段:</strong></p>
+<ol>
+<li>客户端向服务器发送一个开始信息“Hello”以便开始一个新的会话连接；</li>
+<li>服务器根据客户的信息确定是否需要生成新的主密钥，如需要则服务器在响应客户的“Hello”信息时将包含生成主密钥所需的信息；</li>
+<li>客户根据收到的服务器响应信息，产生一个主密钥，并用服务器的公开密钥加密后传给服务器；</li>
+<li>服务器恢复该主密钥，并返回给客户一个用主密钥认证的信息，以此让客户认证服务器。</li>
+</ol>
+<p><strong>用户认证阶段:</strong><br>在此之前，服务器已经通过了客户认证，这一阶段主要完成对客户的认证。经认证的服务器发送一个提问给客户，客户则返回（数字）签名后的提问和其公开密钥，从而向服务器提供认证。</p>
+<h2 id="TLS-SSL握手"><a href="#TLS-SSL握手" class="headerlink" title="TLS/SSL握手"></a>TLS/SSL握手</h2><p>SSL 协议既用到了公钥加密技术又用到了对称加密技术，对称加密技术虽然比公钥加密技术的速度快，可是公钥加密技术提供了更好的身份认证技术。SSL 的握手协议非常有效的让客户和服务器之间完成相互之间的身份认证，其主要过程如下：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170809150224484346357.png" alt="20170809150224484346357.png"></p>
+<p>1.客户端的浏览器向服务器传送客户端SSL 协议的版本号，加密算法的种类，产生的随机数，以及其他服务器和客户端之间通讯所需要的各种信息。</p>
+<p>2.服务器向客户端传送SSL 协议的版本号，加密算法的种类，随机数以及其他相关信息，同时服务器还将向客户端传送自己的证书。</p>
+<p>3.客户利用服务器传过来的信息验证服务器的合法性，<strong>服务器的合法性包括：证书是否过期，发行服务器证书的CA 是否可靠，发行者证书的公钥能否正确解开服务器证书的“发行者的数字签名”，服务器证书上的域名是否和服务器的实际域名相匹配。</strong>如果合法性验证没有通过，通讯将断开；如果合法性验证通过，将继续进行下一步。</p>
+<p>用户端随机产生一个用于后面通讯的“对称密码”，然后用服务器的公钥（服务器的公钥从步骤2中的服务器的证书中获得）对其加密，然后将加密后的“预主密码”传给服务器。</p>
+<p>如果服务器要求客户的身份认证（在握手过程中为可选），用户可以建立一个随机数然后对其进行数据签名，将这个含有签名的随机数和客户自己的证书以及加密过的“预主密码”一起传给服务器。</p>
+<p>如果服务器要求客户的身份认证，服务器必须检验客户证书和签名随机数的合法性，<strong>具体的合法性验证过程包括：客户的证书使用日期是否有效，为客户提供证书的CA 是否可靠，发行CA 的公钥能否正确解开客户证书的发行CA 的数字签名，检查客户的证书是否在证书废止列表（CRL）中。</strong>检验如果没有通过，通讯立刻中断；如果验证通过，服务器将用自己的私钥解开加密的“预主密码”，然后执行一系列步骤来产生主通讯密码（客户端也将通过同样的方法产生相同的主通讯密码）。</p>
+<p>服务器和客户端用相同的主密码即“通话密码”，一个对称密钥用于SSL 协议的安全数据通讯的加解密通讯。同时在SSL 通讯过程中还要完成数据通讯的完整性，防止数据通讯中的任何变化。</p>
+<p>客户端向服务器端发出信息，指明后面的数据通讯将使用主密码为对称密钥，同时通知服务器客户端的握手过程结束。</p>
+<p>4.服务器向客户端发出信息，指明后面的数据通讯将使用主密码为对称密钥，同时通知客户端服务器端的握手过程结束。</p>
+<p>5.SSL 的握手部分结束，SSL 安全通道的数据通讯开始，客户和服务器开始使用相同的对称密钥进行数据通讯，同时进行通讯完整性的检验。</p>
+<h2 id="Https加密算法相关"><a href="#Https加密算法相关" class="headerlink" title="Https加密算法相关"></a>Https加密算法相关</h2><h2 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h2><p>密钥是一种参数，它是在使用密码算法过程中输入的参数，同一个明文在相同的密码算法和不同的密钥计算下会产生不同的密文。</p>
 <h3 id="对称密钥"><a href="#对称密钥" class="headerlink" title="对称密钥"></a>对称密钥</h3><p>又称共享密钥加密，对称密钥在加密和解密的过程中使用的密钥是相同的，常见的对称加密算法有DES、3DES、AES、RC5、RC6.</p>
 <p>优点是计算速度快，缺点是密钥需要在通讯的两端共享。</p>
 <h3 id="非对称密钥"><a href="#非对称密钥" class="headerlink" title="非对称密钥"></a>非对称密钥</h3><p>又称为公开密钥加密。服务端会生成一对密钥，一个私钥保存在服务端，仅自己知道，另一个是公钥，公钥可以自由发布，供任何人使用。</p>
 <p>与对称密钥加密相比，非对称加密无需在客户端和服务端之间共享密钥，只要私钥不发给任何用户，即使公钥在网上被截获，也无法被解密，仅有被窃取的公钥是没有任何用处的。</p>
-<h3 id="RSA加密简单过程"><a href="#RSA加密简单过程" class="headerlink" title="RSA加密简单过程"></a>RSA加密简单过程</h3><ol>
+<h3 id="RSA加密过程"><a href="#RSA加密过程" class="headerlink" title="RSA加密过程"></a>RSA加密过程</h3><p>RSA密码体制是一种公钥密码体制，公钥公开，私钥保密，它的加密解密算法是公开的。 由公钥加密的内容可以并且只能由私钥进行解密，并且由私钥加密的内容可以并且只能由公钥进行解密。也就是说，RSA的这一对公钥、私钥都可以用来加密和解密，并且一方加密的内容可以由并且只能由对方进行解密。</p>
+<p>RSA加密过程:</p>
+<ol>
 <li>服务端生成配对的公钥和私钥；</li>
 <li>私钥保存在服务端，公钥发送给客户端；</li>
 <li>客户端使用公钥加密明文传输给服务端；</li>
 <li>服务端使用私钥解密密文得到明文；</li>
 </ol>
+<h3 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h3><p>就是互联网通讯中标志通讯各方身份信息的一串数字。数字证书解决的问题，就是保证现在使用的公钥就是真实服务器发送给我们的。</p>
+<p>数字证书简称CA，它由权威机构给某网站颁发的一种认可凭证，这个凭证是被大家（浏览器）所认可的。</p>
 <h2 id="数字签名和CA"><a href="#数字签名和CA" class="headerlink" title="数字签名和CA"></a>数字签名和CA</h2><p>数据在浏览器和服务器之间传输时，如何保证数据传输是真实服务器发送的而不是被掉包的？同时，如何保证传输的数据没有被人篡改？</p>
 <h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>数字签名就是用于验证传输的内容是不是真实服务器发送的数据，发送的数据有没有被篡改过，是非对称加密的一种应用场景，不过他是反过来用私钥加密，通过与之配对的公钥来解密。</p>
 <p>数字签名的过程:</p>
@@ -495,9 +527,7 @@
 <li>客户端接收到数据后，把签名提取出来用公钥public-key解密，如果能正常的解密出来Digest2，那么就能确认是对方发送的。</li>
 <li>客户端把报文Text提取出来做同样的Hash处理，得到的摘要信息Digest1，再与之前解密出来的Digest2对比。如果一致，则文本内容没有被修改过。</li>
 </ol>
-<h3 id="数字证书-1"><a href="#数字证书-1" class="headerlink" title="数字证书"></a>数字证书</h3><p>如何保证现在使用的公钥就是真实服务器发送给我们的呢？</p>
-<p>数字证书简称CA，它由权威机构给某网站颁发的一种认可凭证，这个凭证是被大家（浏览器）所认可的。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">超文本传输安全协议</a></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">超文本传输安全协议</a><br><a href="https://baike.baidu.com/item/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6" target="_blank" rel="external">数字证书</a></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.com/Android进阶-2017-06-04-分析HTTPS协议.html">http://www.sguotao.com/Android进阶-2017-06-04-分析HTTPS协议.html</a></p>
 
@@ -582,8 +612,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Android进阶-2016-05-19-分析Android中的Drawable-Animation.html" rel="next" title="分析Android中的Drawable Animation">
-                <i class="fa fa-chevron-left"></i> 分析Android中的Drawable Animation
+              <a href="/Android进阶-2017-06-03-分析HTTP协议.html" rel="next" title="分析HTTP协议">
+                <i class="fa fa-chevron-left"></i> 分析HTTP协议
               </a>
             
           </div>
@@ -592,8 +622,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Android进阶-2016-06-13-Android实现点赞效果.html" rel="prev" title="Android实现点赞效果">
-                Android实现点赞效果 <i class="fa fa-chevron-right"></i>
+              <a href="/Kotlin-2017-06-10-Kotlin-note2.html" rel="prev" title="【Kotlin笔记】Hello Kotlin">
+                【Kotlin笔记】Hello Kotlin <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -679,7 +709,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -690,7 +720,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -745,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Https"><span class="nav-number">1.</span> <span class="nav-text">Https</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-TLS协议"><span class="nav-number">2.</span> <span class="nav-text">SSL/TLS协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Https整体架构图"><span class="nav-number">3.</span> <span class="nav-text">Https整体架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Https传输速度"><span class="nav-number">4.</span> <span class="nav-text">Https传输速度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS-SSL握手"><span class="nav-number">5.</span> <span class="nav-text">TLS/SSL握手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#密码学原理"><span class="nav-number">5.1.</span> <span class="nav-text">密码学原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字证书"><span class="nav-number">5.2.</span> <span class="nav-text">数字证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL与TLS握手整个过程"><span class="nav-number">5.3.</span> <span class="nav-text">SSL与TLS握手整个过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Https加密算法相关"><span class="nav-number"></span> <span class="nav-text">Https加密算法相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥"><span class="nav-number">1.</span> <span class="nav-text">密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称密钥"><span class="nav-number">1.1.</span> <span class="nav-text">对称密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称密钥"><span class="nav-number">1.2.</span> <span class="nav-text">非对称密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA加密简单过程"><span class="nav-number">1.3.</span> <span class="nav-text">RSA加密简单过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名和CA"><span class="nav-number">2.</span> <span class="nav-text">数字签名和CA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名"><span class="nav-number">2.1.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字证书-1"><span class="nav-number">2.2.</span> <span class="nav-text">数字证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Https"><span class="nav-number">1.</span> <span class="nav-text">Https</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS和HTTP的区别"><span class="nav-number">2.</span> <span class="nav-text">HTTPS和HTTP的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-TLS协议"><span class="nav-number">3.</span> <span class="nav-text">SSL/TLS协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL协议的作用"><span class="nav-number">3.1.</span> <span class="nav-text">SSL协议的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL协议的工作过程"><span class="nav-number">3.2.</span> <span class="nav-text">SSL协议的工作过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS-SSL握手"><span class="nav-number">4.</span> <span class="nav-text">TLS/SSL握手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Https加密算法相关"><span class="nav-number">5.</span> <span class="nav-text">Https加密算法相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥"><span class="nav-number">6.</span> <span class="nav-text">密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称密钥"><span class="nav-number">6.1.</span> <span class="nav-text">对称密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称密钥"><span class="nav-number">6.2.</span> <span class="nav-text">非对称密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA加密过程"><span class="nav-number">6.3.</span> <span class="nav-text">RSA加密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字证书"><span class="nav-number">6.4.</span> <span class="nav-text">数字证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名和CA"><span class="nav-number">7.</span> <span class="nav-text">数字签名和CA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名"><span class="nav-number">7.1.</span> <span class="nav-text">数字签名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -776,7 +806,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="post-count">共写了155.7k字</span>
+  <span class="post-count">共写了157.4k字</span>
 </div>
 
 
