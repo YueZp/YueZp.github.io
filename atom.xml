@@ -112,6 +112,929 @@
   </entry>
   
   <entry>
+    <title>分析HTTP协议</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-06-03-%E5%88%86%E6%9E%90HTTP%E5%8D%8F%E8%AE%AE.html"/>
+    <id>http://www.sguotao.com/Android进阶-2017-06-03-分析HTTP协议.html</id>
+    <published>2017-06-03T02:27:04.000Z</published>
+    <updated>2017-08-08T03:39:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>所谓协议，是指指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。<br>Http协议，超文本传输协议(Http)是一种通信协议，它允许将超文本标记语言（HTML）文档从web服务器传送到客户端的浏览器。</p>
+</blockquote>
+<p>HTTP协议的最显著的两个特点:</p>
+<ul>
+<li>HTTP是构建于TCP/IP协议之上的协议，默认端口号是80。</li>
+<li>HTTP是无连接无状态的协议。</li>
+</ul>
+<h2 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h2><p>一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成，下图给出了请求报文的一般格式。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150215936342753.png" alt="20170808150215936342753.png"></p>
+<h3 id="请求行（Request-Line）"><a href="#请求行（Request-Line）" class="headerlink" title="请求行（Request Line）"></a>请求行（Request Line）</h3><p>请求行由请求方法字段、URL字段和HTTP协议版本字段3个字段组成，它们用空格分隔。例如，GET /index.html HTTP/1.1。HTTP协议的请求方法有GET、POST、HEAD、PUT、DELETE、OPTIONS、TRACE、CONNECT。其中比较常用的请求方法是GET和POST。</p>
+<h4 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h4><p>最常见的一种请求方式，当客户端要从服务器中读取文档时，当点击网页上的链接或者通过在浏览器的地址栏输入网址来浏览网页的，使用的都是GET方式。GET方法要求服务器将URL定位的资源放在响应报文的数据部分，回送给客户端。使用GET方法时，请求参数和对应的值附加在URL后面，利用一个问号（“?”）代表URL的结尾与请求参数的开始，传递参数长度受限制。例如，/index.jsp?id=100&amp;op=bind,这样通过GET方式传递的数据直接表示在地址中，所以我们可以把请求结果以链接的形式发送。以用google搜索domety为例，Request格式如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">GET /search?hl=zh-CN&amp;source=hp&amp;q=domety&amp;aq=f&amp;oq= HTTP/1.1  </div><div class="line">Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/vnd.ms-powerpoint, </div><div class="line">application/msword, application/x-silverlight, application/x-shockwave-flash, */*  </div><div class="line">Referer: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.google.cn/"</span>&gt;</span>http://www.google.cn/<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line">Accept-Language: zh-cn  </div><div class="line">Accept-Encoding: gzip, deflate  </div><div class="line">User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; TheWorld)  </div><div class="line">Host: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.google.cn"</span>&gt;</span>www.google.cn<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line">Connection: Keep-Alive  </div><div class="line">Cookie: PREF=ID=80a06da87be9ae3c:U=f7167333e2c3b714:NW=1:TM=1261551909:LM=1261551917:S=ybYcq2wpfefs4V9g; </div><div class="line">NID=31=ojj8d-IygaEtSxLgaJmqSjVhCspkviJrB6omjamNrSm8lZhKy_yMfO2M4QMRKcH1g0iQv9u-2hfBW7bUFwVh7pGaRUb0RnHcJU37y-</div><div class="line">FxlRugatx63JLv7CWMD6UB_O_r</div></pre></td></tr></table></figure>
+<p>可以看到，GET方式的请求一般不包含”请求内容”部分，请求数据以地址的形式表现在请求行。地址中”?”之后的部分就是通过GET发送的请求数据，我们可以在地址栏中清楚的看到，各个数据之间用”&amp;”符号隔开。显然，这种方式不适合传送私密数据。另外，由于不同的浏览器对地址的字符限制也有所不同，一般最多只能识别1024个字符，所以如果需要传送大量数据的时候，也不适合使用GET方式。</p>
+<h4 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h4><p>对于上面提到的不适合使用GET方式的情况，可以考虑使用POST方式，因为使用POST方法可以允许客户端给服务器提供信息较多。POST方法将请求参数封装在HTTP请求数据中，以名称/值的形式出现，可以传输大量数据，这样POST方式对传送的数据大小没有限制，而且也不会显示在URL中。还以上面的搜索domety为例，如果使用POST方式的话，格式如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">POST /search HTTP/1.1  </div><div class="line">Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/vnd.ms-powerpoint, </div><div class="line">application/msword, application/x-silverlight, application/x-shockwave-flash, */*  </div><div class="line">Referer: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.google.cn/"</span>&gt;</span>http://www.google.cn/<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line">Accept-Language: zh-cn  </div><div class="line">Accept-Encoding: gzip, deflate  </div><div class="line">User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; TheWorld)  </div><div class="line">Host: <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.google.cn"</span>&gt;</span>www.google.cn<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  </div><div class="line">Connection: Keep-Alive  </div><div class="line">Cookie: PREF=ID=80a06da87be9ae3c:U=f7167333e2c3b714:NW=1:TM=1261551909:LM=1261551917:S=ybYcq2wpfefs4V9g; </div><div class="line">NID=31=ojj8d-IygaEtSxLgaJmqSjVhCspkviJrB6omjamNrSm8lZhKy_yMfO2M4QMRKcH1g0iQv9u-2hfBW7bUFwVh7pGaRUb0RnHcJU37y-</div><div class="line">FxlRugatx63JLv7CWMD6UB_O_r  </div><div class="line"></div><div class="line">hl=zh-CN&amp;source=hp&amp;q=domety</div></pre></td></tr></table></figure>
+<p>可以看到，POST方式请求行中不包含数据字符串，这些数据保存在”请求内容”部分，各数据之间也是使用”&amp;”符号隔开。POST方式大多用于页面的表单中。因为POST也能完成GET的功能，因此多数人在设计表单的时候一律都使用POST方式，其实这是一个误区。GET方式也有自己的特点和优势，我们应该根据不同的情况来选择是使用GET还是使用POST。</p>
+<h4 id="GET-POST方法的区别"><a href="#GET-POST方法的区别" class="headerlink" title="GET/POST方法的区别"></a>GET/POST方法的区别</h4><ol>
+<li>提交的数据，get提交的数据会在url链接中，以”?”的形式进行分割，post提交数据都放在http请求的body中。</li>
+<li>提交的数据大小是否有限制，get有限制，post没有限制。</li>
+<li>取得变量的值Request.QueryString &amp; Request.Form</li>
+<li>安全问题，get提交方式有安全隐患。</li>
+</ol>
+<h3 id="请求头（Header）"><a href="#请求头（Header）" class="headerlink" title="请求头（Header）"></a>请求头（Header）</h3><p>请求头部由关键字/值对组成，每行一对，关键字和值用英文冒号“:”分隔。请求头部通知服务器有关于客户端请求的信息，典型的请求头有：</p>
+<p><strong>User-Agent</strong>：产生请求的浏览器类型。<br><strong>Accept</strong>：客户端可识别的内容类型列表。<br><strong>Host</strong>：请求的主机名，允许多个域名同处一个IP地址，即虚拟主机。</p>
+<h3 id="空行（Blank-Line）"><a href="#空行（Blank-Line）" class="headerlink" title="空行（Blank Line）"></a>空行（Blank Line）</h3><p>最后一个请求头之后是一个空行，发送回车符和换行符，通知服务器以下不再有请求头。</p>
+<h3 id="请求数据（Request-Body）"><a href="#请求数据（Request-Body）" class="headerlink" title="请求数据（Request-Body）"></a>请求数据（Request-Body）</h3><p>请求数据不在GET方法中使用，而是在POST方法中使用。POST方法适用于需要客户填写表单的场合。与请求数据相关的最常使用的请求头是Content-Type和Content-Length。</p>
+<h2 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h2><p>HTTP 响应与 HTTP 请求相似，HTTP响应也由3个部分构成，分别是：状态行、响应头(Response Header)和响应正文。<br>状态行由协议版本、数字形式的状态码、及相应的状态描述，各元素之间以空格分隔。</p>
+<p>常见的状态码有如下几种：</p>
+<ul>
+<li>200 OK 客户端请求成功</li>
+<li>301 Moved Permanently 请求永久重定向</li>
+<li>302 Moved Temporarily 请求临时重定向</li>
+<li>304 Not Modified 文件未修改，可以直接使用缓存的文件。</li>
+<li>400 Bad Request 由于客户端请求有语法错误，不能被服务器所理解。</li>
+<li>401 Unauthorized 请求未经授权。这个状态代码必须和WWW-Authenticate报头域一起使用</li>
+<li>403 Forbidden 服务器收到请求，但是拒绝提供服务。服务器通常会在响应正文中给出不提供服务的原因</li>
+<li>404 Not Found 请求的资源不存在，例如，输入了错误的URL</li>
+<li>500 Internal Server Error 服务器发生不可预期的错误，导致无法完成客户端的请求。</li>
+<li>503 Service Unavailable 服务器当前不能够处理客户端的请求，在一段时间之后，服务器可能会恢复正常。</li>
+</ul>
+<h2 id="Http协议中容易混淆的知识点"><a href="#Http协议中容易混淆的知识点" class="headerlink" title="Http协议中容易混淆的知识点"></a>Http协议中容易混淆的知识点</h2><h3 id="URI和URL的区别"><a href="#URI和URL的区别" class="headerlink" title="URI和URL的区别"></a>URI和URL的区别</h3><p>URI：Uniform Resource Identifier,统一资源标识符，用来唯一的标识一个资源。</p>
+<p>URI的三个组成部分:</p>
+<ol>
+<li>访问资源的命名机制；</li>
+<li>存放资源的主机名；</li>
+<li>资源自身的名称，由路径表示，着重强调资源。</li>
+</ol>
+<p>URL:Uniform Resource Locator，统一资源定位器，它是一种具体的URI，即URL可以标识一个资源，而且还指明了如何locate这个资源。</p>
+<p>URL的三个组成部分：</p>
+<ol>
+<li>协议</li>
+<li>存有该资源的主机IP地址</li>
+<li>主机资源的具体地址；</li>
+</ol>
+<h3 id="http1-1-http1-0的区别"><a href="#http1-1-http1-0的区别" class="headerlink" title="http1.1/http1.0的区别"></a>http1.1/http1.0的区别</h3><ol>
+<li><p>http1.0产生的背景<br>超文本传输协议（HyperText Transfer Protocol）伴随着计算机网络和浏览器的诞生，Http1.0也随之而来，处于计算机网络中的应用层。</p>
+</li>
+<li><p>http1.0所做的优化<br>带宽:现阶段已经解决<br>延迟：<br> 1.浏览器阻塞：浏览器对于同一个域名，同时只能有4个连接；<br> 2.DNS查询：浏览器需要知道目标服务器的IP才能建立连接<br> 3.建立连接: 3次握手</p>
+</li>
+<li><p>http1.1/http1.0的具体区别<br> a. 缓存处理，Http1.1引入了更多的缓存策略；<br> b. 带宽优化及网络连接的使用，Http1.1在请求头中添加了range，可以请求资源的某个部分。<br> c. Host头处理，Http1.1请求消息和响应消息都支持Host的改进，在请求中如果没有Host域会报400错误。<br> d. 长连接，Http1.1支持长连接，减少每次请求都需要建立和关闭连接的消耗。</p>
+</li>
+<li><p>http1.1和http1.0存在的问题<br> a. Http1.0在传输数据时，每次都需要重新建立连接，无疑增加了大量的延迟时间；<br> b. Http1.x在传输数据时，所有传输的内容都是明文，客户端和服务器端都无法验证对方的身份；<br> c. Http1.x在使用时，header里携带的内容过大，在一定程度上增加了传输的成本；<br> d. 虽然Http1.1支持了keep-alive，来弥补多次创建连接产生的延迟，但是keep-alive使用多了同样会给服务器带来大量的性能压力。</p>
+</li>
+</ol>
+<h3 id="cookie和session的区别"><a href="#cookie和session的区别" class="headerlink" title="cookie和session的区别"></a>cookie和session的区别</h3><p>Cookie技术是客户端的解决方案，Cookie就是由服务器发给客户端的特殊信息，而这些信息以文本文件的方式存放在客户端，然后客户端每次向服务器发送请求的时候都会带上这些特殊的信息。</p>
+<p>Session是另一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，而Session保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。</p>
+<p>Session的工作原理：</p>
+<ol>
+<li>创建Session</li>
+<li>在创建了Session的同时，服务器会为该Session生成唯一的Session id；</li>
+<li>在Session被创建后，就可以调用Session相关的方法在Session中增加内容；</li>
+<li>当客户端再次发送请求的时候，会将这个Session id带上，服务器接受到请求之后就会依据Session id找到相应的Session </li>
+</ol>
+<p>Session和Cookie的区别：</p>
+<ol>
+<li>存放位置不同；Session保存在服务端，Cookie保存在客户端；</li>
+<li>存取方式不同；Session能存取任意类型的数据，Cookie只能保存字符串；</li>
+<li>安全性（隐私策略）不同</li>
+<li>有效期上的不同</li>
+<li>对服务器造成的压力不同</li>
+</ol>
+<h2 id="附录1-HTTP请求报文请求头Header字段说明"><a href="#附录1-HTTP请求报文请求头Header字段说明" class="headerlink" title="附录1 HTTP请求报文请求头Header字段说明"></a>附录1 HTTP请求报文请求头Header字段说明</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Header字段</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Accept</td>
+<td style="text-align:center">指定客户端能够接收的内容类型</td>
+<td style="text-align:center">Accept: text/plain, text/html</td>
+</tr>
+<tr>
+<td style="text-align:center">Accept-Charset</td>
+<td style="text-align:center">浏览器可以接受的字符编码集。</td>
+<td style="text-align:center">Accept-Charset: iso-8859-5</td>
+</tr>
+<tr>
+<td style="text-align:center">Accept-Encoding</td>
+<td style="text-align:center">指定浏览器可以支持的web服务器返回内容压缩编码类型。</td>
+<td style="text-align:center">Accept-Encoding: compress, gzip</td>
+</tr>
+<tr>
+<td style="text-align:center">Accept-Language</td>
+<td style="text-align:center">浏览器可接受的语言</td>
+<td style="text-align:center">Accept-Language: en,zh</td>
+</tr>
+<tr>
+<td style="text-align:center">Accept-Ranges</td>
+<td style="text-align:center">可以请求网页实体的一个或者多个子范围字段</td>
+<td style="text-align:center">Accept-Ranges: bytes</td>
+</tr>
+<tr>
+<td style="text-align:center">Authorization</td>
+<td style="text-align:center">HTTP授权的授权证书</td>
+<td style="text-align:center">Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</td>
+</tr>
+<tr>
+<td style="text-align:center">Cache-Control</td>
+<td style="text-align:center">指定请求和响应遵循的缓存机制</td>
+<td style="text-align:center">Cache-Control: no-cache</td>
+</tr>
+<tr>
+<td style="text-align:center">Connection</td>
+<td style="text-align:center">表示是否需要持久连接。（HTTP 1.1默认进行持久连接）</td>
+<td style="text-align:center">Connection: close</td>
+</tr>
+<tr>
+<td style="text-align:center">Cookie</td>
+<td style="text-align:center">HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。</td>
+<td style="text-align:center">Cookie: $Version=1; Skin=new;</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-Length</td>
+<td style="text-align:center">请求的内容长度</td>
+<td style="text-align:center">Content-Length: 348</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-Type</td>
+<td style="text-align:center">请求的与实体对应的MIME信息</td>
+<td style="text-align:center">Content-Type: application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td style="text-align:center">Date</td>
+<td style="text-align:center">请求发送的日期和时间</td>
+<td style="text-align:center">Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
+</tr>
+<tr>
+<td style="text-align:center">Expect</td>
+<td style="text-align:center">请求的特定的服务器行为</td>
+<td style="text-align:center">Expect: 100-continue</td>
+</tr>
+<tr>
+<td style="text-align:center">From</td>
+<td style="text-align:center">发出请求的用户的Email</td>
+<td style="text-align:center">From: user@email.com</td>
+</tr>
+<tr>
+<td style="text-align:center">Host</td>
+<td style="text-align:center">指定请求的服务器的域名和端口号</td>
+<td style="text-align:center">Host: www.zcmhi.com</td>
+</tr>
+<tr>
+<td style="text-align:center">If-Match</td>
+<td style="text-align:center">只有请求内容与实体相匹配才有效</td>
+<td style="text-align:center">If-Match: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td style="text-align:center">If-Modified-Since</td>
+<td style="text-align:center">如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码</td>
+<td style="text-align:center">If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td style="text-align:center">If-None-Match</td>
+<td style="text-align:center">如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变</td>
+<td style="text-align:center">If-None-Match: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td style="text-align:center">If-Range</td>
+<td style="text-align:center">如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag</td>
+<td style="text-align:center">If-Range: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td style="text-align:center">If-Unmodified-Since</td>
+<td style="text-align:center">只在实体在指定时间之后未被修改才请求成功</td>
+<td style="text-align:center">If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td style="text-align:center">Max-Forwards</td>
+<td style="text-align:center">限制信息通过代理和网关传送的时间</td>
+<td style="text-align:center">Max-Forwards: 10</td>
+</tr>
+<tr>
+<td style="text-align:center">Pragma</td>
+<td style="text-align:center">用来包含实现特定的指令</td>
+<td style="text-align:center">Pragma: no-cache</td>
+</tr>
+<tr>
+<td style="text-align:center">Proxy-Authorization</td>
+<td style="text-align:center">连接到代理的授权证书</td>
+<td style="text-align:center">Proxy-Authorization: BasicQWxhZGRpbjpvcGVuIHNlc2FtZQ==</td>
+</tr>
+<tr>
+<td style="text-align:center">Range</td>
+<td style="text-align:center">只请求实体的一部分，指定范围</td>
+<td style="text-align:center">Range: bytes=500-999</td>
+</tr>
+<tr>
+<td style="text-align:center">Referer</td>
+<td style="text-align:center">先前网页的地址，当前请求网页紧随其后,即来路</td>
+<td style="text-align:center">Referer: <a href="http://www.zcmhi.com/archives/71.html" target="_blank" rel="external">http://www.zcmhi.com/archives/71.html</a></td>
+</tr>
+<tr>
+<td style="text-align:center">TE</td>
+<td style="text-align:center">客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息</td>
+<td style="text-align:center">TE: trailers,deflate;q=0.5</td>
+</tr>
+<tr>
+<td style="text-align:center">Upgrade</td>
+<td style="text-align:center">向服务器指定某种传输协议以便服务器进行转换（如果支持）</td>
+<td style="text-align:center">Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11</td>
+</tr>
+<tr>
+<td style="text-align:center">User-Agent</td>
+<td style="text-align:center">User-Agent的内容包含发出请求的用户信息</td>
+<td style="text-align:center">User-Agent: Mozilla/5.0 (Linux; X11)</td>
+</tr>
+<tr>
+<td style="text-align:center">Via</td>
+<td style="text-align:center">通知中间网关或代理服务器地址，通信协议</td>
+<td style="text-align:center">Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)</td>
+</tr>
+<tr>
+<td style="text-align:center">Warning</td>
+<td style="text-align:center">关于消息实体的警告信息</td>
+<td style="text-align:center">Warn: 199 Miscellaneous warning</td>
+</tr>
+</tbody>
+</table>
+<h2 id="附录2-HTTP响应报文响应头ResponseHeader字段说明"><a href="#附录2-HTTP响应报文响应头ResponseHeader字段说明" class="headerlink" title="附录2 HTTP响应报文响应头ResponseHeader字段说明"></a>附录2 HTTP响应报文响应头ResponseHeader字段说明</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Header字段</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Accept-Ranges</td>
+<td style="text-align:center">表明服务器是否支持指定范围请求及哪种类型的分段请求</td>
+<td style="text-align:center">Accept-Ranges: bytes</td>
+</tr>
+<tr>
+<td style="text-align:center">Age</td>
+<td style="text-align:center">从原始服务器到代理缓存形成的估算时间（以秒计，非负）</td>
+<td style="text-align:center">Age: 12</td>
+</tr>
+<tr>
+<td style="text-align:center">Allow</td>
+<td style="text-align:center">对某网络资源的有效的请求行为，不允许则返回405</td>
+<td style="text-align:center">Allow: GET, HEAD</td>
+</tr>
+<tr>
+<td style="text-align:center">Cache-Control</td>
+<td style="text-align:center">告诉所有的缓存机制是否可以缓存及哪种类型</td>
+<td style="text-align:center">Cache-Control: no-cache</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-Encoding</td>
+<td style="text-align:center">web服务器支持的返回内容压缩编码类型。</td>
+<td style="text-align:center">Content-Encoding: gzip</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-Language</td>
+<td style="text-align:center">响应体的语言</td>
+<td style="text-align:center">Content-Language: en,zh</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-Length</td>
+<td style="text-align:center">响应体的长度</td>
+<td style="text-align:center">Content-Length: 348</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-Location</td>
+<td style="text-align:center">请求资源可替代的备用的另一地址</td>
+<td style="text-align:center">Content-Location: /index.htm</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-MD5</td>
+<td style="text-align:center">返回资源的MD5校验值</td>
+<td style="text-align:center">Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-Range</td>
+<td style="text-align:center">在整个返回体中本部分的字节位置</td>
+<td style="text-align:center">Content-Range: bytes 21010-47021/47022</td>
+</tr>
+<tr>
+<td style="text-align:center">Content-Type</td>
+<td style="text-align:center">返回内容的MIME类型</td>
+<td style="text-align:center">Content-Type: text/html; charset=utf-8</td>
+</tr>
+<tr>
+<td style="text-align:center">Date</td>
+<td style="text-align:center">原始服务器消息发出的时间</td>
+<td style="text-align:center">Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
+</tr>
+<tr>
+<td style="text-align:center">ETag</td>
+<td style="text-align:center">请求变量的实体标签的当前值</td>
+<td style="text-align:center">ETag: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td style="text-align:center">Expires</td>
+<td style="text-align:center">响应过期的日期和时间</td>
+<td style="text-align:center">Expires: Thu, 01 Dec 2010 16:00:00 GMT</td>
+</tr>
+<tr>
+<td style="text-align:center">Last-Modified</td>
+<td style="text-align:center">请求资源的最后修改时间</td>
+<td style="text-align:center">Last-Modified: Tue, 15 Nov 2010 12:45:26 GMT</td>
+</tr>
+<tr>
+<td style="text-align:center">Location</td>
+<td style="text-align:center">用来重定向接收方到非请求URL的位置来完成请求或标识新的资源</td>
+<td style="text-align:center">Location: <a href="http://www.zcmhi.com/archives/94.html" target="_blank" rel="external">http://www.zcmhi.com/archives/94.html</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Pragma</td>
+<td style="text-align:center">包括实现特定的指令，它可应用到响应链上的任何接收方</td>
+<td style="text-align:center">Pragma: no-cache</td>
+</tr>
+<tr>
+<td style="text-align:center">Proxy-Authenticate</td>
+<td style="text-align:center">它指出认证方案和可应用到代理的该URL上的参数</td>
+<td style="text-align:center">Proxy-Authenticate: Basic</td>
+</tr>
+<tr>
+<td style="text-align:center">refresh</td>
+<td style="text-align:center">应用于重定向或一个新的资源被创造，在5秒之后重定向（由网景提出，被大部分浏览器支持）</td>
+<td style="text-align:center">Refresh: 5; url=<a href="http://www.zcmhi.com/archives/94.html" target="_blank" rel="external">http://www.zcmhi.com/archives/94.html</a></td>
+</tr>
+<tr>
+<td style="text-align:center">Retry-After</td>
+<td style="text-align:center">如果实体暂时不可取，通知客户端在指定时间之后再次尝试</td>
+<td style="text-align:center">Retry-After: 120</td>
+</tr>
+<tr>
+<td style="text-align:center">Server</td>
+<td style="text-align:center">web服务器软件名称</td>
+<td style="text-align:center">Server: Apache/1.3.27 (Unix) (Red-Hat/Linux)</td>
+</tr>
+<tr>
+<td style="text-align:center">Set-Cookie</td>
+<td style="text-align:center">设置Http Cookie    Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1</td>
+</tr>
+<tr>
+<td style="text-align:center">Trailer</td>
+<td style="text-align:center">指出头域在分块传输编码的尾部存在</td>
+<td style="text-align:center">Trailer: Max-Forwards</td>
+</tr>
+<tr>
+<td style="text-align:center">Transfer-Encoding</td>
+<td style="text-align:center">文件传输编码</td>
+<td style="text-align:center">Transfer-Encoding:chunked</td>
+</tr>
+<tr>
+<td style="text-align:center">Vary</td>
+<td style="text-align:center">告诉下游代理是使用缓存响应还是从原始服务器请求</td>
+<td style="text-align:center">Vary: *</td>
+</tr>
+<tr>
+<td style="text-align:center">Via</td>
+<td style="text-align:center">告知代理客户端响应是通过哪里发送的</td>
+<td style="text-align:center">Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)</td>
+</tr>
+<tr>
+<td style="text-align:center">Warning</td>
+<td style="text-align:center">警告实体可能存在的问题</td>
+<td style="text-align:center">Warning: 199 Miscellaneous warning</td>
+</tr>
+<tr>
+<td style="text-align:center">WWW-Authenticate</td>
+<td style="text-align:center">表明客户端请求实体应该使用的授权方案</td>
+<td style="text-align:center">WWW-Authenticate: Basic</td>
+</tr>
+</tbody>
+</table>
+<h2 id="附录3-HTTP响应报文状态码"><a href="#附录3-HTTP响应报文状态码" class="headerlink" title="附录3 HTTP响应报文状态码"></a>附录3 HTTP响应报文状态码</h2><p><strong>1xx:信息</strong></p>
+<style>
+table th:first-of-type {
+    width: 150px;
+}
+</style>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center">消息</th>
+<th style="text-align:center">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">100 Continue</td>
+<td style="text-align:center">服务器仅接收到部分请求，但是一旦服务器并没有拒绝该请求，客户端应该继续发送其余的请求。</td>
+</tr>
+<tr>
+<td style="text-align:center">101 Switching Protocols</td>
+<td style="text-align:center">服务器转换协议：服务器将遵从客户的请求转换到另外一种协议。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2xx:成功</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">消息</th>
+<th style="text-align:center">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">200 OK</td>
+<td style="text-align:center">请求成功（其后是对GET和POST请求的应答文档。）</td>
+</tr>
+<tr>
+<td style="text-align:center">201 Created</td>
+<td style="text-align:center">请求被创建完成，同时新的资源被创建。</td>
+</tr>
+<tr>
+<td style="text-align:center">202 Accepted</td>
+<td style="text-align:center">供处理的请求已被接受，但是处理未完成。</td>
+</tr>
+<tr>
+<td style="text-align:center">203 Non-authoritative Information</td>
+<td style="text-align:center">文档已经正常地返回，但一些应答头可能不正确，因为使用的是文档的拷贝。</td>
+</tr>
+<tr>
+<td style="text-align:center">204 No Content</td>
+<td style="text-align:center">没有新文档。浏览器应该继续显示原来的文档。如果用户定期地刷新页面，而Servlet可以确定用户文档足够新，这个状态代码是很有用的。</td>
+</tr>
+<tr>
+<td style="text-align:center">205 Reset Content</td>
+<td style="text-align:center">没有新文档。但浏览器应该重置它所显示的内容。用来强制浏览器清除表单输入内容。</td>
+</tr>
+<tr>
+<td style="text-align:center">206 Partial Content</td>
+<td style="text-align:center">客户发送了一个带有Range头的GET请求，服务器完成了它。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3xx:重定向</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">消息</th>
+<th style="text-align:center">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">300 Multiple Choices</td>
+<td style="text-align:center">多重选择。链接列表。用户可以选择某链接到达目的地。最多允许五个地址。</td>
+</tr>
+<tr>
+<td style="text-align:center">301 Moved Permanently</td>
+<td style="text-align:center">所请求的页面已经转移至新的url。</td>
+</tr>
+<tr>
+<td style="text-align:center">302 Found</td>
+<td style="text-align:center">所请求的页面已经临时转移至新的url。</td>
+</tr>
+<tr>
+<td style="text-align:center">303 See Other</td>
+<td style="text-align:center">所请求的页面可在别的url下被找到。</td>
+</tr>
+<tr>
+<td style="text-align:center">304 Not Modified</td>
+<td style="text-align:center">未按预期修改文档。客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓冲的文档还可以继续使用。</td>
+</tr>
+<tr>
+<td style="text-align:center">305 Use Proxy</td>
+<td style="text-align:center">客户请求的文档应该通过Location头所指明的代理服务器提取。</td>
+</tr>
+<tr>
+<td style="text-align:center">306 Unused</td>
+<td style="text-align:center">此代码被用于前一版本。目前已不再使用，但是代码依然被保留。</td>
+</tr>
+<tr>
+<td style="text-align:center">307 Temporary Redirect</td>
+<td style="text-align:center">被请求的页面已经临时移至新的url。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4xx:客户端错误</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">消息</th>
+<th style="text-align:center">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">400 Bad Request</td>
+<td style="text-align:center">服务器未能理解请求。</td>
+</tr>
+<tr>
+<td style="text-align:center">401 Unauthorized</td>
+<td style="text-align:center">被请求的页面需要用户名和密码。</td>
+</tr>
+<tr>
+<td style="text-align:center">401.1</td>
+<td style="text-align:center">登录失败。</td>
+</tr>
+<tr>
+<td style="text-align:center">401.2</td>
+<td style="text-align:center">服务器配置导致登录失败。</td>
+</tr>
+<tr>
+<td style="text-align:center">401.3</td>
+<td style="text-align:center">由于 ACL 对资源的限制而未获得授权。</td>
+</tr>
+<tr>
+<td style="text-align:center">401.4</td>
+<td style="text-align:center">筛选器授权失败。</td>
+</tr>
+<tr>
+<td style="text-align:center">401.5</td>
+<td style="text-align:center">ISAPI/CGI 应用程序授权失败。</td>
+</tr>
+<tr>
+<td style="text-align:center">401.7</td>
+<td style="text-align:center">访问被 Web 服务器上的 URL 授权策略拒绝。这个错误代码为 IIS 6.0 所专用。</td>
+</tr>
+<tr>
+<td style="text-align:center">402 Payment Required</td>
+<td style="text-align:center">此代码尚无法使用。</td>
+</tr>
+<tr>
+<td style="text-align:center">403 Forbidden</td>
+<td style="text-align:center">对被请求页面的访问被禁止。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.1</td>
+<td style="text-align:center">执行访问被禁止。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.2</td>
+<td style="text-align:center">读访问被禁止。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.3</td>
+<td style="text-align:center">写访问被禁止。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.4</td>
+<td style="text-align:center">要求 SSL。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.5</td>
+<td style="text-align:center">要求 SSL 128。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.6</td>
+<td style="text-align:center">IP 地址被拒绝。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.7</td>
+<td style="text-align:center">要求客户端证书。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.8</td>
+<td style="text-align:center">站点访问被拒绝。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.9</td>
+<td style="text-align:center">用户数过多。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.10</td>
+<td style="text-align:center">配置无效。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.11</td>
+<td style="text-align:center">密码更改。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.12</td>
+<td style="text-align:center">拒绝访问映射表。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.13</td>
+<td style="text-align:center">客户端证书被吊销。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.14</td>
+<td style="text-align:center">拒绝目录列表。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.15</td>
+<td style="text-align:center">超出客户端访问许可。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.16</td>
+<td style="text-align:center">客户端证书不受信任或无效。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.17</td>
+<td style="text-align:center">客户端证书已过期或尚未生效。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.18</td>
+<td style="text-align:center">在当前的应用程序池中不能执行所请求的 URL。这个错误代码为 IIS 6.0 所专用。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.19</td>
+<td style="text-align:center">不能为这个应用程序池中的客户端执行 CGI。这个错误代码为 IIS 6.0 所专用。</td>
+</tr>
+<tr>
+<td style="text-align:center">403.20</td>
+<td style="text-align:center">Passport 登录失败。这个错误代码为 IIS 6.0 所专用。</td>
+</tr>
+<tr>
+<td style="text-align:center">404 Not Found</td>
+<td style="text-align:center">服务器无法找到被请求的页面。</td>
+</tr>
+<tr>
+<td style="text-align:center">404.0</td>
+<td style="text-align:center">（无）–没有找到文件或目录。</td>
+</tr>
+<tr>
+<td style="text-align:center">404.1</td>
+<td style="text-align:center">无法在所请求的端口上访问 Web 站点。</td>
+</tr>
+<tr>
+<td style="text-align:center">404.2</td>
+<td style="text-align:center">Web 服务扩展锁定策略阻止本请求。</td>
+</tr>
+<tr>
+<td style="text-align:center">404.3</td>
+<td style="text-align:center">MIME 映射策略阻止本请求。</td>
+</tr>
+<tr>
+<td style="text-align:center">405 Method Not Allowed</td>
+<td style="text-align:center">请求中指定的方法不被允许。</td>
+</tr>
+<tr>
+<td style="text-align:center">406 Not Acceptable</td>
+<td style="text-align:center">服务器生成的响应无法被客户端所接受。</td>
+</tr>
+<tr>
+<td style="text-align:center">407 Proxy Authentication Required</td>
+<td style="text-align:center">用户必须首先使用代理服务器进行验证，这样请求才会被处理。</td>
+</tr>
+<tr>
+<td style="text-align:center">408 Request Timeout</td>
+<td style="text-align:center">请求超出了服务器的等待时间。</td>
+</tr>
+<tr>
+<td style="text-align:center">409 Conflict</td>
+<td style="text-align:center">由于冲突，请求无法被完成。</td>
+</tr>
+<tr>
+<td style="text-align:center">410 Gone</td>
+<td style="text-align:center">被请求的页面不可用。</td>
+</tr>
+<tr>
+<td style="text-align:center">411 Length Required</td>
+<td style="text-align:center">“Content-Length” 未被定义。如果无此内容，服务器不会接受请求。</td>
+</tr>
+<tr>
+<td style="text-align:center">412 Precondition Failed</td>
+<td style="text-align:center">请求中的前提条件被服务器评估为失败。</td>
+</tr>
+<tr>
+<td style="text-align:center">413 Request Entity Too Large</td>
+<td style="text-align:center">由于所请求的实体的太大，服务器不会接受请求。</td>
+</tr>
+<tr>
+<td style="text-align:center">414 Request-url Too Long</td>
+<td style="text-align:center">由于url太长，服务器不会接受请求。当post请求被转换为带有很长的查询信息的get请求时，就会发生这种情况。</td>
+</tr>
+<tr>
+<td style="text-align:center">415 Unsupported Media Type</td>
+<td style="text-align:center">由于媒介类型不被支持，服务器不会接受请求。</td>
+</tr>
+<tr>
+<td style="text-align:center">416 Requested Range Not Satisfiable</td>
+<td style="text-align:center">服务器不能满足客户在请求中指定的Range头。</td>
+</tr>
+<tr>
+<td style="text-align:center">417 Expectation Failed</td>
+<td style="text-align:center">执行失败。</td>
+</tr>
+<tr>
+<td style="text-align:center">423</td>
+<td style="text-align:center">锁定的错误。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5xx:服务端错误</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">消息</th>
+<th style="text-align:center">状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">500 Internal Server Error</td>
+<td style="text-align:center">请求未完成。服务器遇到不可预知的情况。</td>
+</tr>
+<tr>
+<td style="text-align:center">500.12</td>
+<td style="text-align:center">应用程序正忙于在 Web 服务器上重新启动。</td>
+</tr>
+<tr>
+<td style="text-align:center">500.13</td>
+<td style="text-align:center">Web 服务器太忙。</td>
+</tr>
+<tr>
+<td style="text-align:center">500.15</td>
+<td style="text-align:center">不允许直接请求 Global.asa。</td>
+</tr>
+<tr>
+<td style="text-align:center">500.16</td>
+<td style="text-align:center">UNC 授权凭据不正确。这个错误代码为 IIS 6.0 所专用。</td>
+</tr>
+<tr>
+<td style="text-align:center">500.18</td>
+<td style="text-align:center">URL 授权存储不能打开。这个错误代码为 IIS 6.0 所专用。</td>
+</tr>
+<tr>
+<td style="text-align:center">500.100</td>
+<td style="text-align:center">内部 ASP 错误。</td>
+</tr>
+<tr>
+<td style="text-align:center">501 Not Implemented</td>
+<td style="text-align:center">请求未完成。服务器不支持所请求的功能。</td>
+</tr>
+<tr>
+<td style="text-align:center">502 Bad Gateway</td>
+<td style="text-align:center">请求未完成。服务器从上游服务器收到一个无效的响应。</td>
+</tr>
+<tr>
+<td style="text-align:center">502.1</td>
+<td style="text-align:center">CGI 应用程序超时。</td>
+</tr>
+<tr>
+<td style="text-align:center">502.2</td>
+<td style="text-align:center">CGI 应用程序出错。</td>
+</tr>
+<tr>
+<td style="text-align:center">503 Service Unavailable</td>
+<td style="text-align:center">请求未完成。服务器临时过载或当机。</td>
+</tr>
+<tr>
+<td style="text-align:center">504 Gateway Timeout</td>
+<td style="text-align:center">网关超时。</td>
+</tr>
+<tr>
+<td style="text-align:center">505 HTTP Version Not Supported</td>
+<td style="text-align:center">服务器不支持请求中指明的HTTP协议版本。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.cnblogs.com/biyeymyhjob/archive/2012/07/28/2612910.html" target="_blank" rel="external">HTTP请求报文和HTTP响应报文</a><br><a href="https://baike.baidu.com/item/http" target="_blank" rel="external">HTTP百科</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2017-06-03-分析HTTP协议.html">http://www.sguotao.com/Android进阶-2017-06-03-分析HTTP协议.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;所谓协议，是指指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。&lt;br&gt;Http协议，超文本传输协议(Http)是一种通信协议，它允许将超文本标记语言（HTML）文档从web服务器传送到客户端的浏览器。&lt;/p&gt;
+&lt;/blockqu
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="Http" scheme="http://www.sguotao.com/tags/Http/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分析TCP/IP参考模型</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-06-03-%E5%88%86%E6%9E%90TCP-IP%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html"/>
+    <id>http://www.sguotao.com/Android进阶-2017-06-03-分析TCP-IP网络模型.html</id>
+    <published>2017-06-03T02:27:04.000Z</published>
+    <updated>2017-08-08T08:47:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>TCP/IP模型各个层次分别对应于不同的协议。TCP/IP协议栈是数据通信协议的集合 ，包含许多协议。其协议栈名字来源于其中最主要的两个协议TCP（传输控制协议）和IP（网际协议）。TCP/IP协议栈负责确保网络设备之间能够通信。它是一组规则，规定了信息如何在网络中传输。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017080815021784897401.png" alt="2017080815021784897401.png"></p>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p>物理层功能:</p>
+<ul>
+<li>规定介质类型、接口类型、信令类型；</li>
+<li>规范在终端系统之间激活、维护和关闭物理链路的电气、机械、流程和功能等方面的要求；</li>
+<li>规范电平、数据速率、最大传输距离和物理接头等特征。</li>
+</ul>
+<p>物理层介质：</p>
+<ul>
+<li>同轴电缆（coaxical cable）</li>
+<li>双绞线（twisted pair）</li>
+<li>光纤（fiber）</li>
+<li>无线电波（wireless raido）</li>
+</ul>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><p>数据链路层协议规定了数据链路层帧的封装方式。数据链路层又分为MAC子层和LLC子层:</p>
+<ul>
+<li>MAC子层负责指定数据如何通过物理线路进行传输，并向下与物理层通信，它定义了物理编址、网络拓扑、线路规范、错误通知、按序传递和流量控制等功能。</li>
+<li>LLC子层负责识别协议类型并对数据进行封装以便通过网络进行传输。LLC子层主要执行数据链路层的大部分功能和网络层的部分功能。如帧的收发功能，在发送时，帧由发送的数据加上地址和CRC校验等构成，接收时将帧拆开，执行地址识别、CRC校验，并具有帧顺序控制、差错控制、流量控制等功能。此外，它还执行数据报、虚电路、多路复用等部分网络层的功能。</li>
+</ul>
+<h3 id="mac地址"><a href="#mac地址" class="headerlink" title="mac地址"></a>mac地址</h3><p>网络设备的MAC地址是全球唯一的。MAC地址由48个二进制位组成，通常我们用十六进制数字来表示。其中前6位十六进制数字由IEEE统一分配给设备制造商，后6位十六进制数字由厂商自行分配。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>由于以太网采用广播方式发送数据包，效率比较低，也无法区分哪些MAC地址属于同一子网，引入网络层后，能够区分哪些MAC地址属于同一个子网络，使得我们能够区分不同的计算机是否属于同一个子网络，并且在不同的网络之间转发数据包。</p>
+<p>网络层常用协议:</p>
+<ul>
+<li>IP（Internet Protocol）IP为网络层最主要的协议，其功能即为网络层的主要功能，一是提供逻辑编址，二是提供路由功能，三是报文的封装和解封装。ICMP、ARP、RARP协议辅助IP工作。</li>
+<li>ICMP（Internet Control Message Protocol）是一个管理协议并为IP提供信息服务，ICMP消息承载在IP报文中。</li>
+<li>ARP（Address Resolution Protocol）实现IP地址到硬件地址的动态映射，即根据已知的IP地址获得相应的硬件地址。</li>
+<li>RARP（Reverse Address Resolution Protocol）实现硬件地址到IP地址的动态映射，即根据已知的硬件地址获得相应的IP地址。</li>
+</ul>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>当一个数据包从互联网上发来的时候，怎么确定是网页的内容，还是在线聊天的内容？传输层的功能，实现端口到端口的通信。</p>
+<p>传输层主要功能：</p>
+<ul>
+<li>分段上层数据；</li>
+<li>建立端到端连接；</li>
+<li>将数据从一端主机传送到另一端主机；</li>
+<li>保证数据按序、可靠、正确传输。</li>
+</ul>
+<p>传输层协议主要包含传输控制协议TCP（transfer control protocol）和用户数据报文协议UDP（user datagram protocol）:</p>
+<ul>
+<li>TCP提供面向连接的、可靠的字节流服务。面向连接意味着使用TCP协议作为传输层协议的两个应用之间在相互交换数据之前必须建立一个TCP连接。TCP通过确认、校验、重组等机制为上层应用提供可靠的传输服务。但是TCP连接的建立以及确认、校验等机制都需要耗费大量的工作并且会带来大量的开销。</li>
+<li>UDP提供简单的、面向数据报的服务。UDP不保证可靠性，即不保证报文能够到达目的地。UDP适用于更关注传输效率的应用，如SNMP、Radius等，SNMP监控网络并断续发送告警等消息，如果每次发送少量信息都需要建立TCP连接，无疑会降低传输效率，所以诸如SNMP、Radius等更注重传输效率的应用程序都会选择UDP作为传输层协议。另外，UDP还适用于本身具备可靠性机制的应用层协议。</li>
+</ul>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><p>应用层主要功能:</p>
+<ul>
+<li>规定应用程序的数据格式。</li>
+<li>为用户提供接口、处理特定的应用；</li>
+<li>数据加密、解密、压缩、解压缩；</li>
+<li>定义数据表示的标准。</li>
+</ul>
+<p>应用层的协议包括:</p>
+<ul>
+<li>FTP(File TransferProtocol) 文件传输协议。用于传输独立的文件，通常用于交互式用户会话。</li>
+<li>HTTP(HypertextTransfer Protocol)超文本传输协议。 用于传输那些构成万维网上的页面的文件。</li>
+<li>TELNET ：远程终端访问。用于传送具有TELNET控制信息的数据。它提供了与终端设备或终端进程交互的标准方法，支持终端到终端的连接及进程到进程分布式计算的通信。</li>
+<li>SMTP(Simple MessageTransfer Protocol)简单邮件传输协议</li>
+<li>POP3(Post OfficeProtocol)邮局协议用于发送和接收邮件。</li>
+<li>DNS(Domain NameServer)是一个域名服务的协议，提供域名到IP地址的转换，允许对域名资源进行分散管理。</li>
+<li>TFTP(Trivial FileTransfer Protocol)简单文件传输协议。设计用于一般目的的、高吞吐量的文件传输。</li>
+<li>RIP(RoutingInformation Protocol)路由器用来在 IP 网络上交换路由信息的协议。</li>
+<li>SNMP(Simple NetworkManagement Protocol)用于收集网络管理信息，并在网络管理控制台和网络设备（例如路由器、网桥和服务器）之间交换网络管理信息。</li>
+<li>Radius(RemoteAuthentication Dial In User Service)拨号接入远端认证协议完成接入用户的认证、授权、计费功能的协议。</li>
+</ul>
+<h2 id="TCP-IP模型层间数据封装与解析过程"><a href="#TCP-IP模型层间数据封装与解析过程" class="headerlink" title="TCP/IP模型层间数据封装与解析过程"></a>TCP/IP模型层间数据封装与解析过程</h2><p>TCP/IP每一层都让数据得以通过网络进行传输，这些层之间使用PDU（协议数据单元）彼此交换信息，确保网络设备之间能够通信。数据封装的过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150217839042287.png" alt="20170808150217839042287.png"></p>
+<ol>
+<li>传输层数据中加入TCP报头后得到PDU被称为segment（数据段）；</li>
+<li>数据段被传递给网络层，网络层添加IP报头得到的PDU被称为packet（数据包）；</li>
+<li>数据包被传递到数据链路层，封装数据链路层报头得到的PDU被称为frame（数据帧）；</li>
+<li>帧被转换为比特，通过网络介质传输。</li>
+</ol>
+<p>这种协议栈向下传递数据，并添加报头和报尾的过程称为封装，数据被封装并通过网络传输后，接收设备将删除添加的信息，并根据报头中的信息决定如何将数据沿协议栈上传给合适的应用程序，这个过程称为解封装。不同设备的对等层之间依靠封装和解封装来实现相互间的通信。数据解析的过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150217846881527.png" alt="20170808150217846881527.png"></p>
+<h2 id="TCP-IP模型建立连接与断开连接"><a href="#TCP-IP模型建立连接与断开连接" class="headerlink" title="TCP/IP模型建立连接与断开连接"></a>TCP/IP模型建立连接与断开连接</h2><p>TCP/IP模型建立连接与断开连接过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150218203850506.png" alt="20170808150218203850506.png"></p>
+<p> <strong>三次握手过程(建立连接)</strong></p>
+<ol>
+<li>请求端（通常也称为客户端）发送一个SYN段表示客户期望连接服务器端口，初始序列号为a。</li>
+<li>服务器发回序列号为b的SYN段作为响应。同时设置确认序号为客户端的序列号加1（a+1）作为对客户端的SYN报文的确认。</li>
+<li>客户端设置序列号为服务器端的序列号加1（b+1）作为对服务器端SYN报文段的确认。</li>
+</ol>
+<p><strong>四次挥手过程(断开连接)</strong></p>
+<ol>
+<li>请求端（通常也称为客户端）想终止连接则发送一个FIN段，序列号设置为a。</li>
+<li>服务器回应一个确认序号为客户端的序列号加1（a+1）的ACK确认段，作为对客户端的FIN报文的确认。</li>
+<li>服务器端向客户端发送一个FIN终止段（设置序列号为b，确认号为a+1）。</li>
+<li>客户端返回一个确认报文（设置序列号为b+1）作为响应。</li>
+</ol>
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p>所提供的服务是用来将主机名和域名转换为IP地址的工作。</p>
+<h3 id="DNS查询过程"><a href="#DNS查询过程" class="headerlink" title="DNS查询过程"></a>DNS查询过程</h3><p>递归:DNS服务器可使用其自身的资源记录信息缓存来应答查询，也可以代表请求客户机来查询或联系其他DNS服务器，以完全解析该名称，并随后将应答返回至客户机。</p>
+<p>迭代:客户机自己也可尝试联系其他的DNS服务器来解析名称。如果客户机这么做，它会使用基于服务器应答的独立和附加的查询。</p>
+<ol>
+<li>在浏览器中输入域名，操作系统会先检查自己本地的hosts文件是否有这个网址映射关系；</li>
+<li>如果hosts里没有这个域名的映射，则查找本地DNS解析器缓存</li>
+<li>如果hosts与本地DNS解析器缓存都没有相应的网址映射关系，首先会找TCP/IP参数中设置的首选DNS服务器；</li>
+<li>如果要查询的域名，不由本地DNS服务器区域解析，但该DNS服务器已缓存了此网址映射关系，则调用这个IP地址映射，完成域名解析。</li>
+<li>本地DNS就把请求发至13台根DNS，根DNS服务器收到请求后会判断这个域名（.com）是谁来授权管理，并会返回一个负责该顶级域名服务器的一个IP。本地DNS服务器收到IP信息后，将会联系负责.com域的这台服务器。</li>
+<li>如果用的是转发模式，此DNS服务器就会把请求转至上一级DNS服务器，由上一级服务器进行解析。</li>
+</ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>1.<a href="http://blog.jobbole.com/91515/" target="_blank" rel="external">TCP/IP协议栈及OSI参考模型详解</a><br>2.<a href="http://swiftlet.net/archives/1082" target="_blank" rel="external">TCP三次握手和四次挥手协议</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2017-06-03-分析TCP-IP网络模型.html">http://www.sguotao.com/Android进阶-2017-06-03-分析TCP-IP网络模型.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;TCP/IP模型各个层次分别对应于不同的协议。TCP/IP协议栈是数据通信协议的集合 ，包含许多协议。其协议栈名字来源于其中最主要的两个协议TCP（传输控制协议）和IP（网际协议）。TCP/IP协议栈负责确保网络设备之间能够通信。它是一组规则，规定了信息如何在网络中传输。&lt;
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="Http" scheme="http://www.sguotao.com/tags/Http/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【转】程序员为什么会忧虑自己的未来?</title>
     <link href="http://www.sguotao.com/%E7%94%9F%E6%B4%BB%E6%84%9F%E6%82%9F-2017-06-02-%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BF%A7%E8%99%91%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%AA%E6%9D%A5.html"/>
     <id>http://www.sguotao.com/生活感悟-2017-06-02-程序员为什么会忧虑自己的未来.html</id>
@@ -1146,7 +2069,7 @@ stretch（默认值）：轴线占满整个交叉轴。
     <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2017-03-17-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6.html"/>
     <id>http://www.sguotao.com/Android进阶-2017-03-17-分析Android中的动态加载机制.html</id>
     <published>2017-03-17T02:27:04.000Z</published>
-    <updated>2017-07-13T09:58:33.000Z</updated>
+    <updated>2017-08-08T03:40:10.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Java的类加载机制ClassLoader"><a href="#Java的类加载机制ClassLoader" class="headerlink" title="Java的类加载机制ClassLoader"></a>Java的类加载机制ClassLoader</h2><p>我们编写的java代码，最终会编译成.class字节码的形式，一个完整的Java程序，通常会由若干个.class文件组成，在程序运行时，通过该程序的入口函数来调用系统的各个功能，但是程序启动时，并不会一次性将.class文件加载到内存中，根据程序的需要，通过Java的类加载机制来动态加载.class文件，ClassLoader就是来实现.class文件的动态加载的。</p>
 <h2 id="Java中各类加载器的关系"><a href="#Java中各类加载器的关系" class="headerlink" title="Java中各类加载器的关系"></a>Java中各类加载器的关系</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974200061820.png" alt="20170317148974200061820.png"><br>Java默认会提供三个类加载器，分别为BootStrapClassLoader,ExtClassLoader和AppClassLoader;</p>
@@ -1205,6 +2128,8 @@ stretch（默认值）：轴线占满整个交叉轴。
     
       <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
     
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
     
       <category term="插件框架" scheme="http://www.sguotao.com/tags/%E6%8F%92%E4%BB%B6%E6%A1%86%E6%9E%B6/"/>
     
@@ -1276,11 +2201,138 @@ stretch（默认值）：轴线占满整个交叉轴。
   </entry>
   
   <entry>
+    <title>分析Android中的Binder</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84Binder.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html</id>
+    <published>2016-07-21T02:27:04.000Z</published>
+    <updated>2017-08-08T03:38:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在分析Binder之前，需要先了解几个Linux的几个概念。</p>
+<h2 id="Linux内核的基础知识"><a href="#Linux内核的基础知识" class="headerlink" title="Linux内核的基础知识"></a>Linux内核的基础知识</h2><ol>
+<li><p>进程隔离/虚拟地址空间:每个程序都有自己独立的进程地址空间，这样就做到了进程隔离。这里的进程地址空间是指虚拟地址。虚拟地址不是现实存在的地址空间。操作系统可以根据分段和分页两种方式，实现虚拟地址到真实物理地址的映射。</p>
+</li>
+<li><p>系统调用:计算机系统的各种硬件资源是有限的，在现代多任务操作系统上同时运行的多个进程都需要访问这些资源，为了更好的管理这些资源，进程是不允许直接操作的，所有对这些资源的访问都必须有操作系统控制。也就是说操作系统是使用这些资源的唯一入口，而这个入口就是操作系统提供的系统调用（System Call）。</p>
+</li>
+<li><p>Binder驱动:Binder驱动是作为一个特殊字符型设备存在，设备节点为/dev/binder，遵循Linux设备驱动模型。在驱动实现过程中，实现与用户空间进程的数据通信。</p>
+</li>
+</ol>
+<h2 id="Binder的通信机制"><a href="#Binder的通信机制" class="headerlink" title="Binder的通信机制"></a>Binder的通信机制</h2><h3 id="什么是Binder？"><a href="#什么是Binder？" class="headerlink" title="什么是Binder？"></a>什么是Binder？</h3><ol>
+<li>通常意义下，Binder是Android中的一个类，它继承了IBinder接口；</li>
+<li>从IPC角度，Binder指的是跨进程通信机制；对于Server进程来说，Binder指的是Binder本地对象,对于Client进程来说，Binder指的是Binder代理对象。在整个传输过程，Binder是可以进行跨进程传递对象的。</li>
+<li>从Android Framework角度，Binder是ServiceManager连接各种Manager（ActivityManager、WindowManager，etc）和相应ManagerService的桥梁；</li>
+<li>从Android应用层，Binder是客户端和服务端进行通信的媒介，当你bindService的时候，服务端会返回一个包含了服务端业务调用的Binder对象，通过这个Binder对象，客户端就可以获取服务端提供的服务或者数据，这里的服务包括普通服务和基于AIDL的服务。</li>
+</ol>
+<h3 id="为什么使用binder"><a href="#为什么使用binder" class="headerlink" title="为什么使用binder"></a>为什么使用binder</h3><p>Android中有大量的CS（Client-Server）应用方式，这就要求Android内部提供IPC方法，Android使用Linux内核，拥有着非常多的跨进程通信机制，但是linux所支持的进程通信方式有两个问题：性能和安全性。</p>
+<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>目前linux支持的IPC包括传统的管道，System V IPC(消息队列/共享内存/信号量)，以及socket，但只有socket支持Client-Server的通信方式，由于socket是一套通用的网络通信方式，其传输效率低下切有很大的开销，比如socket的连接建立过程和中断连接过程都是有一定开销的。消息队列和管道采用存储-转发方式，即数据先从发送方缓存区拷贝到内核开辟的缓存区中，然后再从内核缓存区拷贝到接收方缓存区，至少有两次拷贝过程。共享内存虽然无需拷贝，但控制复杂，难以使用。</p>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p>Android作为一个开放式，拥有众多开发者的的平台，应用程序的来源广泛，确保智能终端的安全是非常重要的。终端用户不希望从网上下载的程序在不知情的情况下偷窥隐私数据，连接无线网络，长期操作底层设备导致电池很快耗尽等等。传统IPC没有任何安全措施，完全依赖上层协议来确保。<strong>传统IPC的接收方无法获得对方进程可靠的UID/PID（用户ID/进程ID），从而无法鉴别对方身份。Android为每个安装好的应用程序分配了自己的UID，故进程的UID是鉴别进程身份的重要标志。</strong>使用传统IPC只能由用户在数据包里填入UID/PID，但这样不可靠，容易被恶意程序利用。可靠的身份标记只有由IPC机制本身在内核中添加。其次传统IPC访问接入点是开放的，无法建立私有通道。比如命名管道的名称，system V的键值，socket的ip地址或文件名都是开放的，只要知道这些接入点的程序都可以和对端建立连接，不管怎样都无法阻止恶意程序通过猜测接收方地址获得连接。</p>
+<p>基于以上原因，Android需要建立一套新的IPC机制来满足系统对通信方式，传输性能和安全性的要求，这就是Binder。Binder基于Client-Server通信模式，传输过程只需一次拷贝，为发送发添加UID/PID身份，既支持实名Binder也支持匿名Binder，安全性高。</p>
+<h3 id="Binder通信模型"><a href="#Binder通信模型" class="headerlink" title="Binder通信模型"></a>Binder通信模型</h3><p>Binder的通信过程可以用下图来简单的描述。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170807150209709476434.png" alt="20170807150209709476434.png"></p>
+<p>Client与Server通过Binder进行通信的过程可以概括为:</p>
+<ol>
+<li>ServiceManager的建立；</li>
+<li>启动的Service在ServiceManager中进行注册，在已经建立的ServiceManager维护的一张表；</li>
+<li>Client向ServiceManager中进行查询Service中注册的方法；</li>
+<li>ServiceManager返回一个代理对象，Client可以通过该代理对象实现与Server的通信。代理对象中有空方法，代理对象中方法的实现是Binder驱动来完成的。整个过程对Client是透明的。</li>
+</ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>1.任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507<br>2.<a href="http://blog.csdn.net/universus/article/details/6211589" target="_blank" rel="external">Android Bander设计与实现 - 设计篇</a><br>3.<a href="http://www.cnblogs.com/innost/archive/2011/01/09/1931456.html" target="_blank" rel="external">Android深入浅出之Binder机制</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html">http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Binder.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在分析Binder之前，需要先了解几个Linux的几个概念。&lt;/p&gt;
+&lt;h2 id=&quot;Linux内核的基础知识&quot;&gt;&lt;a href=&quot;#Linux内核的基础知识&quot; class=&quot;headerlink&quot; title=&quot;Linux内核的基础知识&quot;&gt;&lt;/a&gt;Linux内核的基础知识
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="Binder" scheme="http://www.sguotao.com/tags/Binder/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分析Android中的Fragment</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Androdi%E4%B8%AD%E7%9A%84Fragment.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html</id>
+    <published>2016-07-21T02:27:04.000Z</published>
+    <updated>2017-08-08T03:39:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Fragment介绍"><a href="#Fragment介绍" class="headerlink" title="Fragment介绍"></a>Fragment介绍</h2><p>Android 在 Android 3.0（API 级别 11）中引入了Fragment，主要是为了给大屏幕（如平板电脑）上更加动态和灵活的 UI 设计提供支持。</p>
+<h3 id="Fragment加载到Activity中的两种方式"><a href="#Fragment加载到Activity中的两种方式" class="headerlink" title="Fragment加载到Activity中的两种方式"></a>Fragment加载到Activity中的两种方式</h3><p><strong>静态加载方式</strong><br>静态加载方式，直接在布局文件中添加fragment，示例代码:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleListFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/list"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleReaderFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/viewer"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>动态加载方式</strong><br>动态加载方式，即在Activity运行过程中，将fragment加载到布局文件中，示例代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.获取一个FragmentTransaction实例</span></div><div class="line">FragmentManager fragmentManager = getFragmentManager();</div><div class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</div><div class="line"><span class="comment">//2.调用add()方法添加Fragment对象</span></div><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line"><span class="comment">//3.调用commit()方法使得fragmentTransaction实例的改变生效</span></div><div class="line">fragmentTransaction.commit();</div></pre></td></tr></table></figure>
+<h3 id="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"><a href="#FragmentPagerAdapter与FragmentStatePagerAdapter的区别" class="headerlink" title="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"></a>FragmentPagerAdapter与FragmentStatePagerAdapter的区别</h3><p>FragmentPagerAdapter和FragmentStatePagerAdapter都是PagerAdapter的子类，先来看他们的父类PagerAdapter。</p>
+<p>PagerAdapter是ViewPager的适配器，ViewPager将调用它来取得所需显示的页，而 PagerAdapter也会在数据变化时，通知ViewPager。如果继承自该类，至少需要实现 instantiateItem(), destroyItem(), getCount() 以及 isViewFromObject()。</p>
+<p>FragmentPagerAdapter继承自PagerAdapter。相比通用的PagerAdapter，该类更专注于每一页均为Fragment的情况。该类内的每一个生成的Fragment都将保存在内存之中，因此适用于那些相对静态的页，数量也比较少的那种；如果需要处理有很多页，并且数据动态性较大、占用内存较多的情况，应该使用FragmentStatePagerAdapter。FragmentPagerAdapter 重载实现了几个必须的函数，因此来自 PagerAdapter 的函数，我们只需要实现 getCount()，即可。且，由于 FragmentPagerAdapter.instantiateItem() 的实现中，调用了一个新增的虚函数 getItem()，因此，我们还至少需要实现一个 getItem()。</p>
+<p>FragmentStatePagerAdapter 和前面的 FragmentPagerAdapter 一样，是继承子 PagerAdapter。和 FragmentPagerAdapter 不一样的是，正如其类名中的 ‘State’ 所表明的含义一样，该 PagerAdapter 的实现将只保留当前页面，当页面离开视线后，就会被消除，释放其资源；而在页面需要显示时，生成新的页面。这么实现的好处就是当拥有大量的页面时，不必在内存中占用大量的内存。</p>
+<p>为什么FragmentPagerAdapter占用内存会比FragmentStatePagerAdapter呢？看一下FragmentPagerAdapter的源码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">        mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Detaching item #"</span> + getItemId(position) + <span class="string">": f="</span> + object</div><div class="line">            + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">    mCurTransaction.detach((Fragment)object);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再对比看一下FragmentStatePagerAdapter对应的方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">       Fragment fragment = (Fragment) object;</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">           mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Removing item #"</span> + position + <span class="string">": f="</span> + object</div><div class="line">               + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">       <span class="keyword">while</span> (mSavedState.size() &lt;= position) &#123;</div><div class="line">           mSavedState.add(<span class="keyword">null</span>);</div><div class="line">       &#125;</div><div class="line">       mSavedState.set(position, fragment.isAdded()</div><div class="line">               ? mFragmentManager.saveFragmentInstanceState(fragment) : <span class="keyword">null</span>);</div><div class="line">       mFragments.set(position, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">       mCurTransaction.remove(fragment);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>FragmentStatePagerAdapter在每次destroyItem()时，将Fragment移除掉，而FragmentPagerAdapter只是detach()，失去关联而已。</p>
+<h2 id="Fragment的生命周期"><a href="#Fragment的生命周期" class="headerlink" title="Fragment的生命周期"></a>Fragment的生命周期</h2><p>一个Fragment从创建到销毁的完整的生命周期如图:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170722150069331557277.png" alt="20170722150069331557277.png"><br>图中给出了Fragment在创建和销毁的过程中对一个的Activity的回调方法。对比发现，Fragment生命周期过程中的回调状态比Activity的状态多。</p>
+<p><strong>onAttch（Activity activity）</strong>，这个回调方法是在fragment与activity关联之后调用，我们能在这个方法中获取这个关联的activity的实例。但是当你的sdk更新到android6.0（api-23）是就会显示这个方法是过时的，系统建议使用onAttach（Context  context）这个方法代替。</p>
+<p><strong>onCreate()</strong>，这个回调方法是在fragment初始化的时候调用，我们通常在这个方法中使用getArgument()获取Activity传来的初始化Fragment的参数。需要注意的是，在这个方法中不能获取Activity中的控件，因为此时Activity的onCreate()还没有执行完，即Activity还没有创建完，要想获取Activity相关的资源应该在onActivityCreated()中获取。</p>
+<p><strong>onCreateView()</strong>：这个回调方法中我们主要是通过布局填充器获取Fragment布局。我们在这个方法中通过view.findViewById()初始化Fragment中的控件。</p>
+<p><strong>onActivityCreated()</strong>，这个回调方法是在Activity的onCreate()方法执行完执行，通知Fragment，其关联的Activity的onCreate()方法执行完了，即Activity创建完成，可以在这个方法中获取Activity中的资源。</p>
+<p><strong>onStart()</strong>，这个回调方法是在Activity的onstart()执行完立即执行，这个方法执行完Fragment界面就显示出来了，但是现在还没有获取焦点，用户不能进行交互操作。</p>
+<p><strong>onResume()</strong>，这个回调方法是在Activity的onResume()方法执行完立即执行，此时Fragment的获取了界面，用户可以操作。</p>
+<p><strong>onPause()</strong>，Fragment失去焦点，此时用户是不能操作的，执行完立即执行Activity的onPause()方法。</p>
+<p><strong>onStop()</strong>，Fragment不可见，执行完立即执行Activity的onStop()方法。</p>
+<p><strong>onDestroyView()</strong>,在onCreateView()中创建的Fragment视图会被销毁。Fragment的视图被回收。</p>
+<p><strong>onDestroy()</strong>，当这个Fragment不再使用时调用。需要注意的是，它即使经过了onDestroy()阶段，但仍然能从Activity中找到，因为它还没有Detach()。</p>
+<p><strong>onDetach()</strong>，Fragment与Activity解除关联，Fragment的所有的资源都被回收。</p>
+<h2 id="Fragment的通信"><a href="#Fragment的通信" class="headerlink" title="Fragment的通信"></a>Fragment的通信</h2><p>Fragment的通信，概括起来主要包含以下三种情况:</p>
+<ol>
+<li>在Fragment中调用Activity中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，调用Activity中的方法。</li>
+<li>在Activity中调用Fragment中的方法，Activity中维护着其关联的Fragment的实例，可以直接调用其方法。</li>
+<li>在Fragment中调用Fragment中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，通过findFragmentById()方法，知道要与之通信的Fragment。</li>
+</ol>
+<p>除了上面中介绍的方法，还可以通过接口回调的方法。这里以Fragment调用Activity中的方法为例，介绍接口回调的方式,接口回调主要经历三个步骤:</p>
+<ul>
+<li>在Fragment中定义回调接口，声明回调方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 1.在Fragment中定义回调接口，声明回调方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ComminuteListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Fragment关联的Activity实现接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFragmentActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">TestFragment</span>.<span class="title">ComminuteListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span> </span>&#123;</div><div class="line">        showToast();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">()</span> </span>&#123;</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"toast from Activity"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在Fragment的onAttach()方法中，获取接口实例，调用回调方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttach</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onAttach(context);</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">          comminuteListener = (ComminuteListener) getActivity();</div><div class="line">      &#125;<span class="keyword">catch</span> (ClassCastException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      comminuteListener.comminute();</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]<a href="https://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">Google-API指南-应用组件-Fragment</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html">http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Fragment介绍&quot;&gt;&lt;a href=&quot;#Fragment介绍&quot; class=&quot;headerlink&quot; title=&quot;Fragment介绍&quot;&gt;&lt;/a&gt;Fragment介绍&lt;/h2&gt;&lt;p&gt;Android 在 Android 3.0（API 级别 11）中引入了Fr
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="Fragment" scheme="http://www.sguotao.com/tags/Fragment/"/>
+    
+  </entry>
+  
+  <entry>
     <title>分析Android中的Activity</title>
     <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84Activity.html"/>
     <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Android中的Activity.html</id>
     <published>2016-07-21T02:27:04.000Z</published>
-    <updated>2017-07-21T09:02:42.000Z</updated>
+    <updated>2017-08-08T03:39:39.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h2><blockquote>
 <p>Activity是Android与用户进行交互的接口，Activity提供了界面用于处理用户的点击和滑动等交互。</p>
@@ -1362,75 +2414,7 @@ stretch（默认值）：轴线占满整个交叉轴。
     
       <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
     
-  </entry>
-  
-  <entry>
-    <title>分析Android中的Fragment</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Androdi%E4%B8%AD%E7%9A%84Fragment.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html</id>
-    <published>2016-07-21T02:27:04.000Z</published>
-    <updated>2017-07-23T03:06:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Fragment介绍"><a href="#Fragment介绍" class="headerlink" title="Fragment介绍"></a>Fragment介绍</h2><p>Android 在 Android 3.0（API 级别 11）中引入了Fragment，主要是为了给大屏幕（如平板电脑）上更加动态和灵活的 UI 设计提供支持。</p>
-<h3 id="Fragment加载到Activity中的两种方式"><a href="#Fragment加载到Activity中的两种方式" class="headerlink" title="Fragment加载到Activity中的两种方式"></a>Fragment加载到Activity中的两种方式</h3><p><strong>静态加载方式</strong><br>静态加载方式，直接在布局文件中添加fragment，示例代码:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleListFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/list"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleReaderFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/viewer"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><strong>动态加载方式</strong><br>动态加载方式，即在Activity运行过程中，将fragment加载到布局文件中，示例代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.获取一个FragmentTransaction实例</span></div><div class="line">FragmentManager fragmentManager = getFragmentManager();</div><div class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</div><div class="line"><span class="comment">//2.调用add()方法添加Fragment对象</span></div><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line"><span class="comment">//3.调用commit()方法使得fragmentTransaction实例的改变生效</span></div><div class="line">fragmentTransaction.commit();</div></pre></td></tr></table></figure>
-<h3 id="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"><a href="#FragmentPagerAdapter与FragmentStatePagerAdapter的区别" class="headerlink" title="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"></a>FragmentPagerAdapter与FragmentStatePagerAdapter的区别</h3><p>FragmentPagerAdapter和FragmentStatePagerAdapter都是PagerAdapter的子类，先来看他们的父类PagerAdapter。</p>
-<p>PagerAdapter是ViewPager的适配器，ViewPager将调用它来取得所需显示的页，而 PagerAdapter也会在数据变化时，通知ViewPager。如果继承自该类，至少需要实现 instantiateItem(), destroyItem(), getCount() 以及 isViewFromObject()。</p>
-<p>FragmentPagerAdapter继承自PagerAdapter。相比通用的PagerAdapter，该类更专注于每一页均为Fragment的情况。该类内的每一个生成的Fragment都将保存在内存之中，因此适用于那些相对静态的页，数量也比较少的那种；如果需要处理有很多页，并且数据动态性较大、占用内存较多的情况，应该使用FragmentStatePagerAdapter。FragmentPagerAdapter 重载实现了几个必须的函数，因此来自 PagerAdapter 的函数，我们只需要实现 getCount()，即可。且，由于 FragmentPagerAdapter.instantiateItem() 的实现中，调用了一个新增的虚函数 getItem()，因此，我们还至少需要实现一个 getItem()。</p>
-<p>FragmentStatePagerAdapter 和前面的 FragmentPagerAdapter 一样，是继承子 PagerAdapter。和 FragmentPagerAdapter 不一样的是，正如其类名中的 ‘State’ 所表明的含义一样，该 PagerAdapter 的实现将只保留当前页面，当页面离开视线后，就会被消除，释放其资源；而在页面需要显示时，生成新的页面。这么实现的好处就是当拥有大量的页面时，不必在内存中占用大量的内存。</p>
-<p>为什么FragmentPagerAdapter占用内存会比FragmentStatePagerAdapter呢？看一下FragmentPagerAdapter的源码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">        mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Detaching item #"</span> + getItemId(position) + <span class="string">": f="</span> + object</div><div class="line">            + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">    mCurTransaction.detach((Fragment)object);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>再对比看一下FragmentStatePagerAdapter对应的方法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">       Fragment fragment = (Fragment) object;</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">           mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Removing item #"</span> + position + <span class="string">": f="</span> + object</div><div class="line">               + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">       <span class="keyword">while</span> (mSavedState.size() &lt;= position) &#123;</div><div class="line">           mSavedState.add(<span class="keyword">null</span>);</div><div class="line">       &#125;</div><div class="line">       mSavedState.set(position, fragment.isAdded()</div><div class="line">               ? mFragmentManager.saveFragmentInstanceState(fragment) : <span class="keyword">null</span>);</div><div class="line">       mFragments.set(position, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">       mCurTransaction.remove(fragment);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>FragmentStatePagerAdapter在每次destroyItem()时，将Fragment移除掉，而FragmentPagerAdapter只是detach()，失去关联而已。</p>
-<h2 id="Fragment的生命周期"><a href="#Fragment的生命周期" class="headerlink" title="Fragment的生命周期"></a>Fragment的生命周期</h2><p>一个Fragment从创建到销毁的完整的生命周期如图:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170722150069331557277.png" alt="20170722150069331557277.png"><br>图中给出了Fragment在创建和销毁的过程中对一个的Activity的回调方法。对比发现，Fragment生命周期过程中的回调状态比Activity的状态多。</p>
-<p><strong>onAttch（Activity activity）</strong>，这个回调方法是在fragment与activity关联之后调用，我们能在这个方法中获取这个关联的activity的实例。但是当你的sdk更新到android6.0（api-23）是就会显示这个方法是过时的，系统建议使用onAttach（Context  context）这个方法代替。</p>
-<p><strong>onCreate()</strong>，这个回调方法是在fragment初始化的时候调用，我们通常在这个方法中使用getArgument()获取Activity传来的初始化Fragment的参数。需要注意的是，在这个方法中不能获取Activity中的控件，因为此时Activity的onCreate()还没有执行完，即Activity还没有创建完，要想获取Activity相关的资源应该在onActivityCreated()中获取。</p>
-<p><strong>onCreateView()</strong>：这个回调方法中我们主要是通过布局填充器获取Fragment布局。我们在这个方法中通过view.findViewById()初始化Fragment中的控件。</p>
-<p><strong>onActivityCreated()</strong>，这个回调方法是在Activity的onCreate()方法执行完执行，通知Fragment，其关联的Activity的onCreate()方法执行完了，即Activity创建完成，可以在这个方法中获取Activity中的资源。</p>
-<p><strong>onStart()</strong>，这个回调方法是在Activity的onstart()执行完立即执行，这个方法执行完Fragment界面就显示出来了，但是现在还没有获取焦点，用户不能进行交互操作。</p>
-<p><strong>onResume()</strong>，这个回调方法是在Activity的onResume()方法执行完立即执行，此时Fragment的获取了界面，用户可以操作。</p>
-<p><strong>onPause()</strong>，Fragment失去焦点，此时用户是不能操作的，执行完立即执行Activity的onPause()方法。</p>
-<p><strong>onStop()</strong>，Fragment不可见，执行完立即执行Activity的onStop()方法。</p>
-<p><strong>onDestroyView()</strong>,在onCreateView()中创建的Fragment视图会被销毁。Fragment的视图被回收。</p>
-<p><strong>onDestroy()</strong>，当这个Fragment不再使用时调用。需要注意的是，它即使经过了onDestroy()阶段，但仍然能从Activity中找到，因为它还没有Detach()。</p>
-<p><strong>onDetach()</strong>，Fragment与Activity解除关联，Fragment的所有的资源都被回收。</p>
-<h2 id="Fragment的通信"><a href="#Fragment的通信" class="headerlink" title="Fragment的通信"></a>Fragment的通信</h2><p>Fragment的通信，概括起来主要包含以下三种情况:</p>
-<ol>
-<li>在Fragment中调用Activity中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，调用Activity中的方法。</li>
-<li>在Activity中调用Fragment中的方法，Activity中维护着其关联的Fragment的实例，可以直接调用其方法。</li>
-<li>在Fragment中调用Fragment中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，通过findFragmentById()方法，知道要与之通信的Fragment。</li>
-</ol>
-<p>除了上面中介绍的方法，还可以通过接口回调的方法。这里以Fragment调用Activity中的方法为例，介绍接口回调的方式,接口回调主要经历三个步骤:</p>
-<ul>
-<li>在Fragment中定义回调接口，声明回调方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 1.在Fragment中定义回调接口，声明回调方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ComminuteListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>Fragment关联的Activity实现接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFragmentActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">TestFragment</span>.<span class="title">ComminuteListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span> </span>&#123;</div><div class="line">        showToast();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">()</span> </span>&#123;</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"toast from Activity"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在Fragment的onAttach()方法中，获取接口实例，调用回调方法。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttach</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onAttach(context);</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">          comminuteListener = (ComminuteListener) getActivity();</div><div class="line">      &#125;<span class="keyword">catch</span> (ClassCastException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      comminuteListener.comminute();</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]<a href="https://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">Google-API指南-应用组件-Fragment</a></p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html">http://www.sguotao.com/Android进阶-2016-07-21-分析Androdi中的Fragment.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Fragment介绍&quot;&gt;&lt;a href=&quot;#Fragment介绍&quot; class=&quot;headerlink&quot; title=&quot;Fragment介绍&quot;&gt;&lt;/a&gt;Fragment介绍&lt;/h2&gt;&lt;p&gt;Android 在 Android 3.0（API 级别 11）中引入了Fr
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+      <category term="Activity" scheme="http://www.sguotao.com/tags/Activity/"/>
     
   </entry>
   
@@ -1472,68 +2456,6 @@ stretch（默认值）：轴线占满整个交叉轴。
     
       &lt;h2 id=&quot;自定义View的分类&quot;&gt;&lt;a href=&quot;#自定义View的分类&quot; class=&quot;headerlink&quot; title=&quot;自定义View的分类&quot;&gt;&lt;/a&gt;自定义View的分类&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;继承View重写onDraw()&lt;/str
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="View" scheme="http://www.sguotao.com/tags/View/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分析Android中View的工作流程</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-07-%E5%88%86%E6%9E%90Android%E4%B8%ADView%E7%9A%84%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-07-07-分析Android中View的绘制流程.html</id>
-    <published>2016-07-06T02:27:04.000Z</published>
-    <updated>2017-07-13T08:12:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在分析View的工作流程时，需要先分析一个很重要的类,MeasureSpec。这个类在View的测量(Measure)过程中会用到。</p>
-<h2 id="MeasureSpec"><a href="#MeasureSpec" class="headerlink" title="MeasureSpec"></a>MeasureSpec</h2><p>MeasureSpec是View的静态内部类，可以理解为是一种测量规格，是一个32位int值，高2位代表SpecMode，低30位代表SpecSize，SpecMode是指测量模式，而SpecSize是指在某种测量模式下的规格大小。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149986966667975.png" alt="20170712149986966667975.png"><br>SpecMode有三种模式，分别为：</p>
-<ol>
-<li>UNSPECIFIED:父容器不对View做限制</li>
-<li>EXACTLY:父容器已经检测出View所需的精确大小，View的大小为SpecSize中指定的值。</li>
-<li>AT_MOST:父容器指定了一个SpecSize，View的大小不大大于该值。</li>
-</ol>
-<h3 id="MeasureSpec与LayoutParams"><a href="#MeasureSpec与LayoutParams" class="headerlink" title="MeasureSpec与LayoutParams"></a>MeasureSpec与LayoutParams</h3><p>系统通过MeasureSpec作为测量规格，对View进行测量，但在设置View的宽高时，都是通过LayoutParams，因此系统在测量View的时候，会将LayoutParams在父容器的约束下转换成MeasureSpec，然后根据确定的MeasureSepc得到View测量后的宽高。有几点需要说明：</p>
-<ol>
-<li>LayoutParams和父容器一起确定MeasureSpec；</li>
-<li>对于DecorView，其MeasureSpec是由窗口的尺寸和自身的LayoutParams共同确定的；由于窗口尺寸是确定的，因此主要与DecorView自身的LayoutParams有关，具体的对应关系如下图描述：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017071314999163655874.png" alt="2017071314999163655874.png"></li>
-<li>对于普通View，其MeasureSpec是由父容器的MeasureSpec和自身的LayoutParams共同确定的。其对应关系如下图描述：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017071314999164201334.png" alt="2017071314999164201334.png"><br><strong>对普通View，简单总结一下：</strong></li>
-</ol>
-<ul>
-<li>当View采用固定宽/高的时候，不管父容器的MeasureSpec是什么，View的MeasureSpec都是精确模式并且其大小遵循Layoutparams中的大小。</li>
-<li>当View的宽/高是match_parent时，如果父容器的模式是精准模式，那么View也是精准模式并且其大小是父容器的剩余空间；如果父容器是最大模式，那么View也是最大模式并且其大小不会超过父容器的剩余空间。</li>
-<li>当View的宽/高是wrap_content时，不管父容器的模式是精准还是最大模式，View的模式总是最大模式并且大小不能超过父容器的剩余空间。</li>
-<li>在UNSPECIFIED模式中，系统内部会进行多次Measure过程，才能确定View的宽高。</li>
-</ul>
-<h2 id="View的工作流程"><a href="#View的工作流程" class="headerlink" title="View的工作流程"></a>View的工作流程</h2><p>ViewRoot是连接WindowManager与DecorView的纽带，View的绘制流程都是通过ViewRoot来完成的。</p>
-<p>View的工作流程是从ViewRoot的performTraversals方法开始的，它经过measure、layout和draw三个过程才能最终将一个View绘制出来，其中measure用来测量View的宽和高，layout用来确定View在父容器中的放置位置，而draw则负责将View绘制在屏幕上。用一张图来描述View的工作过程：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149985760240189.png" alt="20170712149985760240189.png"></p>
-<h3 id="View的测量-Measure-过程"><a href="#View的测量-Measure-过程" class="headerlink" title="View的测量(Measure)过程"></a>View的测量(Measure)过程</h3><p>在View的Measure过程中，完成对View的测量，确定View的宽高。ViewRoot中的performTraversals()会依次调用ViewRoot中的performMeasure()、performLayout()和performDraw()三个方法，这三个方法分别完成顶级View的measure、layout和draw这三大流程。其中在performMeasure()中会调用View的measure()方法，在measure()方法中又会调用onMeasure()方法。在onMeasure()中将View宽/高的测量值传给setMeasuredDimension()方法，完成View的测量过程。</p>
-<p>对于ViewGroup来说，除了完成自己的measure过程以外，还会遍历去调用所有子元素的measure()方法，各个子元素再递归去执行这个过程。和View不同的是，ViewGroup是一个抽象类，因此它没有重写View的onMeasure方法，因为不同的ViewGroup子类有不同的布局特性，这导致它们的测量细节各不相同。在ViewGroup的onMeasure()中最后也会调用setMeasuredDimension()方法，完成测量过程。</p>
-<p>measure完成以后，通过getMeasuredWidth()/Height()方法就可以正确地获取到View的测量宽/高。需要注意的是，在某些极端情况下，系统可能需要多次measure才能确定最终的测量宽/高，在这种情形下，在onMeasure方法中拿到的测量宽/高很可能是不准确的。一个比较好的习惯是在onLayout方法中去获取View的测量宽/高或者最终宽/高。</p>
-<h3 id="View的布局-Layout-过程"><a href="#View的布局-Layout-过程" class="headerlink" title="View的布局(Layout)过程"></a>View的布局(Layout)过程</h3><p>Layout的作用是ViewGroup用来确定子元素的位置，ViewRoot中的performLayout()中会调用View的layout()方法，在layout()方法中onLayout()方法又会被调用。onLayout的具体实现同样和具体的布局有关，所以View和ViewGroup均没有真正实现onLayout方法。</p>
-<p>当ViewGroup的位置被确定后，它在onLayout()中会遍历所有的子元素并调用其layout()方法，layout()方法确定View本身的位置，而onLayout()方法则会确定所有子元素的位置。</p>
-<h3 id="View的绘制-Draw-过程"><a href="#View的绘制-Draw-过程" class="headerlink" title="View的绘制(Draw)过程"></a>View的绘制(Draw)过程</h3><p>Draw的作用是将View绘制到屏幕上面。View的绘制过程遵循如下几步：</p>
-<ol>
-<li>绘制背景background.draw(canvas)</li>
-<li>绘制自己（onDraw）</li>
-<li>绘制children（dispatchDraw）</li>
-<li>绘制装饰（onDrawScrollBars）</li>
-</ol>
-<p>View绘制过程的传递是通过dispatchDraw来实现的，dispatchDraw会遍历调用所有子元素的draw方法，如此draw事件就一层层地传递了下去。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] 任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507</p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-07-分析Android中View的绘制流程.html">http://www.sguotao.com/Android进阶-2016-07-07-分析Android中View的绘制流程.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在分析View的工作流程时，需要先分析一个很重要的类,MeasureSpec。这个类在View的测量(Measure)过程中会用到。&lt;/p&gt;
-&lt;h2 id=&quot;MeasureSpec&quot;&gt;&lt;a href=&quot;#MeasureSpec&quot; class=&quot;headerlink&quot; tit
     
     </summary>
     
@@ -1607,6 +2529,68 @@ stretch（默认值）：轴线占满整个交叉轴。
     <summary type="html">
     
       &lt;h2 id=&quot;为什么会有事件分发机制&quot;&gt;&lt;a href=&quot;#为什么会有事件分发机制&quot; class=&quot;headerlink&quot; title=&quot;为什么会有事件分发机制&quot;&gt;&lt;/a&gt;为什么会有事件分发机制&lt;/h2&gt;&lt;p&gt;在Android中，View是以树形结构的形式存在的，View可能会
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
+    
+      <category term="View" scheme="http://www.sguotao.com/tags/View/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分析Android中View的工作流程</title>
+    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-07-07-%E5%88%86%E6%9E%90Android%E4%B8%ADView%E7%9A%84%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B.html"/>
+    <id>http://www.sguotao.com/Android进阶-2016-07-07-分析Android中View的绘制流程.html</id>
+    <published>2016-07-06T02:27:04.000Z</published>
+    <updated>2017-07-13T08:12:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在分析View的工作流程时，需要先分析一个很重要的类,MeasureSpec。这个类在View的测量(Measure)过程中会用到。</p>
+<h2 id="MeasureSpec"><a href="#MeasureSpec" class="headerlink" title="MeasureSpec"></a>MeasureSpec</h2><p>MeasureSpec是View的静态内部类，可以理解为是一种测量规格，是一个32位int值，高2位代表SpecMode，低30位代表SpecSize，SpecMode是指测量模式，而SpecSize是指在某种测量模式下的规格大小。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149986966667975.png" alt="20170712149986966667975.png"><br>SpecMode有三种模式，分别为：</p>
+<ol>
+<li>UNSPECIFIED:父容器不对View做限制</li>
+<li>EXACTLY:父容器已经检测出View所需的精确大小，View的大小为SpecSize中指定的值。</li>
+<li>AT_MOST:父容器指定了一个SpecSize，View的大小不大大于该值。</li>
+</ol>
+<h3 id="MeasureSpec与LayoutParams"><a href="#MeasureSpec与LayoutParams" class="headerlink" title="MeasureSpec与LayoutParams"></a>MeasureSpec与LayoutParams</h3><p>系统通过MeasureSpec作为测量规格，对View进行测量，但在设置View的宽高时，都是通过LayoutParams，因此系统在测量View的时候，会将LayoutParams在父容器的约束下转换成MeasureSpec，然后根据确定的MeasureSepc得到View测量后的宽高。有几点需要说明：</p>
+<ol>
+<li>LayoutParams和父容器一起确定MeasureSpec；</li>
+<li>对于DecorView，其MeasureSpec是由窗口的尺寸和自身的LayoutParams共同确定的；由于窗口尺寸是确定的，因此主要与DecorView自身的LayoutParams有关，具体的对应关系如下图描述：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017071314999163655874.png" alt="2017071314999163655874.png"></li>
+<li>对于普通View，其MeasureSpec是由父容器的MeasureSpec和自身的LayoutParams共同确定的。其对应关系如下图描述：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017071314999164201334.png" alt="2017071314999164201334.png"><br><strong>对普通View，简单总结一下：</strong></li>
+</ol>
+<ul>
+<li>当View采用固定宽/高的时候，不管父容器的MeasureSpec是什么，View的MeasureSpec都是精确模式并且其大小遵循Layoutparams中的大小。</li>
+<li>当View的宽/高是match_parent时，如果父容器的模式是精准模式，那么View也是精准模式并且其大小是父容器的剩余空间；如果父容器是最大模式，那么View也是最大模式并且其大小不会超过父容器的剩余空间。</li>
+<li>当View的宽/高是wrap_content时，不管父容器的模式是精准还是最大模式，View的模式总是最大模式并且大小不能超过父容器的剩余空间。</li>
+<li>在UNSPECIFIED模式中，系统内部会进行多次Measure过程，才能确定View的宽高。</li>
+</ul>
+<h2 id="View的工作流程"><a href="#View的工作流程" class="headerlink" title="View的工作流程"></a>View的工作流程</h2><p>ViewRoot是连接WindowManager与DecorView的纽带，View的绘制流程都是通过ViewRoot来完成的。</p>
+<p>View的工作流程是从ViewRoot的performTraversals方法开始的，它经过measure、layout和draw三个过程才能最终将一个View绘制出来，其中measure用来测量View的宽和高，layout用来确定View在父容器中的放置位置，而draw则负责将View绘制在屏幕上。用一张图来描述View的工作过程：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149985760240189.png" alt="20170712149985760240189.png"></p>
+<h3 id="View的测量-Measure-过程"><a href="#View的测量-Measure-过程" class="headerlink" title="View的测量(Measure)过程"></a>View的测量(Measure)过程</h3><p>在View的Measure过程中，完成对View的测量，确定View的宽高。ViewRoot中的performTraversals()会依次调用ViewRoot中的performMeasure()、performLayout()和performDraw()三个方法，这三个方法分别完成顶级View的measure、layout和draw这三大流程。其中在performMeasure()中会调用View的measure()方法，在measure()方法中又会调用onMeasure()方法。在onMeasure()中将View宽/高的测量值传给setMeasuredDimension()方法，完成View的测量过程。</p>
+<p>对于ViewGroup来说，除了完成自己的measure过程以外，还会遍历去调用所有子元素的measure()方法，各个子元素再递归去执行这个过程。和View不同的是，ViewGroup是一个抽象类，因此它没有重写View的onMeasure方法，因为不同的ViewGroup子类有不同的布局特性，这导致它们的测量细节各不相同。在ViewGroup的onMeasure()中最后也会调用setMeasuredDimension()方法，完成测量过程。</p>
+<p>measure完成以后，通过getMeasuredWidth()/Height()方法就可以正确地获取到View的测量宽/高。需要注意的是，在某些极端情况下，系统可能需要多次measure才能确定最终的测量宽/高，在这种情形下，在onMeasure方法中拿到的测量宽/高很可能是不准确的。一个比较好的习惯是在onLayout方法中去获取View的测量宽/高或者最终宽/高。</p>
+<h3 id="View的布局-Layout-过程"><a href="#View的布局-Layout-过程" class="headerlink" title="View的布局(Layout)过程"></a>View的布局(Layout)过程</h3><p>Layout的作用是ViewGroup用来确定子元素的位置，ViewRoot中的performLayout()中会调用View的layout()方法，在layout()方法中onLayout()方法又会被调用。onLayout的具体实现同样和具体的布局有关，所以View和ViewGroup均没有真正实现onLayout方法。</p>
+<p>当ViewGroup的位置被确定后，它在onLayout()中会遍历所有的子元素并调用其layout()方法，layout()方法确定View本身的位置，而onLayout()方法则会确定所有子元素的位置。</p>
+<h3 id="View的绘制-Draw-过程"><a href="#View的绘制-Draw-过程" class="headerlink" title="View的绘制(Draw)过程"></a>View的绘制(Draw)过程</h3><p>Draw的作用是将View绘制到屏幕上面。View的绘制过程遵循如下几步：</p>
+<ol>
+<li>绘制背景background.draw(canvas)</li>
+<li>绘制自己（onDraw）</li>
+<li>绘制children（dispatchDraw）</li>
+<li>绘制装饰（onDrawScrollBars）</li>
+</ol>
+<p>View绘制过程的传递是通过dispatchDraw来实现的，dispatchDraw会遍历调用所有子元素的draw方法，如此draw事件就一层层地传递了下去。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] 任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507</p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-07-07-分析Android中View的绘制流程.html">http://www.sguotao.com/Android进阶-2016-07-07-分析Android中View的绘制流程.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在分析View的工作流程时，需要先分析一个很重要的类,MeasureSpec。这个类在View的测量(Measure)过程中会用到。&lt;/p&gt;
+&lt;h2 id=&quot;MeasureSpec&quot;&gt;&lt;a href=&quot;#MeasureSpec&quot; class=&quot;headerlink&quot; tit
     
     </summary>
     
@@ -1743,377 +2727,6 @@ stretch（默认值）：轴线占满整个交叉轴。
     
     
       <category term="Java" scheme="http://www.sguotao.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android实现点赞效果</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-06-13-Android%E5%AE%9E%E7%8E%B0%E7%82%B9%E8%B5%9E%E6%95%88%E6%9E%9C.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-06-13-Android实现点赞效果.html</id>
-    <published>2016-06-13T06:39:39.000Z</published>
-    <updated>2017-07-13T10:02:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。</p>
-<h3 id="添加平移动画"><a href="#添加平移动画" class="headerlink" title="添加平移动画"></a>添加平移动画</h3><p>先来实现一个简单的平移动画，查看一下效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</div><div class="line">translationY.setDuration(1000);</div><div class="line">translationY.start();</div></pre></td></tr></table></figure>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733811463543.gif" alt="20170613149733811463543.gif"></p>
-<h3 id="添加渐变动画"><a href="#添加渐变动画" class="headerlink" title="添加渐变动画"></a>添加渐变动画</h3><p>再加入一个渐变的效果，查看一下效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//translate动画</div><div class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</div><div class="line">//alpha动画</div><div class="line">ObjectAnimator alpha = ObjectAnimator.ofFloat(view, &quot;alpha&quot;, 1f, 0f);</div><div class="line">AnimatorSet animatorSet = new AnimatorSet();</div><div class="line">animatorSet.play(translationY).before(alpha);</div><div class="line">animatorSet.setDuration(1000);</div><div class="line">animatorSet.start();</div></pre></td></tr></table></figure>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733732652528.gif" alt="20170613149733732652528.gif"></p>
-<h3 id="实现-1效果"><a href="#实现-1效果" class="headerlink" title="实现+1效果"></a>实现+1效果</h3><p>怎样实现+1的效果呢？可以考虑添加TextView，通过监听动画的状态实现对TextView显示状态的控制，查看一下运行效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">final TextView tv = (TextView) findViewById(R.id.tv);</div><div class="line"></div><div class="line">        //translate动画</div><div class="line">        ObjectAnimator translationY = ObjectAnimator.ofFloat(tv, &quot;translationY&quot;, 0f, -100f);</div><div class="line">        //alpha动画</div><div class="line">        ObjectAnimator alpha = ObjectAnimator.ofFloat(tv, &quot;alpha&quot;, 1f, 0f);</div><div class="line">        alpha.addListener(new Animator.AnimatorListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onAnimationStart(Animator animation) &#123;</div><div class="line">                tv.setVisibility(View.VISIBLE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationEnd(Animator animation) &#123;</div><div class="line">                tv.setVisibility(View.GONE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationCancel(Animator animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationRepeat(Animator animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        AnimatorSet animatorSet = new AnimatorSet();</div><div class="line">        animatorSet.play(translationY).with(alpha);</div><div class="line">        animatorSet.setDuration(1000);</div><div class="line">        animatorSet.start();</div></pre></td></tr></table></figure>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149734463770366.gif" alt="20170613149734463770366.gif"></p>
-<h3 id="封装成View"><a href="#封装成View" class="headerlink" title="封装成View"></a>封装成View</h3><p>考虑到后期的扩展性和可维护性，将上面这个动画封装成一个自定义View。</p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-06-13-Android实现点赞效果.html">http://www.sguotao.com/Android进阶-2016-06-13-Android实现点赞效果.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。&lt;/p&gt;
-&lt;h3 id=&quot;添加平移动画&quot;&gt;&lt;a href=&quot;#添加平移动画
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
-    
-      <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分析Android中的Drawable Animation</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-19-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84Drawable-Animation.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-05-19-分析Android中的Drawable-Animation.html</id>
-    <published>2016-05-19T02:27:04.000Z</published>
-    <updated>2017-07-13T09:57:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在上一篇中对Android传统动画中的View动画进行了一些整理，<a href="/Android%E8%BF%9B%E9%98%B6-2016-05-18-android-view-animation.html">Android动画分析一 View Animation</a> 在这一篇中，将对Android传统动画中的Drawable动画进行整理。什么是Drawable动画，Drawable动画是将一些列的Drawable资源一个接一个的播放，从而产生动画的效果，可以理解为是Frame Animation。</p>
-<h2 id="Drawable-Animation"><a href="#Drawable-Animation" class="headerlink" title="Drawable Animation"></a>Drawable Animation</h2><p>这里介绍实现Drawable Animation的两种方式，一种是使用&lt;animation-list&gt;标签，一种是使用AnimationDrawable对象。</p>
-<h3 id="Drawable动画的示例"><a href="#Drawable动画的示例" class="headerlink" title="Drawable动画的示例"></a>Drawable动画的示例</h3><p>在res/drawable目录下定义一个动画文件(<strong>注:不是res/anim目录</strong>)，文件的根节点是&lt;animation-list&gt;其中android:oneshot属性当值为true时,动画只执行一次，当值为false时，动画重复执行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;animation-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:oneshot=&quot;false&quot;&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification01&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification02&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification03&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification04&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification05&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">    &lt;item android:drawable=&quot;@drawable/upgrade_notification06&quot; android:duration=&quot;200&quot; /&gt;</div><div class="line">&lt;/animation-list&gt;</div></pre></td></tr></table></figure>
-<p>在Activity中处理的逻辑:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">ImageView imageView;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_test_view_animation);</div><div class="line"></div><div class="line">        imageView = (ImageView) this.findViewById(R.id.imageView);</div><div class="line">        Button mButton = (Button) this.findViewById(R.id.button);</div><div class="line"></div><div class="line">        mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                AnimationDrawable drawableAnim = (AnimationDrawable) imageView.getBackground();</div><div class="line">                if (drawableAnim.isRunning()) &#123;</div><div class="line">                    drawableAnim.stop();</div><div class="line">                &#125; else &#123;</div><div class="line">                    drawableAnim.start();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h3 id="Drawable动画显示效果"><a href="#Drawable动画显示效果" class="headerlink" title="Drawable动画显示效果"></a>Drawable动画显示效果</h3><p>实现一个下载提示的动画:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170531149619977711659.gif" alt="20170531149619977711659.gif"></p>
-<h3 id="一点引申"><a href="#一点引申" class="headerlink" title="一点引申"></a>一点引申</h3><p>在实现Drawable动画过程中,做一点引申:</p>
-<ol>
-<li>定义的xml动画文件根元素是&lt;animation-list&gt;，存放在res/drawable目录，如果放在其他目录，会出现警告，但不影响正常的编译。</li>
-<li>AnimationDrawable的start()方法不能够在Activity的onCreate()调用，因为这个时候，AnimationDrawable可能还没有绑定到Window上，如果想实现进入Activity后直接播放动画，可以在onWindowFocusChanged()方法里面调用，因为这个方法是在window已经获取到焦点之后回调的，可以保证已经绑定结束。</li>
-<li>在ImageView设置动画时，需要区分&lt;ImageView&gt;的src属性和background属性，在这个示例中，如果使用src属性，会出现NPE异常。出现异常的原因与src属性的绘制时机有关。background属性是view的属性，Android系统提供的所有控件都有该属性，在View的onDraw之前，就已经被绘制。而src属性是ImageView的特有属性，在ImageView的onDraw()方法中才会被绘制。</li>
-</ol>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://developer.android.com/guide/topics/graphics/drawable-animation.html" target="_blank" rel="external">drawable-animation</a></p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-05-19-分析Android中的Drawable-Animation.html">http://www.sguotao.com/Android进阶-2016-05-19-分析Android中的Drawable-Animation.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在上一篇中对Android传统动画中的View动画进行了一些整理，&lt;a href=&quot;/Android%E8%BF%9B%E9%98%B6-2016-05-18-android-view-animation.html&quot;&gt;Android动画分析一 View Animation&lt;
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
-    
-      <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分析Android中的View Animation</title>
-    <link href="http://www.sguotao.com/Android%E8%BF%9B%E9%98%B6-2016-05-18-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84View-Animation.html"/>
-    <id>http://www.sguotao.com/Android进阶-2016-05-18-分析Android中的View-Animation.html</id>
-    <published>2016-05-18T02:27:04.000Z</published>
-    <updated>2017-07-13T10:00:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在进行Android动画内容整理的时候，发现Android的动画有很多，如官方文档中直接给出的有Property Animation、View Animation、Drawable Animation，还有平时接触比较多的帧动画（Frame Animation）和补间动画（Tweened Animation）等，这些概念需要进行一下梳理。</p>
-<p>Android的动画可以分为两类，传统动画和Android3.0之后出现的属性动画(Property Animation)，其中传统动画又包括帧动画(Frame Animation)和补间动画(Tweened Animation)，帧动画的工作原理，类似于动画片，将一个完成的动画拆分为一张张的图片，然后连起来进行播放；补间动画是对View进行的一系列操作，包括淡入淡出(Alpha)，缩放(Scale)，旋转(Rotate)和平移(Translate)。Drawable Animation是将一些列的Drawable资源一个接一个的播放，从而产生动画的效果，可以理解为是Frame Animation。类似的，View Animation可以理解为是Tweened Animation。用一张图来说明一下这几种动画之间的关系。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170518149509230136976.png" alt="20170518149509230136976.png"></p>
-<h2 id="View-Animation"><a href="#View-Animation" class="headerlink" title="View Animation"></a>View Animation</h2><p>View Animation视图动画，只能作用在View上，完成一些基本的动画，淡入淡出，缩放，旋转和平移，以及这些基本动画的组合。视图动画的实现方式有两种，通常在res/anim目录下定义一个xml文件，xml的根元素可以是&lt;alpha&gt;、&lt;scale&gt;、&lt;rotate&gt;、&lt;translate&gt;及&lt;set&gt;。在&lt;set&gt;中定义了一个动画集，包括四种基本动画，也可以包括一个子&lt;set&gt;。另外一种方式，直接使用这些标签对应的Java类，也可以实现相同的效果。View Animation的类图如下所示。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149554073223859.png" alt="20170523149554073223859.png"><br>在介绍几种基本动画之前，先介绍一下动画的一些共有属性，四种基本动画除了继承了这些基本属性外，还有一些自身的属性，这些特有属性的介绍，会在每类动画介绍中做详细的说明。这些共有属性包括：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">XML Attribute</th>
-<th style="text-align:center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">android:detachWallpaper</td>
-<td style="text-align:center">设置是否在壁纸上运行，只对设置了壁纸背景的窗口动画(window animation)有效。设为true，则动画只在窗口运行，壁纸背景保持不变</td>
-</tr>
-<tr>
-<td style="text-align:center">android:duration</td>
-<td style="text-align:center">动画从开始到结束持续的时长，单位为毫秒</td>
-</tr>
-<tr>
-<td style="text-align:center">android:fillAfter</td>
-<td style="text-align:center">设置为true时，动画执行完后，View会停留在动画的最后一帧；默认为false；如果是动画集，需在&lt;set&gt;标签中设置该属性才有效</td>
-</tr>
-<tr>
-<td style="text-align:center">android:fillBefore</td>
-<td style="text-align:center">设置为true时，动画执行完后，View回到动画执行前的状态，默认即为true</td>
-</tr>
-<tr>
-<td style="text-align:center">android:fillEnabled</td>
-<td style="text-align:center">设置为true时，android:fillBefore的值才有效，否则android:fillBefore会被忽略</td>
-</tr>
-<tr>
-<td style="text-align:center">android:interpolator</td>
-<td style="text-align:center">设置动画速率的变化，比如加速、减速、匀速等，需要指定Interpolator资源</td>
-</tr>
-<tr>
-<td style="text-align:center">android:repeatCount</td>
-<td style="text-align:center">设置动画重复执行的次数，默认为0，即不重复；可设为-1或infinite，表示无限重复</td>
-</tr>
-<tr>
-<td style="text-align:center">android:repeatMode</td>
-<td style="text-align:center">设置动画重复执行的模式，可设为以下两个值其中之一：restart 动画重复执行时从起点开始，默认为该值;reverse 动画会反方向执行</td>
-</tr>
-<tr>
-<td style="text-align:center">android:startOffset</td>
-<td style="text-align:center">设置动画执行之前的等待时长，毫秒为单位；重复执行时，每次执行前同样也会等待一段时间</td>
-</tr>
-<tr>
-<td style="text-align:center">android:zAdjustment</td>
-<td style="text-align:center">表示被设置动画的内容在动画运行时在Z轴上的位置，取值为以下三个值之一：normal 默认值，保持内容在Z轴上的位置不变;top 保持在Z周最上层;bottom 保持在Z轴最下层</td>
-</tr>
-</tbody>
-</table>
-<h2 id="lt-alpha-gt-淡入淡出"><a href="#lt-alpha-gt-淡入淡出" class="headerlink" title="&lt;alpha&gt;(淡入淡出)"></a>&lt;alpha&gt;(淡入淡出)</h2><p>&lt;alpha&gt;可以实现淡入淡出的渐变效果。</p>
-<h3 id="alpha动画属性"><a href="#alpha动画属性" class="headerlink" title="alpha动画属性"></a>alpha动画属性</h3><p>对应AlphaAnimation，alpha动画有两个特有的属性：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">XML Attribute</th>
-<th style="text-align:center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">android:fromAlpha</td>
-<td style="text-align:center">动画开始时的透明度，0.0为全透明，1.0为不透明，默认为1.0</td>
-</tr>
-<tr>
-<td style="text-align:center">android:toAlpha</td>
-<td style="text-align:center">动画结束时的透明度，0.0为全透明，1.0为不透明，默认为1.0</td>
-</tr>
-</tbody>
-</table>
-<h3 id="alpha动画构造方法"><a href="#alpha动画构造方法" class="headerlink" title="alpha动画构造方法"></a>alpha动画构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 需要在res中定义属性集(不常使用）</div><div class="line"> * @param context 上下文</div><div class="line"> * @param attrs 属性集</div><div class="line"> */</div><div class="line">public AlphaAnimation(Context context, AttributeSet attrs)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 在构造法方法中指定动画开始和结束时的透明度(常用方法)</div><div class="line"> * @param fromAlpha 动画开始时的透明度</div><div class="line"> * @param toAlpha 动画结束时的透明度</div><div class="line"> */</div><div class="line">public AlphaAnimation(float fromAlpha, float toAlpha)</div></pre></td></tr></table></figure>
-<h3 id="alpha动画示例"><a href="#alpha动画示例" class="headerlink" title="alpha动画示例"></a>alpha动画示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">final ImageView imageView = (ImageView) this.findViewById(R.id.imageView);</div><div class="line">Button mButton = (Button) this.findViewById(R.id.button);</div><div class="line"></div><div class="line">final AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f,1.0f);</div><div class="line">alphaAnimation.setDuration(3000);</div><div class="line"></div><div class="line">mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        imageView.startAnimation(alphaAnimation);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149551118671554.gif" alt="20170523149551118671554.gif"></p>
-<h2 id="lt-scale-gt-缩放"><a href="#lt-scale-gt-缩放" class="headerlink" title="&lt;scale&gt;(缩放)"></a>&lt;scale&gt;(缩放)</h2><p>&lt;scale&gt;可以实现缩放的效果。</p>
-<h3 id="scale动画属性"><a href="#scale动画属性" class="headerlink" title="scale动画属性"></a>scale动画属性</h3><p>对应ScaleAnimation，scale动画有以下的特有属性：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">XML Attribute</th>
-<th style="text-align:center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">fromX</td>
-<td style="text-align:center">动画开始时X坐标上的缩放尺寸，0.0表示缩放到没有，1.0表示正常无缩放，小于1.0表示收缩，大于1.0表示放大</td>
-</tr>
-<tr>
-<td style="text-align:center">toX</td>
-<td style="text-align:center">动画结束时X坐标上的缩放尺寸，0.0表示缩放到没有，1.0表示正常无缩放，小于1.0表示收缩，大于1.0表示放大</td>
-</tr>
-<tr>
-<td style="text-align:center">fromY</td>
-<td style="text-align:center">动画开始时Y坐标上的缩放尺寸，0.0表示缩放到没有，1.0表示正常无缩放，小于1.0表示收缩，大于1.0表示放大</td>
-</tr>
-<tr>
-<td style="text-align:center">toY</td>
-<td style="text-align:center">动画结束时Y坐标上的缩放尺寸，0.0表示缩放到没有，1.0表示正常无缩放，小于1.0表示收缩，大于1.0表示放大</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotX</td>
-<td style="text-align:center">缩放动画相对的固定点X坐标</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotY</td>
-<td style="text-align:center">缩放动画相对的固定点Y坐标</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotXType</td>
-<td style="text-align:center">缩放动画相对的固定点X坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotXValue</td>
-<td style="text-align:center">缩放动画相对的固定点X坐标的位置，与pivotXType相关</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotYType</td>
-<td style="text-align:center">缩放动画相对的固定点Y坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotYValue</td>
-<td style="text-align:center">缩放动画相对的固定点Y坐标的位置，与pivotYType相关</td>
-</tr>
-</tbody>
-</table>
-<h3 id="scale动画构造方法"><a href="#scale动画构造方法" class="headerlink" title="scale动画构造方法"></a>scale动画构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 自定义动画时需要重写的方法</div><div class="line"> * @param context 上下文</div><div class="line"> * @param attrs 属性集</div><div class="line"> */</div><div class="line">public ScaleAnimation(Context context, AttributeSet attrs)</div><div class="line"></div><div class="line">/**</div><div class="line"> *</div><div class="line"> * @param fromX 动画开始时X坐标上的缩放尺寸</div><div class="line"> * @param toX 动画结束时X坐标上的缩放尺寸</div><div class="line"> * @param fromY 动画开始时Y坐标上的缩放尺寸</div><div class="line"> * @param toY 动画结束时Y坐标上的缩放尺寸</div><div class="line"> */</div><div class="line">public ScaleAnimation(float fromX, float toX, float fromY, float toY)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 指定一个固定点,进行动画,固定点的坐标是(pivotX,pivotY)</div><div class="line"> * 第二个构造方法默认固定点的坐标是(0,0),即动画view的的左上角</div><div class="line"> * </div><div class="line"> * @param fromX 动画开始时X坐标上的缩放尺寸</div><div class="line"> * @param toX 动画结束时X坐标上的缩放尺寸</div><div class="line"> * @param fromY 动画开始时Y坐标上的缩放尺寸</div><div class="line"> * @param toY 动画结束时Y坐标上的缩放尺寸</div><div class="line"> * @param pivotX 固定点的X坐标坐标,取值为0时表示动画view的左边沿</div><div class="line"> * @param pivotY 固定点的Y坐标坐标,取值为0时表示动画view的上边沿</div><div class="line"> */</div><div class="line">public ScaleAnimation(float fromX, float toX, float fromY, float toY,</div><div class="line">                      float pivotX, float pivotY)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 通过pivotXType,pivotXValue,pivotYType和pivotYValue确定一个固定点进行动画</div><div class="line"> * 第三个构造方法中,固定点默认的位置类型(pivotXType、pivotYType)为 Animation.ABSOLUTE</div><div class="line"> * </div><div class="line"> * @param fromX 动画开始时X坐标上的缩放尺寸</div><div class="line"> * @param toX 动画结束时X坐标上的缩放尺寸</div><div class="line"> * @param fromY 动画开始时Y坐标上的缩放尺寸</div><div class="line"> * @param toY 动画结束时Y坐标上的缩放尺寸</div><div class="line"> * @param pivotXType 固定点X坐标位置的类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param pivotXValue 固定点X坐标坐标,位置与pivotXType有关</div><div class="line"> * @param pivotYType 固定点Y坐标位置的类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param pivotYValue 固定点Y坐标坐标,位置与pivotYType有关</div><div class="line"> */</div><div class="line">public ScaleAnimation(float fromX, float toX, float fromY, float toY,</div><div class="line">                      int pivotXType, float pivotXValue, int pivotYType, float pivotYValue)</div></pre></td></tr></table></figure>
-<p>这里有必要对这几个构造方法进行一些说明：</p>
-<ol>
-<li>第二个构造方法public ScaleAnimation(float fromX, float toX, float fromY, float toY)固定点的默认坐标是(0,0)，即要发生动画view的左上角，通过该构造方法创建的缩放动画，都是相对于该固定点进行的。</li>
-<li>第三个构造方法public ScaleAnimation(float fromX, float toX, float fromY, float toY,float pivotX, float pivotY)固定点的坐标可以指定为(pivotX,pivotY),即相对于发生动画view的左上角距离(pivotX,pivotY)的位置，通过该构造方法创建的缩放动画,都是相对这个指定的点进行的。</li>
-<li>第四个构造方法public ScaleAnimation(float fromX, float toX, float fromY, float toY,int pivotXType, float pivotXValue, int pivotYType, float pivotYValue)对固定点位置的确定有了更多的方式，固定点位置的确定主要与pivotXType, pivotXValue, pivotYType, pivotYValue这四个值有关。通常pivotXType和pivotYType的值都指定为同一种类型。</li>
-</ol>
-<ul>
-<li>当pivotXType和pivotYType为Animation. ABSOLUTE时，与第三个构造方法效果相同，即第三个构造方法默认的pivotXType和pivotYType为Animation. ABSOLUTE。</li>
-<li>当pivotXType和pivotYType为Animation.RELATIVE_TO_SELF，固定点的位置相对于动画view，固定点的坐标为(width*pivotXValue,height*pivotYValue),其中width为动画view的宽，height为动画view的高。</li>
-<li>当pivotXType和pivotYType为Animation.RELATIVE_TO_PARENT，固定点的位置相对于动画view的父容器view，固定点的坐标为(parentWidth*pivotXValue,parentHeight*pivotYValue),其中parentWidth为父容器view的宽，parentHeight为父容器的高。</li>
-</ul>
-<h3 id="scale动画示例"><a href="#scale动画示例" class="headerlink" title="scale动画示例"></a>scale动画示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//固定点位置相对于imageview,固定点坐标为imageview的中心</div><div class="line">        final ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f, 1.0f, 0.5f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);</div><div class="line">        scaleAnimation.setDuration(3000);</div><div class="line">        scaleAnimation.setFillAfter(true);//动画结束时,保持结束的位置不变</div><div class="line">        mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                imageView.startAnimation(scaleAnimation);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149553277096247.gif" alt="20170523149553277096247.gif"></p>
-<h2 id="lt-rotate-gt-旋转"><a href="#lt-rotate-gt-旋转" class="headerlink" title="&lt;rotate&gt;(旋转)"></a>&lt;rotate&gt;(旋转)</h2><p>&lt;rotate&gt;可以实现旋转的效果。</p>
-<h3 id="rotate动画属性"><a href="#rotate动画属性" class="headerlink" title="rotate动画属性"></a>rotate动画属性</h3><p>对应RotateAnimation，rotate动画有以下的特有属性：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">XML Attribute</th>
-<th style="text-align:center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">fromDegrees</td>
-<td style="text-align:center">旋转开始的角度，旋转角度从0到360</td>
-</tr>
-<tr>
-<td style="text-align:center">toDegrees</td>
-<td style="text-align:center">旋转结束的角度，旋转角度从0到360</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotX</td>
-<td style="text-align:center">旋转中心相对的X坐标</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotY</td>
-<td style="text-align:center">旋转中心相对的Y坐标</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotXType</td>
-<td style="text-align:center">旋转动画中心X坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotXValue</td>
-<td style="text-align:center">旋转动画中心X坐标的位置，与pivotXType相关</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotYType</td>
-<td style="text-align:center">旋转动画中心Y坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
-</tr>
-<tr>
-<td style="text-align:center">pivotYValue</td>
-<td style="text-align:center">旋转动画中心Y坐标的位置，与pivotYType相关</td>
-</tr>
-</tbody>
-</table>
-<h3 id="rotate动画构造方法"><a href="#rotate动画构造方法" class="headerlink" title="rotate动画构造方法"></a>rotate动画构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @param context</div><div class="line"> * @param attrs</div><div class="line"> */</div><div class="line">public RotateAnimation(Context context, AttributeSet attrs)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 旋转中心的位置(0,0)</div><div class="line"> * @param fromDegrees 旋转动画开始角度</div><div class="line"> * @param toDegrees 旋转动画结束角度</div><div class="line"> */</div><div class="line">public RotateAnimation(float fromDegrees, float toDegrees)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 旋转中心相对(0,0)的位置(pivotX,pivotY)</div><div class="line"> * @param fromDegrees 旋转动画开始角度</div><div class="line"> * @param toDegrees 旋转动画结束角度</div><div class="line"> * @param pivotX 旋转中心x坐标</div><div class="line"> * @param pivotY 旋转中心y坐标</div><div class="line"> */</div><div class="line">public RotateAnimation(float fromDegrees, float toDegrees, float pivotX, float pivotY)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 通过pivotXType,pivotXValue,pivotYType和pivotYValue确定旋转中心</div><div class="line"> * @param fromDegrees 旋转动画开始角度</div><div class="line"> * @param toDegrees 旋转动画结束角度</div><div class="line"> * @param pivotXType 旋转动画中心x坐标位置类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param pivotXValue 旋转动画中心x坐标的位置,与pivotXType相关</div><div class="line"> * @param pivotYType 旋转中心y坐标位置类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param pivotYValue 旋转动画中心y坐标的位置,与pivotYType相关</div><div class="line"> */</div><div class="line">public RotateAnimation(float fromDegrees, float toDegrees, int pivotXType, float pivotXValue,</div><div class="line">                       int pivotYType, float pivotYValue)</div></pre></td></tr></table></figure>
-<h3 id="rotate动画示例"><a href="#rotate动画示例" class="headerlink" title="rotate动画示例"></a>rotate动画示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">final ImageView imageView = (ImageView) this.findViewById(R.id.imageView);</div><div class="line">Button mButton = (Button) this.findViewById(R.id.button);</div><div class="line"></div><div class="line">final RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);</div><div class="line">rotateAnimation.setDuration(3000);</div><div class="line">rotateAnimation.setFillAfter(true);//动画结束时,保持结束的位置不变</div><div class="line">mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        imageView.startAnimation(rotateAnimation);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149553531557978.gif" alt="20170523149553531557978.gif"></p>
-<h2 id="lt-translate-gt-平移"><a href="#lt-translate-gt-平移" class="headerlink" title="&lt;translate&gt;(平移)"></a>&lt;translate&gt;(平移)</h2><p>&lt;translate&gt;可以实现平移的动画效果。</p>
-<h3 id="translate动画属性"><a href="#translate动画属性" class="headerlink" title="translate动画属性"></a>translate动画属性</h3><p>对应TranslateAnimation，translate动画有以下特有的属性：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">XML Attribute</th>
-<th style="text-align:center">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">fromXDelta</td>
-<td style="text-align:center">平移动画开始点X坐标</td>
-</tr>
-<tr>
-<td style="text-align:center">toXDelta</td>
-<td style="text-align:center">平移动画结束点X坐标</td>
-</tr>
-<tr>
-<td style="text-align:center">fromYDelta</td>
-<td style="text-align:center">平移动画开始点Y坐标</td>
-</tr>
-<tr>
-<td style="text-align:center">toYDelta</td>
-<td style="text-align:center">平移动画结束点Y坐标</td>
-</tr>
-<tr>
-<td style="text-align:center">fromXType</td>
-<td style="text-align:center">平移动画开始点X坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
-</tr>
-<tr>
-<td style="text-align:center">fromXValue</td>
-<td style="text-align:center">平移动画开始点X坐标位置，与fromXType有关</td>
-</tr>
-<tr>
-<td style="text-align:center">toXType</td>
-<td style="text-align:center">平移动画结束点X坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
-</tr>
-<tr>
-<td style="text-align:center">toXValue</td>
-<td style="text-align:center">平移动画结束点X坐标位置，与toXType有关</td>
-</tr>
-<tr>
-<td style="text-align:center">fromYType</td>
-<td style="text-align:center">平移动画开始点Y坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
-</tr>
-<tr>
-<td style="text-align:center">fromYValue</td>
-<td style="text-align:center">平移动画开始点坐标位置，与fromYType有关</td>
-</tr>
-<tr>
-<td style="text-align:center">toYType</td>
-<td style="text-align:center">平移动画结束点Y坐标位置类型，取值为以下三个值之一：Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT</td>
-</tr>
-<tr>
-<td style="text-align:center">toYValue</td>
-<td style="text-align:center">平移动画结束点坐标位置，与toYType有关</td>
-</tr>
-</tbody>
-</table>
-<h3 id="translate动画构造方法"><a href="#translate动画构造方法" class="headerlink" title="translate动画构造方法"></a>translate动画构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @param context 上下文</div><div class="line"> * @param attrs 属性集</div><div class="line"> */</div><div class="line">public TranslateAnimation(Context context, AttributeSet attrs)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 平移动画的起点位置和结束位置坐标都是相对于(0,0)即动画view的左上角.</div><div class="line"> * @param fromXDelta </div><div class="line"> * @param toXDelta</div><div class="line"> * @param fromYDelta</div><div class="line"> * @param toYDelta</div><div class="line"> */</div><div class="line">public TranslateAnimation(float fromXDelta, float toXDelta, float fromYDelta, float toYDelta)</div><div class="line"></div><div class="line">/**</div><div class="line"> * 通过构造参数确定平移动画的起始位置和结束位置的坐标</div><div class="line"> * </div><div class="line"> * @param fromXType 开始点x坐标位置类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param fromXValue 开始点x坐标位置,与fromXType有关</div><div class="line"> * @param toXType 结束点x坐标类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param toXValue 结束点x坐标位置,与toXType有关</div><div class="line"> * @param fromYType 开始点y坐标类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param fromYValue 开始点y坐标位置,与fromYType有关</div><div class="line"> * @param toYType 结束点y坐标类型,取值范围(Animation.ABSOLUTE, Animation.RELATIVE_TO_SELF, or Animation.RELATIVE_TO_PARENT.)</div><div class="line"> * @param toYValue 结束点y坐标类型,与toYType有关</div><div class="line"> */</div><div class="line">public TranslateAnimation(int fromXType, float fromXValue, int toXType, float toXValue,</div><div class="line">                          int fromYType, float fromYValue, int toYType, float toYValue)</div></pre></td></tr></table></figure>
-<h3 id="translate动画示例"><a href="#translate动画示例" class="headerlink" title="translate动画示例"></a>translate动画示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">final TranslateAnimation translateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 1.0f,</div><div class="line">    Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 1.0f);</div><div class="line">translateAnimation.setDuration(3000);</div><div class="line">translateAnimation.setFillAfter(true);//动画结束时,保持结束的位置不变</div><div class="line">mButton.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        imageView.startAnimation(translateAnimation);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170523149553593494120.gif" alt="20170523149553593494120.gif"></p>
-<h2 id="lt-set-gt-动画集"><a href="#lt-set-gt-动画集" class="headerlink" title="&lt;set&gt;动画集"></a>&lt;set&gt;动画集</h2><p>&lt;set&gt;是一系列动画的集合，对应AnimationSet,可以实现一些动画的组合。在AnimationSet的构造方法中，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">    * Constructor to use when building an AnimationSet from code</div><div class="line">    * </div><div class="line">    * @param shareInterpolator Pass true if all of the animations in this set</div><div class="line">    *        should use the interpolator associated with this AnimationSet.</div><div class="line">    *        Pass false if each animation should use its own interpolator.</div><div class="line">    */</div><div class="line">   public AnimationSet(boolean shareInterpolator) &#123;</div><div class="line">       setFlag(PROPERTY_SHARE_INTERPOLATOR_MASK, shareInterpolator);</div><div class="line">       init();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>当使用代码方式创建动画集时，需要使用到这个构造方法，构造方法需要一个boolean值，当为true时，动画集中的动画使用animationSet的插值器，当为false时，使用每个动画自己的插值器。这里有一个问题，什么是插值器？</p>
-<h3 id="Interpolator"><a href="#Interpolator" class="headerlink" title="Interpolator"></a>Interpolator</h3><p>在Android API 11以前，插值器是Interpolator的直接翻译过来的名称，在Android API 11以后，加入了TimeInterpolator接口。什么是插值器？插值器定义了动画的运行轨迹，如加速和减速等。粗略统计了一下，Android API中关于插值器的接口，抽象类和实现类大概有16个，为了清晰的理解这些接口和类的关系，先抛出一张类图。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170527149586916399293.png" alt="20170527149586916399293.png"><br>这么多的实现类，每个插值器实现类的作用是什么？区别又是什么？在TimeInterpolator接口中声明了一个方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * Maps a value representing the elapsed fraction of an animation to a value that represents</div><div class="line">     * the interpolated fraction. This interpolated value is then multiplied by the change in</div><div class="line">     * value of an animation to derive the animated value at the current elapsed animation time.</div><div class="line">     *</div><div class="line">     * @param input A value between 0 and 1.0 indicating our current point</div><div class="line">     *        in the animation where 0 represents the start and 1.0 represents</div><div class="line">     *        the end</div><div class="line">     * @return The interpolation value. This value can be more than 1.0 for</div><div class="line">     *         interpolators which overshoot their targets, or less than 0 for</div><div class="line">     *         interpolators that undershoot their targets.</div><div class="line">     */</div><div class="line">    float getInterpolation(float input);</div></pre></td></tr></table></figure>
-<p>该函数将当前动画运行的点input映射到一个插值函数中。不同的插值器实现类，对应这不同的插值函数。比如在插值器AccelerateInterpolator中，对应的插值函数是一个抛物线。抛物线的斜率跟mFactor参数有关，mFactor的值越大，抛物线的曲率越大。对应的动画效果是开始阶段动画比较慢，此后会越来越快。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public float getInterpolation(float input) &#123;</div><div class="line">        if (mFactor == 1.0f) &#123;</div><div class="line">            return input * input;</div><div class="line">        &#125; else &#123;</div><div class="line">            return (float)Math.pow(input, mDoubleFactor);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>对一些插值器的效果进行一个简单的描述，具体的运动效果，与对应的插值函数有关。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170527149587798346557.png" alt="20170527149587798346557.png"></p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://developer.android.com/guide/topics/graphics/prop-animation.html" target="_blank" rel="external">prop-animation</a><br><a href="https://developer.android.com/guide/topics/graphics/view-animation.html" target="_blank" rel="external">view animation</a><br><a href="https://developer.android.com/guide/topics/graphics/drawable-animation.html" target="_blank" rel="external">drawable-animation</a><br><a href="https://developer.android.com/reference/android/view/animation/Animation.html" target="_blank" rel="external">Animation</a><br><a href="https://developer.android.com/reference/android/view/animation/AlphaAnimation.html" target="_blank" rel="external">AlphaAnimation</a><br><a href="https://developer.android.com/reference/android/view/animation/RotateAnimation.html" target="_blank" rel="external">RotateAnimation</a><br><a href="https://developer.android.com/reference/android/view/animation/ScaleAnimation.html" target="_blank" rel="external">ScaleAnimation</a><br><a href="https://developer.android.com/reference/android/view/animation/TranslateAnimation.html" target="_blank" rel="external">TranslateAnimation</a><br><a href="https://developer.android.com/reference/android/view/animation/AnimationSet.html" target="_blank" rel="external">AnimationSet</a><br><a href="https://my.oschina.net/banxi/blog/135633" target="_blank" rel="external">android动画（一）Interpolator</a></p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2016-05-18-分析Android中的View-Animation.html">http://www.sguotao.com/Android进阶-2016-05-18-分析Android中的View-Animation.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在进行Android动画内容整理的时候，发现Android的动画有很多，如官方文档中直接给出的有Property Animation、View Animation、Drawable Animation，还有平时接触比较多的帧动画（Frame Animation）和补间动画（
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.com/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.com/tags/Android/"/>
-    
-      <category term="动画" scheme="http://www.sguotao.com/tags/%E5%8A%A8%E7%94%BB/"/>
-    
-      <category term="代码库" scheme="http://www.sguotao.com/tags/%E4%BB%A3%E7%A0%81%E5%BA%93/"/>
     
   </entry>
   
