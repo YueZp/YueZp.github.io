@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活," />
+  <meta name="keywords" content="Android,Handler," />
 
 
 
@@ -104,17 +104,17 @@
 
 
 
-<meta name="description" content="动机都说开通博客，要写篇文章纪念一下，借此感谢Github，Jekyll,MarkDown,感谢像闫肃,黄玄这样的爱分享的童鞋，2014年对我来说，是很重要的一年，认识了很多人，失去了很多人，总得来说，成长了很多，借此写一篇，纪念我逝去的2014。 工作2014年，换了工作，离开了PBI，离开了原来熟悉的环境，离开了熟悉的同事，告别了朝九晚五熟悉的生活节奏，当然也搬离了住了2年的海淀，一切都像当年">
-<meta name="keywords" content="生活">
+<meta name="description" content="Handler什么是HandlerHandler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue。1.可以让对应的Message和Runnable在未来的某个时间点进行相应处理；2.自己想要处理的耗时操作放在子线程，让更新UI的操作放在主线程。 Handler的使用方法1.post(Runnable)    创建Handler对象    调用Handle">
+<meta name="keywords" content="Android,Handler">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello 2015">
-<meta property="og:url" content="http://www.sguotao.com/生活感悟-2015-01-21-my-2014.html">
+<meta property="og:title" content="分析Android中的异步消息处理机制">
+<meta property="og:url" content="http://www.sguotao.com/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
-<meta property="og:description" content="动机都说开通博客，要写篇文章纪念一下，借此感谢Github，Jekyll,MarkDown,感谢像闫肃,黄玄这样的爱分享的童鞋，2014年对我来说，是很重要的一年，认识了很多人，失去了很多人，总得来说，成长了很多，借此写一篇，纪念我逝去的2014。 工作2014年，换了工作，离开了PBI，离开了原来熟悉的环境，离开了熟悉的同事，告别了朝九晚五熟悉的生活节奏，当然也搬离了住了2年的海淀，一切都像当年">
-<meta property="og:updated_time" content="2017-07-10T13:52:13.000Z">
+<meta property="og:description" content="Handler什么是HandlerHandler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue。1.可以让对应的Message和Runnable在未来的某个时间点进行相应处理；2.自己想要处理的耗时操作放在子线程，让更新UI的操作放在主线程。 Handler的使用方法1.post(Runnable)    创建Handler对象    调用Handle">
+<meta property="og:updated_time" content="2017-08-09T09:54:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello 2015">
-<meta name="twitter:description" content="动机都说开通博客，要写篇文章纪念一下，借此感谢Github，Jekyll,MarkDown,感谢像闫肃,黄玄这样的爱分享的童鞋，2014年对我来说，是很重要的一年，认识了很多人，失去了很多人，总得来说，成长了很多，借此写一篇，纪念我逝去的2014。 工作2014年，换了工作，离开了PBI，离开了原来熟悉的环境，离开了熟悉的同事，告别了朝九晚五熟悉的生活节奏，当然也搬离了住了2年的海淀，一切都像当年">
+<meta name="twitter:title" content="分析Android中的异步消息处理机制">
+<meta name="twitter:description" content="Handler什么是HandlerHandler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue。1.可以让对应的Message和Runnable在未来的某个时间点进行相应处理；2.自己想要处理的耗时操作放在子线程，让更新UI的操作放在主线程。 Handler的使用方法1.post(Runnable)    创建Handler对象    调用Handle">
 
 
 
@@ -142,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://www.sguotao.com/生活感悟-2015-01-21-my-2014.html"/>
+  <link rel="canonical" href="http://www.sguotao.com/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html"/>
 
 
 
 
 
-  <title>Hello 2015 | Scott's Blog</title>
+  <title>分析Android中的异步消息处理机制 | Scott's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -332,7 +332,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/生活感悟-2015-01-21-my-2014.html">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Scott">
@@ -349,7 +349,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Hello 2015</h2>
+          <h2 class="post-title" itemprop="name headline">分析Android中的异步消息处理机制</h2>
         
 
         <div class="post-meta">
@@ -361,8 +361,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-01-21T12:00:00+08:00">
-                2015-01-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-17T10:27:04+08:00">
+                2017-06-17
               </time>
             
 
@@ -384,8 +384,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活感悟/" itemprop="url" rel="index">
-                    <span itemprop="name">生活感悟</span>
+                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android进阶</span>
                   </a>
                 </span>
 
@@ -401,7 +401,7 @@
 
           
           
-             <span id="/生活感悟-2015-01-21-my-2014.html" class="leancloud_visitors" data-flag-title="Hello 2015">
+             <span id="/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html" class="leancloud_visitors" data-flag-title="分析Android中的异步消息处理机制">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  896字
+                  839字
                 </span>
               
 
@@ -465,20 +465,38 @@
       
 
       
-        <h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><p>都说开通博客，要写篇文章纪念一下，借此感谢Github，Jekyll,MarkDown,感谢像闫肃,黄玄这样的爱分享的童鞋，2014年对我来说，是很重要的一年，认识了很多人，失去了很多人，总得来说，成长了很多，借此写一篇，纪念我逝去的2014。</p>
-<h3 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h3><p>2014年，换了工作，离开了PBI，离开了原来熟悉的环境，离开了熟悉的同事，告别了朝九晚五熟悉的生活节奏，当然也搬离了住了2年的海淀，一切都像当年，从学校出来，搬到海淀的情景。时光荏苒，场景再现，不变的是自己，变了的是身边的人。</p>
-<p>以前都是在Android源码的环境下，编译代码，调试应用，曾经一度以为自己对很多知识已经足够了解了，可是突然到了一个更大的平台，你才发现，突来的状况，还是会让你措手不及，所以，当你以为自己很牛了，那是因为你见识的还不够多，在更大的🐂面前，你还是攻击力只有5的渣儿渣儿。</p>
-<p>来到了Letv，一切都要从零开始，昨天的已经成为过去，对于未来，还需要今天的积攒，未来还有很长的路要走。</p>
-<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>2014年，研究生进入了第二年，习惯了没有休息日的节奏，突然闲下来，还会有些不适应。在读研之前，没有认真的想过，自己为什么要读，可能是因为曾经考研未果的不甘吧。如果说，读研的收获是为了见识的更多，学到的更多，那我最大的收获，就是认识了很多小伙伴，是他们让我改变了很多，让我发现自己很多性格上的缺点，从而去弥补不足。</p>
-<p>2014年，顺利的通过了开题报告，接下来就安心的准备毕业答辩了，在准备的过程中，把工作中内容和答辩的内容结合起来，深入的去了解移动流媒体的内容，相信在未来的工作中，会有很大的帮助。</p>
-<h3 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h3><p>2014年，去了江西的三清山，当时还没想到，那竟然是最后一次和同事们一起出去玩，好在当时还没有这种离别的情绪，不然也不会玩的这么尽兴。2015年了，衷心的祝森涛，田田，尚喆，赵哥，晶晶…一切都好。</p>
-<p>2014年，去了筹划了已久的西藏，认识了能歌善舞的ZuoZuo，特别会聊天的DiDi，还有原原，感谢徐老师拍的照片和视频，本想写一篇日记记录一下来着，看来只能把这事儿推到2015了，很感慨，为什么人们都说你们变黑了，唯独说我变白了呢？</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>那时我们有梦，<br>关于青春，关于爱情，<br>关于穿于世界的旅行。</p>
-</blockquote>
-<p>2014年，错过了一些人，有些是因为客观的原因，更多的是因为自己。杰伦结婚了，我们的青春岁月也结束了；科比，阿伦最后一年征战NBA，以后再想看他们打球，只能去翻看以前的视频了，从来没想过他们离开的日子，他们就老了。以后再做错事儿，再也不能拿自己年轻当借口了，遇到合适的人，不能再错过了。</p>
+        <h1 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h1><h2 id="什么是Handler"><a href="#什么是Handler" class="headerlink" title="什么是Handler"></a>什么是Handler</h2><p>Handler通过发送和处理Message和Runnable对象来关联相对应线程的MessageQueue。<br>1.可以让对应的Message和Runnable在未来的某个时间点进行相应处理；<br>2.自己想要处理的耗时操作放在子线程，让更新UI的操作放在主线程。</p>
+<h2 id="Handler的使用方法"><a href="#Handler的使用方法" class="headerlink" title="Handler的使用方法"></a>Handler的使用方法</h2><p>1.post(Runnable)<br>    创建Handler对象<br>    调用Handler的post（Runnable）方法；<br>2.sendMessage(message）</p>
+<h2 id="Handler的机制原理"><a href="#Handler的机制原理" class="headerlink" title="Handler的机制原理"></a>Handler的机制原理</h2><p>类图，流程图</p>
+<h2 id="Handler引起的内存泄露以及解决办法"><a href="#Handler引起的内存泄露以及解决办法" class="headerlink" title="Handler引起的内存泄露以及解决办法"></a>Handler引起的内存泄露以及解决办法</h2><p>原因:静态内部类持有外部类的匿名引用，导致外部activity无法释放；<br>解决办法:handler内部持有外部Activity的弱引用;并把handler改为静态内部类;mHandler.removeCallback()</p>
+<h1 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="AsyncTask"></a>AsyncTask</h1><h2 id="什么是AsyncTask"><a href="#什么是AsyncTask" class="headerlink" title="什么是AsyncTask"></a>什么是AsyncTask</h2><p>它本质上据说一个封装了线程池和handler的异步框架。</p>
+<h2 id="AsyncTask的使用方法"><a href="#AsyncTask的使用方法" class="headerlink" title="AsyncTask的使用方法"></a>AsyncTask的使用方法</h2><p>三个参数<br>五个方法</p>
+<h2 id="AsyncTask的机制原理"><a href="#AsyncTask的机制原理" class="headerlink" title="AsyncTask的机制原理"></a>AsyncTask的机制原理</h2><ol>
+<li>AsyncTask的本质上是一个静态的线程池，AsyncTask派生的子类可以实现不同的异步任务，这些任务都是提交到静态的线程池中执行。</li>
+<li>线程池中的工作线程执行doInBackground(mParams)方法执行异步任务</li>
+<li>当任务状态改变之后，工作线程会向UI线程发送消息，AsyncTask内部的InternalHandler响应这些消息，并调用相关的回调函数。</li>
+</ol>
+<h2 id="AsyncTask的注意事项"><a href="#AsyncTask的注意事项" class="headerlink" title="AsyncTask的注意事项"></a>AsyncTask的注意事项</h2><ol>
+<li>内存泄露</li>
+<li>生命周期(AsyncTask并不会随着Activity的销毁而销毁)，在Activity退出时cancel</li>
+<li>结果丢失</li>
+<li>并行or串行</li>
+</ol>
+<h1 id="HandlerThread"><a href="#HandlerThread" class="headerlink" title="HandlerThread"></a>HandlerThread</h1><h2 id="HandlerThread产生背景"><a href="#HandlerThread产生背景" class="headerlink" title="HandlerThread产生背景"></a>HandlerThread产生背景</h2><p>开启Thread子线程进行耗时操作，多次创建和销毁线程是很耗资源的。</p>
+<h2 id="handlerThread是什么"><a href="#handlerThread是什么" class="headerlink" title="handlerThread是什么"></a>handlerThread是什么</h2><p>handler+thread+looper<br>是一个thread内部有looper；</p>
+<h2 id="HandlerThread的特点"><a href="#HandlerThread的特点" class="headerlink" title="HandlerThread的特点"></a>HandlerThread的特点</h2><ol>
+<li>HandlerThread本质上是一个线程类，它集成了Thread；</li>
+<li>HandlerThread有自己的内部Looper对象，可以进行looper循环；</li>
+<li>通过获取HandlerThread的Looper对象传递给Handler对象，可以在HandleMessage方法中执行异步任务。</li>
+<li>优点是不会有堵塞，减少了对性能的消耗，缺点是不能同时进行多任务的处理，需要等待进行处理，处理效率较低；</li>
+<li>与线程池注重并发不同，HandlerThread是一个串行队列，HandlerThread背后只有一个线程。</li>
+</ol>
+<h2 id="HandlerThread源码解析"><a href="#HandlerThread源码解析" class="headerlink" title="HandlerThread源码解析"></a>HandlerThread源码解析</h2><h1 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h1><h2 id="IntentService是什么"><a href="#IntentService是什么" class="headerlink" title="IntentService是什么"></a>IntentService是什么</h2><p>IntentService是继承并处理异步请求的一个类，在IntentService内有一个工作线程来处理耗时操作，启动IntentService的方法和启动传统Service一样，同时，当任务执行完成后，IntentService会自动停止，而不需要我们手动去控制或stopSelf()。另外，可以启动IntentService多次，而每一个耗时操作会以工作队列的方式在IntentService的onHandleIntent回调方法中执行，并且，每次只会执行一个工作线程，执行完第一个再执行第二个。</p>
+<p>1.它本质是一种特殊的Service，继承自Service并且本身就是一个抽象类；<br>2.它内部通过HandlerThread和Handler实现异步操作。</p>
+<h2 id="IntentService的使用方法"><a href="#IntentService的使用方法" class="headerlink" title="IntentService的使用方法"></a>IntentService的使用方法</h2><p>创建IntentService时，只需实现onHandleIntent和构造方法，onHandleIntent为异步方法，可以执行耗时操作。</p>
+<h2 id="IntentService源码解析"><a href="#IntentService源码解析" class="headerlink" title="IntentService源码解析"></a>IntentService源码解析</h2><p>它本质是就是封装了HandlerThread和Handler异步框架</p>
 <hr>
-<p>本文链接：<a href="http://www.sguotao.com/生活感悟-2015-01-21-my-2014.html">http://www.sguotao.com/生活感悟-2015-01-21-my-2014.html</a></p>
+<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html">http://www.sguotao.com/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html</a></p>
 
       
     </div>
@@ -530,7 +548,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://www.sguotao.com/生活感悟-2015-01-21-my-2014.html" title="Hello 2015">http://www.sguotao.com/生活感悟-2015-01-21-my-2014.html</a>
+      <a href="http://www.sguotao.com/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html" title="分析Android中的异步消息处理机制">http://www.sguotao.com/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -546,7 +564,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活/" rel="tag"># 生活</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Handler/" rel="tag"># Handler</a>
           
         </div>
       
@@ -559,8 +579,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Android进阶-2014-12-14-分析Android中的ninepatch-png.html" rel="next" title="分析Android中的.9.png">
-                <i class="fa fa-chevron-left"></i> 分析Android中的.9.png
+              <a href="/Kotlin-2017-06-09-Kotlin-note1.html" rel="next" title="【Kotlin笔记】Kotlin的前世今生">
+                <i class="fa fa-chevron-left"></i> 【Kotlin笔记】Kotlin的前世今生
               </a>
             
           </div>
@@ -568,10 +588,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/设计模式-2015-02-10-分析代理设计模式.html" rel="prev" title="【设计模式】分析代理设计模式">
-                【设计模式】分析代理设计模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -709,7 +725,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动机"><span class="nav-number">1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作"><span class="nav-number">2.</span> <span class="nav-text">工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习"><span class="nav-number">3.</span> <span class="nav-text">学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生活"><span class="nav-number">4.</span> <span class="nav-text">生活</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Handler"><span class="nav-number">1.</span> <span class="nav-text">Handler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Handler"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler的使用方法"><span class="nav-number">1.2.</span> <span class="nav-text">Handler的使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler的机制原理"><span class="nav-number">1.3.</span> <span class="nav-text">Handler的机制原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler引起的内存泄露以及解决办法"><span class="nav-number">1.4.</span> <span class="nav-text">Handler引起的内存泄露以及解决办法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AsyncTask"><span class="nav-number">2.</span> <span class="nav-text">AsyncTask</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是AsyncTask"><span class="nav-number">2.1.</span> <span class="nav-text">什么是AsyncTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AsyncTask的使用方法"><span class="nav-number">2.2.</span> <span class="nav-text">AsyncTask的使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AsyncTask的机制原理"><span class="nav-number">2.3.</span> <span class="nav-text">AsyncTask的机制原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AsyncTask的注意事项"><span class="nav-number">2.4.</span> <span class="nav-text">AsyncTask的注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HandlerThread"><span class="nav-number">3.</span> <span class="nav-text">HandlerThread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerThread产生背景"><span class="nav-number">3.1.</span> <span class="nav-text">HandlerThread产生背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#handlerThread是什么"><span class="nav-number">3.2.</span> <span class="nav-text">handlerThread是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerThread的特点"><span class="nav-number">3.3.</span> <span class="nav-text">HandlerThread的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerThread源码解析"><span class="nav-number">3.4.</span> <span class="nav-text">HandlerThread源码解析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IntentService"><span class="nav-number">4.</span> <span class="nav-text">IntentService</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IntentService是什么"><span class="nav-number">4.1.</span> <span class="nav-text">IntentService是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IntentService的使用方法"><span class="nav-number">4.2.</span> <span class="nav-text">IntentService的使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IntentService源码解析"><span class="nav-number">4.3.</span> <span class="nav-text">IntentService源码解析</span></a></li></ol></li></ol></div>
             
 
           </div>
