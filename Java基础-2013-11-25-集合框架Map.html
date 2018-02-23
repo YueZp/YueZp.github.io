@@ -1,0 +1,1447 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googlea8ba7e863392b1ab" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,集合框架," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.  概述数学中的映射关系在Java中就是通过Map来实现的。它表示，里面存储的元素是一个对（pair）,我们通过一个对象，可以在这个映射关系中找到另外一个和这个对象相关的东西。前面提到的我们对于根据帐号名得到对应的人员的信息，就属于这种情况的应用。我们讲一个人员的帐户名和这人员的信息作了一个映射关系，也就是说，我们把帐户名和人员信息当成了一个“键值对”，“键”就是帐户名，“值”就是人员信息。下">
+<meta name="keywords" content="Java,集合框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【集合框架】Map">
+<meta property="og:url" content="http://www.sguotao.com/Java基础-2013-11-25-集合框架Map.html">
+<meta property="og:site_name" content="Scott&#39;s Blog">
+<meta property="og:description" content="1.  概述数学中的映射关系在Java中就是通过Map来实现的。它表示，里面存储的元素是一个对（pair）,我们通过一个对象，可以在这个映射关系中找到另外一个和这个对象相关的东西。前面提到的我们对于根据帐号名得到对应的人员的信息，就属于这种情况的应用。我们讲一个人员的帐户名和这人员的信息作了一个映射关系，也就是说，我们把帐户名和人员信息当成了一个“键值对”，“键”就是帐户名，“值”就是人员信息。下">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-25%20%E4%B8%8B%E5%8D%889.32.44.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8A%E5%8D%8811.22.23.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%884.17.17.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8A%E5%8D%8811.38.06.png">
+<meta property="og:updated_time" content="2017-08-11T06:34:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【集合框架】Map">
+<meta name="twitter:description" content="1.  概述数学中的映射关系在Java中就是通过Map来实现的。它表示，里面存储的元素是一个对（pair）,我们通过一个对象，可以在这个映射关系中找到另外一个和这个对象相关的东西。前面提到的我们对于根据帐号名得到对应的人员的信息，就属于这种情况的应用。我们讲一个人员的帐户名和这人员的信息作了一个映射关系，也就是说，我们把帐户名和人员信息当成了一个“键值对”，“键”就是帐户名，“值”就是人员信息。下">
+<meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-25%20%E4%B8%8B%E5%8D%889.32.44.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.com/Java基础-2013-11-25-集合框架Map.html"/>
+
+
+
+
+
+  <title>【集合框架】Map | Scott's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/Java基础-2013-11-25-集合框架Map.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">【集合框架】Map</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-11-25T10:27:04+08:00">
+                2013-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/Java基础-2013-11-25-集合框架Map.html" class="leancloud_visitors" data-flag-title="【集合框架】Map">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  6,803字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  26分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.  概述"></a>1.  概述</h2><p>数学中的映射关系在Java中就是通过Map来实现的。它表示，里面存储的元素是一个对（pair）,我们通过一个对象，可以在这个映射关系中找到另外一个和这个对象相关的东西。<br>前面提到的我们对于根据帐号名得到对应的人员的信息，就属于这种情况的应用。我们讲一个人员的帐户名和这人员的信息作了一个映射关系，也就是说，我们把帐户名和人员信息当成了一个“键值对”，“键”就是帐户名，“值”就是人员信息。下面我们先看看Map 接口的常用方法。</p>
+<h2 id="2-常用方法"><a href="#2-常用方法" class="headerlink" title="2. 常用方法"></a>2. 常用方法</h2><p>Map 接口不是 Collection 接口的继承。而是从自己的用于维护键-值关联的接口层次结构入手。按定义，该接口描述了从不重复的键到值的映射。<br>我们可以把这个接口方法分成三组操作：改变、查询和提供可选视图。<br>改变操作允许您从映射中添加和除去键-值对。键和值都可以为 null。但是，您不能把 Map 作为一个键或值添加给自身。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Object put(Object key,Object value)：//用来存放一个键-值对Map中</div><div class="line">Object remove(Object key)：//根据key(键)，移除一个键-值对，并将值返回</div><div class="line">void putAll(Map mapping) ：//将另外一个Map中的元素存入当前的Map中</div><div class="line">void clear() ：//清空当前Map中的元素，查询操作允许您检查映射内容：</div><div class="line">Object get(Object key) ：//根据key(键)取得对应的值</div><div class="line">boolean containsKey(Object key) ：//判断Map中是否存在某键（key）</div><div class="line">boolean containsValue(Object value)://判断Map中是否存在某值(value)</div><div class="line">int size()://返回Map中 键-值对的个数</div><div class="line">boolean isEmpty() ：//判断当前Map是否为空</div></pre></td></tr></table></figure></p>
+<p>最后一组方法允许您把键或值的组作为集合来处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public Set keySet() ：//返回所有的键（key），并使用Set容器存放</div><div class="line">public Collection values() ：//返回所有的值（Value），并使用Collection存放</div><div class="line">public Set entrySet() ：//返回一个实现 Map.Entry 接口的元素 Set</div></pre></td></tr></table></figure></p>
+<p>因为映射中键的集合必须是唯一的，就使用 Set 来支持。因为映射中值的集合可能不唯一，就使用Collection 来支持。最后一个方法返回一个实现 Map.Entry 接口的元素 Set。<br>我们看看Map的常用实现类的比较，如下表：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-25%20%E4%B8%8B%E5%8D%889.32.44.png" alt=""></p>
+<p>下面我们看一个简单的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">import java.util.*; </div><div class="line">public class MapTest &#123;</div><div class="line">public static void main(String[] args) &#123;</div><div class="line">		Map map1 = new HashMap();</div><div class="line">		Map map2 = new HashMap();</div><div class="line">		map1.put(&quot;1&quot;,&quot;aaa1&quot;);</div><div class="line">		map1.put(&quot;2&quot;,&quot;bbb2&quot;);	</div><div class="line">		map2.put(&quot;10&quot;,&quot;aaaa10&quot;);</div><div class="line">		map2.put(&quot;11&quot;,&quot;bbbb11&quot;);//根据键 &quot;1&quot; 取得值：&quot;aaa1&quot;	</div><div class="line">	System.out.println(&quot;map1.get(\&quot;1\&quot;)=&quot;+map1.get(&quot;1&quot;));</div><div class="line">	// 根据键 &quot;1&quot; 移除键值对&quot;1&quot;-&quot;aaa1&quot;</div><div class="line">System.out.println(&quot;map1.remove(\&quot;1\&quot;)=&quot;+map1.remove(&quot;1&quot;));	</div><div class="line">System.out.println(&quot;map1.get(\&quot;1\&quot;)=&quot;+map1.get(&quot;1&quot;));</div><div class="line">		map1.putAll(map2);//将map2全部元素放入map1中</div><div class="line">		map2.clear();//清空map2</div><div class="line">		System.out.println(&quot;map1 IsEmpty?=&quot;+map1.isEmpty());</div><div class="line">		System.out.println(&quot;map2 IsEmpty?=&quot;+map2.isEmpty());</div><div class="line">		System.out.println(&quot;map1 中的键值对的个数size = &quot;+map1.size());</div><div class="line">		System.out.println(&quot;KeySet=&quot;+map1.keySet());//set</div><div class="line">		System.out.println(&quot;values=&quot;+map1.values());//Collection</div><div class="line">		System.out.println(&quot;entrySet=&quot;+map1.entrySet());	</div><div class="line">		System.out.println(&quot;map1 是否包含键：11 = &quot;+map1.containsKey(&quot;11&quot;));	</div><div class="line">		System.out.println(&quot;map1 是否包含值：aaa1 = &quot;+map1.containsValue(&quot;aaa1&quot;));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行输出结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">map1.get(&quot;1&quot;)=aaa1</div><div class="line">map1.remove(&quot;1&quot;)=aaa1</div><div class="line">map1.get(&quot;1&quot;)=null</div><div class="line">map1 IsEmpty?=false</div><div class="line">map2 IsEmpty?=true</div><div class="line">map1 中的键值对的个数size = 3</div><div class="line">KeySet=[10, 2, 11]</div><div class="line">values=[aaaa10, bbb2, bbbb11]</div><div class="line">entrySet=[10=aaaa10, 2=bbb2, 11=bbbb11]</div><div class="line">map1 是否包含键：11 = true</div><div class="line">map1 是否包含值：aaa1 = false</div></pre></td></tr></table></figure></p>
+<p>在该例子中，我们创建一个HashMap，并使用了一下Map接口中的各个方法。<br>其中Map中的entrySet()方法先提一下，该方法返回一个实现 Map.Entry 接口的对象集合。集合中每个对象都是底层 Map 中一个特定的键-值对。</p>
+<p>Map.Entry 接口是Map 接口中的一个内部接口，该内部接口的实现类存放的是键值对。在下面的实现原理中，我们会对这方面再作介绍，现在我们先不管这个它的具体实现。</p>
+<p>我们再看看排序的Map是如何使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import java.util.*;</div><div class="line">public class MapSortExample &#123;</div><div class="line">  public static void main(String args[]) &#123;</div><div class="line">    Map map1 = new HashMap(); </div><div class="line">    Map map2 = new LinkedHashMap();</div><div class="line">    for(int i=0;i&lt;10;i++)&#123;</div><div class="line">    	double s=Math.random()*100;//产生一个随机数，并将其放入Map中</div><div class="line">    	 map1.put(new Integer((int) s),&quot;第 &quot;+i+&quot; 个放入的元素：&quot;+s+&quot;\n&quot;);</div><div class="line">    	 map2.put(new Integer((int) s),&quot;第 &quot;+i+&quot; 个放入的元素：&quot;+s+&quot;\n&quot;);</div><div class="line">    &#125;</div><div class="line">   System.out.println(&quot;未排序前HashMap：&quot;+map1);</div><div class="line">   System.out.println(&quot;未排序前LinkedHashMap：&quot;+map2);</div><div class="line">    //使用TreeMap来对另外的Map进行重构和排序</div><div class="line">    Map sortedMap = new TreeMap(map1);</div><div class="line">    System.out.println(&quot;排序后：&quot;+sortedMap);</div><div class="line">    System.out.println(&quot;排序后：&quot;+new TreeMap(map2));</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该程序的一次运行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">未排序前HashMap：&#123;64=第 1 个放入的元素：64.05341725531845</div><div class="line">, 15=第 9 个放入的元素：15.249165766266382</div><div class="line">, 2=第 4 个放入的元素：2.66794706854534</div><div class="line">, 77=第 0 个放入的元素：77.28814965781416</div><div class="line">, 97=第 5 个放入的元素：97.32893518378948</div><div class="line">, 99=第 2 个放入的元素：99.99412014935982</div><div class="line">, 60=第 8 个放入的元素：60.91451419025399</div><div class="line">, 6=第 3 个放入的元素：6.286974058646977</div><div class="line">, 1=第 7 个放入的元素：1.8261658496439903</div><div class="line">, 48=第 6 个放入的元素：48.736039522423106</div><div class="line">&#125;</div><div class="line">未排序前LinkedHashMap：&#123;77=第 0 个放入的元素：77.28814965781416</div><div class="line">, 64=第 1 个放入的元素：64.05341725531845</div><div class="line">, 99=第 2 个放入的元素：99.99412014935982</div><div class="line">, 6=第 3 个放入的元素：6.286974058646977</div><div class="line">, 2=第 4 个放入的元素：2.66794706854534</div><div class="line">, 97=第 5 个放入的元素：97.32893518378948</div><div class="line">, 48=第 6 个放入的元素：48.736039522423106</div><div class="line">, 1=第 7 个放入的元素：1.8261658496439903</div><div class="line">, 60=第 8 个放入的元素：60.91451419025399</div><div class="line">, 15=第 9 个放入的元素：15.249165766266382</div><div class="line">&#125;</div><div class="line">排序后：&#123;1=第 7 个放入的元素：1.8261658496439903</div><div class="line">, 2=第 4 个放入的元素：2.66794706854534</div><div class="line">, 6=第 3 个放入的元素：6.286974058646977</div><div class="line">, 15=第 9 个放入的元素：15.249165766266382</div><div class="line">, 48=第 6 个放入的元素：48.736039522423106</div><div class="line">, 60=第 8 个放入的元素：60.91451419025399</div><div class="line">, 64=第 1 个放入的元素：64.05341725531845</div><div class="line">, 77=第 0 个放入的元素：77.28814965781416</div><div class="line">, 97=第 5 个放入的元素：97.32893518378948</div><div class="line">, 99=第 2 个放入的元素：99.99412014935982</div><div class="line">&#125;</div><div class="line">排序后：&#123;1=第 7 个放入的元素：1.8261658496439903</div><div class="line">, 2=第 4 个放入的元素：2.66794706854534</div><div class="line">, 6=第 3 个放入的元素：6.286974058646977</div><div class="line">, 15=第 9 个放入的元素：15.249165766266382</div><div class="line">, 48=第 6 个放入的元素：48.736039522423106</div><div class="line">, 60=第 8 个放入的元素：60.91451419025399</div><div class="line">, 64=第 1 个放入的元素：64.05341725531845</div><div class="line">, 77=第 0 个放入的元素：77.28814965781416</div><div class="line">, 97=第 5 个放入的元素：97.32893518378948</div><div class="line">, 99=第 2 个放入的元素：99.99412014935982</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从运行结果，我们可以看出，HashMap的存入顺序和输出顺序无关。而LinkedHashMap 则保留了键值对的存入顺序。TreeMap则是对Map中的元素进行排序。在实际的使用中我们也经常这样做：使用HashMap或者LinkedHashMap 来存放元素，当所有的元素都存放完成后，如果使用则是需要一个经过排序的Map的话，我们再使用TreeMap来重构原来的Map对象。这样做的好处是：因为HashMap和LinkedHashMap 存储数据的速度比直接使用TreeMap 要快，存取效率要高。当完成了所有的元素的存放后，我们再对整个的Map中的元素进行排序。这样可以提高整个程序的运行的效率，缩短执行时间。</p>
+<p>这里需要注意的是，TreeMap中是根据键（Key）进行排序的。而如果我们要使用TreeMap来进行正常的排序的话，Key 中存放的对象必须实现Comparable 接口。我们简单介绍一下这个接口：</p>
+<h2 id="3-Comparable-接口"><a href="#3-Comparable-接口" class="headerlink" title="3. Comparable 接口"></a>3. Comparable 接口</h2><p>在 java.lang 包中，Comparable 接口适用于一个类有自然顺序的时候。假定对象集合是同一类型，该接口允许您把集合排序成自然顺序。</p>
+<p>它只有一个方法：compareTo() 方法，用来比较当前实例和作为参数传入的元素。如果排序过程中当前实例出现在参数前（当前实例比参数大），就返回某个负值。如果当前实例出现在参数后（当前实例比参数小），则返回正值。否则，返回零。如果这里不要求零返回值表示元素相等。零返回值可以只是表示两个对象在排序的时候排在同一个位置。</p>
+<p>上面例子中的整形的包装类：Integer 就实现了该接口。我们可以看一下这个类的源码：<br>可以看到compareTo 方法里面通过判断当前的Integer对象的值是否大于传入的参数的值来得到返回值的。<br>在 Java 2 SDK，版本 1.2 中有十四个类实现 Comparable 接口。下表展示了它们的自然排序。虽然一些类共享同一种自然排序，但只有相互可比的类才能排序。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8A%E5%8D%8811.22.23.png" alt=""></p>
+<p>这里只是简单的介绍一下排序接口，如果要详细的了解排序部分内容的话，可以参考文章最后的附录部分对于排序的更加详细的描述。<br>我们再回到Map中来，Java提高的API中除了上面介绍的几种Map比较常用以为还有一些Map，大家可以了解一下：</p>
+<ul>
+<li>WeakHashMap： WeakHashMap 是 Map 的一个特殊实现，它只用于存储对键的弱引用。当映射的某个键在 WeakHashMap 的外部不再被引用时，就允许垃圾收集器收集映射中相应的键值对。使用 WeakHashMap 有益于保持类似注册表的数据结构，其中条目的键不再能被任何线程访问时，此条目就没用了。</li>
+<li>IdentifyHashMap： Map的一种特性实现，关键属性的hash码不是由hashCode()方法计算，而是由  System.identityHashCode 方法计算，使用==进行比较而不是equals()方法。</li>
+</ul>
+<p>通过简单的对与Map中各个常用实现类的使用，为了更好的理解Map，下面我们再来了解一下Map的实现原理。</p>
+<h2 id="4-实现原理"><a href="#4-实现原理" class="headerlink" title="4.实现原理"></a>4.实现原理</h2><p>有的人可能会认为 Map 会继承 Collection。在数学中，映射只是对（pair）的集合。但是，在“集合框架”中，接口 Map 和 Collection 在层次结构没有任何亲缘关系，它们是截然不同的。这种差别的原因与 Set 和 Map 在 Java 库中使用的方法有关。Map 的典型应用是访问按关键字存储的值。它支持一系列集合操作的全部，但操作的是键-值对，而不是单个独立的元素。因此 Map 需要支持 get() 和 put() 的基本操作，而 Set 不需要。此外，还有返回 Map 对象的 Set 视图的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set set = aMap.keySet();</div></pre></td></tr></table></figure></p>
+<p>下面我们以HashMap为例，对Map的实现机制作一下更加深入一点的理解。</p>
+<p>因为HashMap里面使用Hash算法，所以在理解HashMap之前，我们需要先了解一下Hash算法和Hash表。</p>
+<p>Hash，一般翻译做“散列”，也有直接音译为”哈希”的，就是把任意长度的输入（又叫做 预映射， pre-image），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能 会散列成相同的输出，而不可能从散列值来唯一的确定输入值。</p>
+<p>说的通俗一点，Hash算法的意义在于提供了一种快速存取数据的方法,它用一种算法建立键值与真实值之间的对应关系,(每一个真实值只能有一个键值,但是一个键值可以对应多个真实值),这样可以快速在数组等里面存取数据。</p>
+<p>我们建立一个HashTable（哈希表），该表的长度为N，然后我们分别在该表中的格子中存放不同的元素。每个格子下面存放的元素又是以链表的方式存放元素。</p>
+<ul>
+<li>当添加一个新的元素Entry 的时候，首先我们通过一个Hash函数计算出这个Entry元素的Hash值hashcode。通过该hashcode值，就可以直接定位出我们应该把这个Entry元素存入到Hash表的哪个格子中，如果该格子中已经存在元素了，那么只要把新的Entry元存放到这个链表中即可。</li>
+<li>如果要查找一个元素Entry的时候，也同样的方式，通过Hash函数计算出这个Entry元素的Hash值hashcode。然后通过该hashcode值，就可以直接找到这个Entry是存放到哪个格子中的。接下来就对该格子存放的链表元素进行逐个的比较查找就可以了。</li>
+</ul>
+<p>举一个比较简单的例子来说明这个算法的运算方式：<br>假定我们有一个长度为8的Hash表（可以理解为一个长度为8的数组）。在这个Hash表中存放数字：如下表<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%884.17.17.png" alt=""></p>
+<p>假定我们的Hash函数为：<br>Hashcode = X%8    ——– 对8 取余数<br>其中X是我们需要放入Hash表中的数字，而这个函数返回的Hashcode就是Hash码。<br>假定我们有下面10个数字需要依次存入到这个Hash表中：<br>11 , 23 , 44 , 9 , 6 , 32 , 12 , 45 , 57 , 89<br>通过上面的Hash函数，我们可以得到分别对应的Hash码：<br>11――3 ; 23――7　；44――4　；9――1；6――6；32――0；12――4；45――5；57――1；89――1；<br>计算出来的Hash码分别代表，该数字应该存放到Hash表中的哪个对应数字的格子中。如果改格子中已经有数字存在了，那么就以链表的方式将数字依次存放在该格子中，如下表：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8A%E5%8D%8811.38.06.png" alt=""></p>
+<p>Hash表和Hash算法的特点就是它的存取速度比数组差一些，但是比起单纯的链表，在查找和存储方面却要好很多。同时数组也不利于数据的重构而排序等方面的要求。</p>
+<p>更具体的说明，读者可以参考数据结构相关方面的书籍。</p>
+<p>简单的了解了一下Hash算法后，我们就来看看HashMap的属性有哪些：<br>里面最重要的3个属性：</p>
+<ol>
+<li>transient Entry[] table: 用来存放键值对的对象Entry数组，也就是Hash表</li>
+<li>transient int size：当前Map中存放的键值对的个数</li>
+<li>final float loadFactor：负载因子，用来决定什么情况下应该对Entry进行扩容</li>
+</ol>
+<p>我们Entry 对象是Map接口中的一个内部接口。即是使用它来保存我们的键值对的。</p>
+<p>我们看看这个Entry 内部接口在HashMap中的实现：通过查看源码，我们可以看到Entry类有点类似一个单向链表。其中：<br>   final Object key　和　Object value;存放的就是我们放入Map中的键值对。而属性Entry next;表示当前键值对的下一个键值对是哪个Entry。</p>
+<p>接下来，我们看看HashMap的主要的构造函数：<br>我们主要看看 public HashMap(int initialCapacity, float loadFactor)<br>因为，另外两个构造函数实行也是同样的方式进行构建一个HashMap 的。该构造函数：</p>
+<ol>
+<li>首先是判断参数int initialCapacity和float loadFactor是否合法</li>
+<li>然后确定Hash表的初始化长度。确定的策略是：通过传进来的参数initialCapacity 来找出第一个大于它的2的次方的数。比如说我们传了18这样的一个initialCapacity 参数，那么真实的table数组的长度为2的5次方，即32。之所以采用这种策略来构建Hash表的长度，是因为2的次方的运算对于现代的处理器来说，可以通过一些方法得到更加好的执行效率。</li>
+<li>接下来就是得到重构因子（threshold）了，这个属性也是HashMap中的一个比较重要的属性，它表示，当Hash表中的元素被存放了多少个之后，我们就需要对该Hash表进行重构。</li>
+<li>最后就是使用得到的初始化参数capacity 来构建Hash表：Entry[] table。</li>
+</ol>
+<p>下面我们看看一个键值对是如何添加到HashMap中的。该put方法是用来添加一个键值对（key-value）到Map中，如果Map中已经存在相同的键的键值对的话，那么就把新的值覆盖老的值，并把老的值返回给方法的调用者。如果不存在一样的键，那么就返回null 。我们看看方法的具体实现：</p>
+<ol>
+<li>首先我们判断如果key为null则使用一个常量来代替该key值，该行为在方法maskNull（）终将key替换为一个非null 的对象k。</li>
+<li>计算key值的Hash码：hash</li>
+<li>通过使用Hash码来定位，我们应该把当前的键值对存放到Hash表中的哪个格子中。indexFor()方法计算出的结果：i 就是Hash表（table）中的下标。</li>
+<li>然后遍历当前的Hash表中table[i]格中的链表。从中判断已否已经存在一样的键(Key)的键值对。如果存在一样的key的键，那么就用新的value覆写老的value，并把老的value返回</li>
+<li>如果遍历后发现没有存在同样的键值对，那么就增加当前键值对到Hash表中的第i个格子中的链表中。并返回null 。</li>
+</ol>
+<p>最后我们看看一个键值对是如何添加到各个格子中的链表中的：<br>我们先看void addEntry(int hash, Object key, Object value, int bucketIndex)方法，该方法的作用就用来添加一个键值对到Hash表的第bucketIndex个格子中的链表中去。这个方法作的工作就是：</p>
+<ol>
+<li>创建一个Entry对象用来存放键值对。</li>
+<li>添加该键值对 —- Entry对象到链表中</li>
+<li>最后在size属性加一，并判断是否需要对当前的Hash表进行重构。如果需要就在  void resize(int newCapacity)方法中进行重构。<br>之所以需要重构，也是基于性能考虑。大家可以考虑这样一种情况，假定我们的Hash表只有4个格子，那么我们所有的数据都是放到这4个格子中。如果存储的数据量比较大的话，例如100。这个时候，我们就会发现，在这个Hash表中的4个格子存放的4个长长的链表。而我们每次查找元素的时候，其实相当于就是遍历链表了。这种情况下，我们用这个Hash表来存取数据的性能实际上和使用链表差不多了。 </li>
+</ol>
+<p>但是如果我们对这个Hash表进行重构，换为使用Hash表长度为200的表来存储这100个数据，那么平均2个格子里面才会存放一个数据。这个时候我们查找的数据的速度就会非常的快。因为基本上每个格子中存放的链表都不会很长，所以我们遍历链表的次数也就很少，这样也就加快了查找速度。但是这个时候又存在了另外的一个问题。我们使用了至少200个数据的空间来存放100个数据，这样就造成至少100个数据空间的浪费。 在速度和空间上面，我们需要找到一个适合自己的中间值。在HashMap中我们通过负载因子（loadFactor）来决定应该什么时候应该重构我们的Hash表，以达到比较好的性能状态。</p>
+<p>我们再看看重构Hash表的方法：void resize(int newCapacity)是如何实现的,它的实现方式比较简单：</p>
+<ol>
+<li>首先判断如果Hash表的长度已经达到最大值，那么就不进行重构了。因为这个时候Hash表的长度已经达到上限，已经没有必要重构了。</li>
+<li>然后就是构建新的Hash表</li>
+<li>把老的Hash表中的对象数据全部转移到新的Hash表newTable中，并设置新的重构因子threshold</li>
+</ol>
+<p>对于HashMap中的实现原理，我们就分析到这里。大家可能会发现，HashCode的计算，是用来定位我们的键值对应该放到Hash表中哪个格子中的关键属性。而这个HashCode的计算方法是调用的各个对象自己的实现的hashCode()方法。而这个方法是在Object对象中定义的，所以我们自己定义的类如果要在集合中使用的话，就需要正确的覆写hashCode() 方法。下面就介绍一下应该如何正确覆写hashCode()方法。</p>
+<h2 id="5-覆写hashCode"><a href="#5-覆写hashCode" class="headerlink" title="5. 覆写hashCode()"></a>5. 覆写hashCode()</h2><p>在明白了HashMap具有哪些功能，以及实现原理后，了解如何写一个hashCode()方法就更有意义了。当然，在HashMap中存取一个键值对涉及到的另外一个方法为equals ()，因为该方法的覆写在高级特性已经讲解了。这里就不做过多的描述。</p>
+<p>设计hashCode（）时最重要的因素就是：无论何时，对同一个对象调用hashCode()都应该生成同样的值。如果在将一个对象用put（）方法添加进HashMap时产生一个hashCode()值，而用get()取出时却产生了另外一个hashCode()值，那么就无法重新取得该对象了。所以，如果你的hashCode()方法依赖于对象中易变的数据，那用户就要小心了，因为此数据发生变化时，hashCode()就会产生一个不同的hash码，相当于产生了一个不同的“键”。</p>
+<p>此外，也不应该使hashCode()依赖于具有唯一性的对象信息，尤其是使用this的值，这只能产生很糟糕的hashCode()。因为这样做无法生成一个新的“键”，使之与put()种原始的“键值对”中的“键”相同。例如，如果我们不覆写Object的hashCode()方法，那么调用该方法的时候，就会调用Object的hashCode()方法的默认实现。Object的hashCode（）方法，返回的是当前对象的内存地址。下次如果我们需要取一个一样的“键”对应的键值对的时候，我们就无法得到一样的hashCode值了。因为我们后来创建的“键”对象已经不是存入HashMap中的那个内存地址的对象了。</p>
+<p>我们看一个简单的例子，就能更加清楚的理解上面的意思。假定我们写了一个类：  Person （人），我们判断一个对象“人”是否指向同一个人，只要知道这个人的身份证号一直就可以了。先看我们没有实现hashCode的情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">package c08.hashEx;</div><div class="line">import java.util.*;</div><div class="line">//身份证类</div><div class="line">class Code&#123;</div><div class="line">	final int id;//身份证号码已经确认,不能改变</div><div class="line">	Code(int i)&#123;</div><div class="line">		id=i;</div><div class="line">	&#125;</div><div class="line">	//身份号号码相同，则身份证相同</div><div class="line">	public boolean equals(Object anObject) &#123;</div><div class="line">		if (anObject instanceof Code)&#123;</div><div class="line">			Code other=(Code) anObject;</div><div class="line">			return this.id==other.id;</div><div class="line">		&#125;</div><div class="line">return false;</div><div class="line">	&#125;</div><div class="line">	public String toString() &#123;</div><div class="line">		return &quot;身份证:&quot;+id;</div><div class="line">	&#125;	</div><div class="line">&#125;</div><div class="line">//人员信息类</div><div class="line">class Person &#123;</div><div class="line">	Code id;// 身份证</div><div class="line">	String name;// 姓名</div><div class="line">	public Person(String name, Code id) &#123;</div><div class="line">		this.id=id;</div><div class="line">		this.name=name;</div><div class="line">	&#125;</div><div class="line">	//如果身份证号相同，就表示两个人是同一个人</div><div class="line">	public boolean equals(Object anObject) &#123;</div><div class="line">		if (anObject instanceof Person)&#123;</div><div class="line">			Person other=(Person) anObject;</div><div class="line">			return this.id.equals(other.id);</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	public String toString() &#123;</div><div class="line">		return &quot;姓名:&quot;+name+&quot; 身份证:&quot;+id.id+&quot;\n&quot;;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">public class HashCodeEx &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		HashMap map=new HashMap();</div><div class="line">		Person p1=new Person(&quot;张三&quot;,new Code(123));</div><div class="line">	map.put(p1.id,p1);//我们根据身份证来作为key值存放到Map中</div><div class="line">		Person p2=new Person(&quot;李四&quot;,new Code(456));</div><div class="line">		map.put(p2.id,p2);</div><div class="line">		Person p3=new Person(&quot;王二&quot;,new Code(789));</div><div class="line">		map.put(p3.id,p3);</div><div class="line">		System.out.println(&quot;HashMap 中存放的人员信息:\n&quot;+map);</div><div class="line">		// 张三 改名为：张山 但是还是同一个人。</div><div class="line">		Person p4=new Person(&quot;张山&quot;,new Code(123));</div><div class="line">map.put(p4.id,p4);</div><div class="line">		System.out.println(&quot;张三改名后 HashMap 中存放的人员信息:\n&quot;+map);</div><div class="line">		//查找身份证为：123 的人员信息</div><div class="line">		System.out.println(&quot;查找身份证为：123 的人员信息:&quot;+map.get(new Code(123)));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">HashMap 中存放的人员信息:</div><div class="line">&#123;身份证:456=姓名:李四 身份证:456</div><div class="line">, 身份证:123=姓名:张三 身份证:123</div><div class="line">, 身份证:789=姓名:王二 身份证:789</div><div class="line">&#125;</div><div class="line">张三改名后 HashMap 中存放的人员信息:</div><div class="line">&#123;身份证:456=姓名:李四 身份证:456</div><div class="line">, 身份证:123=姓名:张三 身份证:123</div><div class="line">, 身份证:123=姓名:张山 身份证:123</div><div class="line">, 身份证:789=姓名:王二 身份证:789</div><div class="line">&#125;</div><div class="line">查找身份证为：123 的人员信息:null</div></pre></td></tr></table></figure></p>
+<p>上面的例子的演示的是，我们在一个HashMap中存放了一些人员的信息。并以这些人员的身份证最为人员的“键”。当有的人员的姓名修改了的情况下，我们需要更新这个HashMap。同时假如我们知道某个身份证号，想了解这个身份证号对应的人员信息如何，我们也可以根据这个身份证号在HashMap中得到对应的信息。</p>
+<p>而例子的输出结果表示，我们所做的更新和查找操作都失败了。失败的原因就是我们的身份证类：Code 没有覆写hashCode()方法。这个时候，当查找一样的身份证号码的键值对的时候，使用的是默认的对象的内存地址来进行定位。这样，后面的所有的身份证号对象new Code(123) 产生的hashCode()值都是不一样的。所以导致操作失败。</p>
+<p>下面，我们给Code类加上hashCode（）方法，然后再运行一下程序看看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//身份证类</div><div class="line">class Code&#123;</div><div class="line">	final int id;//身份证号码已经确认,不能改变</div><div class="line">	Code(int i)&#123;</div><div class="line">		id=i;</div><div class="line">	&#125;</div><div class="line">	//身份号号码相同，则身份证相同</div><div class="line">	public boolean equals(Object anObject) &#123;</div><div class="line">if (anObject instanceof Code)&#123;</div><div class="line">			Code other=(Code) anObject;</div><div class="line">			return this.id==other.id;</div><div class="line">		&#125;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	public String toString() &#123;</div><div class="line">		return &quot;身份证:&quot;+id;</div><div class="line">	&#125;	</div><div class="line">	//覆写hashCode方法，并使用身份证号作为hash值</div><div class="line">	public int hashCode()&#123;</div><div class="line">		return id;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再次执行上面的HashCodeEx 的结果就为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">HashMap 中存放的人员信息:</div><div class="line">&#123;身份证:456=姓名:李四 身份证:456</div><div class="line">, 身份证:789=姓名:王二 身份证:789</div><div class="line">, 身份证:123=姓名:张三 身份证:123</div><div class="line">&#125;</div><div class="line">张三改名后 HashMap 中存放的人员信息:</div><div class="line">&#123;身份证:456=姓名:李四 身份证:456</div><div class="line">, 身份证:789=姓名:王二 身份证:789</div><div class="line">, 身份证:123=姓名:张山 身份证:123</div><div class="line">&#125;</div><div class="line">查找身份证为：123 的人员信息:姓名:张山 身份证:123</div></pre></td></tr></table></figure></p>
+<p>这个时候，我们发现。我们想要做的更新和查找操作都成功了。</p>
+<p>对于Map部分的使用和实现，主要就是需要注意存放“键值对”中的对象的equals()方法和hashCode()方法的覆写。如果需要使用到排序的话，那么还需要实现Comparable 接口中的compareTo() 方法。我们需要注意Map中的“键”是不能重复的，而是否重复的判断，是通过调用“键”对象的equals（）方法来决定的。而在HashMap中查找和存取“键值对”是同时使用hashCode（）方法和equals（）方法来决定的。</p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.com/Java基础-2013-11-25-集合框架Map.html">http://www.sguotao.com/Java基础-2013-11-25-集合框架Map.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    
+      <div>
+        
+          
+
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>「真诚赞赏，手留余香」</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+<div>
+
+        
+      </div>
+    
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Scott
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.sguotao.com/Java基础-2013-11-25-集合框架Map.html" title="【集合框架】Map">http://www.sguotao.com/Java基础-2013-11-25-集合框架Map.html</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/集合框架/" rel="tag"># 集合框架</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Java基础-2013-11-24-集合框架List.html" rel="next" title="集合框架篇3 List">
+                <i class="fa fa-chevron-left"></i> 集合框架篇3 List
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Java基础-2013-11-26-集合框架Set.html" rel="prev" title="【集合框架】Set">
+                【集合框架】Set <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODkyOC81NDk3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.  概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-常用方法"><span class="nav-number">2.</span> <span class="nav-text">2. 常用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Comparable-接口"><span class="nav-number">3.</span> <span class="nav-text">3. Comparable 接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-实现原理"><span class="nav-number">4.</span> <span class="nav-text">4.实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-覆写hashCode"><span class="nav-number">5.</span> <span class="nav-text">5. 覆写hashCode()</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="post-count">共写了164.2k字</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" rel="external nofollow" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iH9ug4Eu98bS8XiH30QEwODs-gzGzoHsz", "D0qgHUsqtcQOClhgS4ElkmDQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
