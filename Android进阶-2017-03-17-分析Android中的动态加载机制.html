@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -108,7 +108,7 @@
 <meta name="keywords" content="Android,JVM,插件框架,ClassLoader">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分析Android中的动态加载机制">
-<meta property="og:url" content="http://www.sguotao.com/Android进阶-2017-03-17-分析Android中的动态加载机制.html">
+<meta property="og:url" content="http://www.sguotao.top/Android进阶-2017-03-17-分析Android中的动态加载机制.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="Java的类加载机制ClassLoader我们编写的java代码，最终会编译成.class字节码的形式，一个完整的Java程序，通常会由若干个.class文件组成，在程序运行时，通过该程序的入口函数来调用系统的各个功能，但是程序启动时，并不会一次性将.class文件加载到内存中，根据程序的需要，通过Java的类加载机制来动态加载.class文件，ClassLoader就是来实现.class文件的动">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170317148974200061820.png">
@@ -128,7 +128,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -148,7 +148,7 @@
 
 
 
-  <link rel="canonical" href="http://www.sguotao.com/Android进阶-2017-03-17-分析Android中的动态加载机制.html"/>
+  <link rel="canonical" href="http://www.sguotao.top/Android进阶-2017-03-17-分析Android中的动态加载机制.html"/>
 
 
 
@@ -192,6 +192,9 @@
 
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
+    
+    <!-- 在右上角或者左上角实现fork me on github -->
+    <a href="https://github.com/sguotao" class="github-corner" aria-label="View source on Github"><svg width="92" height="92" viewBox="0 0 250 250" style="fill:#151513;color:#fff;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -206,7 +209,7 @@
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description"></h1>
+        <h1 class="site-subtitle" itemprop="description">和光同尘,静水流深</h1>
       
   </div>
 
@@ -338,7 +341,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/Android进阶-2017-03-17-分析Android中的动态加载机制.html">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.top/Android进阶-2017-03-17-分析Android中的动态加载机制.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Scott">
@@ -517,7 +520,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">DexPathList</span><span class="params">(ClassLoader definingContext, String dexPath,</span></span></div><div class="line">                       String libraryPath, File optimizedDirectory) &#123;</div><div class="line">        ……</div><div class="line">        <span class="keyword">this</span>.dexElements = makeDexElements(splitDexPath(dexPath), optimizedDirectory);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Element[] makeDexElements(ArrayList&lt;File&gt; files,</div><div class="line">                                             File optimizedDirectory) &#123;</div><div class="line">        ArrayList&lt;Element&gt; elements = <span class="keyword">new</span> ArrayList&lt;Element&gt;();</div><div class="line">        <span class="keyword">for</span> (File file : files) &#123;</div><div class="line">            ZipFile zip = <span class="keyword">null</span>;</div><div class="line">            DexFile dex = <span class="keyword">null</span>;</div><div class="line">            String name = file.getName();</div><div class="line">            <span class="keyword">if</span> (name.endsWith(DEX_SUFFIX)) &#123;</div><div class="line">                dex = loadDexFile(file, optimizedDirectory);</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (name.endsWith(APK_SUFFIX) || name.endsWith(JAR_SUFFIX)</div><div class="line">                || name.endsWith(ZIP_SUFFIX)) &#123;</div><div class="line">                zip = <span class="keyword">new</span> ZipFile(file);</div><div class="line">            &#125;</div><div class="line">            ……</div><div class="line">            <span class="keyword">if</span> ((zip != <span class="keyword">null</span>) || (dex != <span class="keyword">null</span>)) &#123;</div><div class="line">                elements.add(<span class="keyword">new</span> Element(file, zip, dex));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> elements.toArray(<span class="keyword">new</span> Element[elements.size()]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> DexFile <span class="title">loadDexFile</span><span class="params">(File file, File optimizedDirectory)</span></span></div><div class="line">        <span class="keyword">throws</span> IOException &#123;</div><div class="line">        <span class="keyword">if</span> (optimizedDirectory == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> DexFile(file);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            String optimizedPath = optimizedPathFor(file, optimizedDirectory);</div><div class="line">            <span class="keyword">return</span> DexFile.loadDex(file.getPath(), optimizedPath, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Converts a dex/jar file path and an output directory to an</div><div class="line">     * output file path for an associated optimized dex file.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">optimizedPathFor</span><span class="params">(File path,</span></span></div><div class="line">                                           File optimizedDirectory) &#123;</div><div class="line">        String fileName = path.getName();</div><div class="line">        <span class="keyword">if</span> (!fileName.endsWith(DEX_SUFFIX)) &#123;</div><div class="line">            <span class="keyword">int</span> lastDot = fileName.lastIndexOf(<span class="string">"."</span>);</div><div class="line">            <span class="keyword">if</span> (lastDot &lt; <span class="number">0</span>) &#123;</div><div class="line">                fileName += DEX_SUFFIX;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                StringBuilder sb = <span class="keyword">new</span> StringBuilder(lastDot + <span class="number">4</span>);</div><div class="line">                sb.append(fileName, <span class="number">0</span>, lastDot);</div><div class="line">                sb.append(DEX_SUFFIX);</div><div class="line">                fileName = sb.toString();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        File result = <span class="keyword">new</span> File(optimizedDirectory, fileName);</div><div class="line">        <span class="keyword">return</span> result.getPath();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>1.<a href="http://blog.csdn.net/xyang81/article/details/7292380" target="_blank" rel="external">深入分析Java ClassLoader原理</a><br>2.<a href="http://blog.csdn.net/irelandken/article/details/7048817" target="_blank" rel="external">分析BootstrapClassLoader/ExtClassLoader/AppClassLoader的加载路径 及”父委托机制”</a><br>3.<a href="https://openhome.cc/Gossip/JavaEssence/ClassLoader.html" target="_blank" rel="external">簡介類別載入器</a><br>4.<a href="http://www.infoq.com/cn/articles/android-in-depth-dalvik" target="_blank" rel="external">Java虚拟机Dalvik</a><br>5<a href="http://www.jianshu.com/p/669fc4858194" target="_blank" rel="external">Android动态加载——DexClassloader分析</a></p>
 <hr>
-<p>本文链接：<a href="http://www.sguotao.com/Android进阶-2017-03-17-分析Android中的动态加载机制.html">http://www.sguotao.com/Android进阶-2017-03-17-分析Android中的动态加载机制.html</a></p>
+<p>本文链接：<a href="http://www.sguotao.top/Android进阶-2017-03-17-分析Android中的动态加载机制.html">http://www.sguotao.top/Android进阶-2017-03-17-分析Android中的动态加载机制.html</a></p>
 
       
     </div>
@@ -533,27 +536,31 @@
       <div>
         
           
-
 <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
   <div>「真诚赞赏，手留余香」</div>
   <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
     <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
   </button>
   <div id="QR" style="display: none;">
+
     
       <div id="wechat" style="display: inline-block">
         <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
         <p>微信打赏</p>
       </div>
     
+
     
       <div id="alipay" style="display: inline-block">
         <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
         <p>支付宝打赏</p>
       </div>
     
+
+    
+
   </div>
-<div>
+</div>
 
         
       </div>
@@ -569,7 +576,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://www.sguotao.com/Android进阶-2017-03-17-分析Android中的动态加载机制.html" title="分析Android中的动态加载机制">http://www.sguotao.com/Android进阶-2017-03-17-分析Android中的动态加载机制.html</a>
+      <a href="http://www.sguotao.top/Android进阶-2017-03-17-分析Android中的动态加载机制.html" title="分析Android中的动态加载机制">http://www.sguotao.top/Android进阶-2017-03-17-分析Android中的动态加载机制.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -581,17 +588,31 @@
       
     </div>
 
+    <div>
+      
+        
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8474352740015305",
+    enable_page_level_ads: true
+  });
+</script>
+
+      
+    </div>
+
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
+            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
           
-            <a href="/tags/JVM/" rel="tag"># JVM</a>
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
           
-            <a href="/tags/插件框架/" rel="tag"># 插件框架</a>
+            <a href="/tags/插件框架/" rel="tag"><i class="fa fa-tag"></i> 插件框架</a>
           
-            <a href="/tags/ClassLoader/" rel="tag"># ClassLoader</a>
+            <a href="/tags/ClassLoader/" rel="tag"><i class="fa fa-tag"></i> ClassLoader</a>
           
         </div>
       
@@ -614,8 +635,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Android进阶-2017-03-24-分析Android中的内存泄露.html" rel="prev" title="分析Android中的内存泄露">
-                分析Android中的内存泄露 <i class="fa fa-chevron-right"></i>
+              <a href="/ReactNative-2017-04-25-rn-css.html" rel="prev" title="【RN笔记】ReactNative样式整理">
+                【RN笔记】ReactNative样式整理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -690,7 +711,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -701,7 +722,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -730,6 +751,17 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sguotao" target="_blank" rel="external nofollow" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
           
         </div>
 
@@ -776,29 +808,18 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2012 - 
-  <span itemprop="copyrightYear">2017</span>
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Scott</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了164.2k字</span>
+  <span class="post-count">共写了165.7k字</span>
 </div>
 
-
-<div class="powered-by">
-  由 <a class="theme-link" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" rel="external nofollow" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
         
@@ -895,6 +916,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>

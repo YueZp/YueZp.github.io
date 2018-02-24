@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -108,7 +108,7 @@
 <meta name="keywords" content="Android,Kotlin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Kotlin笔记】Hello Kotlin">
-<meta property="og:url" content="http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html">
+<meta property="og:url" content="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="在上一篇 Kotlin的前世今生 中介绍了Kotlin的一些特点，下面记录一下Kotlin开发环境的配置，并且完成“Hello Kotlin”的打印输出。 AndroidStudio由于AndroidStudio是基于Intllij Idead的插件实现，Intellij Idea也是JetBrains开发的，所有AndroidStudio就与Kotlin天生有一层紧密的联系，在AndroidSt">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812368551731.png">
@@ -129,7 +129,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
@@ -149,7 +149,7 @@
 
 
 
-  <link rel="canonical" href="http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html"/>
+  <link rel="canonical" href="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html"/>
 
 
 
@@ -193,6 +193,9 @@
 
   <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
+    
+    <!-- 在右上角或者左上角实现fork me on github -->
+    <a href="https://github.com/sguotao" class="github-corner" aria-label="View source on Github"><svg width="92" height="92" viewBox="0 0 250 250" style="fill:#151513;color:#fff;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -207,7 +210,7 @@
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description"></h1>
+        <h1 class="site-subtitle" itemprop="description">和光同尘,静水流深</h1>
       
   </div>
 
@@ -339,7 +342,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Scott">
@@ -481,7 +484,7 @@
 <p>创建一个变量来保存当前使用的kotlin的版本号，在每个module的gradle文件中，都会用到这个变量，当使用高版本的kotlin时，直接修改这个变量即可。</p>
 <h2 id="Hello-Kotlin"><a href="#Hello-Kotlin" class="headerlink" title="Hello Kotlin"></a>Hello Kotlin</h2><p>打开IntelliJ，新建project，选中Kotlin。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812594181308.png" alt="20170622149812594181308.png"><br>输入GroupID（项目组织唯一的标识符，建议对应JAVA的包的结构）和 ArtifactID（项目的唯一的标识符，建议对应项目的名称），一路Next。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812620532141.png" alt="20170622149812620532141.png"><br>新建的工程中，是没有src文件的，需要手动添加，新建directory，名称src/main/kotlin。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812643655117.png" alt="20170622149812643655117.png"><br>新建一个package，创建HelloKotlin.kt。<br> <img src="http://7u2np3.com1.z0.glb.clouddn.com/2017062214981267486665.png" alt="2017062214981267486665.png"><br>添加一个main方法，输出“Hello Kotlin”。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812693961350.png" alt="20170622149812693961350.png"><br>至此，完成了“Hello Kotlin”的输出。</p>
 <hr>
-<p>本文链接：<a href="http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html">http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html</a></p>
+<p>本文链接：<a href="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html">http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html</a></p>
 
       
     </div>
@@ -497,27 +500,31 @@
       <div>
         
           
-
 <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
   <div>「真诚赞赏，手留余香」</div>
   <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
     <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
   </button>
   <div id="QR" style="display: none;">
+
     
       <div id="wechat" style="display: inline-block">
         <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
         <p>微信打赏</p>
       </div>
     
+
     
       <div id="alipay" style="display: inline-block">
         <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
         <p>支付宝打赏</p>
       </div>
     
+
+    
+
   </div>
-<div>
+</div>
 
         
       </div>
@@ -533,7 +540,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html" title="【Kotlin笔记】Hello Kotlin">http://www.sguotao.com/Kotlin-2017-06-10-Kotlin-note2.html</a>
+      <a href="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html" title="【Kotlin笔记】Hello Kotlin">http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -545,13 +552,27 @@
       
     </div>
 
+    <div>
+      
+        
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8474352740015305",
+    enable_page_level_ads: true
+  });
+</script>
+
+      
+    </div>
+
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"># Android</a>
+            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
           
-            <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+            <a href="/tags/Kotlin/" rel="tag"><i class="fa fa-tag"></i> Kotlin</a>
           
         </div>
       
@@ -564,8 +585,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Android进阶-2017-06-04-分析HTTPS协议.html" rel="next" title="分析HTTPS协议">
-                <i class="fa fa-chevron-left"></i> 分析HTTPS协议
+              <a href="/Kotlin-2017-06-09-Kotlin-note1.html" rel="next" title="【Kotlin笔记】Kotlin的前世今生">
+                <i class="fa fa-chevron-left"></i> 【Kotlin笔记】Kotlin的前世今生
               </a>
             
           </div>
@@ -574,8 +595,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Kotlin-2017-06-09-Kotlin-note1.html" rel="prev" title="【Kotlin笔记】Kotlin的前世今生">
-                【Kotlin笔记】Kotlin的前世今生 <i class="fa fa-chevron-right"></i>
+              <a href="/Android进阶-2017-06-17-分析Android中的异步消息处理机制.html" rel="prev" title="分析Android中的异步消息处理机制">
+                分析Android中的异步消息处理机制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -650,7 +671,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -661,7 +682,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -690,6 +711,17 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sguotao" target="_blank" rel="external nofollow" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
           
         </div>
 
@@ -736,29 +768,18 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2012 - 
-  <span itemprop="copyrightYear">2017</span>
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Scott</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了164.2k字</span>
+  <span class="post-count">共写了165.7k字</span>
 </div>
 
-
-<div class="powered-by">
-  由 <a class="theme-link" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" rel="external nofollow" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
 
         
@@ -855,6 +876,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
