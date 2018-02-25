@@ -237,40 +237,6 @@
   </entry>
   
   <entry>
-    <title>【Kotlin笔记】Hello Kotlin</title>
-    <link href="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html"/>
-    <id>http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html</id>
-    <published>2017-06-09T02:30:37.000Z</published>
-    <updated>2017-06-23T11:06:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在上一篇 <em><a href="/Kotlin-2017-06-09-Kotlin-note1.html">Kotlin的前世今生</a></em> 中介绍了Kotlin的一些特点，下面记录一下Kotlin开发环境的配置，并且完成“Hello Kotlin”的打印输出。</p>
-<h2 id="AndroidStudio"><a href="#AndroidStudio" class="headerlink" title="AndroidStudio"></a>AndroidStudio</h2><p>由于AndroidStudio是基于Intllij Idead的插件实现，Intellij Idea也是JetBrains开发的，所有AndroidStudio就与Kotlin天生有一层紧密的联系，在AndroidStudio的预览版中已经将Kotlin作为了一个基础插件进行了集成，官方最新的2.3版本还暂时没有集成Kotlin插件，需要手动进行安装，安装的过程也非常的简单，具体路径Preferences–&gt;Plugin,选择Kotlin，安装，重启编译器。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812368551731.png" alt="20170622149812368551731.png"><br>Eclipse编译器同样需要手动安装插件，从Intellij 15开始，Kotlin也默认是安装的。</p>
-<h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><p>使用gradle构建Kotlin项目时，需要添加kotlin的依赖，对不同的项目，gradle文件也有所不同。</p>
-<h3 id="Java项目"><a href="#Java项目" class="headerlink" title="Java项目"></a>Java项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    ext.kotlin_version = &apos;1.1.2&apos;</div><div class="line"></div><div class="line">    repositories &#123;</div><div class="line">        mavenCentral()</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin: &apos;java&apos;</div><div class="line">apply plugin: &apos;kotlin&apos;</div><div class="line"></div><div class="line">sourceCompatibility = 1.7</div><div class="line"></div><div class="line">repositories &#123;</div><div class="line">    mavenCentral()</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile &quot;org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version&quot;</div><div class="line">    testCompile group: &apos;junit&apos;, name: &apos;junit&apos;, version: &apos;4.12&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="JavaScript项目"><a href="#JavaScript项目" class="headerlink" title="JavaScript项目"></a>JavaScript项目</h3><p>JavaScript使用不同的插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply plugin: &quot;kotlin2js&quot;</div></pre></td></tr></table></figure></p>
-<h3 id="Android项目"><a href="#Android项目" class="headerlink" title="Android项目"></a>Android项目</h3><p>如果通过编译器新建Kotlin项目工程，Gradle文件是默认生成的，如果要手动修改，需要手动添加Kotlin的引用包。在工程的gradle文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    ext.kotlin_version = &apos;1.1.0&apos; //使用的kotlin版本</div><div class="line"></div><div class="line">    repositories &#123;</div><div class="line">        mavenCentral()</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dependencies &#123;</div><div class="line">        classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>创建一个变量来保存当前使用的kotlin的版本号，在每个module的gradle文件中，都会用到这个变量，当使用高版本的kotlin时，直接修改这个变量即可。</p>
-<h2 id="Hello-Kotlin"><a href="#Hello-Kotlin" class="headerlink" title="Hello Kotlin"></a>Hello Kotlin</h2><p>打开IntelliJ，新建project，选中Kotlin。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812594181308.png" alt="20170622149812594181308.png"><br>输入GroupID（项目组织唯一的标识符，建议对应JAVA的包的结构）和 ArtifactID（项目的唯一的标识符，建议对应项目的名称），一路Next。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812620532141.png" alt="20170622149812620532141.png"><br>新建的工程中，是没有src文件的，需要手动添加，新建directory，名称src/main/kotlin。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812643655117.png" alt="20170622149812643655117.png"><br>新建一个package，创建HelloKotlin.kt。<br> <img src="http://7u2np3.com1.z0.glb.clouddn.com/2017062214981267486665.png" alt="2017062214981267486665.png"><br>添加一个main方法，输出“Hello Kotlin”。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812693961350.png" alt="20170622149812693961350.png"><br>至此，完成了“Hello Kotlin”的输出。</p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html">http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在上一篇 &lt;em&gt;&lt;a href=&quot;/Kotlin-2017-06-09-Kotlin-note1.html&quot;&gt;Kotlin的前世今生&lt;/a&gt;&lt;/em&gt; 中介绍了Kotlin的一些特点，下面记录一下Kotlin开发环境的配置，并且完成“Hello Kotlin”的打印输出。
-    
-    </summary>
-    
-      <category term="Kotlin" scheme="http://www.sguotao.top/categories/Kotlin/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.top/tags/Android/"/>
-    
-      <category term="Kotlin" scheme="http://www.sguotao.top/tags/Kotlin/"/>
-    
-  </entry>
-  
-  <entry>
     <title>【Kotlin笔记】Kotlin的前世今生</title>
     <link href="http://www.sguotao.top/Kotlin-2017-06-09-Kotlin-note1.html"/>
     <id>http://www.sguotao.top/Kotlin-2017-06-09-Kotlin-note1.html</id>
@@ -320,6 +286,40 @@
     <summary type="html">
     
       &lt;p&gt;三周前的Google IO大会上，官方宣布将Kotlin作为除Java、C++外的官方编程语言，在最新一期的TIOBE排行榜中，Kotlin就首次挤进编程语言TOP50。&lt;br&gt;&lt;img src=&quot;http://7u2np3.com1.z0.glb.clouddn.com/
+    
+    </summary>
+    
+      <category term="Kotlin" scheme="http://www.sguotao.top/categories/Kotlin/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.top/tags/Android/"/>
+    
+      <category term="Kotlin" scheme="http://www.sguotao.top/tags/Kotlin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【Kotlin笔记】Hello Kotlin</title>
+    <link href="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html"/>
+    <id>http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html</id>
+    <published>2017-06-09T02:30:37.000Z</published>
+    <updated>2017-06-23T11:06:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在上一篇 <em><a href="/Kotlin-2017-06-09-Kotlin-note1.html">Kotlin的前世今生</a></em> 中介绍了Kotlin的一些特点，下面记录一下Kotlin开发环境的配置，并且完成“Hello Kotlin”的打印输出。</p>
+<h2 id="AndroidStudio"><a href="#AndroidStudio" class="headerlink" title="AndroidStudio"></a>AndroidStudio</h2><p>由于AndroidStudio是基于Intllij Idead的插件实现，Intellij Idea也是JetBrains开发的，所有AndroidStudio就与Kotlin天生有一层紧密的联系，在AndroidStudio的预览版中已经将Kotlin作为了一个基础插件进行了集成，官方最新的2.3版本还暂时没有集成Kotlin插件，需要手动进行安装，安装的过程也非常的简单，具体路径Preferences–&gt;Plugin,选择Kotlin，安装，重启编译器。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812368551731.png" alt="20170622149812368551731.png"><br>Eclipse编译器同样需要手动安装插件，从Intellij 15开始，Kotlin也默认是安装的。</p>
+<h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><p>使用gradle构建Kotlin项目时，需要添加kotlin的依赖，对不同的项目，gradle文件也有所不同。</p>
+<h3 id="Java项目"><a href="#Java项目" class="headerlink" title="Java项目"></a>Java项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    ext.kotlin_version = &apos;1.1.2&apos;</div><div class="line"></div><div class="line">    repositories &#123;</div><div class="line">        mavenCentral()</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin: &apos;java&apos;</div><div class="line">apply plugin: &apos;kotlin&apos;</div><div class="line"></div><div class="line">sourceCompatibility = 1.7</div><div class="line"></div><div class="line">repositories &#123;</div><div class="line">    mavenCentral()</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile &quot;org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version&quot;</div><div class="line">    testCompile group: &apos;junit&apos;, name: &apos;junit&apos;, version: &apos;4.12&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="JavaScript项目"><a href="#JavaScript项目" class="headerlink" title="JavaScript项目"></a>JavaScript项目</h3><p>JavaScript使用不同的插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply plugin: &quot;kotlin2js&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="Android项目"><a href="#Android项目" class="headerlink" title="Android项目"></a>Android项目</h3><p>如果通过编译器新建Kotlin项目工程，Gradle文件是默认生成的，如果要手动修改，需要手动添加Kotlin的引用包。在工程的gradle文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    ext.kotlin_version = &apos;1.1.0&apos; //使用的kotlin版本</div><div class="line"></div><div class="line">    repositories &#123;</div><div class="line">        mavenCentral()</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    dependencies &#123;</div><div class="line">        classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建一个变量来保存当前使用的kotlin的版本号，在每个module的gradle文件中，都会用到这个变量，当使用高版本的kotlin时，直接修改这个变量即可。</p>
+<h2 id="Hello-Kotlin"><a href="#Hello-Kotlin" class="headerlink" title="Hello Kotlin"></a>Hello Kotlin</h2><p>打开IntelliJ，新建project，选中Kotlin。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812594181308.png" alt="20170622149812594181308.png"><br>输入GroupID（项目组织唯一的标识符，建议对应JAVA的包的结构）和 ArtifactID（项目的唯一的标识符，建议对应项目的名称），一路Next。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812620532141.png" alt="20170622149812620532141.png"><br>新建的工程中，是没有src文件的，需要手动添加，新建directory，名称src/main/kotlin。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812643655117.png" alt="20170622149812643655117.png"><br>新建一个package，创建HelloKotlin.kt。<br> <img src="http://7u2np3.com1.z0.glb.clouddn.com/2017062214981267486665.png" alt="2017062214981267486665.png"><br>添加一个main方法，输出“Hello Kotlin”。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170622149812693961350.png" alt="20170622149812693961350.png"><br>至此，完成了“Hello Kotlin”的输出。</p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html">http://www.sguotao.top/Kotlin-2017-06-10-Kotlin-note2.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在上一篇 &lt;em&gt;&lt;a href=&quot;/Kotlin-2017-06-09-Kotlin-note1.html&quot;&gt;Kotlin的前世今生&lt;/a&gt;&lt;/em&gt; 中介绍了Kotlin的一些特点，下面记录一下Kotlin开发环境的配置，并且完成“Hello Kotlin”的打印输出。
     
     </summary>
     
@@ -409,127 +409,6 @@
     
       &lt;h2 id=&quot;Https&quot;&gt;&lt;a href=&quot;#Https&quot; class=&quot;headerlink&quot; title=&quot;Https&quot;&gt;&lt;/a&gt;Https&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.top/tags/Android/"/>
-    
-      <category term="Http" scheme="http://www.sguotao.top/tags/Http/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分析TCP/IP参考模型</title>
-    <link href="http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2017-06-03-%E5%88%86%E6%9E%90TCP-IP%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html"/>
-    <id>http://www.sguotao.top/Android进阶-2017-06-03-分析TCP-IP网络模型.html</id>
-    <published>2017-06-03T02:27:04.000Z</published>
-    <updated>2017-08-08T08:47:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>TCP/IP模型各个层次分别对应于不同的协议。TCP/IP协议栈是数据通信协议的集合 ，包含许多协议。其协议栈名字来源于其中最主要的两个协议TCP（传输控制协议）和IP（网际协议）。TCP/IP协议栈负责确保网络设备之间能够通信。它是一组规则，规定了信息如何在网络中传输。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017080815021784897401.png" alt="2017080815021784897401.png"></p>
-<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p>物理层功能:</p>
-<ul>
-<li>规定介质类型、接口类型、信令类型；</li>
-<li>规范在终端系统之间激活、维护和关闭物理链路的电气、机械、流程和功能等方面的要求；</li>
-<li>规范电平、数据速率、最大传输距离和物理接头等特征。</li>
-</ul>
-<p>物理层介质：</p>
-<ul>
-<li>同轴电缆（coaxical cable）</li>
-<li>双绞线（twisted pair）</li>
-<li>光纤（fiber）</li>
-<li>无线电波（wireless raido）</li>
-</ul>
-<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><p>数据链路层协议规定了数据链路层帧的封装方式。数据链路层又分为MAC子层和LLC子层:</p>
-<ul>
-<li>MAC子层负责指定数据如何通过物理线路进行传输，并向下与物理层通信，它定义了物理编址、网络拓扑、线路规范、错误通知、按序传递和流量控制等功能。</li>
-<li>LLC子层负责识别协议类型并对数据进行封装以便通过网络进行传输。LLC子层主要执行数据链路层的大部分功能和网络层的部分功能。如帧的收发功能，在发送时，帧由发送的数据加上地址和CRC校验等构成，接收时将帧拆开，执行地址识别、CRC校验，并具有帧顺序控制、差错控制、流量控制等功能。此外，它还执行数据报、虚电路、多路复用等部分网络层的功能。</li>
-</ul>
-<h3 id="mac地址"><a href="#mac地址" class="headerlink" title="mac地址"></a>mac地址</h3><p>网络设备的MAC地址是全球唯一的。MAC地址由48个二进制位组成，通常我们用十六进制数字来表示。其中前6位十六进制数字由IEEE统一分配给设备制造商，后6位十六进制数字由厂商自行分配。</p>
-<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>由于以太网采用广播方式发送数据包，效率比较低，也无法区分哪些MAC地址属于同一子网，引入网络层后，能够区分哪些MAC地址属于同一个子网络，使得我们能够区分不同的计算机是否属于同一个子网络，并且在不同的网络之间转发数据包。</p>
-<p>网络层常用协议:</p>
-<ul>
-<li>IP（Internet Protocol）IP为网络层最主要的协议，其功能即为网络层的主要功能，一是提供逻辑编址，二是提供路由功能，三是报文的封装和解封装。ICMP、ARP、RARP协议辅助IP工作。</li>
-<li>ICMP（Internet Control Message Protocol）是一个管理协议并为IP提供信息服务，ICMP消息承载在IP报文中。</li>
-<li>ARP（Address Resolution Protocol）实现IP地址到硬件地址的动态映射，即根据已知的IP地址获得相应的硬件地址。</li>
-<li>RARP（Reverse Address Resolution Protocol）实现硬件地址到IP地址的动态映射，即根据已知的硬件地址获得相应的IP地址。</li>
-</ul>
-<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>当一个数据包从互联网上发来的时候，怎么确定是网页的内容，还是在线聊天的内容？传输层的功能，实现端口到端口的通信。</p>
-<p>传输层主要功能：</p>
-<ul>
-<li>分段上层数据；</li>
-<li>建立端到端连接；</li>
-<li>将数据从一端主机传送到另一端主机；</li>
-<li>保证数据按序、可靠、正确传输。</li>
-</ul>
-<p>传输层协议主要包含传输控制协议TCP（transfer control protocol）和用户数据报文协议UDP（user datagram protocol）:</p>
-<ul>
-<li>TCP提供面向连接的、可靠的字节流服务。面向连接意味着使用TCP协议作为传输层协议的两个应用之间在相互交换数据之前必须建立一个TCP连接。TCP通过确认、校验、重组等机制为上层应用提供可靠的传输服务。但是TCP连接的建立以及确认、校验等机制都需要耗费大量的工作并且会带来大量的开销。</li>
-<li>UDP提供简单的、面向数据报的服务。UDP不保证可靠性，即不保证报文能够到达目的地。UDP适用于更关注传输效率的应用，如SNMP、Radius等，SNMP监控网络并断续发送告警等消息，如果每次发送少量信息都需要建立TCP连接，无疑会降低传输效率，所以诸如SNMP、Radius等更注重传输效率的应用程序都会选择UDP作为传输层协议。另外，UDP还适用于本身具备可靠性机制的应用层协议。</li>
-</ul>
-<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><p>应用层主要功能:</p>
-<ul>
-<li>规定应用程序的数据格式。</li>
-<li>为用户提供接口、处理特定的应用；</li>
-<li>数据加密、解密、压缩、解压缩；</li>
-<li>定义数据表示的标准。</li>
-</ul>
-<p>应用层的协议包括:</p>
-<ul>
-<li>FTP(File TransferProtocol) 文件传输协议。用于传输独立的文件，通常用于交互式用户会话。</li>
-<li>HTTP(HypertextTransfer Protocol)超文本传输协议。 用于传输那些构成万维网上的页面的文件。</li>
-<li>TELNET ：远程终端访问。用于传送具有TELNET控制信息的数据。它提供了与终端设备或终端进程交互的标准方法，支持终端到终端的连接及进程到进程分布式计算的通信。</li>
-<li>SMTP(Simple MessageTransfer Protocol)简单邮件传输协议</li>
-<li>POP3(Post OfficeProtocol)邮局协议用于发送和接收邮件。</li>
-<li>DNS(Domain NameServer)是一个域名服务的协议，提供域名到IP地址的转换，允许对域名资源进行分散管理。</li>
-<li>TFTP(Trivial FileTransfer Protocol)简单文件传输协议。设计用于一般目的的、高吞吐量的文件传输。</li>
-<li>RIP(RoutingInformation Protocol)路由器用来在 IP 网络上交换路由信息的协议。</li>
-<li>SNMP(Simple NetworkManagement Protocol)用于收集网络管理信息，并在网络管理控制台和网络设备（例如路由器、网桥和服务器）之间交换网络管理信息。</li>
-<li>Radius(RemoteAuthentication Dial In User Service)拨号接入远端认证协议完成接入用户的认证、授权、计费功能的协议。</li>
-</ul>
-<h2 id="TCP-IP模型层间数据封装与解析过程"><a href="#TCP-IP模型层间数据封装与解析过程" class="headerlink" title="TCP/IP模型层间数据封装与解析过程"></a>TCP/IP模型层间数据封装与解析过程</h2><p>TCP/IP每一层都让数据得以通过网络进行传输，这些层之间使用PDU（协议数据单元）彼此交换信息，确保网络设备之间能够通信。数据封装的过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150217839042287.png" alt="20170808150217839042287.png"></p>
-<ol>
-<li>传输层数据中加入TCP报头后得到PDU被称为segment（数据段）；</li>
-<li>数据段被传递给网络层，网络层添加IP报头得到的PDU被称为packet（数据包）；</li>
-<li>数据包被传递到数据链路层，封装数据链路层报头得到的PDU被称为frame（数据帧）；</li>
-<li>帧被转换为比特，通过网络介质传输。</li>
-</ol>
-<p>这种协议栈向下传递数据，并添加报头和报尾的过程称为封装，数据被封装并通过网络传输后，接收设备将删除添加的信息，并根据报头中的信息决定如何将数据沿协议栈上传给合适的应用程序，这个过程称为解封装。不同设备的对等层之间依靠封装和解封装来实现相互间的通信。数据解析的过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150217846881527.png" alt="20170808150217846881527.png"></p>
-<h2 id="TCP-IP模型建立连接与断开连接"><a href="#TCP-IP模型建立连接与断开连接" class="headerlink" title="TCP/IP模型建立连接与断开连接"></a>TCP/IP模型建立连接与断开连接</h2><p>TCP/IP模型建立连接与断开连接过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150218203850506.png" alt="20170808150218203850506.png"></p>
-<p> <strong>三次握手过程(建立连接)</strong></p>
-<ol>
-<li>请求端（通常也称为客户端）发送一个SYN段表示客户期望连接服务器端口，初始序列号为a。</li>
-<li>服务器发回序列号为b的SYN段作为响应。同时设置确认序号为客户端的序列号加1（a+1）作为对客户端的SYN报文的确认。</li>
-<li>客户端设置序列号为服务器端的序列号加1（b+1）作为对服务器端SYN报文段的确认。</li>
-</ol>
-<p><strong>四次挥手过程(断开连接)</strong></p>
-<ol>
-<li>请求端（通常也称为客户端）想终止连接则发送一个FIN段，序列号设置为a。</li>
-<li>服务器回应一个确认序号为客户端的序列号加1（a+1）的ACK确认段，作为对客户端的FIN报文的确认。</li>
-<li>服务器端向客户端发送一个FIN终止段（设置序列号为b，确认号为a+1）。</li>
-<li>客户端返回一个确认报文（设置序列号为b+1）作为响应。</li>
-</ol>
-<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p>所提供的服务是用来将主机名和域名转换为IP地址的工作。</p>
-<h3 id="DNS查询过程"><a href="#DNS查询过程" class="headerlink" title="DNS查询过程"></a>DNS查询过程</h3><p>递归:DNS服务器可使用其自身的资源记录信息缓存来应答查询，也可以代表请求客户机来查询或联系其他DNS服务器，以完全解析该名称，并随后将应答返回至客户机。</p>
-<p>迭代:客户机自己也可尝试联系其他的DNS服务器来解析名称。如果客户机这么做，它会使用基于服务器应答的独立和附加的查询。</p>
-<ol>
-<li>在浏览器中输入域名，操作系统会先检查自己本地的hosts文件是否有这个网址映射关系；</li>
-<li>如果hosts里没有这个域名的映射，则查找本地DNS解析器缓存</li>
-<li>如果hosts与本地DNS解析器缓存都没有相应的网址映射关系，首先会找TCP/IP参数中设置的首选DNS服务器；</li>
-<li>如果要查询的域名，不由本地DNS服务器区域解析，但该DNS服务器已缓存了此网址映射关系，则调用这个IP地址映射，完成域名解析。</li>
-<li>本地DNS就把请求发至13台根DNS，根DNS服务器收到请求后会判断这个域名（.com）是谁来授权管理，并会返回一个负责该顶级域名服务器的一个IP。本地DNS服务器收到IP信息后，将会联系负责.com域的这台服务器。</li>
-<li>如果用的是转发模式，此DNS服务器就会把请求转至上一级DNS服务器，由上一级服务器进行解析。</li>
-</ol>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>1.<a href="http://blog.jobbole.com/91515/" target="_blank" rel="external">TCP/IP协议栈及OSI参考模型详解</a><br>2.<a href="http://swiftlet.net/archives/1082" target="_blank" rel="external">TCP三次握手和四次挥手协议</a></p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.top/Android进阶-2017-06-03-分析TCP-IP网络模型.html">http://www.sguotao.top/Android进阶-2017-06-03-分析TCP-IP网络模型.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;TCP/IP模型各个层次分别对应于不同的协议。TCP/IP协议栈是数据通信协议的集合 ，包含许多协议。其协议栈名字来源于其中最主要的两个协议TCP（传输控制协议）和IP（网际协议）。TCP/IP协议栈负责确保网络设备之间能够通信。它是一组规则，规定了信息如何在网络中传输。&lt;
     
     </summary>
     
@@ -1332,6 +1211,127 @@ table th:first-of-type {
       &lt;blockquote&gt;
 &lt;p&gt;所谓协议，是指指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则。&lt;br&gt;Http协议，超文本传输协议(Http)是一种通信协议，它允许将超文本标记语言（HTML）文档从web服务器传送到客户端的浏览器。&lt;/p&gt;
 &lt;/blockqu
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.top/tags/Android/"/>
+    
+      <category term="Http" scheme="http://www.sguotao.top/tags/Http/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分析TCP/IP参考模型</title>
+    <link href="http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2017-06-03-%E5%88%86%E6%9E%90TCP-IP%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html"/>
+    <id>http://www.sguotao.top/Android进阶-2017-06-03-分析TCP-IP网络模型.html</id>
+    <published>2017-06-03T02:27:04.000Z</published>
+    <updated>2017-08-08T08:47:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>TCP/IP模型各个层次分别对应于不同的协议。TCP/IP协议栈是数据通信协议的集合 ，包含许多协议。其协议栈名字来源于其中最主要的两个协议TCP（传输控制协议）和IP（网际协议）。TCP/IP协议栈负责确保网络设备之间能够通信。它是一组规则，规定了信息如何在网络中传输。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017080815021784897401.png" alt="2017080815021784897401.png"></p>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><p>物理层功能:</p>
+<ul>
+<li>规定介质类型、接口类型、信令类型；</li>
+<li>规范在终端系统之间激活、维护和关闭物理链路的电气、机械、流程和功能等方面的要求；</li>
+<li>规范电平、数据速率、最大传输距离和物理接头等特征。</li>
+</ul>
+<p>物理层介质：</p>
+<ul>
+<li>同轴电缆（coaxical cable）</li>
+<li>双绞线（twisted pair）</li>
+<li>光纤（fiber）</li>
+<li>无线电波（wireless raido）</li>
+</ul>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><p>数据链路层协议规定了数据链路层帧的封装方式。数据链路层又分为MAC子层和LLC子层:</p>
+<ul>
+<li>MAC子层负责指定数据如何通过物理线路进行传输，并向下与物理层通信，它定义了物理编址、网络拓扑、线路规范、错误通知、按序传递和流量控制等功能。</li>
+<li>LLC子层负责识别协议类型并对数据进行封装以便通过网络进行传输。LLC子层主要执行数据链路层的大部分功能和网络层的部分功能。如帧的收发功能，在发送时，帧由发送的数据加上地址和CRC校验等构成，接收时将帧拆开，执行地址识别、CRC校验，并具有帧顺序控制、差错控制、流量控制等功能。此外，它还执行数据报、虚电路、多路复用等部分网络层的功能。</li>
+</ul>
+<h3 id="mac地址"><a href="#mac地址" class="headerlink" title="mac地址"></a>mac地址</h3><p>网络设备的MAC地址是全球唯一的。MAC地址由48个二进制位组成，通常我们用十六进制数字来表示。其中前6位十六进制数字由IEEE统一分配给设备制造商，后6位十六进制数字由厂商自行分配。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>由于以太网采用广播方式发送数据包，效率比较低，也无法区分哪些MAC地址属于同一子网，引入网络层后，能够区分哪些MAC地址属于同一个子网络，使得我们能够区分不同的计算机是否属于同一个子网络，并且在不同的网络之间转发数据包。</p>
+<p>网络层常用协议:</p>
+<ul>
+<li>IP（Internet Protocol）IP为网络层最主要的协议，其功能即为网络层的主要功能，一是提供逻辑编址，二是提供路由功能，三是报文的封装和解封装。ICMP、ARP、RARP协议辅助IP工作。</li>
+<li>ICMP（Internet Control Message Protocol）是一个管理协议并为IP提供信息服务，ICMP消息承载在IP报文中。</li>
+<li>ARP（Address Resolution Protocol）实现IP地址到硬件地址的动态映射，即根据已知的IP地址获得相应的硬件地址。</li>
+<li>RARP（Reverse Address Resolution Protocol）实现硬件地址到IP地址的动态映射，即根据已知的硬件地址获得相应的IP地址。</li>
+</ul>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>当一个数据包从互联网上发来的时候，怎么确定是网页的内容，还是在线聊天的内容？传输层的功能，实现端口到端口的通信。</p>
+<p>传输层主要功能：</p>
+<ul>
+<li>分段上层数据；</li>
+<li>建立端到端连接；</li>
+<li>将数据从一端主机传送到另一端主机；</li>
+<li>保证数据按序、可靠、正确传输。</li>
+</ul>
+<p>传输层协议主要包含传输控制协议TCP（transfer control protocol）和用户数据报文协议UDP（user datagram protocol）:</p>
+<ul>
+<li>TCP提供面向连接的、可靠的字节流服务。面向连接意味着使用TCP协议作为传输层协议的两个应用之间在相互交换数据之前必须建立一个TCP连接。TCP通过确认、校验、重组等机制为上层应用提供可靠的传输服务。但是TCP连接的建立以及确认、校验等机制都需要耗费大量的工作并且会带来大量的开销。</li>
+<li>UDP提供简单的、面向数据报的服务。UDP不保证可靠性，即不保证报文能够到达目的地。UDP适用于更关注传输效率的应用，如SNMP、Radius等，SNMP监控网络并断续发送告警等消息，如果每次发送少量信息都需要建立TCP连接，无疑会降低传输效率，所以诸如SNMP、Radius等更注重传输效率的应用程序都会选择UDP作为传输层协议。另外，UDP还适用于本身具备可靠性机制的应用层协议。</li>
+</ul>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><p>应用层主要功能:</p>
+<ul>
+<li>规定应用程序的数据格式。</li>
+<li>为用户提供接口、处理特定的应用；</li>
+<li>数据加密、解密、压缩、解压缩；</li>
+<li>定义数据表示的标准。</li>
+</ul>
+<p>应用层的协议包括:</p>
+<ul>
+<li>FTP(File TransferProtocol) 文件传输协议。用于传输独立的文件，通常用于交互式用户会话。</li>
+<li>HTTP(HypertextTransfer Protocol)超文本传输协议。 用于传输那些构成万维网上的页面的文件。</li>
+<li>TELNET ：远程终端访问。用于传送具有TELNET控制信息的数据。它提供了与终端设备或终端进程交互的标准方法，支持终端到终端的连接及进程到进程分布式计算的通信。</li>
+<li>SMTP(Simple MessageTransfer Protocol)简单邮件传输协议</li>
+<li>POP3(Post OfficeProtocol)邮局协议用于发送和接收邮件。</li>
+<li>DNS(Domain NameServer)是一个域名服务的协议，提供域名到IP地址的转换，允许对域名资源进行分散管理。</li>
+<li>TFTP(Trivial FileTransfer Protocol)简单文件传输协议。设计用于一般目的的、高吞吐量的文件传输。</li>
+<li>RIP(RoutingInformation Protocol)路由器用来在 IP 网络上交换路由信息的协议。</li>
+<li>SNMP(Simple NetworkManagement Protocol)用于收集网络管理信息，并在网络管理控制台和网络设备（例如路由器、网桥和服务器）之间交换网络管理信息。</li>
+<li>Radius(RemoteAuthentication Dial In User Service)拨号接入远端认证协议完成接入用户的认证、授权、计费功能的协议。</li>
+</ul>
+<h2 id="TCP-IP模型层间数据封装与解析过程"><a href="#TCP-IP模型层间数据封装与解析过程" class="headerlink" title="TCP/IP模型层间数据封装与解析过程"></a>TCP/IP模型层间数据封装与解析过程</h2><p>TCP/IP每一层都让数据得以通过网络进行传输，这些层之间使用PDU（协议数据单元）彼此交换信息，确保网络设备之间能够通信。数据封装的过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150217839042287.png" alt="20170808150217839042287.png"></p>
+<ol>
+<li>传输层数据中加入TCP报头后得到PDU被称为segment（数据段）；</li>
+<li>数据段被传递给网络层，网络层添加IP报头得到的PDU被称为packet（数据包）；</li>
+<li>数据包被传递到数据链路层，封装数据链路层报头得到的PDU被称为frame（数据帧）；</li>
+<li>帧被转换为比特，通过网络介质传输。</li>
+</ol>
+<p>这种协议栈向下传递数据，并添加报头和报尾的过程称为封装，数据被封装并通过网络传输后，接收设备将删除添加的信息，并根据报头中的信息决定如何将数据沿协议栈上传给合适的应用程序，这个过程称为解封装。不同设备的对等层之间依靠封装和解封装来实现相互间的通信。数据解析的过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150217846881527.png" alt="20170808150217846881527.png"></p>
+<h2 id="TCP-IP模型建立连接与断开连接"><a href="#TCP-IP模型建立连接与断开连接" class="headerlink" title="TCP/IP模型建立连接与断开连接"></a>TCP/IP模型建立连接与断开连接</h2><p>TCP/IP模型建立连接与断开连接过程如图<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170808150218203850506.png" alt="20170808150218203850506.png"></p>
+<p> <strong>三次握手过程(建立连接)</strong></p>
+<ol>
+<li>请求端（通常也称为客户端）发送一个SYN段表示客户期望连接服务器端口，初始序列号为a。</li>
+<li>服务器发回序列号为b的SYN段作为响应。同时设置确认序号为客户端的序列号加1（a+1）作为对客户端的SYN报文的确认。</li>
+<li>客户端设置序列号为服务器端的序列号加1（b+1）作为对服务器端SYN报文段的确认。</li>
+</ol>
+<p><strong>四次挥手过程(断开连接)</strong></p>
+<ol>
+<li>请求端（通常也称为客户端）想终止连接则发送一个FIN段，序列号设置为a。</li>
+<li>服务器回应一个确认序号为客户端的序列号加1（a+1）的ACK确认段，作为对客户端的FIN报文的确认。</li>
+<li>服务器端向客户端发送一个FIN终止段（设置序列号为b，确认号为a+1）。</li>
+<li>客户端返回一个确认报文（设置序列号为b+1）作为响应。</li>
+</ol>
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p>所提供的服务是用来将主机名和域名转换为IP地址的工作。</p>
+<h3 id="DNS查询过程"><a href="#DNS查询过程" class="headerlink" title="DNS查询过程"></a>DNS查询过程</h3><p>递归:DNS服务器可使用其自身的资源记录信息缓存来应答查询，也可以代表请求客户机来查询或联系其他DNS服务器，以完全解析该名称，并随后将应答返回至客户机。</p>
+<p>迭代:客户机自己也可尝试联系其他的DNS服务器来解析名称。如果客户机这么做，它会使用基于服务器应答的独立和附加的查询。</p>
+<ol>
+<li>在浏览器中输入域名，操作系统会先检查自己本地的hosts文件是否有这个网址映射关系；</li>
+<li>如果hosts里没有这个域名的映射，则查找本地DNS解析器缓存</li>
+<li>如果hosts与本地DNS解析器缓存都没有相应的网址映射关系，首先会找TCP/IP参数中设置的首选DNS服务器；</li>
+<li>如果要查询的域名，不由本地DNS服务器区域解析，但该DNS服务器已缓存了此网址映射关系，则调用这个IP地址映射，完成域名解析。</li>
+<li>本地DNS就把请求发至13台根DNS，根DNS服务器收到请求后会判断这个域名（.com）是谁来授权管理，并会返回一个负责该顶级域名服务器的一个IP。本地DNS服务器收到IP信息后，将会联系负责.com域的这台服务器。</li>
+<li>如果用的是转发模式，此DNS服务器就会把请求转至上一级DNS服务器，由上一级服务器进行解析。</li>
+</ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>1.<a href="http://blog.jobbole.com/91515/" target="_blank" rel="external">TCP/IP协议栈及OSI参考模型详解</a><br>2.<a href="http://swiftlet.net/archives/1082" target="_blank" rel="external">TCP三次握手和四次挥手协议</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.top/Android进阶-2017-06-03-分析TCP-IP网络模型.html">http://www.sguotao.top/Android进阶-2017-06-03-分析TCP-IP网络模型.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;TCP/IP模型各个层次分别对应于不同的协议。TCP/IP协议栈是数据通信协议的集合 ，包含许多协议。其协议栈名字来源于其中最主要的两个协议TCP（传输控制协议）和IP（网际协议）。TCP/IP协议栈负责确保网络设备之间能够通信。它是一组规则，规定了信息如何在网络中传输。&lt;
     
     </summary>
     
@@ -2638,6 +2638,78 @@ stretch（默认值）：轴线占满整个交叉轴。
   </entry>
   
   <entry>
+    <title>分析Android中的Fragment</title>
+    <link href="http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Androdi%E4%B8%AD%E7%9A%84Fragment.html"/>
+    <id>http://www.sguotao.top/Android进阶-2016-07-21-分析Androdi中的Fragment.html</id>
+    <published>2016-07-21T02:27:04.000Z</published>
+    <updated>2017-08-08T03:39:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Fragment介绍"><a href="#Fragment介绍" class="headerlink" title="Fragment介绍"></a>Fragment介绍</h2><p>Android 在 Android 3.0（API 级别 11）中引入了Fragment，主要是为了给大屏幕（如平板电脑）上更加动态和灵活的 UI 设计提供支持。</p>
+<h3 id="Fragment加载到Activity中的两种方式"><a href="#Fragment加载到Activity中的两种方式" class="headerlink" title="Fragment加载到Activity中的两种方式"></a>Fragment加载到Activity中的两种方式</h3><p><strong>静态加载方式</strong><br>静态加载方式，直接在布局文件中添加fragment，示例代码:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleListFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/list"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleReaderFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/viewer"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>动态加载方式</strong><br>动态加载方式，即在Activity运行过程中，将fragment加载到布局文件中，示例代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.获取一个FragmentTransaction实例</span></div><div class="line">FragmentManager fragmentManager = getFragmentManager();</div><div class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</div><div class="line"><span class="comment">//2.调用add()方法添加Fragment对象</span></div><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line"><span class="comment">//3.调用commit()方法使得fragmentTransaction实例的改变生效</span></div><div class="line">fragmentTransaction.commit();</div></pre></td></tr></table></figure>
+<h3 id="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"><a href="#FragmentPagerAdapter与FragmentStatePagerAdapter的区别" class="headerlink" title="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"></a>FragmentPagerAdapter与FragmentStatePagerAdapter的区别</h3><p>FragmentPagerAdapter和FragmentStatePagerAdapter都是PagerAdapter的子类，先来看他们的父类PagerAdapter。</p>
+<p>PagerAdapter是ViewPager的适配器，ViewPager将调用它来取得所需显示的页，而 PagerAdapter也会在数据变化时，通知ViewPager。如果继承自该类，至少需要实现 instantiateItem(), destroyItem(), getCount() 以及 isViewFromObject()。</p>
+<p>FragmentPagerAdapter继承自PagerAdapter。相比通用的PagerAdapter，该类更专注于每一页均为Fragment的情况。该类内的每一个生成的Fragment都将保存在内存之中，因此适用于那些相对静态的页，数量也比较少的那种；如果需要处理有很多页，并且数据动态性较大、占用内存较多的情况，应该使用FragmentStatePagerAdapter。FragmentPagerAdapter 重载实现了几个必须的函数，因此来自 PagerAdapter 的函数，我们只需要实现 getCount()，即可。且，由于 FragmentPagerAdapter.instantiateItem() 的实现中，调用了一个新增的虚函数 getItem()，因此，我们还至少需要实现一个 getItem()。</p>
+<p>FragmentStatePagerAdapter 和前面的 FragmentPagerAdapter 一样，是继承子 PagerAdapter。和 FragmentPagerAdapter 不一样的是，正如其类名中的 ‘State’ 所表明的含义一样，该 PagerAdapter 的实现将只保留当前页面，当页面离开视线后，就会被消除，释放其资源；而在页面需要显示时，生成新的页面。这么实现的好处就是当拥有大量的页面时，不必在内存中占用大量的内存。</p>
+<p>为什么FragmentPagerAdapter占用内存会比FragmentStatePagerAdapter呢？看一下FragmentPagerAdapter的源码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">        mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Detaching item #"</span> + getItemId(position) + <span class="string">": f="</span> + object</div><div class="line">            + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">    mCurTransaction.detach((Fragment)object);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再对比看一下FragmentStatePagerAdapter对应的方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">       Fragment fragment = (Fragment) object;</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">           mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Removing item #"</span> + position + <span class="string">": f="</span> + object</div><div class="line">               + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">       <span class="keyword">while</span> (mSavedState.size() &lt;= position) &#123;</div><div class="line">           mSavedState.add(<span class="keyword">null</span>);</div><div class="line">       &#125;</div><div class="line">       mSavedState.set(position, fragment.isAdded()</div><div class="line">               ? mFragmentManager.saveFragmentInstanceState(fragment) : <span class="keyword">null</span>);</div><div class="line">       mFragments.set(position, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">       mCurTransaction.remove(fragment);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>FragmentStatePagerAdapter在每次destroyItem()时，将Fragment移除掉，而FragmentPagerAdapter只是detach()，失去关联而已。</p>
+<h2 id="Fragment的生命周期"><a href="#Fragment的生命周期" class="headerlink" title="Fragment的生命周期"></a>Fragment的生命周期</h2><p>一个Fragment从创建到销毁的完整的生命周期如图:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170722150069331557277.png" alt="20170722150069331557277.png"><br>图中给出了Fragment在创建和销毁的过程中对一个的Activity的回调方法。对比发现，Fragment生命周期过程中的回调状态比Activity的状态多。</p>
+<p><strong>onAttch（Activity activity）</strong>，这个回调方法是在fragment与activity关联之后调用，我们能在这个方法中获取这个关联的activity的实例。但是当你的sdk更新到android6.0（api-23）是就会显示这个方法是过时的，系统建议使用onAttach（Context  context）这个方法代替。</p>
+<p><strong>onCreate()</strong>，这个回调方法是在fragment初始化的时候调用，我们通常在这个方法中使用getArgument()获取Activity传来的初始化Fragment的参数。需要注意的是，在这个方法中不能获取Activity中的控件，因为此时Activity的onCreate()还没有执行完，即Activity还没有创建完，要想获取Activity相关的资源应该在onActivityCreated()中获取。</p>
+<p><strong>onCreateView()</strong>：这个回调方法中我们主要是通过布局填充器获取Fragment布局。我们在这个方法中通过view.findViewById()初始化Fragment中的控件。</p>
+<p><strong>onActivityCreated()</strong>，这个回调方法是在Activity的onCreate()方法执行完执行，通知Fragment，其关联的Activity的onCreate()方法执行完了，即Activity创建完成，可以在这个方法中获取Activity中的资源。</p>
+<p><strong>onStart()</strong>，这个回调方法是在Activity的onstart()执行完立即执行，这个方法执行完Fragment界面就显示出来了，但是现在还没有获取焦点，用户不能进行交互操作。</p>
+<p><strong>onResume()</strong>，这个回调方法是在Activity的onResume()方法执行完立即执行，此时Fragment的获取了界面，用户可以操作。</p>
+<p><strong>onPause()</strong>，Fragment失去焦点，此时用户是不能操作的，执行完立即执行Activity的onPause()方法。</p>
+<p><strong>onStop()</strong>，Fragment不可见，执行完立即执行Activity的onStop()方法。</p>
+<p><strong>onDestroyView()</strong>,在onCreateView()中创建的Fragment视图会被销毁。Fragment的视图被回收。</p>
+<p><strong>onDestroy()</strong>，当这个Fragment不再使用时调用。需要注意的是，它即使经过了onDestroy()阶段，但仍然能从Activity中找到，因为它还没有Detach()。</p>
+<p><strong>onDetach()</strong>，Fragment与Activity解除关联，Fragment的所有的资源都被回收。</p>
+<h2 id="Fragment的通信"><a href="#Fragment的通信" class="headerlink" title="Fragment的通信"></a>Fragment的通信</h2><p>Fragment的通信，概括起来主要包含以下三种情况:</p>
+<ol>
+<li>在Fragment中调用Activity中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，调用Activity中的方法。</li>
+<li>在Activity中调用Fragment中的方法，Activity中维护着其关联的Fragment的实例，可以直接调用其方法。</li>
+<li>在Fragment中调用Fragment中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，通过findFragmentById()方法，知道要与之通信的Fragment。</li>
+</ol>
+<p>除了上面中介绍的方法，还可以通过接口回调的方法。这里以Fragment调用Activity中的方法为例，介绍接口回调的方式,接口回调主要经历三个步骤:</p>
+<ul>
+<li>在Fragment中定义回调接口，声明回调方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 1.在Fragment中定义回调接口，声明回调方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ComminuteListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Fragment关联的Activity实现接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFragmentActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">TestFragment</span>.<span class="title">ComminuteListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span> </span>&#123;</div><div class="line">        showToast();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">()</span> </span>&#123;</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"toast from Activity"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在Fragment的onAttach()方法中，获取接口实例，调用回调方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttach</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onAttach(context);</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">          comminuteListener = (ComminuteListener) getActivity();</div><div class="line">      &#125;<span class="keyword">catch</span> (ClassCastException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      comminuteListener.comminute();</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]<a href="https://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">Google-API指南-应用组件-Fragment</a></p>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.top/Android进阶-2016-07-21-分析Androdi中的Fragment.html">http://www.sguotao.top/Android进阶-2016-07-21-分析Androdi中的Fragment.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Fragment介绍&quot;&gt;&lt;a href=&quot;#Fragment介绍&quot; class=&quot;headerlink&quot; title=&quot;Fragment介绍&quot;&gt;&lt;/a&gt;Fragment介绍&lt;/h2&gt;&lt;p&gt;Android 在 Android 3.0（API 级别 11）中引入了Fr
+    
+    </summary>
+    
+      <category term="Android进阶" scheme="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Android" scheme="http://www.sguotao.top/tags/Android/"/>
+    
+      <category term="Fragment" scheme="http://www.sguotao.top/tags/Fragment/"/>
+    
+  </entry>
+  
+  <entry>
     <title>分析Android中的Activity</title>
     <link href="http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Android%E4%B8%AD%E7%9A%84Activity.html"/>
     <id>http://www.sguotao.top/Android进阶-2016-07-21-分析Android中的Activity.html</id>
@@ -2725,78 +2797,6 @@ stretch（默认值）：轴线占满整个交叉轴。
       <category term="Android" scheme="http://www.sguotao.top/tags/Android/"/>
     
       <category term="Activity" scheme="http://www.sguotao.top/tags/Activity/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分析Android中的Fragment</title>
-    <link href="http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2016-07-21-%E5%88%86%E6%9E%90Androdi%E4%B8%AD%E7%9A%84Fragment.html"/>
-    <id>http://www.sguotao.top/Android进阶-2016-07-21-分析Androdi中的Fragment.html</id>
-    <published>2016-07-21T02:27:04.000Z</published>
-    <updated>2017-08-08T03:39:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Fragment介绍"><a href="#Fragment介绍" class="headerlink" title="Fragment介绍"></a>Fragment介绍</h2><p>Android 在 Android 3.0（API 级别 11）中引入了Fragment，主要是为了给大屏幕（如平板电脑）上更加动态和灵活的 UI 设计提供支持。</p>
-<h3 id="Fragment加载到Activity中的两种方式"><a href="#Fragment加载到Activity中的两种方式" class="headerlink" title="Fragment加载到Activity中的两种方式"></a>Fragment加载到Activity中的两种方式</h3><p><strong>静态加载方式</strong><br>静态加载方式，直接在布局文件中添加fragment，示例代码:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleListFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/list"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.news.ArticleReaderFragment"</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/viewer"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"2"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><strong>动态加载方式</strong><br>动态加载方式，即在Activity运行过程中，将fragment加载到布局文件中，示例代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.获取一个FragmentTransaction实例</span></div><div class="line">FragmentManager fragmentManager = getFragmentManager();</div><div class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</div><div class="line"><span class="comment">//2.调用add()方法添加Fragment对象</span></div><div class="line">ExampleFragment fragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</div><div class="line"><span class="comment">//3.调用commit()方法使得fragmentTransaction实例的改变生效</span></div><div class="line">fragmentTransaction.commit();</div></pre></td></tr></table></figure>
-<h3 id="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"><a href="#FragmentPagerAdapter与FragmentStatePagerAdapter的区别" class="headerlink" title="FragmentPagerAdapter与FragmentStatePagerAdapter的区别"></a>FragmentPagerAdapter与FragmentStatePagerAdapter的区别</h3><p>FragmentPagerAdapter和FragmentStatePagerAdapter都是PagerAdapter的子类，先来看他们的父类PagerAdapter。</p>
-<p>PagerAdapter是ViewPager的适配器，ViewPager将调用它来取得所需显示的页，而 PagerAdapter也会在数据变化时，通知ViewPager。如果继承自该类，至少需要实现 instantiateItem(), destroyItem(), getCount() 以及 isViewFromObject()。</p>
-<p>FragmentPagerAdapter继承自PagerAdapter。相比通用的PagerAdapter，该类更专注于每一页均为Fragment的情况。该类内的每一个生成的Fragment都将保存在内存之中，因此适用于那些相对静态的页，数量也比较少的那种；如果需要处理有很多页，并且数据动态性较大、占用内存较多的情况，应该使用FragmentStatePagerAdapter。FragmentPagerAdapter 重载实现了几个必须的函数，因此来自 PagerAdapter 的函数，我们只需要实现 getCount()，即可。且，由于 FragmentPagerAdapter.instantiateItem() 的实现中，调用了一个新增的虚函数 getItem()，因此，我们还至少需要实现一个 getItem()。</p>
-<p>FragmentStatePagerAdapter 和前面的 FragmentPagerAdapter 一样，是继承子 PagerAdapter。和 FragmentPagerAdapter 不一样的是，正如其类名中的 ‘State’ 所表明的含义一样，该 PagerAdapter 的实现将只保留当前页面，当页面离开视线后，就会被消除，释放其资源；而在页面需要显示时，生成新的页面。这么实现的好处就是当拥有大量的页面时，不必在内存中占用大量的内存。</p>
-<p>为什么FragmentPagerAdapter占用内存会比FragmentStatePagerAdapter呢？看一下FragmentPagerAdapter的源码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">        mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Detaching item #"</span> + getItemId(position) + <span class="string">": f="</span> + object</div><div class="line">            + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">    mCurTransaction.detach((Fragment)object);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>再对比看一下FragmentStatePagerAdapter对应的方法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</div><div class="line">       Fragment fragment = (Fragment) object;</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (mCurTransaction == <span class="keyword">null</span>) &#123;</div><div class="line">           mCurTransaction = mFragmentManager.beginTransaction();</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (DEBUG) Log.v(TAG, <span class="string">"Removing item #"</span> + position + <span class="string">": f="</span> + object</div><div class="line">               + <span class="string">" v="</span> + ((Fragment)object).getView());</div><div class="line">       <span class="keyword">while</span> (mSavedState.size() &lt;= position) &#123;</div><div class="line">           mSavedState.add(<span class="keyword">null</span>);</div><div class="line">       &#125;</div><div class="line">       mSavedState.set(position, fragment.isAdded()</div><div class="line">               ? mFragmentManager.saveFragmentInstanceState(fragment) : <span class="keyword">null</span>);</div><div class="line">       mFragments.set(position, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">       mCurTransaction.remove(fragment);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>FragmentStatePagerAdapter在每次destroyItem()时，将Fragment移除掉，而FragmentPagerAdapter只是detach()，失去关联而已。</p>
-<h2 id="Fragment的生命周期"><a href="#Fragment的生命周期" class="headerlink" title="Fragment的生命周期"></a>Fragment的生命周期</h2><p>一个Fragment从创建到销毁的完整的生命周期如图:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170722150069331557277.png" alt="20170722150069331557277.png"><br>图中给出了Fragment在创建和销毁的过程中对一个的Activity的回调方法。对比发现，Fragment生命周期过程中的回调状态比Activity的状态多。</p>
-<p><strong>onAttch（Activity activity）</strong>，这个回调方法是在fragment与activity关联之后调用，我们能在这个方法中获取这个关联的activity的实例。但是当你的sdk更新到android6.0（api-23）是就会显示这个方法是过时的，系统建议使用onAttach（Context  context）这个方法代替。</p>
-<p><strong>onCreate()</strong>，这个回调方法是在fragment初始化的时候调用，我们通常在这个方法中使用getArgument()获取Activity传来的初始化Fragment的参数。需要注意的是，在这个方法中不能获取Activity中的控件，因为此时Activity的onCreate()还没有执行完，即Activity还没有创建完，要想获取Activity相关的资源应该在onActivityCreated()中获取。</p>
-<p><strong>onCreateView()</strong>：这个回调方法中我们主要是通过布局填充器获取Fragment布局。我们在这个方法中通过view.findViewById()初始化Fragment中的控件。</p>
-<p><strong>onActivityCreated()</strong>，这个回调方法是在Activity的onCreate()方法执行完执行，通知Fragment，其关联的Activity的onCreate()方法执行完了，即Activity创建完成，可以在这个方法中获取Activity中的资源。</p>
-<p><strong>onStart()</strong>，这个回调方法是在Activity的onstart()执行完立即执行，这个方法执行完Fragment界面就显示出来了，但是现在还没有获取焦点，用户不能进行交互操作。</p>
-<p><strong>onResume()</strong>，这个回调方法是在Activity的onResume()方法执行完立即执行，此时Fragment的获取了界面，用户可以操作。</p>
-<p><strong>onPause()</strong>，Fragment失去焦点，此时用户是不能操作的，执行完立即执行Activity的onPause()方法。</p>
-<p><strong>onStop()</strong>，Fragment不可见，执行完立即执行Activity的onStop()方法。</p>
-<p><strong>onDestroyView()</strong>,在onCreateView()中创建的Fragment视图会被销毁。Fragment的视图被回收。</p>
-<p><strong>onDestroy()</strong>，当这个Fragment不再使用时调用。需要注意的是，它即使经过了onDestroy()阶段，但仍然能从Activity中找到，因为它还没有Detach()。</p>
-<p><strong>onDetach()</strong>，Fragment与Activity解除关联，Fragment的所有的资源都被回收。</p>
-<h2 id="Fragment的通信"><a href="#Fragment的通信" class="headerlink" title="Fragment的通信"></a>Fragment的通信</h2><p>Fragment的通信，概括起来主要包含以下三种情况:</p>
-<ol>
-<li>在Fragment中调用Activity中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，调用Activity中的方法。</li>
-<li>在Activity中调用Fragment中的方法，Activity中维护着其关联的Fragment的实例，可以直接调用其方法。</li>
-<li>在Fragment中调用Fragment中的方法，通过getActivity()获取到关联的Activity，然后通过获取的Activity实例，通过findFragmentById()方法，知道要与之通信的Fragment。</li>
-</ol>
-<p>除了上面中介绍的方法，还可以通过接口回调的方法。这里以Fragment调用Activity中的方法为例，介绍接口回调的方式,接口回调主要经历三个步骤:</p>
-<ul>
-<li>在Fragment中定义回调接口，声明回调方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 1.在Fragment中定义回调接口，声明回调方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ComminuteListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>Fragment关联的Activity实现接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestFragmentActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">TestFragment</span>.<span class="title">ComminuteListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">comminute</span><span class="params">()</span> </span>&#123;</div><div class="line">        showToast();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">()</span> </span>&#123;</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"toast from Activity"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在Fragment的onAttach()方法中，获取接口实例，调用回调方法。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAttach</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onAttach(context);</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">          comminuteListener = (ComminuteListener) getActivity();</div><div class="line">      &#125;<span class="keyword">catch</span> (ClassCastException e)&#123;</div><div class="line">          e.printStackTrace();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      comminuteListener.comminute();</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]<a href="https://developer.android.com/guide/components/fragments.html" target="_blank" rel="external">Google-API指南-应用组件-Fragment</a></p>
-<hr>
-<p>本文链接：<a href="http://www.sguotao.top/Android进阶-2016-07-21-分析Androdi中的Fragment.html">http://www.sguotao.top/Android进阶-2016-07-21-分析Androdi中的Fragment.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Fragment介绍&quot;&gt;&lt;a href=&quot;#Fragment介绍&quot; class=&quot;headerlink&quot; title=&quot;Fragment介绍&quot;&gt;&lt;/a&gt;Fragment介绍&lt;/h2&gt;&lt;p&gt;Android 在 Android 3.0（API 级别 11）中引入了Fr
-    
-    </summary>
-    
-      <category term="Android进阶" scheme="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Android" scheme="http://www.sguotao.top/tags/Android/"/>
-    
-      <category term="Fragment" scheme="http://www.sguotao.top/tags/Fragment/"/>
     
   </entry>
   
