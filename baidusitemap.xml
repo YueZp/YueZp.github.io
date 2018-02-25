@@ -639,11 +639,11 @@
         
         <tag>Android</tag>
          
+        <tag>JVM</tag>
+         
         <tag>插件框架</tag>
          
         <tag>ClassLoader</tag>
-         
-        <tag>JVM</tag>
          
          
            
@@ -819,9 +819,9 @@
         
         <tag>Android</tag>
          
-        <tag>动画</tag>
-         
         <tag>UI</tag>
+         
+        <tag>动画</tag>
          
          
            
