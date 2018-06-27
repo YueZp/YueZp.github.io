@@ -111,8 +111,9 @@
 <meta property="og:url" content="http://www.sguotao.top/Java-2013-10-3-多线程之线程的状态与调度.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 线程的生命周期线程从创建、运行到结束总是处于下面五个状态之一：新建状态、就绪状态、运行状态、阻塞状态及死亡状态。线">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.16.48.png">
-<meta property="og:updated_time" content="2017-08-12T13:09:54.000Z">
+<meta property="og:updated_time" content="2018-06-27T02:01:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【多线程】线程的状态与调度">
 <meta name="twitter:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 线程的生命周期线程从创建、运行到结束总是处于下面五个状态之一：新建状态、就绪状态、运行状态、阻塞状态及死亡状态。线">
@@ -436,7 +437,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,998字
+                  2,020字
                 </span>
               
 
@@ -470,25 +471,25 @@
       
 
       
-        <p>在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。<br><a href="http://sguotao.com/Java-2013-10-1-多线程之线程与线程类.html" target="_blank" rel="external">多线程 1 线程与线程类</a><br><a href="http://sguotao.com/Java-2013-10-2-多线程之线程的创建.html" target="_blank" rel="external">多线程 2 线程的创建</a><br><a href="http://sguotao.com/Java-2013-10-3-多线程之线程的状态与调度.html" target="_blank" rel="external">多线程 3 线程的状态与调度</a><br><a href="http://sguotao.com/Java-2013-10-4-多线程之状态的改变.html" target="_blank" rel="external">多线程 4 线程状态的改变</a><br><a href="http://sguotao.com/Java-2013-10-5-多线程之线程的同步与共享.html" target="_blank" rel="external">多线程 5 线程的同步与共享</a><br><a href="http://sguotao.com/Java-2013-10-6-多线程之线程组.html" target="_blank" rel="external">多线程 6 线程组</a></p>
+        <p>在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。<br><a href="http://sguotao.top/Java-2013-10-1-多线程之线程与线程类.html" target="_blank" rel="noopener">多线程 1 线程与线程类</a><br><a href="http://sguotao.top/Java-2013-10-2-多线程之线程的创建.html" target="_blank" rel="noopener">多线程 2 线程的创建</a><br><a href="http://sguotao.top/Java-2013-10-3-多线程之线程的状态与调度.html" target="_blank" rel="noopener">多线程 3 线程的状态与调度</a><br><a href="http://sguotao.top/Java-2013-10-4-多线程之状态的改变.html" target="_blank" rel="noopener">多线程 4 线程状态的改变</a><br><a href="http://sguotao.top/Java-2013-10-5-多线程之线程的同步与共享.html" target="_blank" rel="noopener">多线程 5 线程的同步与共享</a><br><a href="http://sguotao.top/Java-2013-10-6-多线程之线程组.html" target="_blank" rel="noopener">多线程 6 线程组</a></p>
 <h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><p>线程从创建、运行到结束总是处于下面五个状态之一：新建状态、就绪状态、运行状态、阻塞状态及死亡状态。线程的状态如图4所示：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-26%20%E4%B8%8B%E5%8D%887.16.48.png" alt=""></p>
 <p>下面以前面的Java小程序为例说明线程的状态：</p>
 <h3 id="新建状态-NewThread"><a href="#新建状态-NewThread" class="headerlink" title="新建状态 NewThread"></a>新建状态 NewThread</h3><p>当Applet启动时调用Applet的start()方法，此时小应用程序就创建一个Thread对象clockThread。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (clockThread == <span class="keyword">null</span>) &#123;</div><div class="line">           clockThread = <span class="keyword">new</span> Thread(cp, <span class="string">"Clock"</span>);</div><div class="line">           clockThread.start(); </div><div class="line">           &#125; </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (clockThread == <span class="keyword">null</span>) &#123;</span><br><span class="line">           clockThread = <span class="keyword">new</span> Thread(cp, <span class="string">"Clock"</span>);</span><br><span class="line">           clockThread.start(); </span><br><span class="line">           &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>当该语句执行后clockThread就处于新建状态。处于该状态的线程仅仅是空的线程对象，并没有为其分配系统资源。当线程处于该状态，你仅能启动线程，调用任何其他方法是无意义的且会引发IllegalThreadStateException异常(实际上，当调用线程的状态所不允许的任何方法时，运行时系统都会引发IllegalThreadStateException异常)。</p>
 <p>注意cp作为线程构造方法的第一个参数，该参数必须是实现了Runnable接口的对象并提供线程运行的run()方法，第二个参数是线程名。</p>
 <h3 id="就绪状态-Runnable"><a href="#就绪状态-Runnable" class="headerlink" title="就绪状态 Runnable"></a>就绪状态 Runnable</h3><p>一个新创建的线程并不自动开始运行，要执行线程，必须调用线程的start()方法。当线程对象调用start()方法即启动了线程，如clockThread.start(); 语句就是启动clockThread线程。start()方法创建线程运行的系统资源，并调度线程运行run()方法。当start()方法返回后，线程就处于就绪状态。</p>
 <p>处于就绪状态的线程并不一定立即运行run()方法，线程还必须同其他线程竞争CPU时间，只有获得CPU时间才可以运行线程。因为在单CPU的计算机系统中，不可能同时运行多个线程，一个时刻仅有一个线程处于运行状态。因此此时可能有多个线程处于就绪状态。对多个处于就绪状态的线程是由Java运行时系统的线程调度程序(thread scheduler)来调度的。</p>
 <h3 id="运行状态-Running"><a href="#运行状态-Running" class="headerlink" title="运行状态 Running"></a>运行状态 Running</h3><p>当线程获得CPU时间后，它才进入运行状态，真正开始执行run()方法，这里run()方法中是一个循环，循环条件是true。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">           repaint();</div><div class="line">           <span class="keyword">try</span> &#123;  </div><div class="line">            Thread.sleep(<span class="number">1000</span>);</div><div class="line">           &#125; </div><div class="line">           <span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">           &#125; </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">           repaint();</span><br><span class="line">           <span class="keyword">try</span> &#123;  </span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">           &#125; </span><br><span class="line">           <span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">           &#125; </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="阻塞状态-Blocked"><a href="#阻塞状态-Blocked" class="headerlink" title="阻塞状态 Blocked"></a>阻塞状态 Blocked</h3><p>线程运行过程中，可能由于各种原因进入阻塞状态。所谓阻塞状态是正在运行的线程没有运行结束，暂时让出CPU，这时其他处于就绪状态的线程就可以获得CPU时间，进入运行状态。有关阻塞状态在后面详细讨论。</p>
 <h3 id="死亡状态-Dead"><a href="#死亡状态-Dead" class="headerlink" title="死亡状态 Dead"></a>死亡状态 Dead</h3><p>线程的正常结束，即run()方法返回，线程运行就结束了，此时线程就处于死亡状态。本例子中，线程运行结束的条件是clockThread为null，而在小应用程序的stop()方法中，将clockThread赋值为null。即当用户离开含有该小应用程序的页面时，浏览器调用stop()方法，将clockThread赋值为null，这样在run()的while循环时条件就为false，这样线程运行就结束了。如果再重新访问该页面，小应用程序的start()方法又会重新被调用，重新创建并启动一个新的线程。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</div><div class="line">       clockThread = <span class="keyword">null</span>; </div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       clockThread = <span class="keyword">null</span>; </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>程序不能像终止小应用程序那样通过调用一个方法来结束线程(小应用程序通过调用stop()方法结束小应用程序的运行)。线程必须通过run()方法的自然结束而结束。通常在run()方法中是一个循环，要么是循环结束，要么是循环的条件不满足，这两种情况都可以使线程正常结束，进入死亡状态。<br>例如，下面一段代码是一个循环：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(i&lt;<span class="number">100</span>)&#123;</div><div class="line">    i++;</div><div class="line">    System.out.println(<span class="string">"i = "</span> + i );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(i&lt;<span class="number">100</span>)&#123;</span><br><span class="line">    i++;</span><br><span class="line">    System.out.println(<span class="string">"i = "</span> + i );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当该段代码循环结束后，线程就自然结束了。注意一个处于死亡状态的线程不能再调用该线程的任何方法。</p>
 <h2 id="线程的优先级和调度"><a href="#线程的优先级和调度" class="headerlink" title="线程的优先级和调度"></a>线程的优先级和调度</h2><p>Java的每个线程都有一个优先级，当有多个线程处于就绪状态时，线程调度程序根据线程的优先级调度线程运行。可以用下面方法设置和返回线程的优先级。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setPriority</span><span class="params">(<span class="keyword">int</span> newPriority)</span> 设置线程的优先级。</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getPriority</span><span class="params">()</span> 返回线程的优先级。</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setPriority</span><span class="params">(<span class="keyword">int</span> newPriority)</span> 设置线程的优先级。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getPriority</span><span class="params">()</span> 返回线程的优先级。</span></span><br></pre></td></tr></table></figure>
 <p>newPriority为线程的优先级，其取值为1到10之间的整数，也可以使用Thread类定义的常量来设置线程的优先级，这些常量分别为：Thread.MIN_PRIORITY、Thread.NORM_PRIORITY、Thread.MAX_PRIORITY，它们分别对应于线程优先级的1、5和10，数值越大优先级越高。当创建Java线程时，如果没有指定它的优先级，则它从创建该线程那里继承优先级。</p>
 <p>一般来说，只有在当前线程停止或由于某种原因被阻塞，较低优先级的线程才有机会运行。<br>前面说过多个线程可并发运行，然而实际上并不总是这样。由于很多计算机都是单CPU的，所以一个时刻只能有一个线程运行，多个线程的并发运行只是幻觉。在单CPU机器上多个线程的执行是按照某种顺序执行的，这称为线程的调度(scheduling)。</p>
 <p>大多数计算机仅有一个CPU，所以线程必须与其他线程共享CPU。多个线程在单个CPU是按照某种顺序执行的。实际的调度策略随系统的不同而不同，通常线程调度可以采用两种策略调度处于就绪状态的线程。</p>
@@ -682,7 +683,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -693,7 +694,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -704,7 +705,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -788,7 +789,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

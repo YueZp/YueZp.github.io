@@ -1,0 +1,1446 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googlea8ba7e863392b1ab" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,AndroidP,GoogleI/O,AppBundle,Kotlin,Flutter," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Android P（Android 9.0）的新特性 Google I/O 2018   watch Google I/O 2018 for developer  watch What’s new in Android Overview(Google I/O ‘18)  watch  Android P新功能1. 使用 WiFi RTT 进行室内定位Android P 为 IEEE 802.11m">
+<meta name="keywords" content="Android,AndroidP,GoogleI&#x2F;O,AppBundle,Kotlin,Flutter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android P（Android 9.0）的新特性">
+<meta property="og:url" content="http://www.sguotao.top/Android进阶-2018-06-15-Android-P（Android-9-0）的新特性.html">
+<meta property="og:site_name" content="Scott&#39;s Blog">
+<meta property="og:description" content="Android P（Android 9.0）的新特性 Google I/O 2018   watch Google I/O 2018 for developer  watch What’s new in Android Overview(Google I/O ‘18)  watch  Android P新功能1. 使用 WiFi RTT 进行室内定位Android P 为 IEEE 802.11m">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180606152825601059704.png">
+<meta property="og:updated_time" content="2018-06-22T07:24:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android P（Android 9.0）的新特性">
+<meta name="twitter:description" content="Android P（Android 9.0）的新特性 Google I/O 2018   watch Google I/O 2018 for developer  watch What’s new in Android Overview(Google I/O ‘18)  watch  Android P新功能1. 使用 WiFi RTT 进行室内定位Android P 为 IEEE 802.11m">
+<meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180606152825601059704.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.top/Android进阶-2018-06-15-Android-P（Android-9-0）的新特性.html"/>
+
+
+
+
+
+  <title>Android P（Android 9.0）的新特性 | Scott's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    
+    <!-- 在右上角或者左上角实现fork me on github -->
+    <a href="https://github.com/sguotao" class="github-corner" aria-label="View source on Github"><svg width="92" height="92" viewBox="0 0 250 250" style="fill:#151513;color:#fff;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">和光同尘,静水流深</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.top/Android进阶-2018-06-15-Android-P（Android-9-0）的新特性.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android P（Android 9.0）的新特性</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-15T15:56:19+08:00">
+                2018-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/Android进阶-2018-06-15-Android-P（Android-9-0）的新特性.html" class="leancloud_visitors" data-flag-title="Android P（Android 9.0）的新特性">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,694字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  7分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android-P（Android-9-0）的新特性"><a href="#Android-P（Android-9-0）的新特性" class="headerlink" title="Android P（Android 9.0）的新特性"></a>Android P（Android 9.0）的新特性</h1><ol>
+<li>Google I/O 2018   <a href="https://www.youtube.com/watch?v=ogfYd705cRs" target="_blank" rel="noopener">watch</a></li>
+<li>Google I/O 2018 for developer  <a href="https://www.youtube.com/watch?v=flU42CTF3MQ" target="_blank" rel="noopener">watch</a></li>
+<li>What’s new in Android Overview(Google I/O ‘18)  <a href="https://www.youtube.com/watch?v=eMHsnvhcf78&amp;t=584s" target="_blank" rel="noopener">watch</a></li>
+</ol>
+<h2 id="Android-P"><a href="#Android-P" class="headerlink" title="Android P"></a>Android P</h2><h3 id="新功能"><a href="#新功能" class="headerlink" title="新功能"></a>新功能</h3><h4 id="1-使用-WiFi-RTT-进行室内定位"><a href="#1-使用-WiFi-RTT-进行室内定位" class="headerlink" title="1. 使用 WiFi RTT 进行室内定位"></a>1. 使用 WiFi RTT 进行室内定位</h4><p>Android P 为 IEEE 802.11mc WiFi 协议添加了平台支持 (也称为 WiFi 往返时间，RTT)，这可以在应用中使用室内定位。拥有硬件支持的 Android P 设备可以让应用使用 RTT API 测量与附近 WiFi 接入点 (AP) 的距离，设备不需要连接到 AP 便可以使用 RTT。为了保持隐私，只有手机能够确定距离，AP 无法做到这一点。通过测量从设备到三个或更多 AP 的距离，您可以以 1 到 2 米的精度确定设备位置。</p>
+<h4 id="2-凹口屏幕的支持"><a href="#2-凹口屏幕的支持" class="headerlink" title="2. 凹口屏幕的支持"></a>2. 凹口屏幕的支持</h4><p>在 Android 平台加入了对凹口屏幕的支持，並提供 API 供使用，从而管理内容展示方式。可以调用 <em>getDisplayCutout()</em> 来判断本地设备是否具有凹口屏幕，然后再确定裁切区域的位置和形状。</p>
+<h4 id="3-消息通知的改进"><a href="#3-消息通知的改进" class="headerlink" title="3. 消息通知的改进"></a>3. 消息通知的改进</h4><p>全新的 <em>MessagingStyle</em> 通知突出强调了来信人以及可采用的回复方式。可以显示对话，附加照片和表情，甚至使用智能回复。</p>
+<h4 id="4-多摄像头-API"><a href="#4-多摄像头-API" class="headerlink" title="4. 多摄像头 API"></a>4. 多摄像头 API</h4><p>在运行 Android P 的设备上您可以通过两个或更多实体摄像头同时访问视频流。所以您可以在具有双前置或双后置摄像头的设备上，实现单摄像头无法实现的创新功能：如无缝变焦、散景和立体视觉。</p>
+<h4 id="5-用于位图和-drawable-的-ImageDecoder"><a href="#5-用于位图和-drawable-的-ImageDecoder" class="headerlink" title="5. 用于位图和 drawable 的 ImageDecoder"></a>5. 用于位图和 drawable 的 ImageDecoder</h4><p>Android P 引入了一种更简单的方法来将图像解码为位图或 drawable，即用 ImageDecoder 替代了 BitmapFactory。ImageDecoder 允许您从字节缓冲区、文件或 URI 创建位图或 drawable。它比 BitmapFactory 多出了几个优势，包括对精确缩放的支持，单步解码至硬件存储器，对解码后处理的支持，以及对动画图像的解码。</p>
+<h4 id="6-HDR-VP9-视频、HEIF-以及媒体-APIs"><a href="#6-HDR-VP9-视频、HEIF-以及媒体-APIs" class="headerlink" title="6. HDR VP9 视频、HEIF 以及媒体 APIs"></a>6. HDR VP9 视频、HEIF 以及媒体 APIs</h4><p>添加了对 HEIF 图像编码的支持，这种格式被广泛使用，改善了照片压缩效果，并减少了所需的存储空间和网络流量。</p>
+<h4 id="7-JobScheduler-中的数据费用敏感度"><a href="#7-JobScheduler-中的数据费用敏感度" class="headerlink" title="7. JobScheduler 中的数据费用敏感度"></a>7. JobScheduler 中的数据费用敏感度</h4><p>任务现在可以声明其估计的数据大小、信号预取以及指定详细的网络要求 —— 运营商可以报告网络状况是拥塞还是不计量，然后，JobScheduler 会根据网络状态管理工作。例如，当网络拥塞时，JobScheduler 可能推迟大型网络请求。而在网络可以不计量使用时，则可以运行多种预加载作业 (例如，预读标题) 来改进用户体验。</p>
+<h4 id="8-神经网络-API-1-1"><a href="#8-神经网络-API-1-1" class="headerlink" title="8. 神经网络 API 1.1"></a>8. 神经网络 API 1.1</h4><p>加速 Android 上设备内置的机器学习。</p>
+<h4 id="9-自动填充的改进"><a href="#9-自动填充的改进" class="headerlink" title="9. 自动填充的改进"></a>9. 自动填充的改进</h4><p>在 Android P 中，此版本还包含新的 API，允许密码管理程序 (Password Manager) 改进 Autofill 用户体验，例如更好的数据集过滤，输入清理和兼容模式。</p>
+<h4 id="10-用于-NFC-支付和安全交易的-Open-Mobile-API"><a href="#10-用于-NFC-支付和安全交易的-Open-Mobile-API" class="headerlink" title="10. 用于 NFC 支付和安全交易的 Open Mobile API"></a>10. 用于 NFC 支付和安全交易的 Open Mobile API</h4><p>Android P 将 GlobalPlatform Open Mobile API 的实现添加到 Android 中。在支持的设备上，应用可以使用 OMAPI API 访问 Android 设备上的安全元素 (SE) ，以启用智能卡支付等安全服务。</p>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><h4 id="1-应用安全"><a href="#1-应用安全" class="headerlink" title="1. 应用安全"></a>1. 应用安全</h4><p>Android P 现在提供了一个标准系统对话框，以提示用户触摸指纹传感器，并且在文案和位置管理方面会根据不同的设备做相应的匹配。同时，应用可以使用新的 <em>FingerprintDialog API</em> 触发系统指纹对话框。</p>
+<p>将所有网络流量从明文 (未加密的 HTTP) 转向 TLS，我们还将更改网络安全性配置 (Network Security Configuration) 的默认值，以阻止所有明文流量。</p>
+<h4 id="2-用户隐私"><a href="#2-用户隐私" class="headerlink" title="2.用户隐私"></a>2.用户隐私</h4><p>为了更好地保证隐私，Android P 限制所有处于空闲状态的应用对话筒、摄像头和所有 SensorManager 传感器的访问。当一个应用的 UID 空闲时，麦克风将会报告系统 “无音频信号”，传感器将会停止报告事件。应用使用的摄像头也会断开连接。</p>
+<h4 id="3-ART-性能提升"><a href="#3-ART-性能提升" class="headerlink" title="3.ART 性能提升"></a>3.ART 性能提升</h4><p>扩展了 ART 对执行配置文件的使用，以优化应用并减少已编译应用代码的内存占用量。ART 现可使用配置文件信息在设备上重写 DEX 文件，在多个人气的应用中内存占用减少高达 11％。</p>
+<h4 id="4-Kotlin-优化"><a href="#4-Kotlin-优化" class="headerlink" title="4.Kotlin 优化"></a>4.Kotlin 优化</h4><p>改进了一些编译器优化，尤其是那些针对循环的编译器优化，以实现更好的性能。</p>
+<h4 id="5-电耗优化"><a href="#5-电耗优化" class="headerlink" title="5.电耗优化"></a>5.电耗优化</h4><p>在 Android P 中继续优化 Doze、App 待命模式以及后台限制，进一步改善电池寿命。</p>
+<h4 id="6-针对现阶段的Android版本"><a href="#6-针对现阶段的Android版本" class="headerlink" title="6.针对现阶段的Android版本"></a>6.针对现阶段的Android版本</h4><p>Google Play 将要求所有应用在 2018 年 11 月之前针对 Android Oreo (targetSdkVersion 26 或更高版本) 进行更新，并支持将在 2019 年提供 64 位支持。</p>
+<p>Android P 将在安装针对 Android 4.2 之前的平台 (targetSdkVersion 小于17) 的应用时通过对话框向用户发出警告，未来平台将会继续提高版本下限。</p>
+<h4 id="7-通过公开-API-增强应用兼容性"><a href="#7-通过公开-API-增强应用兼容性" class="headerlink" title="7.通过公开 API 增强应用兼容性"></a>7.通过公开 API 增强应用兼容性</h4><p>确保应用从一开始就支持新平台，并让用户远离崩溃风险，以及开发者不再需要针对兼容性问题做紧急更新。<strong>从 SDK 到 NDK 都使用 Android 公开 API 的应用拥有较好的兼容性，而使用私有 Android 接口和库的应用则兼容性较差。</strong> 在Android P中，开始逐步限制对特定非 SDK 接口的访问权限，并要求开发者 (包括 Google 内部的应用团队) 使用公开 API 里的替代接口。</p>
+<h2 id="Android-App-Bundle"><a href="#Android-App-Bundle" class="headerlink" title="Android App Bundle"></a>Android App Bundle</h2><p>Build the new, modular Android App Bundle (Google I/O ‘18) <a href="https://www.youtube.com/watch?v=bViNOUeFuiQ" target="_blank" rel="noopener">watch</a></p>
+<h2 id="Android-JetPack"><a href="#Android-JetPack" class="headerlink" title="Android JetPack"></a>Android JetPack</h2><p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180606152825601059704.png" alt="20180606152825601059704.png"></p>
+<h3 id="Introducing"><a href="#Introducing" class="headerlink" title="Introducing"></a>Introducing</h3><p>Introducing Android Jetpack for Developers <a href="https://www.youtube.com/watch?v=r8U5Rtcr5UU&amp;t=83s" target="_blank" rel="noopener">watch</a></p>
+<ol>
+<li>Android Jetpack: Improve Your App’s Architecture <a href="https://www.youtube.com/watch?v=7p22cSzniBM" target="_blank" rel="noopener">watch</a></li>
+<li>Android Jetpack: KTX - Sweeter Kotlin Android Development <a href="https://www.youtube.com/watch?v=r_19VZ0xRO8" target="_blank" rel="noopener">watch</a></li>
+<li>Android Jetpack: Room <a href="https://www.youtube.com/watch?v=SKWh4ckvFPM" target="_blank" rel="noopener">watch</a></li>
+<li>Android Jetpack: ViewModel <a href="https://www.youtube.com/watch?v=5qlIPTDE274" target="_blank" rel="noopener">watch</a></li>
+<li>Android Jetpack: LiveData <a href="https://www.youtube.com/watch?v=OMcDk2_4LSk" target="_blank" rel="noopener">watch</a></li>
+<li>Android Jetpack: Paging <a href="https://www.youtube.com/watch?v=QVMqCRs0BNA" target="_blank" rel="noopener">watch</a></li>
+<li>Android Jetpack: Autosizing TextView <a href="https://www.youtube.com/watch?v=JYrpEAz_A1U" target="_blank" rel="noopener">watch</a></li>
+<li>Android Jetpack: EmojiCompat <a href="https://www.youtube.com/watch?v=sYGKUtM2ga8" target="_blank" rel="noopener">watch</a></li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://android-developers.googleblog.com/2018/03/previewing-android-p.html?m=1" target="_blank" rel="noopener">https://android-developers.googleblog.com/2018/03/previewing-android-p.html?m=1</a></li>
+<li><a href="https://developer.android.com/studio/preview/features/?utm_source=android-studio&amp;utm_medium=studio-assistant" target="_blank" rel="noopener">https://developer.android.com/studio/preview/features/?utm_source=android-studio&amp;utm_medium=studio-assistant</a></li>
+<li><a href="https://developer.android.com/jetpack/behavior/" target="_blank" rel="noopener">https://developer.android.com/jetpack/behavior/</a></li>
+<li><a href="https://android-developers.googleblog.com/2018/05/whats-new-in-android-p-beta.html" target="_blank" rel="noopener">https://android-developers.googleblog.com/2018/05/whats-new-in-android-p-beta.html</a></li>
+<li><a href="https://developer.android.com/platform/technology/app-bundle/" target="_blank" rel="noopener">https://developer.android.com/platform/technology/app-bundle/</a></li>
+<li><a href="https://developer.android.com/studio/preview/features/?utm_source=android-studio&amp;utm_medium=studio-assistant" target="_blank" rel="noopener">https://developer.android.com/studio/preview/features/?utm_source=android-studio&amp;utm_medium=studio-assistant</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing#kotlin" target="_blank" rel="noopener">https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing#kotlin</a></li>
+<li><a href="https://android-developers.googleblog.com/2018/05/use-android-jetpack-to-accelerate-your.html" target="_blank" rel="noopener">https://android-developers.googleblog.com/2018/05/use-android-jetpack-to-accelerate-your.html</a></li>
+<li><a href="https://android-developers.googleblog.com/2018/05/android-studio-3-2-canary.html" target="_blank" rel="noopener">https://android-developers.googleblog.com/2018/05/android-studio-3-2-canary.html</a></li>
+</ol>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.top/Android进阶-2018-06-15-Android-P（Android-9-0）的新特性.html">http://www.sguotao.top/Android进阶-2018-06-15-Android-P（Android-9-0）的新特性.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    
+      <div>
+        
+          
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>「真诚赞赏，手留余香」</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+        
+      </div>
+    
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Scott
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.sguotao.top/Android进阶-2018-06-15-Android-P（Android-9-0）的新特性.html" title="Android P（Android 9.0）的新特性">http://www.sguotao.top/Android进阶-2018-06-15-Android-P（Android-9-0）的新特性.html</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8474352740015305",
+    enable_page_level_ads: true
+  });
+</script>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
+          
+            <a href="/tags/AndroidP/" rel="tag"><i class="fa fa-tag"></i> AndroidP</a>
+          
+            <a href="/tags/GoogleI-O/" rel="tag"><i class="fa fa-tag"></i> GoogleI/O</a>
+          
+            <a href="/tags/AppBundle/" rel="tag"><i class="fa fa-tag"></i> AppBundle</a>
+          
+            <a href="/tags/Kotlin/" rel="tag"><i class="fa fa-tag"></i> Kotlin</a>
+          
+            <a href="/tags/Flutter/" rel="tag"><i class="fa fa-tag"></i> Flutter</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/读书笔记-2018-06-15-树獭先生写作课.html" rel="next" title="树獭先生写作课">
+                <i class="fa fa-chevron-left"></i> 树獭先生写作课
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018-06-15-Kotlin-md.html" rel="prev" title="2018-06-15-Kotlin.md">
+                2018-06-15-Kotlin.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODkyOC81NDk3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sguotao" target="_blank" rel="external nofollow" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-P（Android-9-0）的新特性"><span class="nav-number">1.</span> <span class="nav-text">Android P（Android 9.0）的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-P"><span class="nav-number">1.1.</span> <span class="nav-text">Android P</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新功能"><span class="nav-number">1.1.1.</span> <span class="nav-text">新功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-使用-WiFi-RTT-进行室内定位"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">1. 使用 WiFi RTT 进行室内定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-凹口屏幕的支持"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">2. 凹口屏幕的支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-消息通知的改进"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">3. 消息通知的改进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-多摄像头-API"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">4. 多摄像头 API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-用于位图和-drawable-的-ImageDecoder"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">5. 用于位图和 drawable 的 ImageDecoder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-HDR-VP9-视频、HEIF-以及媒体-APIs"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">6. HDR VP9 视频、HEIF 以及媒体 APIs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-JobScheduler-中的数据费用敏感度"><span class="nav-number">1.1.1.7.</span> <span class="nav-text">7. JobScheduler 中的数据费用敏感度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-神经网络-API-1-1"><span class="nav-number">1.1.1.8.</span> <span class="nav-text">8. 神经网络 API 1.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-自动填充的改进"><span class="nav-number">1.1.1.9.</span> <span class="nav-text">9. 自动填充的改进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-用于-NFC-支付和安全交易的-Open-Mobile-API"><span class="nav-number">1.1.1.10.</span> <span class="nav-text">10. 用于 NFC 支付和安全交易的 Open Mobile API</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化"><span class="nav-number">1.1.2.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-应用安全"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">1. 应用安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-用户隐私"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">2.用户隐私</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ART-性能提升"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">3.ART 性能提升</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Kotlin-优化"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">4.Kotlin 优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-电耗优化"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">5.电耗优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-针对现阶段的Android版本"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">6.针对现阶段的Android版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-通过公开-API-增强应用兼容性"><span class="nav-number">1.1.2.7.</span> <span class="nav-text">7.通过公开 API 增强应用兼容性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-App-Bundle"><span class="nav-number">1.2.</span> <span class="nav-text">Android App Bundle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-JetPack"><span class="nav-number">1.3.</span> <span class="nav-text">Android JetPack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introducing"><span class="nav-number">1.3.1.</span> <span class="nav-text">Introducing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+  <span class="with-love">
+    <i class="fa fa-pencil"></i>
+  </span>
+  <span class="post-count">共写了187.5k字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iH9ug4Eu98bS8XiH30QEwODs-gzGzoHsz", "D0qgHUsqtcQOClhgS4ElkmDQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

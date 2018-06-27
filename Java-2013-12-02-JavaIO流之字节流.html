@@ -111,7 +111,8 @@
 <meta property="og:url" content="http://www.sguotao.top/Java-2013-12-02-JavaIO流之字节流.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容：Java IO流 1.IO流的介绍Java IO流 2.字符流Java IO流 3.字节流Java IO流 4.File类Java IO流 5.序列流 字节流抽象基类：InputStream，OutputStream。字节流可以操作任何数据。注意：字符流使用的数组是字符数组。char [] chs字节流使用的数">
-<meta property="og:updated_time" content="2017-08-12T09:00:33.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-27T01:59:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【IO流】字节流">
 <meta name="twitter:description" content="在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容：Java IO流 1.IO流的介绍Java IO流 2.字符流Java IO流 3.字节流Java IO流 4.File类Java IO流 5.序列流 字节流抽象基类：InputStream，OutputStream。字节流可以操作任何数据。注意：字符流使用的数组是字符数组。char [] chs字节流使用的数">
@@ -434,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,993字
+                  2,015字
                 </span>
               
 
@@ -468,13 +469,13 @@
       
 
       
-        <p>在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容：<br><a href="http://www.sguotao.com/Java-2013-11-30-JavaIO流的介绍.html" target="_blank" rel="external">Java IO流 1.IO流的介绍</a><br><a href="http://www.sguotao.com/Java-2013-12-01-JavaIO流之字符流.html" target="_blank" rel="external">Java IO流 2.字符流</a><br><a href="http://www.sguotao.com/Java-2013-12-02-JavaIO流之字节流.html" target="_blank" rel="external">Java IO流 3.字节流</a><br><a href="http://www.sguotao.com/Java-2013-12-03-JavaIO流之File类.html" target="_blank" rel="external">Java IO流 4.File类</a><br><a href="http://www.sguotao.com/Java-2013-12-04-JavaIO流之序列流.html" target="_blank" rel="external">Java IO流 5.序列流</a></p>
+        <p>在学习Java IO相关的内容时，会遇到成对出现的流，为方便日后查阅，整理以下笔记内容：<br><a href="http://www.sguotao.top/Java-2013-11-30-JavaIO流的介绍.html">Java IO流 1.IO流的介绍</a><br><a href="http://www.sguotao.top/Java-2013-12-01-JavaIO流之字符流.html">Java IO流 2.字符流</a><br><a href="http://www.sguotao.top/Java-2013-12-02-JavaIO流之字节流.html">Java IO流 3.字节流</a><br><a href="http://www.sguotao.top/Java-2013-12-03-JavaIO流之File类.html">Java IO流 4.File类</a><br><a href="http://www.sguotao.top/Java-2013-12-04-JavaIO流之序列流.html">Java IO流 5.序列流</a></p>
 <h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><p>抽象基类：InputStream，OutputStream。字节流可以操作任何数据。<br><strong>注意：字符流使用的数组是字符数组</strong>。char [] chs<br><strong>字节流使用的数组是字节数组</strong>。byte [] bt </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"a.txt"</span>); </div><div class="line">fos.write(<span class="string">"abcde"</span>);<span class="comment">//直接将数据写入到了目的地。 </span></div><div class="line">fos.close();<span class="comment">//只关闭资源。 </span></div><div class="line">FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>); </div><div class="line"><span class="comment">//fis.available();//获取关联的文件的字节数。</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"a.txt"</span>); </span><br><span class="line">fos.write(<span class="string">"abcde"</span>);<span class="comment">//直接将数据写入到了目的地。 </span></span><br><span class="line">fos.close();<span class="comment">//只关闭资源。 </span></span><br><span class="line">FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>); </span><br><span class="line"><span class="comment">//fis.available();//获取关联的文件的字节数。</span></span><br></pre></td></tr></table></figure>
 <p>如果文件体积不是很大，可以这样操作。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[fis.available()];<span class="comment">//创建一个刚刚好的缓冲区。</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[fis.available()];<span class="comment">//创建一个刚刚好的缓冲区。</span></span><br></pre></td></tr></table></figure>
 <p>但是这有一个弊端，就是文件过大，大小超出jvm 的内容空间时，会内存溢出。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">fis.read(buf); </div><div class="line">System.out.println(<span class="keyword">new</span> String(buf)); </div><div class="line"><span class="comment">/**</span></div><div class="line">  *copy一个图片</div><div class="line">  */</div><div class="line">BufferedInputStream bufis = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"1.jpg"</span>)); </div><div class="line">BufferedOutputStream bufos =  <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutptStream(<span class="string">"2.jpg"</span>)); </div><div class="line"><span class="keyword">int</span> by = <span class="number">0</span>; </div><div class="line"><span class="keyword">while</span>((by=bufis.read())!=-<span class="number">1</span>)&#123; </div><div class="line">      bufos.write(by); </div><div class="line">&#125; </div><div class="line">bufos.close(); </div><div class="line">bufis.close();</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fis.read(buf); </span><br><span class="line">System.out.println(<span class="keyword">new</span> String(buf)); </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  *copy一个图片</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">BufferedInputStream bufis = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"1.jpg"</span>)); </span><br><span class="line">BufferedOutputStream bufos =  <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutptStream(<span class="string">"2.jpg"</span>)); </span><br><span class="line"><span class="keyword">int</span> by = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">while</span>((by=bufis.read())!=-<span class="number">1</span>)&#123; </span><br><span class="line">      bufos.write(by); </span><br><span class="line">&#125; </span><br><span class="line">bufos.close(); </span><br><span class="line">bufis.close();</span><br></pre></td></tr></table></figure>
 <h2 id="字节流-amp-字符流小结"><a href="#字节流-amp-字符流小结" class="headerlink" title="字节流&amp;字符流小结"></a>字节流&amp;字符流小结</h2><p><strong>字符流</strong><br>  FileReader. FileWriter.<br>  BufferedReader BufferedWriter. </p>
 <p><strong>字节流</strong><br>  FileInputStream FileOutputStream<br>  BufferedInputStream BufferedOutputStream </p>
 <p><strong>字节流的read()方法读取一个字节。为什么返回的不是byte类型，而是int 类型呢</strong>？<br>因为read方法读到末尾时返回的是-1。而在所操作的数据中的很容易出现连续多个1的情况，而连续读到8个1，就是-1。导致读取会提前停止。所以将读到的一个字节给提升为一个int 类型的数值，但是只保留原字节，并在剩余二进制位补0。</p>
@@ -495,16 +496,16 @@
 <li>OutputStreamWriter：字符到字节的桥梁。 </li>
 </ul>
 <p>这两个流对象是字符流体系中的成员。那么它们有转换作用，而本身又是字符流。所以在构造的时候，需要传入字节流对象进来。构造函数：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">InputStreamReader(InputStream):<span class="comment">//通过该构造函数初始化，使用的是本系统默认的编码表GBK。 </span></div><div class="line">InputStreamReader(InputStream,String charSet):<span class="comment">//通过该构造函数初始化，可以指定编码表。   OutputStreamWriter(OutputStream)://通过该构造函数初始化，使用的是本系统默认的编码表GBK。 </span></div><div class="line">OutputStreamWriter(OutputStream,String charSet):<span class="comment">//通过该构造函数初始化，可以指定编码表。</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader(InputStream):<span class="comment">//通过该构造函数初始化，使用的是本系统默认的编码表GBK。 </span></span><br><span class="line">InputStreamReader(InputStream,String charSet):<span class="comment">//通过该构造函数初始化，可以指定编码表。   OutputStreamWriter(OutputStream)://通过该构造函数初始化，使用的是本系统默认的编码表GBK。 </span></span><br><span class="line">OutputStreamWriter(OutputStream,String charSet):<span class="comment">//通过该构造函数初始化，可以指定编码表。</span></span><br></pre></td></tr></table></figure>
 <p><strong>4.操作文件的字符流对象是转换流的子类</strong><br><strong>Reader</strong><br>&nbsp;&nbsp;|–InputStreamReader<br>&nbsp;&nbsp;&nbsp;&nbsp;|–FileReader </p>
 <p><strong>Writer</strong><br>&nbsp;&nbsp;|–OutputStreamWriter<br>&nbsp;&nbsp;&nbsp;&nbsp;|–FileWriter </p>
 <p>转换流中的read方法。已经融入了编码表，在底层调用字节流的read方法时将获取的一个或者多个字节数据进行临时存储，并去查指定的编码表，如果编码表没有指定，查的是默认码表。那么转流的read方法就可以返回一个字符比如中文。转换流已经完成了编码转换的动作，对于直接操作的文本文件的FileReaer而言，就不用在重新定义了，只要继承该转换流，获取其方法，就可以直接操作文本文件中的字符数据了。 </p>
 <p>注意： 在使用FileReader操作文本数据时，该对象使用的是默认的编码表。如果要使用指定编码表时，必须使用转换流。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"a.txt"</span>);<span class="comment">//操作a.txt的中的数据使用的本系统默认的GBK。</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"a.txt"</span>);<span class="comment">//操作a.txt的中的数据使用的本系统默认的GBK。</span></span><br></pre></td></tr></table></figure>
 <p>操作a.txt中的数据使用的也是本系统默认的GBK。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>));</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>));</span><br></pre></td></tr></table></figure>
 <p>这两句的代码的意义相同。如果a.txt中的文件中的字符数据是通过utf-8的形式编码。那么在读取时，就必须指定编码表。那么转换流必须使用。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>),<span class="string">"utf-8"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>),<span class="string">"utf-8"</span>);</span><br></pre></td></tr></table></figure>
 <p><strong>5.流操作的基本规律</strong></p>
 <ul>
 <li>明确数据源和数据汇（数据目的）。其实是为了明确输入流还是输出流。 </li>
@@ -517,12 +518,12 @@
 </ul>
 <p><strong>7.需求：将键盘录入的数据存储到一个文件中</strong>。<br>数据源：System.in 既然是源，使用的就是输入流，可用的体系有InputStream，Reader。</p>
 <p>因为键盘录入进来的一定是纯文本数据，所以可以使用专门操作字符数据的Reader。发现System.in对应的流是字节读取流。所以要将其进行转换，将字节转成字符即可。所以要使用Reader体系中：InputStreamReader<br>接下来，是否需要提高效率呢？如果需要，那么就加入字符流的缓冲区： </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BufferedReader bur = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader bur = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br></pre></td></tr></table></figure>
 <p>数据汇：一个文件，硬盘。既然是数据汇，那么一定是输出流，可以用的OutputStream,Writer。往文件中存储的都是文本数据，那么可以使用字符流较为方便:Writer。因为操作的是一个文件。所以使用Writer中的FileWriter。是否要提高效率呢？是，那就使用BufferedWriter。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BufferedWriter bufr = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"a.txt"</span>));</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BufferedWriter bufr = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"a.txt"</span>));</span><br></pre></td></tr></table></figure>
 <p><strong>8.附加需求：希望将这些文本数据按照指定的编码表存入文件中</strong>。<br>既然是文本数据，而是还是写入到文件中，那么使用的体系还是Writer。因为要指定编码表，所以要使用Writer中的转换流，OutputStreamWriter。是否要提高效率，是，选择BufferedWriter。注意：虽然是最终是文件，但是不可以选择FileWriter。因为该对象是使用默认编码表。 </p>
 <p>输出转换流要接收一个字节输出流进来，所以要是用OutputStram体系，而最终输出到一个文件中，那么就要使用OutputStream体系中可以操作的文件的字节流对象FileOutputStream。：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//String charSet = System.getProperty("file.encoding"); </span></div><div class="line">String charSet = <span class="string">"utf-8"</span>; </div><div class="line">BufferedWriter  bufw  =  <span class="keyword">new</span>  BufferedWriter(<span class="keyword">new</span>  OutputStreamWriter(<span class="keyword">new</span> </div><div class="line">FileOutputStream(<span class="string">"a.txt"</span>),charSet);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//String charSet = System.getProperty("file.encoding"); </span></span><br><span class="line">String charSet = <span class="string">"utf-8"</span>; </span><br><span class="line">BufferedWriter  bufw  =  <span class="keyword">new</span>  BufferedWriter(<span class="keyword">new</span>  OutputStreamWriter(<span class="keyword">new</span> </span><br><span class="line">FileOutputStream(<span class="string">"a.txt"</span>),charSet);</span><br></pre></td></tr></table></figure>
 <h2 id="可以和流相关联的集合对象Properties"><a href="#可以和流相关联的集合对象Properties" class="headerlink" title="可以和流相关联的集合对象Properties"></a>可以和流相关联的集合对象Properties</h2><p><strong>Map</strong><br>&nbsp;&nbsp;|–Hashtable<br>&nbsp;&nbsp;&nbsp;&nbsp;|–Properties </p>
 <p>Properties:该集合不需要泛型，因为该集合中的键值对都是String类型。 </p>
 <ul>
@@ -532,11 +533,11 @@
 <li>列出该集合中的所有键值对，可以通过参数打印流指定列出到的目的地。<br>list(PrintStream);   list(PrintWriter); </li>
 </ul>
 <p>例：list(System.out):将集合中的键值对打印到控制台。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list(<span class="keyword">new</span> PrintStream(<span class="string">"prop.txt"</span>));<span class="comment">//将集合中的键值对存储到prop.txt文件中。</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list(<span class="keyword">new</span> PrintStream(<span class="string">"prop.txt"</span>));<span class="comment">//将集合中的键值对存储到prop.txt文件中。</span></span><br></pre></td></tr></table></figure>
 <p>可以将流中的规则数据加载进行集合，并称为键值对。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">load(InputStream): <span class="comment">//jdk1.6 版本。提供了新的方法。  load(Reader):</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load(InputStream): <span class="comment">//jdk1.6 版本。提供了新的方法。  load(Reader):</span></span><br></pre></td></tr></table></figure>
 <p><strong>注意：流中的数据要是  “键=值” 的规则数据</strong>。 </p>
-<p>可以将集合中的数据进行指定目的的存储。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">store(OutputStram,String comment)方法。 </div><div class="line"><span class="comment">//jdk1.6 版本。提供了新的方法。 store(Writer ,String comment): 使用该方法存储时，会带着当时存储的时间。</span></div></pre></td></tr></table></figure></p>
+<p>可以将集合中的数据进行指定目的的存储。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">store(OutputStram,String comment)方法。 </span><br><span class="line"><span class="comment">//jdk1.6 版本。提供了新的方法。 store(Writer ,String comment): 使用该方法存储时，会带着当时存储的时间。</span></span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.top/Java-2013-12-02-JavaIO流之字节流.html">http://www.sguotao.top/Java-2013-12-02-JavaIO流之字节流.html</a></p>
 
@@ -725,7 +726,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -736,7 +737,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -747,7 +748,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -800,7 +801,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字节流"><span class="nav-number">1.</span> <span class="nav-text">字节流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字节流-amp-字符流小结"><span class="nav-number">2.</span> <span class="nav-text">字节流&字符流小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换流"><span class="nav-number">3.</span> <span class="nav-text">转换流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可以和流相关联的集合对象Properties"><span class="nav-number">4.</span> <span class="nav-text">可以和流相关联的集合对象Properties</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#字节流"><span class="nav-number">1.</span> <span class="nav-text">字节流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字节流-amp-字符流小结"><span class="nav-number">2.</span> <span class="nav-text">字节流&amp;字符流小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换流"><span class="nav-number">3.</span> <span class="nav-text">转换流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可以和流相关联的集合对象Properties"><span class="nav-number">4.</span> <span class="nav-text">可以和流相关联的集合对象Properties</span></a></li></ol></div>
             
 
           </div>
@@ -831,7 +832,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

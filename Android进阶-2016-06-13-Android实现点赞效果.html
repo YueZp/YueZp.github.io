@@ -111,10 +111,11 @@
 <meta property="og:url" content="http://www.sguotao.top/Android进阶-2016-06-13-Android实现点赞效果.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。 添加平移动画先来实现一个简单的平移动画，查看一下效果： 123ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &amp;quot;tra">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733811463543.gif">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733732652528.gif">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170613149734463770366.gif">
-<meta property="og:updated_time" content="2017-07-13T10:02:55.000Z">
+<meta property="og:updated_time" content="2017-08-08T03:40:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android实现点赞效果">
 <meta name="twitter:description" content="最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。 添加平移动画先来实现一个简单的平移动画，查看一下效果： 123ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &amp;quot;tra">
@@ -438,7 +439,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  369字
+                  411字
                 </span>
               
 
@@ -474,13 +475,13 @@
       
         <p>最近接到一个需求，需求中有个点赞动画的需求。决定使用属性动画的方式来实现。其实使用传统的动画，也可以实现相同的效果，出于传统动画会重复调用onDraw()方法进行绘制，可能会存在一些内存和性能的问题。</p>
 <h3 id="添加平移动画"><a href="#添加平移动画" class="headerlink" title="添加平移动画"></a>添加平移动画</h3><p>先来实现一个简单的平移动画，查看一下效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</div><div class="line">translationY.setDuration(1000);</div><div class="line">translationY.start();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</span><br><span class="line">translationY.setDuration(1000);</span><br><span class="line">translationY.start();</span><br></pre></td></tr></table></figure>
 <p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733811463543.gif" alt="20170613149733811463543.gif"></p>
 <h3 id="添加渐变动画"><a href="#添加渐变动画" class="headerlink" title="添加渐变动画"></a>添加渐变动画</h3><p>再加入一个渐变的效果，查看一下效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//translate动画</div><div class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</div><div class="line">//alpha动画</div><div class="line">ObjectAnimator alpha = ObjectAnimator.ofFloat(view, &quot;alpha&quot;, 1f, 0f);</div><div class="line">AnimatorSet animatorSet = new AnimatorSet();</div><div class="line">animatorSet.play(translationY).before(alpha);</div><div class="line">animatorSet.setDuration(1000);</div><div class="line">animatorSet.start();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//translate动画</span><br><span class="line">ObjectAnimator translationY = ObjectAnimator.ofFloat(view, &quot;translationY&quot;, 0f, -100f);</span><br><span class="line">//alpha动画</span><br><span class="line">ObjectAnimator alpha = ObjectAnimator.ofFloat(view, &quot;alpha&quot;, 1f, 0f);</span><br><span class="line">AnimatorSet animatorSet = new AnimatorSet();</span><br><span class="line">animatorSet.play(translationY).before(alpha);</span><br><span class="line">animatorSet.setDuration(1000);</span><br><span class="line">animatorSet.start();</span><br></pre></td></tr></table></figure>
 <p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149733732652528.gif" alt="20170613149733732652528.gif"></p>
 <h3 id="实现-1效果"><a href="#实现-1效果" class="headerlink" title="实现+1效果"></a>实现+1效果</h3><p>怎样实现+1的效果呢？可以考虑添加TextView，通过监听动画的状态实现对TextView显示状态的控制，查看一下运行效果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">final TextView tv = (TextView) findViewById(R.id.tv);</div><div class="line"></div><div class="line">        //translate动画</div><div class="line">        ObjectAnimator translationY = ObjectAnimator.ofFloat(tv, &quot;translationY&quot;, 0f, -100f);</div><div class="line">        //alpha动画</div><div class="line">        ObjectAnimator alpha = ObjectAnimator.ofFloat(tv, &quot;alpha&quot;, 1f, 0f);</div><div class="line">        alpha.addListener(new Animator.AnimatorListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onAnimationStart(Animator animation) &#123;</div><div class="line">                tv.setVisibility(View.VISIBLE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationEnd(Animator animation) &#123;</div><div class="line">                tv.setVisibility(View.GONE);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationCancel(Animator animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAnimationRepeat(Animator animation) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        AnimatorSet animatorSet = new AnimatorSet();</div><div class="line">        animatorSet.play(translationY).with(alpha);</div><div class="line">        animatorSet.setDuration(1000);</div><div class="line">        animatorSet.start();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">final TextView tv = (TextView) findViewById(R.id.tv);</span><br><span class="line"></span><br><span class="line">        //translate动画</span><br><span class="line">        ObjectAnimator translationY = ObjectAnimator.ofFloat(tv, &quot;translationY&quot;, 0f, -100f);</span><br><span class="line">        //alpha动画</span><br><span class="line">        ObjectAnimator alpha = ObjectAnimator.ofFloat(tv, &quot;alpha&quot;, 1f, 0f);</span><br><span class="line">        alpha.addListener(new Animator.AnimatorListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationStart(Animator animation) &#123;</span><br><span class="line">                tv.setVisibility(View.VISIBLE);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationEnd(Animator animation) &#123;</span><br><span class="line">                tv.setVisibility(View.GONE);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationCancel(Animator animation) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationRepeat(Animator animation) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        AnimatorSet animatorSet = new AnimatorSet();</span><br><span class="line">        animatorSet.play(translationY).with(alpha);</span><br><span class="line">        animatorSet.setDuration(1000);</span><br><span class="line">        animatorSet.start();</span><br></pre></td></tr></table></figure>
 <p><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170613149734463770366.gif" alt="20170613149734463770366.gif"></p>
 <h3 id="封装成View"><a href="#封装成View" class="headerlink" title="封装成View"></a>封装成View</h3><p>考虑到后期的扩展性和可维护性，将上面这个动画封装成一个自定义View。</p>
 <hr>
@@ -673,7 +674,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -684,7 +685,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -695,7 +696,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -779,7 +780,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

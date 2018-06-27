@@ -111,6 +111,7 @@
 <meta property="og:url" content="http://www.sguotao.top/Java-2016-06-15-Java-String的不可变性.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="Java String类有一个特点，即它是一个不可变类，一旦被实例化后，就无法被修改。于是就有一个疑问，为什么将String类设计成不可变的？这样设计有什么好处呢？ 什么是不可变对象？一个对象在其被实例化完成后，不能够改变其成员变量，包括基本数据类型的值不能够改变及引用类型索引的对象也不能够被修改。 String的不可变性String类的实例变量，存在一块特殊区域，这部分区域可以称为字符串池，这是">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170615149750940366064.png">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170615149751091924228.png">
 <meta property="og:updated_time" content="2017-07-20T08:42:36.000Z">
@@ -437,7 +438,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  646字
+                  651字
                 </span>
               
 
@@ -474,16 +475,16 @@
         <p>Java String类有一个特点，即它是一个不可变类，一旦被实例化后，就无法被修改。于是就有一个疑问，为什么将String类设计成不可变的？这样设计有什么好处呢？</p>
 <h2 id="什么是不可变对象？"><a href="#什么是不可变对象？" class="headerlink" title="什么是不可变对象？"></a>什么是不可变对象？</h2><p>一个对象在其被实例化完成后，不能够改变其成员变量，包括基本数据类型的值不能够改变及引用类型索引的对象也不能够被修改。</p>
 <h2 id="String的不可变性"><a href="#String的不可变性" class="headerlink" title="String的不可变性"></a>String的不可变性</h2><p>String类的实例变量，存在一块特殊区域，这部分区域可以称为字符串池，这是在堆存储区中，方法区中的一部分存储区域。当一个字符串被创建的时候，会在字符串池中查找，如果找到，则直接返回该字符串的引用。比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//声明两个字符串</span></div><div class="line">String str1 = <span class="string">"abcd"</span>;</div><div class="line">String str2 = <span class="string">"abcd"</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明两个字符串</span></span><br><span class="line">String str1 = <span class="string">"abcd"</span>;</span><br><span class="line">String str2 = <span class="string">"abcd"</span>;</span><br></pre></td></tr></table></figure>
 <p>用图来表示这两个字符串的声明过程：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170615149750940366064.png" alt="20170615149750940366064.png"><br>在声明str2时，在字符串池中存在“abcd”，因此直接将“abcd”的引用返回。</p>
 <h2 id="对象和对象的引用"><a href="#对象和对象的引用" class="headerlink" title="对象和对象的引用"></a>对象和对象的引用</h2><p>下面一段代码，先看代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String str1 = <span class="string">"abcd"</span></div><div class="line">str1=<span class="string">"1234"</span></div><div class="line">System.out.println(str1);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="string">"abcd"</span></span><br><span class="line">str1=<span class="string">"1234"</span></span><br><span class="line">System.out.println(str1);</span><br></pre></td></tr></table></figure>
 <p>打印结果”1234”。<br>很容易让人产生一个误区，str1的值是改变的，怎么解释呢？这里需要区分一下对象及对象的引用。对象是存放在堆内存中的，类的实例。引用，存放在栈内存中的，存放指向堆内存中对象的索引。上面这段代码的执行过程可以用下面的图形表示：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170615149751091924228.png" alt="20170615149751091924228.png"><br>str1只是一个引用，它指向一个具体的对象，当str1=”1234”执行时，创建了一个新的对象”1234”,引用str1指向了这个新对象，原来的对象“abcd”还存在内存中，没有发生改变。</p>
 <h2 id="String的不可变性有哪些特点"><a href="#String的不可变性有哪些特点" class="headerlink" title="String的不可变性有哪些特点"></a>String的不可变性有哪些特点</h2><ol>
 <li>线程安全，不可变对象不能够被改变，所以可以再多线程之间共享，不需要任何同步处理。</li>
 <li>高效性，在String中的源码中</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//this is used to cache hash code.</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> hash;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//this is used to cache hash code.</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> hash;</span><br></pre></td></tr></table></figure>
 <p>由于String是不可变的，随意一旦对象被创建，该Hash值也无法修改。所以在使用该对象的hashcode时，可以直接返回。比如在HashMap中，字符串对象的hashcode不可变且永远唯一，这就意味着使用在HashMap中的字符串时，不需要重新计算hashcode值，更加的高效。</p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.top/Java-2016-06-15-Java-String的不可变性.html">http://www.sguotao.top/Java-2016-06-15-Java-String的不可变性.html</a></p>
@@ -671,7 +672,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -682,7 +683,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -693,7 +694,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -777,7 +778,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

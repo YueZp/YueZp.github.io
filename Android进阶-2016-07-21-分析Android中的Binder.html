@@ -111,6 +111,7 @@
 <meta property="og:url" content="http://www.sguotao.top/Android进阶-2016-07-21-分析Android中的Binder.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="在分析Binder之前，需要先了解几个Linux的几个概念。 Linux内核的基础知识 进程隔离/虚拟地址空间:每个程序都有自己独立的进程地址空间，这样就做到了进程隔离。这里的进程地址空间是指虚拟地址。虚拟地址不是现实存在的地址空间。操作系统可以根据分段和分页两种方式，实现虚拟地址到真实物理地址的映射。  系统调用:计算机系统的各种硬件资源是有限的，在现代多任务操作系统上同时运行的多个进程都需要访">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170807150209709476434.png">
 <meta property="og:updated_time" content="2017-08-08T03:38:55.000Z">
 <meta name="twitter:card" content="summary">
@@ -497,7 +498,7 @@
 <li>Client向ServiceManager中进行查询Service中注册的方法；</li>
 <li>ServiceManager返回一个代理对象，Client可以通过该代理对象实现与Server的通信。代理对象中有空方法，代理对象中方法的实现是Binder驱动来完成的。整个过程对Client是透明的。</li>
 </ol>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>1.任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507<br>2.<a href="http://blog.csdn.net/universus/article/details/6211589" target="_blank" rel="external">Android Bander设计与实现 - 设计篇</a><br>3.<a href="http://www.cnblogs.com/innost/archive/2011/01/09/1931456.html" target="_blank" rel="external">Android深入浅出之Binder机制</a></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>1.任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507<br>2.<a href="http://blog.csdn.net/universus/article/details/6211589" target="_blank" rel="noopener">Android Bander设计与实现 - 设计篇</a><br>3.<a href="http://www.cnblogs.com/innost/archive/2011/01/09/1931456.html" target="_blank" rel="noopener">Android深入浅出之Binder机制</a></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.top/Android进阶-2016-07-21-分析Android中的Binder.html">http://www.sguotao.top/Android进阶-2016-07-21-分析Android中的Binder.html</a></p>
 
@@ -600,8 +601,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Android进阶-2016-07-21-分析Android中的Activity.html" rel="next" title="分析Android中的Activity">
-                <i class="fa fa-chevron-left"></i> 分析Android中的Activity
+              <a href="/Android进阶-2016-07-21-分析Androdi中的Fragment.html" rel="next" title="分析Android中的Fragment">
+                <i class="fa fa-chevron-left"></i> 分析Android中的Fragment
               </a>
             
           </div>
@@ -686,7 +687,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -697,7 +698,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -708,7 +709,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -792,7 +793,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

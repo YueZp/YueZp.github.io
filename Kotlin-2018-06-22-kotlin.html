@@ -1,0 +1,1546 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googlea8ba7e863392b1ab" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Kotlin," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Kotlin介绍 Kotlin是一种在Java虚拟机上运行的静态类型编程语言，它也可以被编译成为JavaScript源代码。Kotlin与Java 100%兼容，能够运行在Android平台和浏览器上。  Kotlin的应用场景1.Kotlin Script在IntellJ Idea中创建后缀为.kts的脚本文件，可以直接运行。Gradle在3.0之后部分支持Kotlin作为其脚本语言。 2.Ja">
+<meta name="keywords" content="Kotlin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin笔记">
+<meta property="og:url" content="http://www.sguotao.top/Kotlin-2018-06-22-kotlin.html">
+<meta property="og:site_name" content="Scott&#39;s Blog">
+<meta property="og:description" content="Kotlin介绍 Kotlin是一种在Java虚拟机上运行的静态类型编程语言，它也可以被编译成为JavaScript源代码。Kotlin与Java 100%兼容，能够运行在Android平台和浏览器上。  Kotlin的应用场景1.Kotlin Script在IntellJ Idea中创建后缀为.kts的脚本文件，可以直接运行。Gradle在3.0之后部分支持Kotlin作为其脚本语言。 2.Ja">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-26T08:40:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kotlin笔记">
+<meta name="twitter:description" content="Kotlin介绍 Kotlin是一种在Java虚拟机上运行的静态类型编程语言，它也可以被编译成为JavaScript源代码。Kotlin与Java 100%兼容，能够运行在Android平台和浏览器上。  Kotlin的应用场景1.Kotlin Script在IntellJ Idea中创建后缀为.kts的脚本文件，可以直接运行。Gradle在3.0之后部分支持Kotlin作为其脚本语言。 2.Ja">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.top/Kotlin-2018-06-22-kotlin.html"/>
+
+
+
+
+
+  <title>Kotlin笔记 | Scott's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    
+    <!-- 在右上角或者左上角实现fork me on github -->
+    <a href="https://github.com/sguotao" class="github-corner" aria-label="View source on Github"><svg width="92" height="92" viewBox="0 0 250 250" style="fill:#151513;color:#fff;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">和光同尘,静水流深</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.top/Kotlin-2018-06-22-kotlin.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Kotlin笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-22T15:25:42+08:00">
+                2018-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/Kotlin-2018-06-22-kotlin.html" class="leancloud_visitors" data-flag-title="Kotlin笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,377字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  15分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Kotlin介绍"><a href="#Kotlin介绍" class="headerlink" title="Kotlin介绍"></a>Kotlin介绍</h2><blockquote>
+<p>Kotlin是一种在Java虚拟机上运行的静态类型编程语言，它也可以被编译成为JavaScript源代码。Kotlin与Java 100%兼容，能够运行在Android平台和浏览器上。</p>
+</blockquote>
+<h2 id="Kotlin的应用场景"><a href="#Kotlin的应用场景" class="headerlink" title="Kotlin的应用场景"></a>Kotlin的应用场景</h2><p><strong>1.Kotlin Script</strong><br>在IntellJ Idea中创建后缀为.kts的脚本文件，可以直接运行。Gradle在3.0之后部分支持Kotlin作为其脚本语言。</p>
+<p><strong>2.Java虚拟机应用</strong><br>常见的Web应用，JavaFx应用，Kotlin都完美支持。</p>
+<p><strong>3.前端开发</strong><br>Kotlin从1.1版本开始，Kotlin可以编译成JavaScript代码，运行在浏览器上。</p>
+<p><strong>4.Android应用开发</strong><br>Kotlin应用的主战场</p>
+<p><strong>5.Native程序开发</strong><br>直接将Kotlin代码编译成机器码，不依赖JVM，区别于JNI，能与C直接进行交互。</p>
+<h2 id="Kotlin语法特性"><a href="#Kotlin语法特性" class="headerlink" title="Kotlin语法特性"></a>Kotlin语法特性</h2><h3 id="1-定义类"><a href="#1-定义类" class="headerlink" title="1.定义类"></a>1.定义类</h3><p>定义类，使用class关键字，它有一个默认的构造器，只需要在类名后面写上参数，如果类没有任何内容，可以省略大括号。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(name:String,age:<span class="built_in">Int</span>)</span><br></pre></td></tr></table></figure>
+<p>构造函数的函数体卸载init代码块中</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(name:String,age:<span class="built_in">Int</span>)&#123;</span><br><span class="line">    init&#123;</span><br><span class="line">        <span class="comment">//todo</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-继承"><a href="#2-继承" class="headerlink" title="2.继承"></a>2.继承</h3><p>在Kotlin中任何类都是继承自Any，所有类默认是不以被继承的，都是final类型，如果想让类被继承，可以使用open或abstract关键字。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>(name:String)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(name:String,age:<span class="built_in">Int</span>): Animal(name) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-函数"><a href="#3-函数" class="headerlink" title="3.函数"></a>3.函数</h3><p>使用fun关键字声明函数，如果没有指定函数的返回类型，默认为Unit</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">add</span><span class="params">(x: <span class="type">Int</span>, y: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">如果返回的结果可以使用一个表达式来表示，可以省略大括号，使用等号。</span><br><span class="line"></span><br><span class="line">```Kotlin</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">add</span><span class="params">(x: <span class="type">Int</span>, y: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> = x + y</span><br></pre></td></tr></table></figure>
+<p>Kotlin中定义的函数可以指定默认参数，在调用函数的时候，可以省略这个参数。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">showToast</span><span class="params">(message: <span class="type">String</span>, tag: <span class="type">String</span> = javaClass.simpleName, length: <span class="type">Int</span> = Toast.LENGTH_SHORT)</span></span> &#123;</span><br><span class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"[<span class="variable">$tag</span>] <span class="variable">$message</span>"</span>, length).show()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>调用时</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">showToast(<span class="string">"Hello Kotlin"</span>)</span><br><span class="line">showToast(<span class="string">"Hello Kotlin"</span>, <span class="string">"Letv"</span>, Toast.LENGTH_LONG)</span><br><span class="line">showToast(message = <span class="string">"Hello Kotlin"</span>, tag = <span class="string">"sguotao"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="4-基本类型"><a href="#4-基本类型" class="headerlink" title="4.基本类型"></a>4.基本类型</h3><p><strong>1.数字类型不会进行自动转型，必须要做一个明确的类型转换</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> i:<span class="built_in">Int</span> = <span class="number">7</span></span><br><span class="line"><span class="keyword">val</span> d:<span class="built_in">Double</span> = i.toDouble()</span><br></pre></td></tr></table></figure>
+<p><strong>2.字符Char不能直接作为一个数字来处理，需要进行类型转换。</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> c:<span class="built_in">Char</span> = <span class="string">'c'</span></span><br><span class="line"><span class="keyword">val</span> i:<span class="built_in">Int</span> = c.toInt()</span><br></pre></td></tr></table></figure>
+<p><strong>3.位运算符使用and or 区别与Java的“ &amp; |”</strong><br><strong>4.Kotlin编译器可以推断出变量的类型，此时可以省略声明时的具体类型</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> i = <span class="number">5</span> <span class="comment">//Int</span></span><br><span class="line"><span class="keyword">val</span> d = <span class="number">4.5</span> <span class="comment">//Double</span></span><br><span class="line"><span class="keyword">val</span> iHex = <span class="number">0x1f</span> <span class="comment">//十六进制Int</span></span><br><span class="line"><span class="keyword">val</span> l = <span class="number">2</span>l <span class="comment">//Long</span></span><br><span class="line"><span class="keyword">val</span> f = <span class="number">3.5</span>f <span class="comment">//Float</span></span><br></pre></td></tr></table></figure>
+<p><strong>5.String类型可以像数组一样访问和迭代</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s = <span class="string">"sample"</span></span><br><span class="line"><span class="keyword">val</span> a = s[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (a <span class="keyword">in</span> s)&#123;</span><br><span class="line">    print(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-变量"><a href="#5-变量" class="headerlink" title="5.变量"></a>5.变量</h3><p>在Kotlin中变量分为可变变量(var)和不可变变量(val)，一个不可变变量在实例化之后，其状态就不能被改变，所以不可变变量可以认为是线程安全的。声明变量时，编译器会根据变量初始化时的赋值类型，判断变量的类型。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s = <span class="string">"sample"</span></span><br></pre></td></tr></table></figure>
+<p>如果使用泛型类型，声明变量时需要指定类型。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> a: Any = <span class="number">12</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-属性"><a href="#6-属性" class="headerlink" title="6.属性"></a>6.属性</h3><p>在Kotlin中，属性会默认创在getter和setter方法，如果需要重写getter和setter方法，使用field关键字访问属性。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>() &#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">""</span></span><br><span class="line">        <span class="keyword">get</span>() &#123;</span><br><span class="line">            <span class="keyword">return</span> field.toUpperCase()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            field = <span class="string">"Name: <span class="variable">$value</span>"</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-扩展函数"><a href="#7-扩展函数" class="headerlink" title="7.扩展函数"></a>7.扩展函数</h3><p>扩展函数是指在一个类上增加一种新的行为，即使没有对这个类的访问权限。扩展函数并不是真正修改原来的类，它是以静态导入的方式来实现的。扩展函数表现的就像是该函数属于该类一样，甚至可以使用this关键字调用类中的public方法。</p>
+<p>声明一个扩展函数，需要用一个<strong><em>接收者类型</em></strong>也就是被扩展的类型来作为他的前缀。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> MutableList<span class="type">&lt;T&gt;</span>.<span class="title">swap</span><span class="params">(index1: <span class="type">Int</span>, index2: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> tmp = <span class="keyword">this</span>[index1] <span class="comment">// “this”对应该列表</span></span><br><span class="line">    <span class="keyword">this</span>[index1] = <span class="keyword">this</span>[index2]</span><br><span class="line">    <span class="keyword">this</span>[index2] = tmp</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="8-伴生对象"><a href="#8-伴生对象" class="headerlink" title="8.伴生对象"></a>8.伴生对象</h3><p>使用伴生对象实际上是在这个类内部创建了一个名为 Companion 的静态单例内部类，伴生对象中定义的属性会直接编译为外部类的静态字段，而函数会被编译为伴生对象的方法。</p>
+<h3 id="9-内置函数"><a href="#9-内置函数" class="headerlink" title="9.内置函数"></a>9.内置函数</h3><p>支持闭包(block)，如果函数中最后一个参数为闭包，那么最后一个参可以不写在括号中，而写在括号后面，如果只有一个参数，括号也可以去掉。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">toast</span><span class="params">()</span></span> &#123;</span><br><span class="line">    button.setOnClickListener(&#123;</span><br><span class="line">       Toast.makeText(context, <span class="string">"test"</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">toast</span><span class="params">()</span></span> &#123;</span><br><span class="line">    button.setOnClickListener &#123;</span><br><span class="line">        Toast.makeText(context, <span class="string">"test"</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="9-1-repeat函数"><a href="#9-1-repeat函数" class="headerlink" title="9.1 repeat函数"></a>9.1 repeat函数</h4><p>循环执行多次block中内容。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    repeat(<span class="number">3</span>) &#123;</span><br><span class="line">        println(<span class="string">"Hello world"</span>)<span class="comment">//打印3遍“Hello World”</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="9-2-with函数"><a href="#9-2-with函数" class="headerlink" title="9.2 with函数"></a>9.2 with函数</h4><p>with函数接收一个对象和一个函数，这个函数会作为这个对象的扩展函数来执行。即指定的T作为闭包的receiver，使用参数中闭包的返回结果。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Calls the specified function [block] with the given [receiver] as its receiver and returns its result.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@kotlin</span>.<span class="keyword">internal</span>.InlineOnly</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T, R&gt;</span> <span class="title">with</span><span class="params">(receiver: <span class="type">T</span>, block: <span class="type">T</span>.()</span></span> -&gt; R): R &#123;</span><br><span class="line">    contract &#123;</span><br><span class="line">        callsInPlace(block, InvocationKind.EXACTLY_ONCE)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> receiver.block()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="9-3-let函数（TODO）"><a href="#9-3-let函数（TODO）" class="headerlink" title="9.3 let函数（TODO）"></a>9.3 let函数（TODO）</h4><p>let函数可以被任意对象调用，它接收一个函数作为参数，作为参数的函数的返回结果作为整个整个函数的返回值。</p>
+<h4 id="9-4-apply函数（TODO）"><a href="#9-4-apply函数（TODO）" class="headerlink" title="9.4 apply函数（TODO）"></a>9.4 apply函数（TODO）</h4><p>与with函数类似，apply可以以避免创建Builder的方式来使用，因为对象调用的函数可以根据需要来初始化自己，并且返回它同一个对象。</p>
+<h4 id="9-5-run函数（TODO）"><a href="#9-5-run函数（TODO）" class="headerlink" title="9.5 run函数（TODO）"></a>9.5 run函数（TODO）</h4><h3 id="10-“-”与“-”"><a href="#10-“-”与“-”" class="headerlink" title="10.“===”与“!==”"></a>10.“===”与“!==”</h3><p>操作符“===”与“!===”用来判断两个对象是否为同一个对象，对应Java中的“==”和“!=”</p>
+<h3 id="11-Lambda表达式-TODO"><a href="#11-Lambda表达式-TODO" class="headerlink" title="11.Lambda表达式(TODO)"></a>11.Lambda表达式(TODO)</h3><h3 id="12-内联函数-inline"><a href="#12-内联函数-inline" class="headerlink" title="12.内联函数(inline)"></a>12.内联函数(inline)</h3><p>被inline修饰的函数或lambda表达式,在调用时都会被内联(在调用处插入函数体代码)</p>
+<h3 id="13-操作符重载（TODO）"><a href="#13-操作符重载（TODO）" class="headerlink" title="13.操作符重载（TODO）"></a>13.操作符重载（TODO）</h3><h3 id="14-委托属性（TODO）"><a href="#14-委托属性（TODO）" class="headerlink" title="14.委托属性（TODO）"></a>14.委托属性（TODO）</h3><h3 id="15-函数操作符"><a href="#15-函数操作符" class="headerlink" title="15.函数操作符"></a>15.函数操作符</h3><h4 id="总数操作符"><a href="#总数操作符" class="headerlink" title="总数操作符"></a>总数操作符</h4><p><strong>1.any 如果有一个元素符合给出的判断条件，返回true*</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> list = listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line"><span class="keyword">val</span> listwithNull = listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="literal">null</span>, <span class="number">5</span>, <span class="literal">null</span>, <span class="number">6</span>, <span class="literal">null</span>)</span><br><span class="line">assertTrue(list.any &#123; it % <span class="number">2</span> == <span class="number">0</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>2.all 如果全部的元素符合给出的判断条件，返回true</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertTrue &#123; list.all &#123; it &gt; <span class="number">0</span> &#125; &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3.count 返回符合给出判断条件的元素的个数</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(<span class="number">3</span>, list.count &#123; it % <span class="number">2</span> == <span class="number">0</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>4.fold 在一个初始值的基础上从第一项到最后一项进行累加</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(<span class="number">220</span>, list.fold(<span class="number">10</span>) &#123; total, next -&gt; total + next * <span class="number">10</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>5.foldRight 与fold类似，但顺序是从最后一项到第一项</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(31, list.foldRight(10) &#123; total, next -&gt; total + next &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>6.forEach 遍历所有元素并执行给定操作</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.forEach() &#123; print(it) &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>7.forEachIndexed 与forEach类似，同时可以获取元素的index</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.forEachIndexed() &#123; index, value -&gt; println(<span class="string">"position:<span class="variable">$index</span>,value:<span class="variable">$value</span>"</span>) &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>8.max 返回最大一项，如果没有返回null</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(6, list.max())</span><br></pre></td></tr></table></figure>
+<p><strong>9.maxBy 根据给定的函数，返回最大一项，如果没有返回null</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(1, list.maxBy &#123; -it &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>10.min 返回最小一项，如果没有返回null</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(1, list.min())</span><br></pre></td></tr></table></figure>
+<p><strong>11.minBy 根据给定的函数，返回最小的一项，如果没有返回null</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(6, list.minBy &#123; -it &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>12.none 如果没有任何元素与给定的函数匹配，返回true</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertTrue &#123; list.none() &#123; it &gt;= 7 &#125; &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>13.reduce 与fold类似，但没有初始值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(21, list.reduce() &#123; total, next -&gt; total + next &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>14.reduceRight 与reduce类似，但顺序是从最后一项到第一项</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(21, list.reduceRight() &#123; total, next -&gt; total + next &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>15.sumBy 返回每一项通过函数转换后的数据总和</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(-21, list.sumBy &#123; -it &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="过滤操作符"><a href="#过滤操作符" class="headerlink" title="过滤操作符"></a>过滤操作符</h4><p><strong>16.drop 返回包含去掉前n个元素的所有元素的列表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(5, 6), list.drop(4))</span><br></pre></td></tr></table></figure>
+<p><strong>17.dropWhile 返回去掉满足指定函数要求的，从第一个元素开始的所有元素的列表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(4, 5, 6), list.dropWhile &#123; it &lt; 4 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>18.dropLastWhile 返回去掉指定函数要求的，从最后一个元素开始的所有元素的列表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(1, 2, 3, 4), list.dropLastWhile &#123; it &gt; 4 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>19.filter 保留所有满足指定函数要求的元素</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(2, 4, 6), list.filter &#123; it % 2 == 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>20.filterNot 过滤掉所有满足指定函数要求的元素</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(1, 3, 5), list.filterNot &#123; it % 2 == 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>21.filterNotNull 保留所有不为null的元素</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(1, 2, 3, 4, 5, 6), listwithNull.filterNotNull())</span><br></pre></td></tr></table></figure>
+<p><strong>22.slice 保留list中指定index的元素</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(2, 4, 5), list.slice(listOf(1, 3, 4)))</span><br></pre></td></tr></table></figure>
+<p><strong>23.take 保留从第一个元素开始的n个元素</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(1, 2, 3), list.take(3))</span><br></pre></td></tr></table></figure>
+<p><strong>24.takeLast 保留从最后一个元素开始的n个元素</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(4, 5, 6), list.takeLast(3))</span><br></pre></td></tr></table></figure>
+<p><strong>25.takeWhile 保留从第一个元素开始，满足指定函数的元素</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(1, 2), list.takeWhile &#123; it &lt; 3 &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="映射操作符"><a href="#映射操作符" class="headerlink" title="映射操作符"></a>映射操作符</h4><p><strong>26.flatMap 遍历每一个元素，为每一个元素创建一个集合，最后把所有集合合并为一个集合</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(list)//list:[1,2,3,4,5,6]</span><br><span class="line">//[1,2],[2,3],[3,4],[4,5],[5,6],[6,7] =&gt; [1,2,2,3,3,4,4,5,5,6,6,7]</span><br><span class="line">println(list.flatMap &#123; listOf(it, it + 1) &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>27.groupBy 返回一个根据指定函数分组的map</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">println(mapOf(&quot;odd&quot; to listOf(1, 3, 5)))</span><br><span class="line">println(mapOf(&quot;even&quot; to listOf(2, 4, 6)))</span><br><span class="line">println(list.groupBy &#123; if (it % 2 == 0) &quot;even&quot; else &quot;odd&quot; &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>28.map 返回一个，每个元素都按照指定函数进行转换后的集合</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(2, 4, 6, 8, 10, 12), list.map &#123; it -&gt; it * 2 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>29.mapIndexed 返回一个，每个元素按照包含元素index的指定函数转换后的集合</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(0, 2, 6, 12, 20, 30), list.mapIndexed &#123; it, index -&gt; index * it &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>30.mapNotNull 返回一个过滤掉null元素，并且非null元素按照指定函数进行转换后的集合</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">println(listwithNull)</span><br><span class="line">println(listwithNull.mapNotNull &#123; it &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="元素操作符"><a href="#元素操作符" class="headerlink" title="元素操作符"></a>元素操作符</h4><p><strong>31.contains 如果指定元素在集合中，返回true</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertTrue(list.contains(1))</span><br></pre></td></tr></table></figure>
+<p><strong>32.elementAt 返回指定index对应的元素，如果index越界，抛IndexOutOfBoundsException</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(1, list.elementAt(0))</span><br></pre></td></tr></table></figure>
+<p><strong>33.elementAtOrElse 返回指定index对应的元素，如果index越界，返回指定函数中设置的默认值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(20, list.elementAtOrElse(10, &#123; 2 * it &#125;))</span><br></pre></td></tr></table></figure>
+<p><strong>34.elementAtOrNull 返回指定index对应的元素，如果index越界，返回null</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertNull(list.elementAtOrNull(10))</span><br></pre></td></tr></table></figure>
+<p><strong>35.first 返回第一个满足指定函数的元素，如果没有，抛出NoSuchElementException</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(2, list.first() &#123; it % 2 == 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>36.firstOrNull 返回第一个满足指定函数的元素，如果没有返回null</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertNull(list.firstOrNull() &#123; it &lt; 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>37.indexOf 返回指定元素的第一个index，如果不存在返回-1</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(-1, list.indexOf(7))</span><br></pre></td></tr></table></figure>
+<p><strong>38.indexOfFirst 返回第一个满足指定函数的元素的index，如果不存在返回-1</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(1, list.indexOfFirst &#123; it % 2 == 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>39.indexOfLast 返回最后一个满足指定函数的元素的index，如果不存在返回-1</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(5, list.indexOfLast &#123; it % 2 == 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>40.last 返回最后一个满足指定函数的元素，如果没有，抛出NoSuchElementException</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(list.last() &#123; it % 2 == 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>41.lastIndexOf 返回指定元素的最后一个index，如果不存在返回-1</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(listwithNull.lastIndexOf(null))</span><br></pre></td></tr></table></figure>
+<p><strong>42.lastOrNull 返回最后一个满足指定函数的元素，如果没有返回null</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertNull(list.lastOrNull() &#123; it &lt; 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>43.single 返回满足指定函数的单个元素，如果没有，或者满足条件的元素个数超过一个，抛出异常</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(1, list.single() &#123; it &lt; 2 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>44.singleOrNull 返回满足指定函数的单个元素，如果没有，或者满足条件的元素个数超过一个，返回null</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(list.singleOrNull() &#123; it % 2 == 0 &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="生产操作符"><a href="#生产操作符" class="headerlink" title="生产操作符"></a>生产操作符</h4><p><strong>45.partition 将一个给定的集合分割成两个集合，第一个集合是由匹配指定函数，返回true的元素组成。第二个集合是由匹配指定函数，返回false的元素组成。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(Pair(listOf(1, 3, 5), listOf(2, 4, 6)), list.partition &#123; it % 2 != 0 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>46.plus 返回一个包含原集合和给定集合中所有元素的集合，可以使用“+”操作符</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(1, 2, 3, 4, 5, 6, 6, 7, 8), list + listOf(6, 7, 8))</span><br></pre></td></tr></table></figure>
+<p><strong>47.plusElement 在集合中添加元素</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(list.plusElement(7))</span><br></pre></td></tr></table></figure>
+<p><strong>48.zip 将两个集合按照下标进行配对，组成的Pair是由两个集合中相同index的元素组成，如果两个集合长度不一致，取短的集合的长度。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertEquals(listOf(Pair(1, &apos;x&apos;), Pair(2, &apos;y&apos;)), list.zip(listOf(&apos;x&apos;, &apos;y&apos;)))</span><br></pre></td></tr></table></figure>
+<p><strong>49.unzip 作用在包含Pair的集合上，依次取各个Pair的first和second值，放入List<t>和List<r>中，然后返回包含List<t>和List<r>的Pair</r></t></r></t></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val listPair = listOf(Pair(1, 2), Pair(&apos;a&apos;, &apos;b&apos;), Pair(3, 4), Pair(&apos;c&apos;, &apos;d&apos;))</span><br><span class="line">println(listPair)</span><br><span class="line">println(listPair.unzip())</span><br></pre></td></tr></table></figure>
+<h4 id="顺序操作符"><a href="#顺序操作符" class="headerlink" title="顺序操作符"></a>顺序操作符</h4><p><strong>50.reversed 返回一个与指定list顺序相反的list</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">println(list)</span><br><span class="line">println(list.reversed())</span><br></pre></td></tr></table></figure>
+<p><strong>51.sorted 升序排序</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(list.sorted())</span><br></pre></td></tr></table></figure>
+<p><strong>52.sortBy 返回一个按照指定函数变换后的升序排序</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(list.sortedBy &#123; it -&gt; it % 3 &#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>53.sortDescending 降序排序</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(list.sortedDescending())</span><br></pre></td></tr></table></figure>
+<p><strong>54.sortDescendingBy 返回一个按照指定函数变换后的降序排序</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">println(list.sortedByDescending &#123; it -&gt; it % 3 &#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><ol>
+<li><a href="https://classroom.udacity.com/courses/ud9011" target="_blank" rel="noopener">Kotlin Bootcamp for Programmers</a></li>
+<li><a href="https://try.kotlinlang.org/#/Kotlin%20Koans/Introduction/Hello,%20world!/Task.kt" target="_blank" rel="noopener">Kotlin Koans</a></li>
+</ol>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.top/Kotlin-2018-06-22-kotlin.html">http://www.sguotao.top/Kotlin-2018-06-22-kotlin.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    
+      <div>
+        
+          
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>「真诚赞赏，手留余香」</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+        
+      </div>
+    
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Scott
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.sguotao.top/Kotlin-2018-06-22-kotlin.html" title="Kotlin笔记">http://www.sguotao.top/Kotlin-2018-06-22-kotlin.html</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8474352740015305",
+    enable_page_level_ads: true
+  });
+</script>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kotlin/" rel="tag"><i class="fa fa-tag"></i> Kotlin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018-06-15-Kotlin-md.html" rel="next" title="2018-06-15-Kotlin.md">
+                <i class="fa fa-chevron-left"></i> 2018-06-15-Kotlin.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/生活感悟-2018-06-26-学习一门编程语言大致经历的阶段.html" rel="prev" title="学习一门语言大致经历的阶段">
+                学习一门语言大致经历的阶段 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODkyOC81NDk3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sguotao" target="_blank" rel="external nofollow" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin介绍"><span class="nav-number">1.</span> <span class="nav-text">Kotlin介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin的应用场景"><span class="nav-number">2.</span> <span class="nav-text">Kotlin的应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin语法特性"><span class="nav-number">3.</span> <span class="nav-text">Kotlin语法特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-定义类"><span class="nav-number">3.1.</span> <span class="nav-text">1.定义类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-继承"><span class="nav-number">3.2.</span> <span class="nav-text">2.继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-函数"><span class="nav-number">3.3.</span> <span class="nav-text">3.函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-基本类型"><span class="nav-number">3.4.</span> <span class="nav-text">4.基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-变量"><span class="nav-number">3.5.</span> <span class="nav-text">5.变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-属性"><span class="nav-number">3.6.</span> <span class="nav-text">6.属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-扩展函数"><span class="nav-number">3.7.</span> <span class="nav-text">7.扩展函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-伴生对象"><span class="nav-number">3.8.</span> <span class="nav-text">8.伴生对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-内置函数"><span class="nav-number">3.9.</span> <span class="nav-text">9.内置函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-1-repeat函数"><span class="nav-number">3.9.1.</span> <span class="nav-text">9.1 repeat函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-2-with函数"><span class="nav-number">3.9.2.</span> <span class="nav-text">9.2 with函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-3-let函数（TODO）"><span class="nav-number">3.9.3.</span> <span class="nav-text">9.3 let函数（TODO）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-4-apply函数（TODO）"><span class="nav-number">3.9.4.</span> <span class="nav-text">9.4 apply函数（TODO）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-5-run函数（TODO）"><span class="nav-number">3.9.5.</span> <span class="nav-text">9.5 run函数（TODO）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-“-”与“-”"><span class="nav-number">3.10.</span> <span class="nav-text">10.“===”与“!==”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Lambda表达式-TODO"><span class="nav-number">3.11.</span> <span class="nav-text">11.Lambda表达式(TODO)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-内联函数-inline"><span class="nav-number">3.12.</span> <span class="nav-text">12.内联函数(inline)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-操作符重载（TODO）"><span class="nav-number">3.13.</span> <span class="nav-text">13.操作符重载（TODO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-委托属性（TODO）"><span class="nav-number">3.14.</span> <span class="nav-text">14.委托属性（TODO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-函数操作符"><span class="nav-number">3.15.</span> <span class="nav-text">15.函数操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总数操作符"><span class="nav-number">3.15.1.</span> <span class="nav-text">总数操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤操作符"><span class="nav-number">3.15.2.</span> <span class="nav-text">过滤操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#映射操作符"><span class="nav-number">3.15.3.</span> <span class="nav-text">映射操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元素操作符"><span class="nav-number">3.15.4.</span> <span class="nav-text">元素操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生产操作符"><span class="nav-number">3.15.5.</span> <span class="nav-text">生产操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#顺序操作符"><span class="nav-number">3.15.6.</span> <span class="nav-text">顺序操作符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资料"><span class="nav-number">4.</span> <span class="nav-text">学习资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+  <span class="with-love">
+    <i class="fa fa-pencil"></i>
+  </span>
+  <span class="post-count">共写了187.5k字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iH9ug4Eu98bS8XiH30QEwODs-gzGzoHsz", "D0qgHUsqtcQOClhgS4ElkmDQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

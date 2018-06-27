@@ -111,6 +111,7 @@
 <meta property="og:url" content="http://www.sguotao.top/Android基础-2012-08-15-android设置全屏显示.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="Android中实现全屏显示的两种方式: 方式一在AndroidManifest.xml文件中通过设置Application或Activity的android:theme属性12345678&amp;lt;activity            android:theme=&amp;quot;@android:style/Theme.NoTitleBar.Fullscreen&amp;quot;            a">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-06-02T10:37:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 设置全屏显示">
@@ -434,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  248字
+                  267字
                 </span>
               
 
@@ -469,9 +470,9 @@
 
       
         <p>Android中实现全屏显示的两种方式:</p>
-<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p>在AndroidManifest.xml文件中通过设置Application或Activity的android:theme属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;activity</div><div class="line">            android:theme=&quot;@android:style/Theme.NoTitleBar.Fullscreen&quot;</div><div class="line">            android:name=&quot;.TestViewAnimation&quot;&gt;</div><div class="line">            &lt;intent-filter&gt;</div><div class="line">                &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;</div><div class="line">                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;</div><div class="line">            &lt;/intent-filter&gt;</div><div class="line">        &lt;/activity&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p>在Activity的onCreate()方法中进行设置(<strong>两行代码还必须写在setContentView()前面。</strong>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">          /*set it to be no title*/</div><div class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE);</div><div class="line">        /*set it to be full screen*/</div><div class="line">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);</div><div class="line">        setContentView(R.layout.activity_test_view_animation);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<h2 id="方式三-补充"><a href="#方式三-补充" class="headerlink" title="方式三(补充)"></a>方式三(补充)</h2><p>在AppCompatActivity设置全屏，情况有些特殊。发现当Activity继承AppCompatActivity时，以上两种方法会出现Crash和无法编译的情况。这时需要我们创建一个style样式，并在AndroidManifest.xml文件中需要全屏显示的Activity使用该样式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;theme_fullscreen&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;</div><div class="line">    &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</div><div class="line">    &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;</div><div class="line">    &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p>在AndroidManifest.xml文件中通过设置Application或Activity的android:theme属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">            android:theme=&quot;@android:style/Theme.NoTitleBar.Fullscreen&quot;</span><br><span class="line">            android:name=&quot;.TestViewAnimation&quot;&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;</span><br><span class="line">                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line">        &lt;/activity&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p>在Activity的onCreate()方法中进行设置(<strong>两行代码还必须写在setContentView()前面。</strong>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">          /*set it to be no title*/</span><br><span class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">        /*set it to be full screen*/</span><br><span class="line">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);</span><br><span class="line">        setContentView(R.layout.activity_test_view_animation);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="方式三-补充"><a href="#方式三-补充" class="headerlink" title="方式三(补充)"></a>方式三(补充)</h2><p>在AppCompatActivity设置全屏，情况有些特殊。发现当Activity继承AppCompatActivity时，以上两种方法会出现Crash和无法编译的情况。这时需要我们创建一个style样式，并在AndroidManifest.xml文件中需要全屏显示的Activity使用该样式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;theme_fullscreen&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;</span><br><span class="line">    &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;</span><br><span class="line">    &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;</span><br><span class="line">    &lt;item name=&quot;android:windowActionBar&quot;&gt;false&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.top/Android基础-2012-08-15-android设置全屏显示.html">http://www.sguotao.top/Android基础-2012-08-15-android设置全屏显示.html</a></p>
 
@@ -660,7 +661,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -671,7 +672,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -682,7 +683,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -766,7 +767,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

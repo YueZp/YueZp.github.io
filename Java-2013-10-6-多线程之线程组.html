@@ -111,8 +111,9 @@
 <meta property="og:url" content="http://www.sguotao.top/Java-2013-10-6-多线程之线程组.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 所有Java线程都属于某个线程组(thread group)。线程组提供了一个将多个线程组织成一个线程组对象来管理">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-30%20%E4%B8%8B%E5%8D%882.23.40.png">
-<meta property="og:updated_time" content="2017-08-12T13:40:01.000Z">
+<meta property="og:updated_time" content="2018-06-27T02:00:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【多线程】线程组">
 <meta name="twitter:description" content="在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。多线程 1 线程与线程类多线程 2 线程的创建多线程 3 线程的状态与调度多线程 4 线程状态的改变多线程 5 线程的同步与共享多线程 6 线程组 所有Java线程都属于某个线程组(thread group)。线程组提供了一个将多个线程组织成一个线程组对象来管理">
@@ -436,7 +437,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,270字
+                  1,281字
                 </span>
               
 
@@ -470,24 +471,24 @@
       
 
       
-        <p>在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。<br><a href="http://sguotao.com/Java-2013-10-1-多线程之线程与线程类.html" target="_blank" rel="external">多线程 1 线程与线程类</a><br><a href="http://sguotao.com/Java-2013-10-2-多线程之线程的创建.html" target="_blank" rel="external">多线程 2 线程的创建</a><br><a href="http://sguotao.com/Java-2013-10-3-多线程之线程的状态与调度.html" target="_blank" rel="external">多线程 3 线程的状态与调度</a><br><a href="http://sguotao.com/Java-2013-10-4-多线程之状态的改变.html" target="_blank" rel="external">多线程 4 线程状态的改变</a><br><a href="http://sguotao.com/Java-2013-10-5-多线程之线程的同步与共享.html" target="_blank" rel="external">多线程 5 线程的同步与共享</a><br><a href="http://sguotao.com/Java-2013-10-6-多线程之线程组.html" target="_blank" rel="external">多线程 6 线程组</a></p>
+        <p>在学习Java多线程的过程中，Java 线程工具和 API 看似简单，但是，编写有效使用线程的复杂程序并不容易。做如下整理，方便日后查阅。<br><a href="http://sguotao.top/Java-2013-10-1-多线程之线程与线程类.html" target="_blank" rel="noopener">多线程 1 线程与线程类</a><br><a href="http://sguotao.top/Java-2013-10-2-多线程之线程的创建.html" target="_blank" rel="noopener">多线程 2 线程的创建</a><br><a href="http://sguotao.top/Java-2013-10-3-多线程之线程的状态与调度.html" target="_blank" rel="noopener">多线程 3 线程的状态与调度</a><br><a href="http://sguotao.top/Java-2013-10-4-多线程之状态的改变.html" target="_blank" rel="noopener">多线程 4 线程状态的改变</a><br><a href="http://sguotao.top/Java-2013-10-5-多线程之线程的同步与共享.html" target="_blank" rel="noopener">多线程 5 线程的同步与共享</a><br><a href="http://sguotao.top/Java-2013-10-6-多线程之线程组.html" target="_blank" rel="noopener">多线程 6 线程组</a></p>
 <p>所有Java线程都属于某个线程组(thread group)。线程组提供了一个将多个线程组织成一个线程组对象来管理的机制，如可以通过一个方法调用来启动线程组中的所有线程。</p>
 <h2 id="创建线程组"><a href="#创建线程组" class="headerlink" title="创建线程组"></a>创建线程组</h2><p>线程组是由java.lang包中的ThreadGroup类实现的。它的构造方法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadGroup</span><span class="params">(String name)</span></span></div><div class="line"><span class="keyword">public</span> <span class="title">ThreadGroup</span><span class="params">(ThreadGroup parent, String name)</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadGroup</span><span class="params">(String name)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadGroup</span><span class="params">(ThreadGroup parent, String name)</span></span></span><br></pre></td></tr></table></figure>
 <p>name为线程组名，parent为线程组的父线程组，若无该参数则新建线程组的父线程组为当前运行的线程的线程组。当一个线程被创建时，运行时系统都将其放入一个线程组。创建线程时可以明确指定新建线程属于哪个线程组，若没有明确指定则放入缺省线程组中。一旦线程被指定属于哪个线程组，便不能改变，不能删除。</p>
 <h2 id="缺省线程组"><a href="#缺省线程组" class="headerlink" title="缺省线程组"></a>缺省线程组</h2><p>如果在创建线程时没有在构造方法中指定所属线程组，运行时系统会自动将该线程放入创建该线程的线程所属的线程组中。那么当我们创建线程时没有指定线程组，它属于哪个线程组呢?</p>
 <p>当Java应用程序启动时，Java运行时系统创建一个名main的ThreadGroup对象。除非另外指定，否则所有新建线程都属于main线程组的成员。</p>
 <p><img src="http://7u2np3.com1.z0.glb.clouddn.com/blog%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-30%20%E4%B8%8B%E5%8D%882.23.40.png" alt=""></p>
 <p>在一个线程组内可以创建多个线程，也可以创建其它的线程组。一个程序中的线程组和线程构成一个树型结构，如图6所示.</p>
 <p>如果在Applet中创建线程，新线程组可能不是main线程组，它依赖于使用的浏览器或Applet查看器。<br>创建属于某个线程组的线程可以通过下面构造方法实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Thread</span><span class="params">(ThreadGroup group, Runnable target)</span></span></div><div class="line"><span class="keyword">public</span> <span class="title">Thread</span><span class="params">(ThreadGroup group, String name)</span></div><div class="line"><span class="keyword">public</span> <span class="title">Thread</span><span class="params">(ThreadGroup group, Runnable target, String name)</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Thread</span><span class="params">(ThreadGroup group, Runnable target)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Thread</span><span class="params">(ThreadGroup group, String name)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Thread</span><span class="params">(ThreadGroup group, Runnable target, String name)</span></span></span><br></pre></td></tr></table></figure>
 <p>如下面代码创建的myThread线程属于myThreadGroup线程组。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ThreadGroup myGroup = <span class="keyword">new</span> ThreadGroup(<span class="string">"My Group of Threads"</span>);</div><div class="line">Thread myThread = <span class="keyword">new</span> Thread(myGroup, <span class="string">"a thread for my group"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadGroup myGroup = <span class="keyword">new</span> ThreadGroup(<span class="string">"My Group of Threads"</span>);</span><br><span class="line">Thread myThread = <span class="keyword">new</span> Thread(myGroup, <span class="string">"a thread for my group"</span>);</span><br></pre></td></tr></table></figure>
 <p>为了得到线程所属的线程组可以调用Thread的getThreadGroup()方法，该方法返回ThreadGroup对象。可以通过下面方法获得线程所属线程组名。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myThread.getThreadGroup().getName()</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myThread.getThreadGroup().getName()</span><br></pre></td></tr></table></figure>
 <p>一旦得到了线程组对象，就可查询线程组的有关信息，如线程组中其他线程、也可仅通过调用一个方法就可实现修改线程组中的线程，如挂起、恢复或停止线程。</p>
 <h2 id="线程组操作方法"><a href="#线程组操作方法" class="headerlink" title="线程组操作方法"></a>线程组操作方法</h2><p>线程组类提供了有关方法可以对线程组操作。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span> 返回线程组名。</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> ThreadGroup <span class="title">getParent</span><span class="params">()</span> 返回线程组的父线程组对象。</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setMaxPriority</span><span class="params">(<span class="keyword">int</span> pri)</span> 设置线程组的最大优先级。线程组中的线程不能超过该优先级。</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getMaxPriority</span><span class="params">()</span> 返回线程组的最大优先级。</div><div class="line"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDestroyed</span><span class="params">()</span> 测试该线程组对象是否已被销毁。</div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">activeCount</span><span class="params">()</span> 返回该线程组中活动线程的估计数。</div><div class="line"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">activeGroupCount</span><span class="params">()</span> 返回该线程组中活动线程组的估计数。</div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> 销毁该线程组及其子线程组对象。当前线程组的所有线程必须已经停止。</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span> 返回线程组名。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> ThreadGroup <span class="title">getParent</span><span class="params">()</span> 返回线程组的父线程组对象。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setMaxPriority</span><span class="params">(<span class="keyword">int</span> pri)</span> 设置线程组的最大优先级。线程组中的线程不能超过该优先级。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getMaxPriority</span><span class="params">()</span> 返回线程组的最大优先级。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDestroyed</span><span class="params">()</span> 测试该线程组对象是否已被销毁。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">activeCount</span><span class="params">()</span> 返回该线程组中活动线程的估计数。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">activeGroupCount</span><span class="params">()</span> 返回该线程组中活动线程组的估计数。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> 销毁该线程组及其子线程组对象。当前线程组的所有线程必须已经停止。</span></span><br></pre></td></tr></table></figure>
 <p>Java语言内在支持多线程的程序设计。线程是进程中的一个单个的顺序控制流，多线程是指单个程序内可以同时运行多个线程。</p>
 <p>在Java程序中创建多线程的程序有两种方法。一种是继承Thread类并覆盖其run()方法，另一种是实现Runnable接口并实现其run()方法。</p>
 <p>线程从创建、运行到结束总是处于下面五个状态之一：新建状态、就绪状态、运行状态、阻塞状态及死亡状态。Java的每个线程都有一个优先级，当有多个线程处于就绪状态时，线程调度程序根据线程的优先级调度线程运行。</p>
@@ -681,7 +682,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -692,7 +693,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -703,7 +704,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -787,7 +788,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

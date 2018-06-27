@@ -111,7 +111,8 @@
 <meta property="og:url" content="http://www.sguotao.top/Java-2014-11-28-Java注解.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="1.什么是注解 注解Annotation又叫元数据，是JDK5中引入的一种以通用格式为程序提供配置信息的方式。注解使得Java源代码中不但可以包含功能性的实现代码，还可以添加元数据。使用注解Annotation可以使元数据写在程序源码中，使得代码看起来简洁，同时编译器也提供了对注解Annotation的类型检查，使得在编译期间就可以排除语法错误。  注解的功能类似于代码中的注释，所不同的是注解不是">
-<meta property="og:updated_time" content="2017-07-13T10:08:18.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-13T10:08:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java注解">
 <meta name="twitter:description" content="1.什么是注解 注解Annotation又叫元数据，是JDK5中引入的一种以通用格式为程序提供配置信息的方式。注解使得Java源代码中不但可以包含功能性的实现代码，还可以添加元数据。使用注解Annotation可以使元数据写在程序源码中，使得代码看起来简洁，同时编译器也提供了对注解Annotation的类型检查，使得在编译期间就可以排除语法错误。  注解的功能类似于代码中的注释，所不同的是注解不是">
@@ -434,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,362字
+                  2,373字
                 </span>
               
 
@@ -520,26 +521,26 @@
 </ol>
 <p>除了上面这些类型以外，如果在注解中定义其他类型的数据，编译器将会报错。<br><strong>注意：</strong><br><strong>注解中的元素要么指定默认值，要么由使用的类赋值，如果即没有默认值，使用类也没有赋值的话，注解元素是不会像普通类成员变量一样给定默认值，即必须赋值或者显示指定默认值。</strong></p>
 <p>如果注解中有一个名称为value 的属性，且只想设置value 的属性（即其它属性都采用默认值或只有一个value 属性）那么可以省略“value = ”部分。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">import java.lang.annotation.*;</div><div class="line"></div><div class="line">@Target(ElementType.METHOD)</div><div class="line">@Retention(RetentionPolicy.RUNTIME)</div><div class="line">public @interface DefaultValue&#123;</div><div class="line">     public int id() default -1;</div><div class="line">     public String description() default “”;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface DefaultValue&#123;</span><br><span class="line">     public int id() default -1;</span><br><span class="line">     public String description() default “”;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="4-2-注解的生命周期"><a href="#4-2-注解的生命周期" class="headerlink" title="4.2 注解的生命周期"></a>4.2 注解的生命周期</h3><p>一个注解的生命周期包括三个阶段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Java 源文件 ---&gt; class 文件 ---&gt; 内存中的字节码</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java 源文件 ---&gt; class 文件 ---&gt; 内存中的字节码</span><br></pre></td></tr></table></figure>
 <p>如果一个注解不声明自己的生命周期属于那个阶段，会默认为生命周期是 class 文件阶段。但它也可以由一个@Retetion的元注解指定它的生命周期。</p>
 <p><strong>java源文件</strong><br>当在一个注解类前定义了一个@Retetion(RetentionPolicy.SOURCE)的注解，那么说明该注解只保留在一个源文件当中，当编译器将源文件编译成class文件时，它不会将源文件中定义的注解保留在class文件中。</p>
 <p><strong>class文件中</strong><br>当在一个注解类前定义了一个@Retetion(RetentionPolicy.CLASS)的注解，那么说明该注解只保留在一个class文件当中，当加载class文件到内存时，虚拟机会将注解去掉，从而在程序中不能访问。</p>
 <p><strong>程序运行期间</strong><br>当在一个注解类前定义了一个@Retetion(RetentionPolicy.RUNTIME)的注解，那么说明该注解在程序运行期间都会存在内存当中。此时，我们可以通过反射来获得定义在某个类上的所有注解。</p>
 <h3 id="4-3注解的使用"><a href="#4-3注解的使用" class="headerlink" title="4.3注解的使用"></a>4.3注解的使用</h3><p>注解的使用分为三个过程。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">定义注解--&gt;声明注解--&gt;得到注解</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定义注解--&gt;声明注解--&gt;得到注解</span><br></pre></td></tr></table></figure>
 <h4 id="4-3-1-定义注解"><a href="#4-3-1-定义注解" class="headerlink" title="4.3.1 定义注解"></a>4.3.1 定义注解</h4><p>一个简单的注解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public@interfaceAnnotation01&#123;</div><div class="line">//定义公共的final静态属性.....</div><div class="line">//定以公共的抽象方法......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public@interfaceAnnotation01&#123;</span><br><span class="line">//定义公共的final静态属性.....</span><br><span class="line">//定以公共的抽象方法......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>注解可以有哪些成员</strong><br>注解和接口相似，它只能定义final静态属性和公共抽象方法。</p>
 <p><strong>注解的方法</strong><br>1.方法前默认会加上public abstract<br>2.在声明方法时可以定义方法的默认返回值。例如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Stringcolor()default&quot;blue&quot;;</div><div class="line">String[]color()default&#123;&quot;blue&quot;,&quot;red&quot;,......&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stringcolor()default&quot;blue&quot;;</span><br><span class="line">String[]color()default&#123;&quot;blue&quot;,&quot;red&quot;,......&#125;</span><br></pre></td></tr></table></figure>
 <p>3.方法的返回值可以有哪些类型:8种基本类型，String、Class、枚举、注解及这些类型的数组。</p>
 <h4 id="4-3-2声明注解"><a href="#4-3-2声明注解" class="headerlink" title="4.3.2声明注解"></a>4.3.2声明注解</h4><p><strong>1.在哪些元素上声明注解</strong><br>如果定义注解时没有指定@Target元注解来限制它的使用范围，那么该注解可以使用在ElementType枚举指定的任何一个元素前。否则，只能声明在@Target元注解指定的元素前。一般声明的形式：@注解名()</p>
 <p><strong>2.对注解的方法的返回值进行赋值</strong><br>对于注解中定义的每一个没有默认返回值的方法，在声明注解时必须对它的每一个方法的返回值进行赋值。<br>一般形式:<br>@注解名(方法名=方法返回值，……)<br>如果方法返回的是一个数组时，那么将方法返回值写在{}符号里<br>@注解名(方法名={返回值1，返回值2，……}，……)</p>
 <p><strong>3.对于只含有value方法的注解，在声明注解时可以只写返回值。</strong></p>
 <h4 id="4-3-3得到注解"><a href="#4-3-3得到注解" class="headerlink" title="4.3.3得到注解"></a>4.3.3得到注解</h4><p>对于生命周期为运行期间的注解，都可以通过反射获得该元素上的注解实例。<br><strong>1.声明在一个类中的注解</strong><br>可以通过该类Class对象的getAnnotation或getAnnotations方法获得。<br><strong>2.声明在一个字段中的注解</strong><br>通过Field对象的getAnnotation或getAnnotations方法获得<br><strong>3.声明在一个方法中的注解</strong><br>通过Method对象的getAnnotation或getAnnotations方法获得</p>
-<h2 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h2><p>[1] <a href="http://www.infoq.com/cn/articles/cf-java-annotation/" target="_blank" rel="external">成富.Java深度历险（六）——Java注解[Z].InfoQ, 2011.3.23</a></p>
+<h2 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h2><p>[1] <a href="http://www.infoq.com/cn/articles/cf-java-annotation/" target="_blank" rel="noopener">成富.Java深度历险（六）——Java注解[Z].InfoQ, 2011.3.23</a></p>
 <hr>
 <p>本文链接：<a href="http://www.sguotao.top/Java-2014-11-28-Java注解.html">http://www.sguotao.top/Java-2014-11-28-Java注解.html</a></p>
 
@@ -726,7 +727,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -737,7 +738,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -748,7 +749,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -832,7 +833,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

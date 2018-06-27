@@ -111,6 +111,7 @@
 <meta property="og:url" content="http://www.sguotao.top/Android基础-2012-08-12-android-basic-14.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="1. 样式(style)android中的样式和CSS样式作用相似，都是用于为界面元素定义显示风格，它是一个包含一个或者多个view控件属性的集合。如：需要定义字体的颜色和大小。在CSS中是这样定义的： 123&amp;lt;style&amp;gt;    .ncist&amp;#123;COLOR:#0000CC;font-size:18px;&amp;#125;&amp;lt;/style&amp;gt; 可以像这样使用上面的css样式：">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://obovytgzz.bkt.clouddn.com/i18n1.png">
 <meta property="og:image" content="http://obovytgzz.bkt.clouddn.com/i18n2.png">
 <meta property="og:updated_time" content="2017-07-24T06:15:11.000Z">
@@ -437,7 +438,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,045字
+                  1,080字
                 </span>
               
 
@@ -453,7 +454,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4分钟
+                  5分钟
                 </span>
               
             </div>
@@ -472,28 +473,28 @@
 
       
         <h2 id="1-样式-style"><a href="#1-样式-style" class="headerlink" title="1. 样式(style)"></a>1. 样式(style)</h2><p>android中的样式和CSS样式作用相似，都是用于为界面元素定义显示风格，它是一个包含一个或者多个view控件属性的集合。如：需要定义字体的颜色和大小。在CSS中是这样定义的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">    .ncist&#123;COLOR:#0000CC;font-size:18px;&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .ncist&#123;COLOR:#0000CC;font-size:18px;&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 <p>可以像这样使用上面的css样式：<div class="ncist">华北科技</div>，在Android中可以这样定义样式：在res/values/styles.xml文件中添加以下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;resources&gt;</div><div class="line">    &lt;style name=“ncist”&gt; &lt;!-- 为样式定义一个全局唯一的名字--&gt;</div><div class="line">     &lt;item name=“android:textSize”&gt;18px&lt;/item&gt; &lt;!-- name属性的值为使用了该样式的View控件的属性 --&gt;</div><div class="line">     &lt;item name=&quot;android:textColor&quot;&gt;#0000CC&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;style name=“ncist”&gt; &lt;!-- 为样式定义一个全局唯一的名字--&gt;</span><br><span class="line">     &lt;item name=“android:textSize”&gt;18px&lt;/item&gt; &lt;!-- name属性的值为使用了该样式的View控件的属性 --&gt;</span><br><span class="line">     &lt;item name=&quot;android:textColor&quot;&gt;#0000CC&lt;/item&gt;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
 <p>在layout文件中可以像下面这样使用上面的android样式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; ....&gt;</div><div class="line">    &lt;TextView style=&quot;@style/ncist&quot;</div><div class="line">        .....  /&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; ....&gt;</span><br><span class="line">    &lt;TextView style=&quot;@style/ncist&quot;</span><br><span class="line">        .....  /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
 <p>&lt;style&gt;元素中有一个parent属性。这个属性可以让当前样式继承一个父样式，并且具有父样式的值。当然，如果父样式的值不符合你的需求，你也可以对它进行修改，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;resources&gt;</div><div class="line">    &lt;style name=&quot;ncist&quot;&gt;</div><div class="line">        &lt;item name=&quot;android:textSize&quot;&gt;18px&lt;/item&gt; &lt;!-- name属性为样式要用在的View控件持有的属性 --&gt;</div><div class="line">        &lt;item name=&quot;android:textColor&quot;&gt;#0000CC&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div><div class="line">    &lt;style name=&quot;subncist&quot; parent=&quot;@style/ncist&quot;&gt;</div><div class="line">        &lt;item name=&quot;android:textColor&quot;&gt;#FF0000&lt;/item&gt;</div><div class="line">    &lt;/style&gt;</div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;style name=&quot;ncist&quot;&gt;</span><br><span class="line">        &lt;item name=&quot;android:textSize&quot;&gt;18px&lt;/item&gt; &lt;!-- name属性为样式要用在的View控件持有的属性 --&gt;</span><br><span class="line">        &lt;item name=&quot;android:textColor&quot;&gt;#0000CC&lt;/item&gt;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;style name=&quot;subncist&quot; parent=&quot;@style/ncist&quot;&gt;</span><br><span class="line">        &lt;item name=&quot;android:textColor&quot;&gt;#FF0000&lt;/item&gt;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>继承样式有两种定义方式</strong></p>
 <ol>
 <li>继承样式，在&lt;style&gt;标签中配置属性parent</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;style2&quot; parent=&quot;@style/style1&quot;&gt;</div><div class="line">			&lt;item name=&quot;android:textColor&quot;&gt;#FF0000&lt;/item&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;style2&quot; parent=&quot;@style/style1&quot;&gt;</span><br><span class="line">			&lt;item name=&quot;android:textColor&quot;&gt;#FF0000&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>继承样式，在name中引用其他样式</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;style2.style3&quot;&gt;</div><div class="line">			&lt;item name=&quot;android:textSize&quot;&gt;30sp&lt;/item&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;style2.style3&quot;&gt;</span><br><span class="line">			&lt;item name=&quot;android:textSize&quot;&gt;30sp&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>使用样式</strong><br>在layout文件的标签中配置style属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;Button  	style=&quot;@style/style2.style3&quot;</div><div class="line">	    		android:text=&quot;这是一个按钮&quot;/&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button  	style=&quot;@style/style2.style3&quot;</span><br><span class="line">	    		android:text=&quot;这是一个按钮&quot;/&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="2-主题-theme"><a href="#2-主题-theme" class="headerlink" title="2. 主题(theme)"></a>2. 主题(theme)</h2><p>android中主题也是用于为应用定义显示风格，它的定义和样式的定义相同，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;resources&gt;</div><div class="line">&lt;style name=“ncistTheme&quot;&gt;</div><div class="line">	&lt;item name=“android:windowNoTitle”&gt;true&lt;/item&gt; &lt;!– 没标题 </div><div class="line">	&lt;item name=“android:windowFullscreen”&gt;?android:windowNoTitle&lt;/item&gt; &lt;!– 全屏显示 </div><div class="line">&lt;/style&gt;</div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">&lt;style name=“ncistTheme&quot;&gt;</span><br><span class="line">	&lt;item name=“android:windowNoTitle”&gt;true&lt;/item&gt; &lt;!– 没标题 </span><br><span class="line">	&lt;item name=“android:windowFullscreen”&gt;?android:windowNoTitle&lt;/item&gt; &lt;!– 全屏显示 </span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
 <p>上面“?android:windowNoTitle”中的问号用于引用在当前主题中定义过的资源的值。下面代码显示在AndroidManifest.xml中如何为应用设置上面定义的主题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;</div><div class="line">     android:theme=&quot;@style/ncistTheme&quot;&gt;</div><div class="line">   ......</div><div class="line">&lt;/application&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;</span><br><span class="line">     android:theme=&quot;@style/ncistTheme&quot;&gt;</span><br><span class="line">   ......</span><br><span class="line">&lt;/application&gt;</span><br></pre></td></tr></table></figure>
 <p>除了可以在AndroidManifest.xml中设置主题，同样也可以在代码中设置主题，如下：<br>setTheme(R.style.ncistTheme);</p>
 <h2 id="3-样式与主题的区别"><a href="#3-样式与主题的区别" class="headerlink" title="3. 样式与主题的区别"></a>3. 样式与主题的区别</h2><p>尽管在定义上，样式和主题基本相同，但是它们使用的地方不同。</p>
 <ol>
@@ -698,7 +699,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -709,7 +710,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -720,7 +721,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -804,7 +805,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

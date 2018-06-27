@@ -111,6 +111,7 @@
 <meta property="og:url" content="http://www.sguotao.top/Android进阶-2013-11-11-分析Android中的Activity-Task栈及启动模式.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="在Android中，一个activity可以激活另一个activity（可能属于另一个应用程序）。若新的被激活的activity属于另一个应用程序，则那个activity会运行在那个应用程序的进程中，但是从用户的角度来看，好像就是属于本应用程序一样。 Android是通过将之前的activity组件和新被激活的activity组件放入同一个任务栈来实现这个功能的。从用户的角度看，一个任务栈就代表了">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-11T12:56:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分析Android中的Activity Task栈及启动模式">
@@ -434,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,788字
+                  2,799字
                 </span>
               
 
@@ -477,8 +478,8 @@
 <li>方法1：在发送的请求（即Intent对象）中设置一些标记。</li>
 <li>方法2：在manifest文件中，对接收请求（即Intent对象）的activity组件设置一些属性。</li>
 </ul>
-<p>所以在请求者和接收者中都可以进行控制。在Intent对象中主要的标志有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">FLAG_ACTIVITY_NEW_TASK  </div><div class="line">FLAG_ACTIVITY_CLEAR_TOP  </div><div class="line">FLAG_ACTIVITY_RESET_TASK_IF_NEEDED  </div><div class="line">FLAG_ACTIVITY_SINGLE_TOP</div></pre></td></tr></table></figure></p>
-<p>在<activity>标签中，主要的属性有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">taskAffinity   </div><div class="line">launchMode   </div><div class="line">allowTaskReparenting   </div><div class="line">clearTaskOnLaunch   </div><div class="line">alwaysRetainTaskState   </div><div class="line">finishOnTaskLaunch</div></pre></td></tr></table></figure></activity></p>
+<p>所以在请求者和接收者中都可以进行控制。在Intent对象中主要的标志有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FLAG_ACTIVITY_NEW_TASK  </span><br><span class="line">FLAG_ACTIVITY_CLEAR_TOP  </span><br><span class="line">FLAG_ACTIVITY_RESET_TASK_IF_NEEDED  </span><br><span class="line">FLAG_ACTIVITY_SINGLE_TOP</span><br></pre></td></tr></table></figure></p>
+<p>在<activity>标签中，主要的属性有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">taskAffinity   </span><br><span class="line">launchMode   </span><br><span class="line">allowTaskReparenting   </span><br><span class="line">clearTaskOnLaunch   </span><br><span class="line">alwaysRetainTaskState   </span><br><span class="line">finishOnTaskLaunch</span><br></pre></td></tr></table></figure></activity></p>
 <p>接下来的内容就会讲解一些Intent标志和<activity>标签属性的作用和用法。</activity></p>
 <h2 id="亲缘关系和新的任务"><a href="#亲缘关系和新的任务" class="headerlink" title="亲缘关系和新的任务"></a>亲缘关系和新的任务</h2><p>默认情况下，一个应用程序中的activity组件彼此之间是亲属关系――也就是说它们属于同一个任务栈。但是我们可以通过设置某个<activity>标签的taskAffinity属性来为这个activity组件设置亲属关系。在不同的应用程序中定义的activity组件可以共用同一个亲属关系，或者在同一个的应用程序中定义的activity组件可以使用不同的亲属关系。亲属关系会在两种情况下发挥作用：</activity></p>
 <ul>
@@ -487,7 +488,7 @@
 </ul>
 <p><strong>关于FLAG_ACTIVITY_NEW_TASK标志量</strong><br>默认情况下，一个被激活的新activity会和负责激活它的那个activity组件存在于同一个任务栈中。但是若负责激活的Intent对象包含了FLAG_ACTIVITY_NEW_TASK标志，则系统会为存放那个即被激活的新activity寻找一个新的任务栈。此时，若已经存在了相同亲属关系的任务栈，则系统会直接将这个即被激活的新activity放入到这个任务栈中；否则系统会开始一个新的任务栈。</p>
 <p><strong>关于allowTaskReparenting属性</strong><br>若一个activity组件的allowTaskReparenting被置为“true”，则当与这个activity有相同的亲属关系的任务栈被切换到前台的时候，这个activity会从当前存在的任务栈中移动到与其有相同的亲属关系的任务栈中。<strong>若从用户的角度来看，一个.apk文件包含了一个以上的“应用程序”，那你可能要为那些activity组件指定不同的亲属关系。</strong></p>
-<h2 id="启动模式"><a href="#启动模式" class="headerlink" title="启动模式"></a>启动模式</h2><p><activity>标签的launchMode属性可以设置为四种不同的模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">“standard”（默认模式）  </div><div class="line">    “singleTop”  </div><div class="line">    “singleTask”  </div><div class="line">    “singleInstance”</div></pre></td></tr></table></figure></activity></p>
+<h2 id="启动模式"><a href="#启动模式" class="headerlink" title="启动模式"></a>启动模式</h2><p><activity>标签的launchMode属性可以设置为四种不同的模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">“standard”（默认模式）  </span><br><span class="line">    “singleTop”  </span><br><span class="line">    “singleTask”  </span><br><span class="line">    “singleInstance”</span><br></pre></td></tr></table></figure></activity></p>
 <p>这几种模式的区别体现以下四点上：</p>
 <ul>
 <li><p>1)当这个activity被激活的时候，会放入哪个任务栈。<br>对于“standard”和“singleTop”模式，这个新被激活的activity会放入和之前的activity相同的任务栈中――除非如前所述，Intent对象包含FLAG_ACTIVITY_NEW_TASK标志。但“singleTask”和“singleInstance”模式则表示这个新被激活的activity不会放入已经存在的任务栈中，它会重新开启一个任务栈，并作为这个新的任务栈的根activity。</p>
@@ -705,7 +706,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -716,7 +717,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -727,7 +728,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -811,7 +812,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 

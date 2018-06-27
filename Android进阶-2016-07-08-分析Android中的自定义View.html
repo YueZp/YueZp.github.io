@@ -111,7 +111,8 @@
 <meta property="og:url" content="http://www.sguotao.top/Android进阶-2016-07-08-分析Android中的自定义View.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
 <meta property="og:description" content="自定义View的分类 继承View重写onDraw()，这种方法主要用于实现一些不规则的效果，即这种效果不方便通过布局的组合方式来达到，往往需要静态或者动态地显示一些不规则的图形。很显然这需要通过绘制的方式来实现，即重写onDraw方法。采用这种方式需要自己支持wrap_content，并且padding也需要自己处理。  继承ViewGroup派生出特殊的Layout布局，这种方法主要用于实现自">
-<meta property="og:updated_time" content="2017-07-13T09:47:39.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-13T09:47:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分析Android中的自定义View">
 <meta name="twitter:description" content="自定义View的分类 继承View重写onDraw()，这种方法主要用于实现一些不规则的效果，即这种效果不方便通过布局的组合方式来达到，往往需要静态或者动态地显示一些不规则的图形。很显然这需要通过绘制的方式来实现，即重写onDraw方法。采用这种方式需要自己支持wrap_content，并且padding也需要自己处理。  继承ViewGroup派生出特殊的Layout布局，这种方法主要用于实现自">
@@ -434,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,256字
+                  1,297字
                 </span>
               
 
@@ -479,14 +480,14 @@
 </li>
 </ol>
 <h2 id="添加自定义属性"><a href="#添加自定义属性" class="headerlink" title="添加自定义属性"></a>添加自定义属性</h2><p><strong>1.在values目录下面创建自定义属性的XML，比如attrs.xml，也可以选择类似于attrs_circle<em>view.xml等这种以attrs</em>开头的文件名。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xmlversion=&quot;1.0&quot;encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;resources&gt;</div><div class="line">    &lt;declare-styleable name=&quot;CircleView&quot;&gt;</div><div class="line">        &lt;attr name=&quot;circle_color&quot; format=&quot;color&quot;/&gt;</div><div class="line">    &lt;/declare-styleable&gt;</div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xmlversion=&quot;1.0&quot;encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;declare-styleable name=&quot;CircleView&quot;&gt;</span><br><span class="line">        &lt;attr name=&quot;circle_color&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>2.在View的构造方法中解析自定义属性的值并做相应处理。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public CircleView(Context context, AttributeSet attrs, int defStyleAttr) &#123;</div><div class="line">    super(context, attrs, defStyleAttr);</div><div class="line">    TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleView);</div><div class="line">    mColor = a.getColor(styleable.CircleView_circle_color, Color.RED); a.recycle();</div><div class="line">    init();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public CircleView(Context context, AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">    super(context, attrs, defStyleAttr);</span><br><span class="line">    TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleView);</span><br><span class="line">    mColor = a.getColor(styleable.CircleView_circle_color, Color.RED); a.recycle();</span><br><span class="line">    init();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>3.在布局文件中使用自定义属性</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;LinearLayout</div><div class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    android:background=&quot;#ffffff&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;&gt;</div><div class="line">    </div><div class="line">    &lt;com.scott.codelibrary.view.CustomView</div><div class="line">        android:id=&quot;@+id/cv&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;100dp&quot; </div><div class="line">        android:layout_margin=&quot;20dp&quot; </div><div class="line">        android:background=&quot;#000000&quot; </div><div class="line">        android:padding=&quot;20dp&quot; </div><div class="line">        app:circle_color=&quot;@color/light_green&quot;/&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;LinearLayout</span><br><span class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:background=&quot;#ffffff&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;com.scott.codelibrary.view.CustomView</span><br><span class="line">        android:id=&quot;@+id/cv&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;100dp&quot; </span><br><span class="line">        android:layout_margin=&quot;20dp&quot; </span><br><span class="line">        android:background=&quot;#000000&quot; </span><br><span class="line">        android:padding=&quot;20dp&quot; </span><br><span class="line">        app:circle_color=&quot;@color/light_green&quot;/&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="自定义View的注意事项"><a href="#自定义View的注意事项" class="headerlink" title="自定义View的注意事项"></a>自定义View的注意事项</h2><h3 id="让View支持wrap-content"><a href="#让View支持wrap-content" class="headerlink" title="让View支持wrap_content"></a>让View支持wrap_content</h3><p>这是因为直接继承View或者ViewGroup的控件，如果不在onMeasure中对wrap_content做特殊处理，那么当外界在布局中使用wrap_content时就无法达到预期的效果。为什么呢？</p>
 <p>如果View在布局中使用wrap_content，那么它的specMode是AT_MOST模式，在这种模式下，它的宽/高等于specSize；这种情况下View的specSize是parentSize，而parentSize是父容器中目前可以使用的大小，也就是父容器当前剩余的空间大小。很显然，View的宽/高就等于父容器当前剩余的空间大小，这种效果和在布局中使用match_parent完全一致。怎么处理呢？直接继承View的自定义控件需要重写onMeasure方法并设置wrap_content时的自身大小。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;</div><div class="line">        super.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line">        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line">        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);</div><div class="line">        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);</div><div class="line"></div><div class="line">        if (widthSpecMode == MeasureSpec.AT_MOST &amp;&amp; heightSpecMode == MeasureSpec.AT_MOST) &#123;</div><div class="line">            //给View指定默认的宽mWidth，高mHeight</div><div class="line">            setMeasuredDimension(mWidth, mHeight);</div><div class="line">        &#125; else if (widthSpecMode == MeasureSpec.AT_MOST) &#123;</div><div class="line">            setMeasuredDimension(mWidth, heightSpecSize);</div><div class="line">        &#125; else if (heightSpecMode == MeasureSpec.AT_MOST) &#123;</div><div class="line">            setMeasuredDimension(widthSpecSize, mHeight);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;</span><br><span class="line">        super.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);</span><br><span class="line">        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);</span><br><span class="line">        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);</span><br><span class="line">        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);</span><br><span class="line"></span><br><span class="line">        if (widthSpecMode == MeasureSpec.AT_MOST &amp;&amp; heightSpecMode == MeasureSpec.AT_MOST) &#123;</span><br><span class="line">            //给View指定默认的宽mWidth，高mHeight</span><br><span class="line">            setMeasuredDimension(mWidth, mHeight);</span><br><span class="line">        &#125; else if (widthSpecMode == MeasureSpec.AT_MOST) &#123;</span><br><span class="line">            setMeasuredDimension(mWidth, heightSpecSize);</span><br><span class="line">        &#125; else if (heightSpecMode == MeasureSpec.AT_MOST) &#123;</span><br><span class="line">            setMeasuredDimension(widthSpecSize, mHeight);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="让View支持padding"><a href="#让View支持padding" class="headerlink" title="让View支持padding"></a>让View支持padding</h3><p>这是因为直接继承View的控件，如果不在draw方法中处理padding，那么padding属性是无法起作用的。另外，直接继承自ViewGroup的控件需要在onMeasure和onLayout中考虑padding和子元素的margin对其造成的影响，不然将导致padding和子元素的margin失效。</p>
 <h3 id="不要在View中使用Handler"><a href="#不要在View中使用Handler" class="headerlink" title="不要在View中使用Handler"></a>不要在View中使用Handler</h3><p>这是因为View内部本身就提供了post系列的方法，完全可以替代Handler的作用，当然除非你很明确地要使用Handler来发送消息。</p>
 <h3 id="View中如果有线程或者动画，需要及时停止，"><a href="#View中如果有线程或者动画，需要及时停止，" class="headerlink" title="View中如果有线程或者动画，需要及时停止，"></a>View中如果有线程或者动画，需要及时停止，</h3><p>参考View#onDetachedFromWindow这一条也很好理解，如果有线程或者动画需要停止时，那么onDetachedFromWindow是一个很好的时机。当包含此View的Activity退出或者当前View被remove时，View的onDetachedFromWindow方法会被调用，和此方法对应的是onAttachedToWindow，当包含此View的Activity启动时，View的onAttachedToWindow方法会被调用。同时，当View变得不可见时我们也需要停止线程和动画，如果不及时处理这种问题，有可能会造成内存泄漏。</p>
@@ -603,8 +604,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Android进阶-2016-07-21-分析Androdi中的Fragment.html" rel="prev" title="分析Android中的Fragment">
-                分析Android中的Fragment <i class="fa fa-chevron-right"></i>
+              <a href="/Android进阶-2016-07-21-分析Android中的Activity.html" rel="prev" title="分析Android中的Activity">
+                分析Android中的Activity <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -679,7 +680,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -690,7 +691,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -701,7 +702,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -785,7 +786,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了165.7k字</span>
+  <span class="post-count">共写了187.5k字</span>
 </div>
 
 
