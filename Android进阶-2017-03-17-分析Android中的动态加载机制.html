@@ -130,7 +130,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":true,"scrollpercent":true},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -191,7 +191,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
     
     <!-- 在右上角或者左上角实现fork me on github -->
@@ -636,8 +636,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Android进阶-2017-03-24-分析Android中的内存泄露.html" rel="prev" title="分析Android中的内存泄露">
-                分析Android中的内存泄露 <i class="fa fa-chevron-right"></i>
+              <a href="/ReactNative-2017-04-25-rn-css.html" rel="prev" title="【RN笔记】ReactNative样式整理">
+                【RN笔记】ReactNative样式整理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -712,7 +712,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -796,6 +796,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -849,11 +856,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
   </div>
@@ -1436,6 +1438,9 @@
   
 
   
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
 
   
 

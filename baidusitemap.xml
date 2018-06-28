@@ -298,13 +298,13 @@
         
         <tag>Android</tag>
          
+        <tag>Kotlin</tag>
+         
         <tag>AndroidP</tag>
          
         <tag>GoogleI/O</tag>
          
         <tag>AppBundle</tag>
-         
-        <tag>Kotlin</tag>
          
         <tag>Flutter</tag>
          
@@ -313,21 +313,6 @@
              
               <breadCrumb title="Android进阶" url="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.top/2018-06-15-Kotlin-md.html</loc>
-    <lastmod>2018-06-15T08:19:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>2018-06-15-Kotlin.md</title>
-        <pubTime>2018-06-15T08:19:20.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
