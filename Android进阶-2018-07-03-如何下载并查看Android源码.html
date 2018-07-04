@@ -114,8 +114,18 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180703153058913695268.png">
 <meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180703153059903252234.png">
-<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180703153059988163024.png">
-<meta property="og:updated_time" content="2018-07-03T06:39:02.000Z">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068451557786.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068772575884.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068856974079.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068870646902.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068884216372.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068894421498.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068898237535.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068900113818.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068850714232.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068953579156.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068964449010.png">
+<meta property="og:updated_time" content="2018-07-04T07:40:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何下载并查看Android源码">
 <meta name="twitter:description" content="引言作为一名Android 开发人员，很有必要阅读Android源码，平时在编译器如AndroidStudio或IntelliJ中，只要是创建Android项目工程，就能够查看到Framework层的源码，但是这样看源码有两个弊端： 1.容易处在一种盲人摸象的状态，只能看到局部，不能总览全局；2.看到的Framework层源码跟编译时使用的版本号相关，如果版本号很低，想看到最新的Android源码">
@@ -439,7 +449,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,009字
+                  1,325字
                 </span>
               
 
@@ -455,7 +465,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4分钟
+                  5分钟
                 </span>
               
             </div>
@@ -493,9 +503,22 @@
 <p>扫描完成后，就可以看到扫描之后的结果，这里扫描到了98个非SDK API的调用，下面就要针对扫描出来的各个API进行调整了。开发者需要重点关注深灰名单及黑名单中的接口。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180703153059903252234.png" alt="20180703153059903252234.png"></p>
 <h2 id="如何下载Android源码"><a href="#如何下载Android源码" class="headerlink" title="如何下载Android源码"></a>如何下载Android源码</h2><p>这里介绍一下Android Framework源码的下载，这里提供两个下载地址，下载之前可能需要准备好梯子，关于如何优雅的翻墙，可以看之前分享的一篇文章<a href="http://sguotao.top/读书笔记-2018-06-29-如何优雅的飞跃长城.html" target="_blank" rel="noopener">如何优雅的飞跃长城</a></p>
 <p><a href="https://github.com/android/platform_frameworks_base" target="_blank" rel="noopener">github下载地址</a><br><a href="https://android.googlesource.com/platform/frameworks/base/" target="_blank" rel="noopener">Google官方下载地址</a></p>
-<p>这里使用git的方式下载，方便后面更新。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180703153059988163024.png" alt="20180703153059988163024.png"></p>
-<h2 id="如何查看Android源码"><a href="#如何查看Android源码" class="headerlink" title="如何查看Android源码"></a>如何查看Android源码</h2><p>在Windows平台，有一个看源码的神器SourceInsight，但是在Mac平台还没有替代产品，这里介绍使用Sublime Text。</p>
-<h2 id="遇到的问题及处理办法"><a href="#遇到的问题及处理办法" class="headerlink" title="遇到的问题及处理办法"></a>遇到的问题及处理办法</h2><p><strong>1.下载源码过程中遇到 error: RPC failed; curl 56 SSLRead() return error -9806835.00 KiB/s</strong></p>
+<p>这里使用git的方式下载，方便后面更新。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068451557786.png" alt="20180704153068451557786.png"></p>
+<h2 id="如何查看Android源码"><a href="#如何查看Android源码" class="headerlink" title="如何查看Android源码"></a>如何查看Android源码</h2><p>在Windows平台，有一个看源码的神器SourceInsight，但是在Mac平台还没有替代产品，这里介绍使用Sublime Text。打开Sublime Text。</p>
+<p>File –&gt; open 定位到源码下载的目录，就可以方面的查看源码了。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068772575884.png" alt="20180704153068772575884.png"></p>
+<p>在查看源码时，有时需要能够直接进行跳转，这时需要安装CTags插件。</p>
+<p><strong>1. 在Sublime Text中，Preferences –&gt; Package Control</strong><br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068856974079.png" alt="20180704153068856974079.png"></p>
+<p><strong>2.在弹出的Package Control窗口中选择Install Package，选择CTags插件进行安装</strong><br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068870646902.png" alt="20180704153068870646902.png"></p>
+<p><strong>3.在CTags插件中添加跳转方式，Preferences –&gt;Package Settings –&gt; CTags –&gt; Mouse Bindings-Default</strong><br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068884216372.png" alt="20180704153068884216372.png"></p>
+<p><strong>4. 拷贝出里边的配置文件</strong><br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068894421498.png" alt="20180704153068894421498.png"></p>
+<p><strong>5. 复制到Preferences –&gt;Package Settings –&gt; CTags –&gt; Mouse Bindings-User中</strong><br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068898237535.png" alt="20180704153068898237535.png"></p>
+<p><strong>6.在Sublime Text中打开文件的根目录右键–&gt; CTags:Rebuild Tags,让我们设置的跳转方式生效</strong><br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068900113818.png" alt="20180704153068900113818.png"></p>
+<h2 id="遇到的问题及处理办法"><a href="#遇到的问题及处理办法" class="headerlink" title="遇到的问题及处理办法"></a>遇到的问题及处理办法</h2><p><strong>1.下载源码过程中遇到 error: RPC failed; curl 56 SSLRead() return error -9806835.00 KiB/s</strong><br>引起的原因多数与网络环境有关，解决办法，如果使用git下载，建议更换到SSH key的方式进行下载。</p>
+<p><strong>2.使用Sublime Text插件CTags时，遇到错误提示</strong><br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068850714232.png" alt="20180704153068850714232.png"></p>
+<p>遇到这个问题，多数是由于CTags插件版本引起的，进入Terminal，重新下载安装CTags插件。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068953579156.png" alt="20180704153068953579156.png"></p>
+<p>安装完成后，查看CTags的安装目录，这里是<strong><em>/usr/local/bin</em></strong>,定位到我们下载好的Android源码的根目录，执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/ctags -R -f .tags</span><br></pre></td></tr></table></figure>
+<p>待编译完成，生成.tags文件后，就可以在看代码时，使用快捷键进行跳转了。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180704153068964449010.png" alt="20180704153068964449010.png"></p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
 <li><a href="https://testerhome.com/topics/13699" target="_blank" rel="noopener">https://testerhome.com/topics/13699</a></li>
 <li><a href="https://developer.android.google.cn/reference/packages" target="_blank" rel="noopener">https://developer.android.google.cn/reference/packages</a></li>
@@ -805,7 +828,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了191.8k字</span>
+  <span class="post-count">共写了192.2k字</span>
 </div>
 
 

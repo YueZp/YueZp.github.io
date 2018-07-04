@@ -4,38 +4,8 @@
 
     
   <url>
-    <loc>http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2018-06-15-Android-P%EF%BC%88Android-9-0%EF%BC%89%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7.html</loc>
-    <lastmod>2018-07-03T08:09:51.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android P（Android 9.0）的新特性</title>
-        <pubTime>2018-06-15T07:56:19.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>AndroidP</tag>
-         
-        <tag>GoogleI/O</tag>
-         
-        <tag>AppBundle</tag>
-         
-        <tag>Kotlin</tag>
-         
-        <tag>Flutter</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android进阶" url="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2018-07-03-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BD%E5%B9%B6%E6%9F%A5%E7%9C%8BAndroid%E6%BA%90%E7%A0%81.html</loc>
-    <lastmod>2018-07-03T06:39:02.000Z</lastmod>
+    <lastmod>2018-07-04T07:40:53.000Z</lastmod>
     <data>
         <display>
         <title>如何下载并查看Android源码</title>
@@ -52,6 +22,36 @@
         <tag>Framework</tag>
          
         <tag>SDK限制</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android进阶" url="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2018-06-15-Android-P%EF%BC%88Android-9-0%EF%BC%89%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7.html</loc>
+    <lastmod>2018-07-04T06:57:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android P（Android 9.0）的新特性</title>
+        <pubTime>2018-06-15T07:56:19.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>AndroidP</tag>
+         
+        <tag>GoogleI/O</tag>
+         
+        <tag>AppBundle</tag>
+         
+        <tag>Kotlin</tag>
+         
+        <tag>Flutter</tag>
          
          
            
