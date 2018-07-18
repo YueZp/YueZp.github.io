@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2018-07-11-android-gradle-v3-0%E6%96%B0%E7%89%B9%E6%80%A7%E7%9A%84%E4%BB%8B%E7%BB%8D.html</loc>
+    <lastmod>2018-07-18T01:54:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android Gradle v3.0新特性介绍</title>
+        <pubTime>2018-07-11T03:13:34.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>源码</tag>
+         
+        <tag>Gradle-Plugin</tag>
+         
+        <tag>Gradle</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android进阶" url="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.sguotao.top/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-2018-04-15-%E6%A0%91%E7%8D%AD%E5%85%88%E7%94%9F%E8%B0%88%E5%86%99%E4%BD%9C.html</loc>
     <lastmod>2018-07-18T01:47:01.000Z</lastmod>
     <data>
@@ -54,32 +80,6 @@
         <display>
         <title>Gradle源码分析</title>
         <pubTime>2018-07-17T02:26:37.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>源码</tag>
-         
-        <tag>Gradle-Plugin</tag>
-         
-        <tag>Gradle</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android进阶" url="http://www.sguotao.top/categories/Android%E8%BF%9B%E9%98%B6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.sguotao.top/Android%E8%BF%9B%E9%98%B6-2018-07-11-android-gradle-v3-0%E8%BF%81%E7%A7%BB.html</loc>
-    <lastmod>2018-07-17T08:11:03.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android Gradle v3.0新特性介绍及源码分析</title>
-        <pubTime>2018-07-11T03:13:34.000Z</pubTime>
         
         <tag>Android</tag>
          
@@ -902,9 +902,9 @@
         
         <tag>Android</tag>
          
-        <tag>代码库</tag>
-         
         <tag>动画</tag>
+         
+        <tag>代码库</tag>
          
          
            
@@ -1544,9 +1544,9 @@
         
         <tag>Android</tag>
          
-        <tag>代码库</tag>
-         
         <tag>动画</tag>
+         
+        <tag>代码库</tag>
          
          
            
@@ -1568,9 +1568,9 @@
         
         <tag>Android</tag>
          
-        <tag>代码库</tag>
-         
         <tag>动画</tag>
+         
+        <tag>代码库</tag>
          
          
            
@@ -1592,9 +1592,9 @@
         
         <tag>Android</tag>
          
-        <tag>代码库</tag>
-         
         <tag>动画</tag>
+         
+        <tag>代码库</tag>
          
          
            
