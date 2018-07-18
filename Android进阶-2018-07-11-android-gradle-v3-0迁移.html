@@ -1,0 +1,1542 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="googlea8ba7e863392b1ab" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,源码,Gradle-Plugin,Gradle," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Scott's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.更新Android Gradle Plugin v3.01.1 为什么要更新Android Gradle Plugin？Android Gradle Plugin在v3.0版本中进行了大量调整和优化，其中官方对一个包含130个modules的工程在不同版本上进行了对比，其中v3.0版本性能明显优于此前的版本。 1.2 如何更新Android Gradle Plugin？在项目的顶级build.">
+<meta name="keywords" content="Android,源码,Gradle-Plugin,Gradle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Gradle v3.0新特性介绍及源码分析">
+<meta property="og:url" content="http://www.sguotao.top/Android进阶-2018-07-11-android-gradle-v3-0迁移.html">
+<meta property="og:site_name" content="Scott&#39;s Blog">
+<meta property="og:description" content="1.更新Android Gradle Plugin v3.01.1 为什么要更新Android Gradle Plugin？Android Gradle Plugin在v3.0版本中进行了大量调整和优化，其中官方对一个包含130个modules的工程在不同版本上进行了对比，其中v3.0版本性能明显优于此前的版本。 1.2 如何更新Android Gradle Plugin？在项目的顶级build.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180711153130265218831.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180712153136097754655.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180712153136216422036.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180712153136225681889.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180716153173050821984.png">
+<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180713153147512654858.png">
+<meta property="og:updated_time" content="2018-07-17T08:11:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Gradle v3.0新特性介绍及源码分析">
+<meta name="twitter:description" content="1.更新Android Gradle Plugin v3.01.1 为什么要更新Android Gradle Plugin？Android Gradle Plugin在v3.0版本中进行了大量调整和优化，其中官方对一个包含130个modules的工程在不同版本上进行了对比，其中v3.0版本性能明显优于此前的版本。 1.2 如何更新Android Gradle Plugin？在项目的顶级build.">
+<meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20180711153130265218831.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":true,"scrollpercent":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sguotao.top/Android进阶-2018-07-11-android-gradle-v3-0迁移.html"/>
+
+
+
+
+
+  <title>Android Gradle v3.0新特性介绍及源码分析 | Scott's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?760edc77a59a2329550e2d68c6400d9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+    
+    <!-- 在右上角或者左上角实现fork me on github -->
+    <a href="https://github.com/sguotao" class="github-corner" aria-label="View source on Github"><svg width="92" height="92" viewBox="0 0 250 250" style="fill:#151513;color:#fff;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">和光同尘,静水流深</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.top/Android进阶-2018-07-11-android-gradle-v3-0迁移.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android Gradle v3.0新特性介绍及源码分析</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T11:13:34+08:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/Android进阶-2018-07-11-android-gradle-v3-0迁移.html" class="leancloud_visitors" data-flag-title="Android Gradle v3.0新特性介绍及源码分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  4,022字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  18分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-更新Android-Gradle-Plugin-v3-0"><a href="#1-更新Android-Gradle-Plugin-v3-0" class="headerlink" title="1.更新Android Gradle Plugin v3.0"></a>1.更新Android Gradle Plugin v3.0</h2><h3 id="1-1-为什么要更新Android-Gradle-Plugin？"><a href="#1-1-为什么要更新Android-Gradle-Plugin？" class="headerlink" title="1.1 为什么要更新Android Gradle Plugin？"></a>1.1 为什么要更新Android Gradle Plugin？</h3><p>Android Gradle Plugin在v3.0版本中进行了大量调整和优化，其中官方对一个包含130个modules的工程在不同版本上进行了对比，其中v3.0版本性能明显优于此前的版本。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180711153130265218831.png" alt="20180711153130265218831.png"></p>
+<h3 id="1-2-如何更新Android-Gradle-Plugin？"><a href="#1-2-如何更新Android-Gradle-Plugin？" class="headerlink" title="1.2 如何更新Android Gradle Plugin？"></a>1.2 如何更新Android Gradle Plugin？</h3><p>在项目的顶级build.gradle文件中，升级android gradle plugin到v3.0及以上，添加google()仓库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        // Gradle 4.1 and higher include support for Google&apos;s Maven repo using</span><br><span class="line">        // the google() method. And you need to include this repo to download</span><br><span class="line">        // Android plugin 3.0.0 or higher.</span><br><span class="line">        google()</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &apos;com.android.tools.build:gradle:3.1.0&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里Google建议明确指定gradle plugin的版本，不建议使用com.android.tools.build:gradle:3.+的形式，这样会导致版本管理的混乱，android gradle plugin的版本与Gradle版本存在对应的关系，这样写也不方便维护这样的对应关系。android gradle plugin与Gradle版本对应关系如下图：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180712153136097754655.png" alt="20180712153136097754655.png"></p>
+<p>这里升级plugin到v3.1.0版本，需要对应升级Gradle版本到4.4以上，升级Gradle，需要在gradle/wrapper/gradle-wrapper.properties文件中更新Gradle版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">distributionUrl = https\://services.gradle.org/distributions/gradle-4.4-all.zip</span><br></pre></td></tr></table></figure>
+<p>修改完Plugin和Gradle的版本后，构建工程，多数会出现构建失败或者构建时间比较长的情况，其中很大的原因是Android Studio在下载Plugin和Gradle，这种情况通常与网络状况有关，有时需要设置代理。</p>
+<h3 id="1-3-设置代理"><a href="#1-3-设置代理" class="headerlink" title="1.3 设置代理"></a>1.3 设置代理</h3><p>由于android gradle plugin需要从google()仓库下载，虽然开启了翻墙软件，仍然可能会出现构建失败的情况，这时需要在AndroidStudio中设置代理，修改文件位置gradle/wrapper/gradle-wrapper.properties，这里设置的代理地址127.0.0.1是一个回路地址，意味着Androidstudio会使用本机的翻墙软件配置，需要注意端口设置与翻墙软件中配置的端口保持一致。如Shadowsocks的socks配置为:<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180712153136216422036.png" alt="20180712153136216422036.png"></p>
+<p>对应在gradle-wrapper.properties文件中添加socks的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemProp.socksProxyHost=127.0.0.1</span><br><span class="line">systemProp.socksProxyPort=1086</span><br><span class="line">systemprop.socksProxyVersion=5</span><br></pre></td></tr></table></figure>
+<p>同样的，Shadowsocks的http配置为<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180712153136225681889.png" alt="20180712153136225681889.png"><br>对应修改gradle-wrapper.properties文件中Http和Https的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemProp.http.proxyHost=127.0.0.1</span><br><span class="line">systemProp.http.proxyPort=1087</span><br></pre></td></tr></table></figure>
+<p>配置Https</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemProp.https.proxyHost=127.0.0.1</span><br><span class="line">systemProp.https.proxyPort=1087</span><br></pre></td></tr></table></figure>
+<h2 id="2-Android-Gradle-Plugin3-0以上的一些新特性"><a href="#2-Android-Gradle-Plugin3-0以上的一些新特性" class="headerlink" title="2.Android Gradle Plugin3.0以上的一些新特性"></a>2.Android Gradle Plugin3.0以上的一些新特性</h2><p>目前最新的Android Gradle Plguin最新版本是3.1.3。该版本以上的都还是beta版本，还不是正式版本，这里主要介绍plugin3.0.0及plugin3.1.0的一些新特性。</p>
+<h3 id="2-1-Android-Gradle-Plugin3-0-0"><a href="#2-1-Android-Gradle-Plugin3-0-0" class="headerlink" title="2.1 Android Gradle Plugin3.0.0"></a>2.1 Android Gradle Plugin3.0.0</h3><p>Android Gradle Plugin3.0.0的正式版本是在2017年10月发布，该版本对应Gradle4.1到Gradle4.4以下版本。</p>
+<h4 id="2-1-1-plugin3-0的优化"><a href="#2-1-1-plugin3-0的优化" class="headerlink" title="2.1.1 plugin3.0的优化"></a>2.1.1 plugin3.0的优化</h4><p>Android Gradel Plugin 3.0版本中进行了一些优化，使得项目的构建速度大大提升，主要体现在以下几个方面：</p>
+<p><strong>1.通过对Gradle Task Graph的优化，从而能够更好的实现多Module的并行编译。</strong></p>
+<p>2.通过使用plugin3.0中新加入的依赖方式 implementation, api, compileOnly,及 runtimeOnly. 使得在修改依赖时(implementation声明的依赖)，gradle不会再重新编译modules，加快编译速度。<strong>说明:plugin3.0中新添加的配置api与原来的compile等同，implementation只作用于当前module，使用implementation依赖的库只对当前的module起作用。</strong></p>
+<style>
+table th:first-of-type {
+    width: 120px;
+}
+table th:nth-of-type(2) {
+    width: 120px;
+}
+</style>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center">新配置</th>
+<th style="text-align:center">已过时配置</th>
+<th style="text-align:center">行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">implementation</td>
+<td style="text-align:center">compile</td>
+<td style="text-align:center">依赖项在编译时对模块可用，并且仅在运行时对模块的消费者可用。 对于大型多项目构建，使用 implementation 而不是 api/compile 可以显著缩短构建时间，因为它可以减少构建系统需要重新编译的项目量。 大多数应用和测试模块都应使用此配置。</td>
+</tr>
+<tr>
+<td style="text-align:center">api</td>
+<td style="text-align:center">compile</td>
+<td style="text-align:center">依赖项在编译时对模块可用，并且在编译时和运行时还对模块的消费者可用。 此配置的行为类似于 compile（现在已弃用），一般情况下，您应当仅在库模块中使用它。 应用模块应使用 implementation，除非您想要将其 API 公开给单独的测试模块。</td>
+</tr>
+<tr>
+<td style="text-align:center">compileOnly</td>
+<td style="text-align:center">provided</td>
+<td style="text-align:center">依赖项仅在编译时对模块可用，并且在编译或运行时对其消费者不可用。 此配置的行为类似于 provided（现在已弃用）。</td>
+</tr>
+<tr>
+<td style="text-align:center">runtimeOnly</td>
+<td style="text-align:center">apk</td>
+<td style="text-align:center">依赖项仅在运行时对模块及其消费者可用。 此配置的行为类似于 apk（现在已弃用）。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.在plugin3.0中，每个class文件都会被构建成dex文件，只有当class文件发生变化时才会重新进行构建</strong>，这样只对变化的class文件进行重新构建，加快了项目的构建速度。对minSdkVersion设置为20及以下的app，可以通过分包来加快构建。</p>
+<p><strong>4.通过设置Build cache来加快构建速度</strong>，设置Build cache可以通过以下方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//在命令行中添加--build-cach打开缓存，--no-build-cache取消缓存</span><br><span class="line">./gradlew build --build-cach</span><br></pre></td></tr></table></figure>
+<p>或者在gradle.properties文件中，添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.caching=true</span><br></pre></td></tr></table></figure>
+<p><strong>5.在plugin3.0中会默认使用AAPT2来对资源文件的处理</strong>，如果要禁用AAPT2,可以在gradle.properties文件中设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.enableAapt2=false</span><br></pre></td></tr></table></figure>
+<p>并且在命令行中暂停gradle的进程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew --stop</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-2-plugin3-0的新特性"><a href="#2-1-2-plugin3-0的新特性" class="headerlink" title="2.1.2 plugin3.0的新特性"></a>2.1.2 plugin3.0的新特性</h4><p><strong>1.plugin3.0 中变体对依赖能够自动感知，</strong>当构建项目的某个变体时，plugin会自动匹配与该变体相关的本地module。比如构建app的debug的变体时，会自动匹配library的debug变体，构建app的freeDebug变体时，会自动匹配library的freeDebug变体。当我们在plugin3.0中构建plugin3.0以下的项目时，会收到一下的错误提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error:All flavors must now belong to a named flavor dimension.</span><br><span class="line">The flavor &apos;flavor_name&apos; is not assigned to a flavor dimension.</span><br></pre></td></tr></table></figure>
+<p>这是因为在plugin3.0新添加了一个属性flavorDimensions。这个属性在原来flavor的基础上增加了维度的概念。怎样理解这个属性呢？比如下面的build.gradle文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">productFlavors &#123;</span><br><span class="line">        leading &#123;&#125;</span><br><span class="line">        common &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;&#125;</span><br><span class="line">        debug &#123;&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>按照编译原则，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Build variant:[Leading, Common][Debug, Release]</span><br></pre></td></tr></table></figure>
+<p>会编译出4个变体，在添加了flavorDimensions属性后，扩展了flavor的维度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  ...</span><br><span class="line">  buildTypes &#123;</span><br><span class="line">    debug &#123;...&#125;</span><br><span class="line">    release &#123;...&#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  flavorDimensions &quot;api&quot;, &quot;mode&quot;</span><br><span class="line"></span><br><span class="line">  productFlavors &#123;</span><br><span class="line">    leading &#123;</span><br><span class="line">      dimension &quot;mode&quot;</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    common &#123;</span><br><span class="line">      dimension &quot;mode&quot;</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    minApi24 &#123;</span><br><span class="line">      dimension &quot;api&quot;</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    minApi23 &#123;</span><br><span class="line">      dimension &quot;api&quot;</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    minApi21 &#123;</span><br><span class="line">      dimension &quot;api&quot;</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>按照编译原则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Build variant: [minApi24, minApi23, minApi21][Leading, Common][Debug, Release]</span><br><span class="line">Corresponding APK: app-[minApi24, minApi23, minApi21]-[leading, common]-[debug, release].apk</span><br></pre></td></tr></table></figure></p>
+<p>会编译出12个变种的apk文件。理解了flavor dimensions后，为了能够增加变体依赖的准确度，需要对所有的product flavor声明flavor dimensions，即使flavor 只有一个维度。</p>
+<p>有时在app的build.gradle文件中新加一种buildType，而library的build.gradle文件中没有与之对应的buildType。<br>这时就会出现类似以下的编译错误，这时需要使用matchingFallbacks为给定的构建类型指定备用匹配项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Error:Could not resolve all dependencies for configuration &apos;:bankOK:betaNewApiInnerTestRuntimeClasspath&apos;.</span><br><span class="line">&gt; Unable to find a matching configuration in project :abChat:</span><br><span class="line">    - Configuration &apos;debugApiElements&apos;:</span><br><span class="line">        - Required apiLvl &apos;ProductFlavorAttr&#123;name=newApi&#125;&apos; but no value provided.</span><br><span class="line">        - Required com.android.build.gradle.internal.dependency.AndroidTypeAttr &apos;AndroidTypeAttr&#123;name=Aar&#125;&apos; and found compatible value &apos;AndroidTypeAttr&#123;name=Aar&#125;&apos;.</span><br><span class="line">        - Required com.android.build.gradle.internal.dependency.BuildTypeAttr &apos;BuildTypeAttr&#123;name=innerTest&#125;&apos; and found incompatible value &apos;BuildTypeAttr&#123;name=debug&#125;&apos;.</span><br><span class="line">        - Found com.android.build.gradle.internal.dependency.VariantAttr &apos;VariantAttr&#123;name=debug&#125;&apos; but wasn&apos;t required.</span><br><span class="line">        - Required org.gradle.api.attributes.Usage &apos;for runtime&apos; and found incompatible value &apos;for compile&apos;.</span><br><span class="line">        - Required releaseType &apos;ProductFlavorAttr&#123;name=beta&#125;&apos; but no value provided.</span><br></pre></td></tr></table></figure>
+<p>如app的build.gradle中的buildType中新增一种 staging类型，而library中没有与之对应的buildType，这是需要使用matchingFallbacks进行制定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;&#125;</span><br><span class="line">        release &#123;&#125;</span><br><span class="line">        staging &#123;</span><br><span class="line">            // Specifies a sorted list of fallback build types that the</span><br><span class="line">            // plugin should try to use when a dependency does not include a</span><br><span class="line">            // &quot;staging&quot; build type. You may specify as many fallbacks as you</span><br><span class="line">            // like, and the plugin selects the first build type that&apos;s</span><br><span class="line">            // available in the dependency.</span><br><span class="line">            matchingFallbacks = [&apos;debug&apos;, &apos;qa&apos;, &apos;release&apos;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2.plugin3.0支持Android Instant App 及Android Instant Apps SDK。</strong></p>
+<p><strong>3.plugin3.0内置使用Java8的库及特性。</strong></p>
+<p>在Java8中默认工具链(desugar)对javac输出的字节码进行转换，java8的一些新的特性都是在desugar中完成的，原来的jack将不再支持。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180716153173050821984.png" alt="20180716153173050821984.png"><br>为了使用默认工具链（desugar）内置的java8的支持，需要先停用对jack的使用。在build.gradle文件中移除jackOptions块。同时需要声明对java8的配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        // Remove this block.</span><br><span class="line">        jackOptions &#123;</span><br><span class="line">            enabled true</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Keep the following configuration in order to target Java 8.</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于java8中内置了对lambda表达式的支持，所以需要移除build.gradle文件中对lambda库的依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">  ...</span><br><span class="line">   dependencies &#123;</span><br><span class="line">      // Remove the following dependency.</span><br><span class="line">      classpath &apos;me.tatarka:gradle-retrolambda:&lt;version_number&gt;&apos;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时移除每个模块 build.gradle 文件中的 Retrolambda 插件和 retrolambda 块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Remove the following plugin.</span><br><span class="line">apply plugin: &apos;me.tatarka.retrolambda&apos;</span><br><span class="line">...</span><br><span class="line">// Remove this block after migrating useful configurations.</span><br><span class="line">retrolambda &#123;</span><br><span class="line">    ...</span><br><span class="line">    // If you have arguments for the Java VM you want to keep,</span><br><span class="line">    // move them to your project&apos;s gradle.properties file.</span><br><span class="line">    jvmArgs &apos;-Xmx2048m&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果停用对 Java 8 语言功能的支持，需要在gradle.properties文件中设置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.enableDesugar=false</span><br></pre></td></tr></table></figure>
+<p><strong>4.plugin3.0添加了JunitRunner Orchestrator的支持；</strong></p>
+<p><strong>5.plugin3.0添加了testOptions.unitTests.includeAndroidResources属性</strong>，解决单元测试时对一些资源文件的依赖。当设置该属性为true时，gradle会在单元测试执行之前完成resource，asset，manifest文件的合并。</p>
+<p><strong>6.plugin3.0支持字体文件作为一种资源。</strong></p>
+<p><strong>7.支持Android Instant Apps SDK 1.1中对特定语言apk的支持；</strong></p>
+<p><strong>8.通过buildStagingDirectory修改外部的native工程。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">...</span><br><span class="line">externalNativeBuild &#123;</span><br><span class="line">    // For ndk-build, instead use the ndkBuild block.</span><br><span class="line">    cmake &#123;</span><br><span class="line">        ...</span><br><span class="line">        // Specifies a relative path for outputs from external native</span><br><span class="line">        // builds. You can specify any path that&apos;s not a subdirectory</span><br><span class="line">        // of your project&apos;s temporary build/ directory.</span><br><span class="line">        buildStagingDirectory &quot;./outputs/cmake&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>9.可以在AndroidStudio中使用CMake 3.7及以上版本编译native工程。</strong></p>
+<p><strong>10.支持lintChecks这种依赖方式来按照自定义的lint规则编译jar文件，并且打包到aar及apk中，</strong>自定义的lint 规则必须是一个单独的工程来输出jar，并且该工程中的所有依赖方式只能为compileOnly。其它module可按照如下的方式添加依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">// This tells the Gradle plugin to build &apos;:lint-checks&apos; into a lint.jar file</span><br><span class="line">// and package it with your module. If the module is an Android library,</span><br><span class="line">// other projects that depend on it automatically use the lint checks.</span><br><span class="line">// If the module is an app, lint includes these rules when analyzing the app.</span><br><span class="line">lintChecks project(&apos;:lint-checks&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-1-3-plugin3-0的行为变更"><a href="#2-1-3-plugin3-0的行为变更" class="headerlink" title="2.1.3 plugin3.0的行为变更"></a>2.1.3 plugin3.0的行为变更</h4><p><strong>1. Android Gradle Plugin3.0中移除了一些核心的api</strong>，这会导致升级到v3.0之后，会出编译失败的情况，同时会引入一些新api来替代这些被移除的api，比如variant outputs和manifestOutputFile：</p>
+<p>在Variant api中使用all()替代了each()来遍历variant对象。each()只能遍历存在配置期的variant对象，对在执行期添加的variant对象是无法访问的。另外，由于plugin3.0版本对配置期的Task进行了优化，一些variant的task将不会再被创建，使得在配置期中无法预先确定会有哪些outputFile输出，因此不能通过api对outputFile对象进行访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// If you use each() to iterate through the variant objects,</span><br><span class="line">// you need to start using all(). That&apos;s because each() iterates</span><br><span class="line">// through only the objects that already exist during configuration time—</span><br><span class="line">// but those object don&apos;t exist at configuration time with the new model.</span><br><span class="line">// However, all() adapts to the new model by picking up object as they are</span><br><span class="line">// added during execution.</span><br><span class="line">android.applicationVariants.all &#123; variant -&gt;</span><br><span class="line">    variant.outputs.all &#123;</span><br><span class="line">        outputFileName = &quot;$&#123;variant.name&#125;-$&#123;variant.versionName&#125;.apk&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>processManifest.manifestOutputFile()该方法将不能被调用，否则会出现以下错误提示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A problem occurred configuring project &apos;:myapp&apos;.</span><br><span class="line">   Could not get unknown property &apos;manifestOutputFile&apos; for task &apos;:myapp:processDebugManifest&apos;</span><br><span class="line">   of type com.android.build.gradle.tasks.ProcessManifest.</span><br></pre></td></tr></table></figure>
+<p>可以调用processManifest.manifestOutputDirectory()得到一个包含manifests文件的路径，进而找到manifests文件进行一些逻辑处理，比如修改android:versionCode。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">android.applicationVariants.all &#123; variant -&gt;</span><br><span class="line">    variant.outputs.all &#123; output -&gt;</span><br><span class="line">        output.processManifest.doLast &#123;</span><br><span class="line">            // Stores the path to the maifest.</span><br><span class="line">            String manifestPath = &quot;$manifestOutputDirectory/AndroidManifest.xml&quot;</span><br><span class="line">            // Stores the contents of the manifest.</span><br><span class="line">            def manifestContent = file(manifestPath).getText()</span><br><span class="line">            // Changes the version code in the stored text.</span><br><span class="line">            manifestContent = manifestContent.replace(&apos;android:versionCode=&quot;1&quot;&apos;,</span><br><span class="line">                    String.format(&apos;android:versionCode=&quot;%s&quot;&apos;, generatedCode))</span><br><span class="line">            // Overwrites the manifest with the new text.</span><br><span class="line">            file(manifestPath).write(manifestContent)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2. 在android gradle plugin3.0以后不需要再指定android.buildToolsVersion，默认情况下plugin会使用与plugin版本对应的最低版本。</strong>android gradle plugin3.0对应Android SDK Build Tools 26.0.2版本，android gradle plugin3.1对应Android SDK Build Tools 27.0.3 版本。</p>
+<p><strong>3.从plugin3.0开始crunchPngs属性对除debug之外的构建，默认是打开的，</strong>该属性打开时，会增加png文件的编译时间。如果要加快编译时间，可以关闭该属性，或者把png文件转换为WebP。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">buildTypes &#123;</span><br><span class="line">release &#123;</span><br><span class="line">  // Disables PNG crunching for the release build type.</span><br><span class="line">  crunchPngs false</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>4.从plugin3.0开始gradle会自动构建cmake文件中配置的外部工程。</strong></p>
+<p><strong>5.从plugin3.0开始，要将annotation processors添加到classpath中，否则会编译失败。</strong>在plugin3.0之前的版本，如果你的项目中依赖的工程中涉及到annotation processor，这些annotation processor会被自动添加到compile classpath中，这就会导致大量无效的依赖添加到编译中，严重影响了编译效率。</p>
+<p>在plugin3.0.0开始，这些annotation processor将不会被自动添加到compile classpath中，需要使用annotationProcessor进行添加。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    ...</span><br><span class="line">    annotationProcessor &apos;com.google.dagger:dagger-compiler:&lt;version-number&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那什么样的依赖需要使用annotationProcessor进行声明呢？如果依赖的jar包中包含META-INF/services/javax.annotation.processing.Processor文件,就需要使用annotationProcessor声明。如果项目需要添加该jar包到complie classpath中，这时需要使用compile进行第二次声明。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20180713153147512654858.png" alt="20180713153147512654858.png"></p>
+<p>还有一种解决方案，就是通过设置属性includeCompileClasspath为true来保留一些plugin2.3.0中的特性，该方案官方是不推荐使用的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        javaCompileOptions &#123;</span><br><span class="line">            annotationProcessorOptions &#123;</span><br><span class="line">                includeCompileClasspath true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>6.从plugin3.0开始，对已经废弃的ndkCompile提出了更多的限制，推荐迁移到CMake或者ndk-build项目来编译native代码。</strong></p>
+<h3 id="2-2-Android-Gradle-Plguin3-1-0"><a href="#2-2-Android-Gradle-Plguin3-1-0" class="headerlink" title="2.2 Android Gradle Plguin3.1.0"></a>2.2 Android Gradle Plguin3.1.0</h3><p>Android Gradle Plguin3.1.0的正式版本是2018年3月发布，该版本对应Gradle4.4及以上版本。</p>
+<p>在最新版本的Androidstudio3.2中默认使用已一种新的Dex 编译器，称为D8，区别于原有的Dx编译器，编译速度更快，将.class文件编译成的.dex文件更小。如果要禁用D8，可以在gradle.properties文件中设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.enableD8=false</span><br></pre></td></tr></table></figure>
+<p>在plugin 3.1.0中的一些行为变更：</p>
+<p><strong>1.在plugin3.1.0中将不再默认针对不同平台（如mips, mips64,armeabi）打包多个apk</strong>，如果要继续为不同平台打包多个apk，需要在build.gradle文件中进行如下声明，同时需要将ndk的版本修改为r16b及以下版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">splits &#123;</span><br><span class="line">    abi &#123;</span><br><span class="line">        include &apos;armeabi&apos;, &apos;mips&apos;, &apos;mips64&apos;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2.在为Android Instant App构建配置APK时，plugin3.1.0默认会对语言配置的按根语言分组</strong>。比如如果app中包含zh-CN，zh-TW的语言环境，Gradle会打包这些资源文件到zh语言配置的split中。可以通过include关键字进行重写。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">splits &#123;</span><br><span class="line">    language &#123;</span><br><span class="line">        enable true</span><br><span class="line">        // Each string defines a group of locales that</span><br><span class="line">        // Gradle should package together.</span><br><span class="line">        include &quot;in,id&quot;,</span><br><span class="line">                &quot;iw,he&quot;,</span><br><span class="line">                &quot;fil,tl,tgl&quot;,</span><br><span class="line">                &quot;yue,zh,zh-TW,zh-CN&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3.plugin会删除那些超过30天的build cache</strong></p>
+<p><strong>4.在resConfig中设置‘auto’将不再自动选择打包到apk中的字符串资源包</strong>，如果还设置为auto，plugin会打包所有字符串资源到apk中，因此需要针对不同的语言环境进行设置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        // Keeps language resources for only the locale specified below.</span><br><span class="line">        resConfig &quot;en&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>5.androidTestApi已经被废弃，需要使用androidTestImplementation替代。</strong></p>
+<h3 id="2-2-迁移到android-gradle-plugin3-0以上"><a href="#2-2-迁移到android-gradle-plugin3-0以上" class="headerlink" title="2.2 迁移到android gradle plugin3.0以上"></a>2.2 迁移到android gradle plugin3.0以上</h3><iframe width="560" height="315" src="https://www.youtube.com/embed/oBsbI8ICYKg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li><a href="https://developer.android.com/studio/releases/gradle-plugin#3-1-0" target="_blank" rel="noopener">https://developer.android.com/studio/releases/gradle-plugin#3-1-0</a></li>
+<li><a href="https://developer.android.google.cn/studio/build/gradle-plugin-3-0-0-migration" target="_blank" rel="noopener">https://developer.android.google.cn/studio/build/gradle-plugin-3-0-0-migration</a></li>
+<li><a href="https://developer.android.com/studio/build/gradle-plugin-3-0-0-migration?utm_source=android-studio" target="_blank" rel="noopener">https://developer.android.com/studio/build/gradle-plugin-3-0-0-migration?utm_source=android-studio</a></li>
+</ol>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.top/Android进阶-2018-07-11-android-gradle-v3-0迁移.html">http://www.sguotao.top/Android进阶-2018-07-11-android-gradle-v3-0迁移.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    
+      <div>
+        
+          
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>「真诚赞赏，手留余香」</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+        
+      </div>
+    
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Scott
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.sguotao.top/Android进阶-2018-07-11-android-gradle-v3-0迁移.html" title="Android Gradle v3.0新特性介绍及源码分析">http://www.sguotao.top/Android进阶-2018-07-11-android-gradle-v3-0迁移.html</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8474352740015305",
+    enable_page_level_ads: true
+  });
+</script>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
+          
+            <a href="/tags/源码/" rel="tag"><i class="fa fa-tag"></i> 源码</a>
+          
+            <a href="/tags/Gradle-Plugin/" rel="tag"><i class="fa fa-tag"></i> Gradle-Plugin</a>
+          
+            <a href="/tags/Gradle/" rel="tag"><i class="fa fa-tag"></i> Gradle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Android进阶-2018-07-03-如何下载并查看Android源码.html" rel="next" title="如何下载并查看Android源码">
+                <i class="fa fa-chevron-left"></i> 如何下载并查看Android源码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Android进阶-2018-07-17-gradle源码分析.html" rel="prev" title="Gradle源码分析">
+                Gradle源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODkyOC81NDk3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Scott" />
+          <p class="site-author-name" itemprop="name">Scott</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sguotao" target="_blank" rel="external nofollow" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-更新Android-Gradle-Plugin-v3-0"><span class="nav-number">1.</span> <span class="nav-text">1.更新Android Gradle Plugin v3.0</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-为什么要更新Android-Gradle-Plugin？"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 为什么要更新Android Gradle Plugin？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-如何更新Android-Gradle-Plugin？"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 如何更新Android Gradle Plugin？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-设置代理"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 设置代理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Android-Gradle-Plugin3-0以上的一些新特性"><span class="nav-number">2.</span> <span class="nav-text">2.Android Gradle Plugin3.0以上的一些新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Android-Gradle-Plugin3-0-0"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Android Gradle Plugin3.0.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-plugin3-0的优化"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 plugin3.0的优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-plugin3-0的新特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 plugin3.0的新特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-plugin3-0的行为变更"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 plugin3.0的行为变更</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Android-Gradle-Plguin3-1-0"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Android Gradle Plguin3.1.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-迁移到android-gradle-plugin3-0以上"><span class="nav-number">2.3.</span> <span class="nav-text">2.2 迁移到android gradle plugin3.0以上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott</span>
+  <span class="with-love">
+    <i class="fa fa-pencil"></i>
+  </span>
+  <span class="post-count">共写了196.4k字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iH9ug4Eu98bS8XiH30QEwODs-gzGzoHsz", "D0qgHUsqtcQOClhgS4ElkmDQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
+
+</body>
+</html>
