@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,View," />
+  <meta name="keywords" content="DSL,Groovy," />
 
 
 
@@ -104,23 +104,18 @@
 
 
 
-<meta name="description" content="在分析View的工作流程时，需要先分析一个很重要的类,MeasureSpec。这个类在View的测量(Measure)过程中会用到。 MeasureSpecMeasureSpec是View的静态内部类，可以理解为是一种测量规格，是一个32位int值，高2位代表SpecMode，低30位代表SpecSize，SpecMode是指测量模式，而SpecSize是指在某种测量模式下的规格大小。SpecMo">
-<meta name="keywords" content="Android,View">
+<meta name="description" content="二.Groovy闭包2.1 闭包的定义闭包是Groovy中最有特点的用法之一，什么是闭包，简单来说，就是包含一段语义的代码块，是一个匿名函数。Groovy中闭包的完整声明是: 1&amp;#123; [closureParameters -&amp;gt; ] statements &amp;#125; 其中闭包的参数closureParameters及其类型是可选的，当不指定参数类型时，编译器会自动进行推断。当闭包只有">
+<meta name="keywords" content="DSL,Groovy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分析Android中View的工作流程">
-<meta property="og:url" content="http://www.sguotao.top/Android进阶-2016-07-07-分析Android中View的绘制流程.html">
+<meta property="og:title" content="Groovy笔记-2-Groovy闭包">
+<meta property="og:url" content="http://www.sguotao.top/Groovy-2018-07-18-Groovy笔记-2-Groovy闭包.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
-<meta property="og:description" content="在分析View的工作流程时，需要先分析一个很重要的类,MeasureSpec。这个类在View的测量(Measure)过程中会用到。 MeasureSpecMeasureSpec是View的静态内部类，可以理解为是一种测量规格，是一个32位int值，高2位代表SpecMode，低30位代表SpecSize，SpecMode是指测量模式，而SpecSize是指在某种测量模式下的规格大小。SpecMo">
+<meta property="og:description" content="二.Groovy闭包2.1 闭包的定义闭包是Groovy中最有特点的用法之一，什么是闭包，简单来说，就是包含一段语义的代码块，是一个匿名函数。Groovy中闭包的完整声明是: 1&amp;#123; [closureParameters -&amp;gt; ] statements &amp;#125; 其中闭包的参数closureParameters及其类型是可选的，当不指定参数类型时，编译器会自动进行推断。当闭包只有">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170712149986966667975.png">
-<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/2017071314999163655874.png">
-<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/2017071314999164201334.png">
-<meta property="og:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170712149985760240189.png">
-<meta property="og:updated_time" content="2017-07-13T08:12:28.000Z">
+<meta property="og:updated_time" content="2018-07-20T07:17:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分析Android中View的工作流程">
-<meta name="twitter:description" content="在分析View的工作流程时，需要先分析一个很重要的类,MeasureSpec。这个类在View的测量(Measure)过程中会用到。 MeasureSpecMeasureSpec是View的静态内部类，可以理解为是一种测量规格，是一个32位int值，高2位代表SpecMode，低30位代表SpecSize，SpecMode是指测量模式，而SpecSize是指在某种测量模式下的规格大小。SpecMo">
-<meta name="twitter:image" content="http://7u2np3.com1.z0.glb.clouddn.com/20170712149986966667975.png">
+<meta name="twitter:title" content="Groovy笔记-2-Groovy闭包">
+<meta name="twitter:description" content="二.Groovy闭包2.1 闭包的定义闭包是Groovy中最有特点的用法之一，什么是闭包，简单来说，就是包含一段语义的代码块，是一个匿名函数。Groovy中闭包的完整声明是: 1&amp;#123; [closureParameters -&amp;gt; ] statements &amp;#125; 其中闭包的参数closureParameters及其类型是可选的，当不指定参数类型时，编译器会自动进行推断。当闭包只有">
 
 
 
@@ -148,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="http://www.sguotao.top/Android进阶-2016-07-07-分析Android中View的绘制流程.html"/>
+  <link rel="canonical" href="http://www.sguotao.top/Groovy-2018-07-18-Groovy笔记-2-Groovy闭包.html"/>
 
 
 
 
 
-  <title>分析Android中View的工作流程 | Scott's Blog</title>
+  <title>Groovy笔记-2-Groovy闭包 | Scott's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -341,7 +336,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sguotao.top/Android进阶-2016-07-07-分析Android中View的绘制流程.html">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.top/Groovy-2018-07-18-Groovy笔记-2-Groovy闭包.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Scott">
@@ -358,7 +353,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">分析Android中View的工作流程</h2>
+          <h2 class="post-title" itemprop="name headline">Groovy笔记-2-Groovy闭包</h2>
         
 
         <div class="post-meta">
@@ -370,8 +365,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-06T10:27:04+08:00">
-                2016-07-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-18T15:04:12+08:00">
+                2018-07-18
               </time>
             
 
@@ -410,7 +405,7 @@
 
           
           
-             <span id="/Android进阶-2016-07-07-分析Android中View的绘制流程.html" class="leancloud_visitors" data-flag-title="分析Android中View的工作流程">
+             <span id="/Groovy-2018-07-18-Groovy笔记-2-Groovy闭包.html" class="leancloud_visitors" data-flag-title="Groovy笔记-2-Groovy闭包">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -440,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,297字
+                  2,072字
                 </span>
               
 
@@ -456,7 +451,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5分钟
+                  9分钟
                 </span>
               
             </div>
@@ -474,43 +469,131 @@
       
 
       
-        <p>在分析View的工作流程时，需要先分析一个很重要的类,MeasureSpec。这个类在View的测量(Measure)过程中会用到。</p>
-<h2 id="MeasureSpec"><a href="#MeasureSpec" class="headerlink" title="MeasureSpec"></a>MeasureSpec</h2><p>MeasureSpec是View的静态内部类，可以理解为是一种测量规格，是一个32位int值，高2位代表SpecMode，低30位代表SpecSize，SpecMode是指测量模式，而SpecSize是指在某种测量模式下的规格大小。<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149986966667975.png" alt="20170712149986966667975.png"><br>SpecMode有三种模式，分别为：</p>
+        <h2 id="二-Groovy闭包"><a href="#二-Groovy闭包" class="headerlink" title="二.Groovy闭包"></a>二.Groovy闭包</h2><h3 id="2-1-闭包的定义"><a href="#2-1-闭包的定义" class="headerlink" title="2.1 闭包的定义"></a>2.1 闭包的定义</h3><p>闭包是Groovy中最有特点的用法之一，什么是闭包，简单来说，就是包含一段语义的代码块，是一个匿名函数。Groovy中闭包的完整声明是:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; [closureParameters -&gt; ] statements &#125;</span><br></pre></td></tr></table></figure>
+<p>其中闭包的参数closureParameters及其类型是可选的，当不指定参数类型时，编译器会自动进行推断。当闭包只有一个参数时，这个参数是可以省略的，此时可以使用it关键字来访问。</p>
+<p>闭包的参数列表是可选的，参数的类型也是可选的。如果我们不指定参数的类型，会由编译器自动推断。如果闭包只有一个参数，这个参数可以省略，我们可以直接使用隐式参数it来替代。</p>
+<p>需要说明的是隐式参数it总是存在的，除非显示声明指定闭包的没有参数。比如：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> magicNumber = &#123; -&gt; <span class="number">42</span> &#125;  <span class="comment">//显示声明指定闭包的没有参数</span></span><br></pre></td></tr></table></figure>
+<p>以下都是合法的闭包</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123; item++ &#125;<span class="comment">//引用名为item的变量的闭包</span></span><br><span class="line"></span><br><span class="line">&#123; -&gt; item++ &#125;<span class="comment">//通过添加箭头（-&gt;）可以明确地将闭包参数与代码分开</span></span><br><span class="line"></span><br><span class="line">&#123; println it &#125;<span class="comment">//使用隐式参数（it）的闭包</span></span><br><span class="line"></span><br><span class="line">&#123; it -&gt; println it &#125;<span class="comment">//这里的it是显示参数</span></span><br><span class="line"></span><br><span class="line">&#123; name -&gt; println name &#125;<span class="comment">//建议使用能够区别与隐式参数的变量名称</span></span><br><span class="line"></span><br><span class="line">&#123; String x, <span class="keyword">int</span> y -&gt; <span class="comment">//接受两个参数的闭包</span></span><br><span class="line">           println <span class="string">"hey $&#123;x&#125; the value is $&#123;y&#125;"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123; reader -&gt; <span class="comment">//包含多个语句的闭包</span></span><br><span class="line">   <span class="keyword">def</span> line = reader.readLine()</span><br><span class="line">   line.trim()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123; String... args -&gt; args.join(<span class="string">''</span>) &#125;  <span class="comment">//使用可变参数的闭包</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-闭包的使用"><a href="#2-2-闭包的使用" class="headerlink" title="2.2 闭包的使用"></a>2.2 闭包的使用</h3><p>可以将闭包赋值给变量，将变量作为函数使用，或者通过变量调用闭包的call()方法。比如:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> isOdd = &#123; <span class="keyword">int</span> i -&gt; i%<span class="number">2</span> != <span class="number">0</span> &#125;</span><br><span class="line"><span class="keyword">assert</span> isOdd(<span class="number">3</span>) == <span class="literal">true</span></span><br><span class="line"><span class="keyword">assert</span> isOdd.call(<span class="number">2</span>) == <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2-1-基本数据类型结合闭包的使用"><a href="#2-2-1-基本数据类型结合闭包的使用" class="headerlink" title="2.2.1.基本数据类型结合闭包的使用"></a>2.2.1.基本数据类型结合闭包的使用</h4><p><strong>在Groovy的整型中新增加了几个结合闭包使用的扩展方法，比如upto()/downto()，times()，step()</strong>等。比如upto()源码：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> upto(Number self, Number to, <span class="meta">@ClosureParams</span>(FirstParam.<span class="keyword">class</span>) Closure closure) &#123;</span><br><span class="line">        <span class="keyword">int</span> self1 = self.intValue();</span><br><span class="line">        <span class="keyword">int</span> to1 = to.intValue();</span><br><span class="line">        <span class="keyword">if</span> (self1 &gt; to1) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> GroovyRuntimeException(<span class="string">"The argument ("</span> + to + <span class="string">") to upto() cannot be less than the value ("</span> + self + <span class="string">") it's called on."</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = self1; i &lt;= to1; ++i) &#123;</span><br><span class="line">                closure.call(i);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>其中参数closure就是接受一个闭包。<strong>n.upto(m)就表示所传入的闭包closure循环m- n次</strong>，比如，用upto()方式实现乘法表的打印：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> multiplicationTable() &#123;</span><br><span class="line">    <span class="number">1.</span>upto(<span class="number">9</span>) &#123;</span><br><span class="line">        i -&gt;</span><br><span class="line">            <span class="number">1.</span>upto(<span class="number">9</span>) &#123;</span><br><span class="line">                j -&gt;</span><br><span class="line">                    <span class="keyword">if</span> (j &lt;= i)</span><br><span class="line">                        print <span class="string">"$&#123;j&#125; * $&#123;i&#125; = $&#123;i * j&#125;  "</span></span><br><span class="line">            &#125;</span><br><span class="line">            println()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>与upto()方法类似的是downto方法，n.downto(m)表示所传入的闭包closure循环n-m次</strong>。比如用downto()实现阶乘。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fac(<span class="keyword">int</span> number) &#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">1</span>;</span><br><span class="line">    number.downto(<span class="number">1</span>, &#123;</span><br><span class="line">        num -&gt;</span><br><span class="line">            result *= num</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>n.times()方法，表示循环n次，循环变量从0开始到n-1结束。</strong>比如实现从1到100的累加：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> accumulation() &#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">0</span></span><br><span class="line">    <span class="number">101.</span>times &#123;</span><br><span class="line">        num -&gt;</span><br><span class="line">            result += num</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>n.step(x, y)方法，表示循环变量从n开始到x结束，每次循环后循环变量增加y，所以整个循环次数为 (x - n) / y 次。</strong>比如实现从0到100输出所有偶数：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> showOdd() &#123;</span><br><span class="line">    <span class="number">0.</span>step(<span class="number">100</span>, <span class="number">2</span>) &#123;</span><br><span class="line">        num -&gt;</span><br><span class="line">            println num</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-2-String结合闭包的使用"><a href="#2-2-2-String结合闭包的使用" class="headerlink" title="2.2.2 String结合闭包的使用"></a>2.2.2 String结合闭包的使用</h4><p><strong>在Groovy的String的类型中新增了几个结合闭包使用的扩展方法，如each，find，findAll，any，every，collect等</strong>。</p>
+<p><strong>each()字符串遍历，有返回值，返回值为原字符串，闭包中的参数为字符串中的每一个字符</strong>。比如将字符串中的每个字符都转换为大写形式。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> strGroovy = <span class="string">"86 is China country code,100088 is Beijing zipcode."</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> returnVal = strGroovy.each &#123;</span><br><span class="line">    str -&gt;</span><br><span class="line">        print str.capitalize()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">println()</span><br><span class="line">println returnVal</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">86</span> IS CHINA COUNTRY CODE,<span class="number">100088</span> IS BEIJING ZIPCODE.</span><br><span class="line"><span class="number">86</span> is China country code,<span class="number">100088</span> is Beijing zipcode.</span><br></pre></td></tr></table></figure>
+<p><strong>find()查找字符串中符合条件的第一个字符作为结果进行返回。闭包参数为字符串中的每一个字符，并且要求闭包要返回boolean类型。</strong>比如查找字符串中第一个数字。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> returnVal = strGroovy.find &#123;</span><br><span class="line">    str -&gt;</span><br><span class="line">        str.isNumber()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">println returnVal</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8</span><br></pre></td></tr></table></figure>
+<p><strong>findAll()和find类似，不同之处是会返回所有满足条件的字符而非第一个。</strong></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> returnVal = strGroovy.findAll &#123;</span><br><span class="line">    str -&gt;</span><br><span class="line">        str.isNumber()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">println returnVal</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">8</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">8</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>any()闭包参数为字符串中的每一个字符并且要求闭包要返回Bool类型，只要有一项满足闭包条件，则整个方法返回true否则返回false。</strong></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> returnVal = strGroovy.any &#123;</span><br><span class="line">    str -&gt;</span><br><span class="line">        str.isNumber()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>every与()闭包参数为字符串中的每一个字符并且要求闭包要返回Bool类型，every要求每一项都要满足闭包的条件，只要有一项不满足条件就返回false。</strong></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> returnVal = strGroovy.every &#123;</span><br><span class="line">    str -&gt;</span><br><span class="line">        str.isNumber()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p><strong>collect()相当于有返回值的each，类似于kotlin中的map，对每个字符进行操作之后进行收集。</strong></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> returnVal = strGroovy.collect &#123;</span><br><span class="line">    str -&gt;</span><br><span class="line">        str.capitalize()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">println returnVal</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">8</span>, <span class="number">6</span>,  , I, S,  , C, H, I, N, A,  , C, O, U, N, T, R, Y,  , C, O, D, E, ,, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">8</span>,  , I, S,  , B, E, I, J, I, N, G,  , Z, I, P, C, O, D, E, .]</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-3-数据结构结合闭包的使用"><a href="#2-2-3-数据结构结合闭包的使用" class="headerlink" title="2.2.3 数据结构结合闭包的使用"></a>2.2.3 数据结构结合闭包的使用</h4><h4 id="2-2-4-文件结合闭包的使用"><a href="#2-2-4-文件结合闭包的使用" class="headerlink" title="2.2.4 文件结合闭包的使用"></a>2.2.4 文件结合闭包的使用</h4><h3 id="2-3-闭包的委托策略"><a href="#2-3-闭包的委托策略" class="headerlink" title="2.3 闭包的委托策略"></a>2.3 闭包的委托策略</h3><p>如果说闭包是Groovy的最大特点的话，那么委托策略就是闭包的最大特点。如果想了解Groovy中的闭包，必须要先了解三个比较关键的变量，this,owner,delegate。那这三个关键变量又分别代表什么呢？先给出三个变量代表的含义。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">变量</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">this</td>
+<td style="text-align:center">代表闭包定义处的类</td>
+</tr>
+<tr>
+<td style="text-align:center">owner</td>
+<td style="text-align:center">代表闭包定义处的类或者对象</td>
+</tr>
+<tr>
+<td style="text-align:center">delegate</td>
+<td style="text-align:center">代表任意对象，默认与owner一致</td>
+</tr>
+</tbody>
+</table>
+<p>怎么理解，先看下面的代码，其中ClosureLearning是闭包所在的类：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> closure = &#123;</span><br><span class="line">    println <span class="string">"closure this:"</span> + <span class="keyword">this</span></span><br><span class="line">    println <span class="string">"closure this:"</span> + owner</span><br><span class="line">    println <span class="string">"closure this:"</span> + delegate</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">closure.call()</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">closure <span class="string">this:</span>closure.ClosureLearning@<span class="number">4e7912</span>d8</span><br><span class="line">closure <span class="string">owner:</span>closure.ClosureLearning@<span class="number">4e7912</span>d8</span><br><span class="line">closure <span class="string">delegate:</span>closure.ClosureLearning@<span class="number">4e7912</span>d8</span><br></pre></td></tr></table></figure>
+<p>可以看出三个变量的值完全一样，那么有不一样的时候么？看下面的代码</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> outerClosure = &#123;</span><br><span class="line">    <span class="keyword">def</span> innerClosure = &#123;</span><br><span class="line">        println <span class="string">"innerClosure this:"</span> + <span class="keyword">this</span></span><br><span class="line">        println <span class="string">"innerClosure owner:"</span> + owner</span><br><span class="line">        println <span class="string">"innerClosure delegate:"</span> + delegate</span><br><span class="line">    &#125;</span><br><span class="line">    innerClosure.call()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">outerClosure.call()</span><br></pre></td></tr></table></figure>
+<p>在闭包中定义了闭包，形成了闭包的嵌套，这时候会发现this与owner,delegate的值是不同的，输出结果：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">innerClosure <span class="string">this:</span>closure.ClosureLearning@<span class="number">2</span>bfc268b</span><br><span class="line">innerClosure <span class="string">owner:</span>closure.ClosureLearning$_run_closure3@<span class="number">41</span>fecb8b</span><br><span class="line">innerClosure <span class="string">delegate:</span>closure.ClosureLearning$_run_closure3@<span class="number">41</span>fecb8b</span><br></pre></td></tr></table></figure>
+<p>那owner与delegate的值什么时候不同呢？看下面代码:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tiger</span> &#123;</span></span><br><span class="line">    String name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fox</span> &#123;</span></span><br><span class="line">    String name</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义闭包</span></span><br><span class="line">    <span class="keyword">def</span> say = &#123;</span><br><span class="line">        println(<span class="string">"Hello,I am $name!"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义方法调用闭包</span></span><br><span class="line">    <span class="keyword">void</span> sayHi() &#123;</span><br><span class="line">        say.call()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> tiger = <span class="keyword">new</span> Tiger(<span class="string">name:</span> <span class="string">"Tiger"</span>)</span><br><span class="line">Fox fox = <span class="keyword">new</span> Fox(<span class="string">name:</span> <span class="string">"fox"</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"设置delegate之前: "</span>)</span><br><span class="line">fox.sayHi()</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置delegate</span></span><br><span class="line">fox.say.delegate = tiger</span><br><span class="line">fox.say.resolveStrategy = Closure.DELEGATE_FIRST</span><br><span class="line">print(<span class="string">"设置delegate之后: "</span>)</span><br><span class="line">fox.sayHi()</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">设置delegate之前: Hello,I am fox!</span><br><span class="line">设置delegate之后: Hello,I am Tiger!</span><br></pre></td></tr></table></figure>
+<p>总结一下：</p>
 <ol>
-<li>UNSPECIFIED:父容器不对View做限制</li>
-<li>EXACTLY:父容器已经检测出View所需的精确大小，View的大小为SpecSize中指定的值。</li>
-<li>AT_MOST:父容器指定了一个SpecSize，View的大小不大大于该值。</li>
+<li>在大多数场景下this,owner,delegate的值都是一样的；</li>
+<li>如果在闭包中再定义闭包，this与owner，delegate的值就不在一样；</li>
+<li>如果修改了delegate的值（this与owner是不能修改的），那么owner与delegate的值就不再一样。</li>
 </ol>
-<h3 id="MeasureSpec与LayoutParams"><a href="#MeasureSpec与LayoutParams" class="headerlink" title="MeasureSpec与LayoutParams"></a>MeasureSpec与LayoutParams</h3><p>系统通过MeasureSpec作为测量规格，对View进行测量，但在设置View的宽高时，都是通过LayoutParams，因此系统在测量View的时候，会将LayoutParams在父容器的约束下转换成MeasureSpec，然后根据确定的MeasureSepc得到View测量后的宽高。有几点需要说明：</p>
-<ol>
-<li>LayoutParams和父容器一起确定MeasureSpec；</li>
-<li>对于DecorView，其MeasureSpec是由窗口的尺寸和自身的LayoutParams共同确定的；由于窗口尺寸是确定的，因此主要与DecorView自身的LayoutParams有关，具体的对应关系如下图描述：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017071314999163655874.png" alt="2017071314999163655874.png"></li>
-<li>对于普通View，其MeasureSpec是由父容器的MeasureSpec和自身的LayoutParams共同确定的。其对应关系如下图描述：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/2017071314999164201334.png" alt="2017071314999164201334.png"><br><strong>对普通View，简单总结一下：</strong></li>
-</ol>
-<ul>
-<li>当View采用固定宽/高的时候，不管父容器的MeasureSpec是什么，View的MeasureSpec都是精确模式并且其大小遵循Layoutparams中的大小。</li>
-<li>当View的宽/高是match_parent时，如果父容器的模式是精准模式，那么View也是精准模式并且其大小是父容器的剩余空间；如果父容器是最大模式，那么View也是最大模式并且其大小不会超过父容器的剩余空间。</li>
-<li>当View的宽/高是wrap_content时，不管父容器的模式是精准还是最大模式，View的模式总是最大模式并且大小不能超过父容器的剩余空间。</li>
-<li>在UNSPECIFIED模式中，系统内部会进行多次Measure过程，才能确定View的宽高。</li>
-</ul>
-<h2 id="View的工作流程"><a href="#View的工作流程" class="headerlink" title="View的工作流程"></a>View的工作流程</h2><p>ViewRoot是连接WindowManager与DecorView的纽带，View的绘制流程都是通过ViewRoot来完成的。</p>
-<p>View的工作流程是从ViewRoot的performTraversals方法开始的，它经过measure、layout和draw三个过程才能最终将一个View绘制出来，其中measure用来测量View的宽和高，layout用来确定View在父容器中的放置位置，而draw则负责将View绘制在屏幕上。用一张图来描述View的工作过程：<br><img src="http://7u2np3.com1.z0.glb.clouddn.com/20170712149985760240189.png" alt="20170712149985760240189.png"></p>
-<h3 id="View的测量-Measure-过程"><a href="#View的测量-Measure-过程" class="headerlink" title="View的测量(Measure)过程"></a>View的测量(Measure)过程</h3><p>在View的Measure过程中，完成对View的测量，确定View的宽高。ViewRoot中的performTraversals()会依次调用ViewRoot中的performMeasure()、performLayout()和performDraw()三个方法，这三个方法分别完成顶级View的measure、layout和draw这三大流程。其中在performMeasure()中会调用View的measure()方法，在measure()方法中又会调用onMeasure()方法。在onMeasure()中将View宽/高的测量值传给setMeasuredDimension()方法，完成View的测量过程。</p>
-<p>对于ViewGroup来说，除了完成自己的measure过程以外，还会遍历去调用所有子元素的measure()方法，各个子元素再递归去执行这个过程。和View不同的是，ViewGroup是一个抽象类，因此它没有重写View的onMeasure方法，因为不同的ViewGroup子类有不同的布局特性，这导致它们的测量细节各不相同。在ViewGroup的onMeasure()中最后也会调用setMeasuredDimension()方法，完成测量过程。</p>
-<p>measure完成以后，通过getMeasuredWidth()/Height()方法就可以正确地获取到View的测量宽/高。需要注意的是，在某些极端情况下，系统可能需要多次measure才能确定最终的测量宽/高，在这种情形下，在onMeasure方法中拿到的测量宽/高很可能是不准确的。一个比较好的习惯是在onLayout方法中去获取View的测量宽/高或者最终宽/高。</p>
-<h3 id="View的布局-Layout-过程"><a href="#View的布局-Layout-过程" class="headerlink" title="View的布局(Layout)过程"></a>View的布局(Layout)过程</h3><p>Layout的作用是ViewGroup用来确定子元素的位置，ViewRoot中的performLayout()中会调用View的layout()方法，在layout()方法中onLayout()方法又会被调用。onLayout的具体实现同样和具体的布局有关，所以View和ViewGroup均没有真正实现onLayout方法。</p>
-<p>当ViewGroup的位置被确定后，它在onLayout()中会遍历所有的子元素并调用其layout()方法，layout()方法确定View本身的位置，而onLayout()方法则会确定所有子元素的位置。</p>
-<h3 id="View的绘制-Draw-过程"><a href="#View的绘制-Draw-过程" class="headerlink" title="View的绘制(Draw)过程"></a>View的绘制(Draw)过程</h3><p>Draw的作用是将View绘制到屏幕上面。View的绘制过程遵循如下几步：</p>
-<ol>
-<li>绘制背景background.draw(canvas)</li>
-<li>绘制自己（onDraw）</li>
-<li>绘制children（dispatchDraw）</li>
-<li>绘制装饰（onDrawScrollBars）</li>
-</ol>
-<p>View绘制过程的传递是通过dispatchDraw来实现的，dispatchDraw会遍历调用所有子元素的draw方法，如此draw事件就一层层地传递了下去。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] 任玉刚.Android开发艺术探索[M].电子工业出版社, 2015.9:1 - 507</p>
+<p>Groovy关于委托解析策略resolveStrategy，包含以下几种</p>
+<style>
+table th:first-of-type {
+    width: 150px;
+}
+</style>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性解析策略</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Closure.OWNER_FIRST</td>
+<td style="text-align:center">默认解析策略，首先从owner上寻找属性或方法，找不到则在delegate上寻找</td>
+</tr>
+<tr>
+<td style="text-align:center">Closure.DELEGATE_FIRST</td>
+<td style="text-align:center">首先从delegate上寻找属性或方法，找不到则在owner上寻找</td>
+</tr>
+<tr>
+<td style="text-align:center">Closure.OWNER_ONLY</td>
+<td style="text-align:center">只在owner上寻找，delegate被忽略</td>
+</tr>
+<tr>
+<td style="text-align:center">Closure.DELEGATE_ONLY</td>
+<td style="text-align:center">只在delegate上寻找，找不到抛出异常</td>
+</tr>
+<tr>
+<td style="text-align:center">Closure.TO_SELF</td>
+<td style="text-align:center">高级选项，让开发者自定义策略</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-4-柯里化"><a href="#2-4-柯里化" class="headerlink" title="2.4 柯里化"></a>2.4 柯里化</h3><p>TODO</p>
 <hr>
-<p>本文链接：<a href="http://www.sguotao.top/Android进阶-2016-07-07-分析Android中View的绘制流程.html">http://www.sguotao.top/Android进阶-2016-07-07-分析Android中View的绘制流程.html</a></p>
+<p>本文链接：<a href="http://www.sguotao.top/Groovy-2018-07-18-Groovy笔记-2-Groovy闭包.html">http://www.sguotao.top/Groovy-2018-07-18-Groovy笔记-2-Groovy闭包.html</a></p>
 
       
     </div>
@@ -566,7 +649,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://www.sguotao.top/Android进阶-2016-07-07-分析Android中View的绘制流程.html" title="分析Android中View的工作流程">http://www.sguotao.top/Android进阶-2016-07-07-分析Android中View的绘制流程.html</a>
+      <a href="http://www.sguotao.top/Groovy-2018-07-18-Groovy笔记-2-Groovy闭包.html" title="Groovy笔记-2-Groovy闭包">http://www.sguotao.top/Groovy-2018-07-18-Groovy笔记-2-Groovy闭包.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -596,9 +679,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
+            <a href="/tags/DSL/" rel="tag"><i class="fa fa-tag"></i> DSL</a>
           
-            <a href="/tags/View/" rel="tag"><i class="fa fa-tag"></i> View</a>
+            <a href="/tags/Groovy/" rel="tag"><i class="fa fa-tag"></i> Groovy</a>
           
         </div>
       
@@ -611,8 +694,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Android进阶-2016-07-06-分析Android中View的事件分发流程.html" rel="next" title="分析Android中View的事件分发流程">
-                <i class="fa fa-chevron-left"></i> 分析Android中View的事件分发流程
+              <a href="/Android进阶-2018-07-17-gradle源码分析.html" rel="next" title="Gradle源码分析">
+                <i class="fa fa-chevron-left"></i> Gradle源码分析
               </a>
             
           </div>
@@ -621,8 +704,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Android进阶-2016-07-08-分析Android中的自定义View.html" rel="prev" title="分析Android中的自定义View">
-                分析Android中的自定义View <i class="fa fa-chevron-right"></i>
+              <a href="/Groovy-2018-07-20-Groovy笔记-3-Groovy数据结构.html" rel="prev" title="Groovy笔记-3-Groovy数据结构">
+                Groovy笔记-3-Groovy数据结构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -761,7 +844,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MeasureSpec"><span class="nav-number">1.</span> <span class="nav-text">MeasureSpec</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MeasureSpec与LayoutParams"><span class="nav-number">1.1.</span> <span class="nav-text">MeasureSpec与LayoutParams</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View的工作流程"><span class="nav-number">2.</span> <span class="nav-text">View的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#View的测量-Measure-过程"><span class="nav-number">2.1.</span> <span class="nav-text">View的测量(Measure)过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View的布局-Layout-过程"><span class="nav-number">2.2.</span> <span class="nav-text">View的布局(Layout)过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View的绘制-Draw-过程"><span class="nav-number">2.3.</span> <span class="nav-text">View的绘制(Draw)过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二-Groovy闭包"><span class="nav-number">1.</span> <span class="nav-text">二.Groovy闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-闭包的定义"><span class="nav-number">1.1.</span> <span class="nav-text">2.1 闭包的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-闭包的使用"><span class="nav-number">1.2.</span> <span class="nav-text">2.2 闭包的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-基本数据类型结合闭包的使用"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.2.1.基本数据类型结合闭包的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-String结合闭包的使用"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2.2 String结合闭包的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-数据结构结合闭包的使用"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.2.3 数据结构结合闭包的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-文件结合闭包的使用"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.2.4 文件结合闭包的使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-闭包的委托策略"><span class="nav-number">1.3.</span> <span class="nav-text">2.3 闭包的委托策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-柯里化"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 柯里化</span></a></li></ol></li></ol></div>
             
 
           </div>

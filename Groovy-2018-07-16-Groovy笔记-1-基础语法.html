@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Scott, Scott's Blog, Android, Python, Kotlin, 读书" />
+  <meta name="keywords" content="DSL,Groovy," />
 
 
 
@@ -104,16 +104,18 @@
 
 
 
-<meta name="description" content="和光同尘,静水流深">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Scott&#39;s Blog">
-<meta property="og:url" content="http://www.sguotao.top/tags/Android/page/4/index.html">
+<meta name="description" content="一.Groovy基础语法领域特定语言DSL，区别于Java等通用编程语言使用的广泛，DSL其基本思想是“求专不求全”，是针对某一特定问题的计算机语言。 Groovy是一种领域特定语言，同时也是基于JVM的敏捷开发语言，结合了Python，Ruby和Smalltalk的许多强大的特性，可以与Java完美结合，而且可以使用Java所有的库。 1.在Groovy中，无论是基本数据类型，还是对象数据类型，">
+<meta name="keywords" content="DSL,Groovy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Groovy笔记-1-Groovy基础语法">
+<meta property="og:url" content="http://www.sguotao.top/Groovy-2018-07-16-Groovy笔记-1-基础语法.html">
 <meta property="og:site_name" content="Scott&#39;s Blog">
-<meta property="og:description" content="和光同尘,静水流深">
+<meta property="og:description" content="一.Groovy基础语法领域特定语言DSL，区别于Java等通用编程语言使用的广泛，DSL其基本思想是“求专不求全”，是针对某一特定问题的计算机语言。 Groovy是一种领域特定语言，同时也是基于JVM的敏捷开发语言，结合了Python，Ruby和Smalltalk的许多强大的特性，可以与Java完美结合，而且可以使用Java所有的库。 1.在Groovy中，无论是基本数据类型，还是对象数据类型，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-20T08:41:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Scott&#39;s Blog">
-<meta name="twitter:description" content="和光同尘,静水流深">
+<meta name="twitter:title" content="Groovy笔记-1-Groovy基础语法">
+<meta name="twitter:description" content="一.Groovy基础语法领域特定语言DSL，区别于Java等通用编程语言使用的广泛，DSL其基本思想是“求专不求全”，是针对某一特定问题的计算机语言。 Groovy是一种领域特定语言，同时也是基于JVM的敏捷开发语言，结合了Python，Ruby和Smalltalk的许多强大的特性，可以与Java完美结合，而且可以使用Java所有的库。 1.在Groovy中，无论是基本数据类型，还是对象数据类型，">
 
 
 
@@ -121,7 +123,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":true,"scrollpercent":true},
     fancybox: true,
     motion: true,
@@ -141,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="http://www.sguotao.top/tags/Android/page/4/"/>
+  <link rel="canonical" href="http://www.sguotao.top/Groovy-2018-07-16-Groovy笔记-1-基础语法.html"/>
 
 
 
 
 
-  <title>标签: Android | Scott's Blog</title>
+  <title>Groovy笔记-1-Groovy基础语法 | Scott's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -183,7 +185,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
     
     <!-- 在右上角或者左上角实现fork me on github -->
@@ -324,300 +326,345 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2>Android<small>标签</small>
-      </h2>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sguotao.top/Groovy-2018-07-16-Groovy笔记-1-基础语法.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Groovy笔记-1-Groovy基础语法</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-16T15:04:12+08:00">
+                2018-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/Groovy-2018-07-16-Groovy笔记-1-基础语法.html" class="leancloud_visitors" data-flag-title="Groovy笔记-1-Groovy基础语法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,106字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一-Groovy基础语法"><a href="#一-Groovy基础语法" class="headerlink" title="一.Groovy基础语法"></a>一.Groovy基础语法</h2><p>领域特定语言DSL，区别于Java等通用编程语言使用的广泛，DSL其基本思想是“求专不求全”，是针对某一特定问题的计算机语言。</p>
+<p>Groovy是一种领域特定语言，同时也是基于JVM的敏捷开发语言，结合了Python，Ruby和Smalltalk的许多强大的特性，可以与Java完美结合，而且可以使用Java所有的库。</p>
+<p><strong>1.在Groovy中，无论是基本数据类型，还是对象数据类型，最终都会与Java的对象类型对应。</strong></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">100</span></span><br><span class="line"><span class="keyword">double</span> d = <span class="number">100</span>d</span><br><span class="line"></span><br><span class="line">println i.<span class="keyword">class</span></span><br><span class="line">println d.<span class="keyword">class</span></span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">Integer</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">Double</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>2.Groovy中变量的声明支持强类型定义和弱类型定义两种方式</strong>，强类型定义在变量声明的过程中，直接指定变量的类型。弱类型定义，使用def关键字进行变量的定义。当使用def定义变量时，编译器会根据变量的值来推断变量的类型，比如：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> val = <span class="number">100</span>d</span><br><span class="line">println val.<span class="keyword">class</span></span><br><span class="line"></span><br><span class="line">val = <span class="string">"Android"</span></span><br><span class="line">println val.<span class="keyword">class</span></span><br></pre></td></tr></table></figure>
+<p>第一次赋值输出结果的结果是Double类型，第二次输出结果是String类型。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">Double</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">String</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>3.Groovy中对字符串String类型进行了扩展，提供了GString类型，可以认为GString类型是对String类型的扩展。在Groovy中声明一个字符串变量可以使用单引号，双引号，三个单引号（或三个双引号）方式进行声明</strong>，比如：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> str1 = <span class="string">'hello groovy!'</span></span><br><span class="line"><span class="keyword">def</span> str2 = <span class="string">"hello groovy!"</span></span><br><span class="line"><span class="keyword">def</span> str3 = <span class="string">'''</span></span><br><span class="line"><span class="string">hello</span></span><br><span class="line"><span class="string">groovy!</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<p>使用三个单引号（或三个双引号）的方式，会保留字符内容的格式，如上面的str3输出结果：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello</span><br><span class="line">groovy!</span><br></pre></td></tr></table></figure>
+<p>Groovy还支持字符串模板，此时字符串的类型不再是String，而是GString，比如：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> result = <span class="string">"the result is $&#123;3 * 7&#125;"</span></span><br><span class="line">println result</span><br><span class="line">println result.<span class="keyword">class</span></span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">the result is <span class="number">21</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">org</span>.<span class="title">codehaus</span>.<span class="title">groovy</span>.<span class="title">runtime</span>.<span class="title">GStringImpl</span></span></span><br></pre></td></tr></table></figure>
+<p>需要指出的是String与GString类型编译器会自动进行相互切换，不需要在代码中进行类型的转换。</p>
+<p><strong>4.Groovy对Java中的String类型进行的扩展，具体是通过StringGroovyMethods实现的。几个常用的扩展方法及操作符：</strong></p>
+<p><strong>4.1字符串的填充，center()、padLeft()、padRight()</strong></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> str = <span class="string">"groovy"</span></span><br><span class="line"><span class="comment">//从字符串两边进行填充，第一个参数为填充后的字符串长度，第二个参数为填充字符</span></span><br><span class="line">println str.center(<span class="number">10</span>, <span class="string">'x'</span>)</span><br><span class="line"><span class="comment">//从字符串左边进行填充</span></span><br><span class="line">println str.padLeft(<span class="number">10</span>, <span class="string">'x'</span>)</span><br><span class="line"><span class="comment">//从字符串右边进行填充</span></span><br><span class="line">println str.padRight(<span class="number">10</span>, <span class="string">'x'</span>)</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xxgroovyxx</span><br><span class="line">xxxxgroovy</span><br><span class="line">groovyxxxx</span><br></pre></td></tr></table></figure>
+<p><strong>4.2字符串的比较，实际比较的是字符串对应的unicode编码的大小，可以使用操作符如 &gt; 、&lt; 等，也可以使用compareTo(),compareToIgnoreCase()方法。</strong></p>
+<p><strong>4.3获取字符串中的字符，可以通过getAt()方法获取字符串中某个位置的字符，也可以把字符串当做一个数组，通过数组下标的方式获取字符。</strong>比如：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">println str.getAt(<span class="number">0</span>)</span><br><span class="line">println str[<span class="number">0</span>]</span><br><span class="line">println str[<span class="number">0.</span><span class="number">.2</span>]</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g</span><br><span class="line">g</span><br><span class="line">gro</span><br></pre></td></tr></table></figure>
+<p><strong>4.4字符串减法</strong>。比如：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> str1 = <span class="string">"hello groovy"</span></span><br><span class="line"><span class="comment">//去除str1中包含的str字符串</span></span><br><span class="line">println str1.minus(str)</span><br><span class="line">println str1 - str</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello</span><br></pre></td></tr></table></figure>
+<p><strong>4.5Groovy中其它常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">reverse()</td>
+<td style="text-align:center">字符串反转</td>
+</tr>
+<tr>
+<td style="text-align:center">capitalize()</td>
+<td style="text-align:center">字符串首字母大写</td>
+</tr>
+<tr>
+<td style="text-align:center">isNumber()</td>
+<td style="text-align:center">判断字符串是否为Number类型</td>
+</tr>
+<tr>
+<td style="text-align:center">toInteger(),toDouble()等</td>
+<td style="text-align:center">字符串类型转换</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5.Groovy中的switch/case语句与for循环语句。</strong><br>Java中的switch语句中 switch后面接受的参数类型只能是byte、short、int、char及其对应的封装类Byte、Short、Integer、Character，枚举Enum，在Java7之后支持String类型。</p>
+<p>与Java不同的是，Groovy中switch后面可以接受任意类型的参数。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (str)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"isString"</span>:<span class="comment">//字符串</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">"four"</span>]:<span class="comment">//list</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">10.</span><span class="number">.20</span> :<span class="comment">//range</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">BigDecimal:</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Groovy中的for循环与Java中的也有不同，灵活性更强。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">0.</span><span class="number">.10</span>) &#123;<span class="comment">//对range循环</span></span><br><span class="line">    sum += i</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]) &#123;<span class="comment">//对list循环</span></span><br><span class="line">    sum += i</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> [<span class="string">"005474"</span>: <span class="number">1</span>, <span class="string">"003212"</span>: <span class="number">2</span>, <span class="string">"009876"</span>: <span class="number">3</span>]) &#123;<span class="comment">//对map循环</span></span><br><span class="line">    sum += i.value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>本文链接：<a href="http://www.sguotao.top/Groovy-2018-07-16-Groovy笔记-1-基础语法.html">http://www.sguotao.top/Groovy-2018-07-16-Groovy笔记-1-基础语法.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
     </div>
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
+      <div>
         
-            <a class="post-title-link" href="/Android基础-2012-07-21-android-basic-11.html" itemprop="url">
-              
-                <span itemprop="name">Android基础11 常用UI（上）</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-07-21T10:27:04+08:00"
-              content="2012-07-21" >
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+          
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>「真诚赞赏，手留余香」</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-07-15-android-basic-10.html" itemprop="url">
-              
-                <span itemprop="name">Android基础10 通知</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-07-15T10:27:04+08:00"
-              content="2012-07-15" >
-          07-15
-        </time>
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat_pay.png" alt="Scott WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
       </div>
-
-    </header>
-  </article>
-
+    
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-07-09-android-basic-9.html" itemprop="url">
-              
-                <span itemprop="name">Android基础9 多媒体</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-07-09T10:27:04+08:00"
-              content="2012-07-09" >
-          07-09
-        </time>
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alibaba_pay.png" alt="Scott Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
       </div>
-
-    </header>
-  </article>
-
+    
 
     
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-07-03-Android基础-8-Service.html" itemprop="url">
-              
-                <span itemprop="name">Android基础8 服务(Service)</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-07-03T10:27:04+08:00"
-              content="2012-07-03" >
-          07-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-06-28-Android基础-7-Broadcast.html" itemprop="url">
-              
-                <span itemprop="name">Android基础7 广播接收者(BroadcastReceiver)</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-06-28T10:27:04+08:00"
-              content="2012-06-28" >
-          06-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-06-27-android-basic-6.html" itemprop="url">
-              
-                <span itemprop="name">Android基础6 活动(Activity)</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-06-27T10:27:04+08:00"
-              content="2012-06-27" >
-          06-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-06-15-android-basic-5.html" itemprop="url">
-              
-                <span itemprop="name">Android基础5 网络通信</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-06-15T10:27:04+08:00"
-              content="2012-06-15" >
-          06-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-06-14-android-basic-4.html" itemprop="url">
-              
-                <span itemprop="name">Android基础4 内容提供者（ContentProvider）</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-06-14T10:27:04+08:00"
-              content="2012-06-14" >
-          06-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-06-09-android-basic-3.html" itemprop="url">
-              
-                <span itemprop="name">Android基础3 Android文件操作</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-06-11T10:27:04+08:00"
-              content="2012-06-11" >
-          06-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Android基础-2012-06-07-android-basic-2.html" itemprop="url">
-              
-                <span itemprop="name">Android基础2 布局</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2012-06-07T10:27:04+08:00"
-              content="2012-06-07" >
-          06-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
   </div>
+</div>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/tags/Android/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/tags/Android/">1</a><span class="space">&hellip;</span><a class="page-number" href="/tags/Android/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/tags/Android/page/5/">5</a><a class="extend next" rel="next" href="/tags/Android/page/5/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+        
+      </div>
+    
 
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Scott
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.sguotao.top/Groovy-2018-07-16-Groovy笔记-1-基础语法.html" title="Groovy笔记-1-Groovy基础语法">http://www.sguotao.top/Groovy-2018-07-16-Groovy笔记-1-基础语法.html</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8474352740015305",
+    enable_page_level_ads: true
+  });
+</script>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DSL/" rel="tag"><i class="fa fa-tag"></i> DSL</a>
+          
+            <a href="/tags/Groovy/" rel="tag"><i class="fa fa-tag"></i> Groovy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Android进阶-2018-07-11-android-gradle-v3-0新特性的介绍.html" rel="next" title="Android Gradle v3.0新特性介绍">
+                <i class="fa fa-chevron-left"></i> Android Gradle v3.0新特性介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Android进阶-2018-07-17-gradle源码分析.html" rel="prev" title="Gradle源码分析">
+                Gradle源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -625,6 +672,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODkyOC81NDk3"></div>
+    
+  </div>
+
 
         </div>
         
@@ -644,8 +697,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -660,7 +722,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">92</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -682,7 +744,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -701,17 +763,6 @@
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/sguotao" target="_blank" rel="external nofollow" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-          
         </div>
 
         
@@ -725,6 +776,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-Groovy基础语法"><span class="nav-number">1.</span> <span class="nav-text">一.Groovy基础语法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -757,7 +824,7 @@
   <span class="with-love">
     <i class="fa fa-pencil"></i>
   </span>
-  <span class="post-count">共写了196.4k字</span>
+  <span class="post-count">共写了200.1k字</span>
 </div>
 
 
@@ -852,18 +919,11 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
@@ -898,6 +958,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
